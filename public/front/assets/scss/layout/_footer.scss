@@ -1,0 +1,121 @@
+/*===========================
+23. Footer Style CSS
+===========================*/
+.footer-area {
+  .footer-widget-area{
+    background-color: $blackSoft;
+    padding: 100px 0;
+    color: $offWhite;
+
+    @media #{$md-device} {
+      padding: 80px 0;
+    }
+
+    @media #{$sm-device} {
+      padding: 60px 0;
+    }
+  }
+
+  .footer-copyright-area{
+    background-color: $black;
+    color: $offWhite;
+    padding: 20px 0;
+  }
+}
+
+.widget-item {
+  margin-top: 38px;
+
+  .widget-title {
+    color: $offWhite;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1;
+    margin-top: -1px;
+    margin-bottom: 22px;
+    text-decoration: underline;
+
+    @media #{$sm-device} {
+      margin-bottom: 15px;
+    }
+  }
+
+  address {
+    line-height: 2;
+    margin-bottom: 0;
+    font-weight: 500;
+  }
+}
+
+.widget-list {
+  li {
+    line-height: 2;
+
+    a {
+      font-weight: 300;
+      color: $offWhite;
+      transition: 0.2s;
+
+      &:hover {
+        color: $brandColor;
+        padding-left: 5px;
+      }
+    }
+  }
+}
+
+// About Widget
+.about-widget {
+  img {
+    max-width: 120px;
+    margin-bottom: 20px;
+  }
+}
+
+.copyright-txt {
+  margin-top: 25px;
+  font-weight: 500;
+
+  @media #{$sm-device} {
+    margin-top: 15px;
+  }
+}
+
+
+/*--------------------------------
+Scroll Top Button
+----------------------------------*/
+
+.btn-scroll-top {
+  background-color: $brandColor;
+  border-radius: 50%;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14);
+  color: $white;
+  cursor: pointer;
+  font-size: 16px;
+  display: block;
+  text-align: center;
+  line-height: 50px;
+  position: fixed;
+  bottom: -50px;
+  right: 30px;
+  height: 50px;
+  width: 50px;
+  z-index: 999;
+  @include hide;
+
+  @media #{$sm-device} {
+    line-height: 40px;
+    height: 40px;
+    width: 40px;
+  }
+
+  &:hover {
+    background-color: $headingColor;
+  }
+
+  &.show {
+    bottom: 30px;
+    @include show;
+  }
+}

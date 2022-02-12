@@ -1,0 +1,193 @@
+/*===========================
+05. Slider Area Style
+============================*/
+.slider-slide-item {
+  height: 850px;
+
+  @media #{$sm-device} {
+    height: 450px;
+  }
+
+  .slide-content {
+    h2, h3 {
+      color: darken($white, 15.4%);
+    }
+
+    h3 {
+      font-weight: 300;
+      margin-bottom: 20px;
+
+      @media #{$sm-device} {
+        font-size: 26px;
+      }
+    }
+
+    h2 {
+      font-weight: 600;
+      font-size: 72px;
+      margin-bottom: 22px;
+
+      @media #{$sm-device} {
+        font-size: 40px;
+      }
+    }
+
+    &-inner {
+      margin-top: -100px;
+
+      @media #{$sm-device} {
+        margin-top: 0;
+      }
+
+      * {
+        transform: translateY(40px);
+        transition: 0.8s;
+        opacity: 0;
+      }
+    }
+  }
+
+  .slide-img {
+    img {
+      @media #{$md-device} {
+        max-width: 40%;
+      }
+      @media #{$sm-device} {
+        max-width: 180px;
+      }
+    }
+  }
+}
+
+.slider-area-wrapper {
+  .slick-arrow {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    color: $white;
+    line-height: 50px;
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    @include hide;
+    height: 50px;
+    width: 50px;
+    z-index: 1;
+
+    &.slick-next {
+      left: auto;
+      right: 50px;
+    }
+
+    &:hover {
+      background-color: $brandColor;
+    }
+  }
+
+  .slick-dots {
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    bottom: 200px;
+    cursor: pointer;
+    @extend .container-wide;
+    padding: 0 15px;
+
+    @media #{$md-device} {
+      max-width: 720px;
+    }
+
+    @media #{$sm-device} {
+      bottom: 50px;
+      max-width: 540px;
+    }
+
+    li {
+      background-color: $white;
+      display: inline-block;
+      margin: 0 5px;
+      transition: 0.4s;
+      height: 2px;
+      width: 20px;
+
+      &.slick-active {
+        background-color: $brandColor;
+        width: 30px;
+      }
+
+      button {
+        display: none;
+      }
+    }
+  }
+
+  .slick-active {
+    .slide-content-inner {
+      * {
+        transform: translateY(0);
+        opacity: 1;
+
+        &:first-child {
+          transition-delay: 0.2s;
+        }
+
+        &:nth-child(2) {
+          transition-delay: 0.4s;
+        }
+
+        &:nth-child(3) {
+          transition-delay: 0.6s;
+        }
+      }
+    }
+  }
+
+  &:hover {
+    .slick-arrow {
+      @include show;
+    }
+  }
+
+  &.home-2 {
+    .slider-slide-item {
+      height: 800px;
+
+      @media #{$sm-device} {
+        height: 680px;
+      }
+
+      .slide-content {
+
+        h2 {
+          @media #{$sm-device, $md-device} {
+            font-size: 30px;
+            margin-top: 0;
+            margin-bottom: 35px;
+          }
+
+          @media #{$lg-device} {
+            font-size: 50px;
+          }
+        }
+
+        &-inner {
+          margin-top: 0;
+          @media #{$sm-device, $md-device} {
+            margin-top: -200px;
+          }
+        }
+      }
+    }
+
+    .slick-dots {
+      text-align: right;
+      bottom: 60px;
+
+      @media #{$sm-device,$md-device} {
+        text-align: left;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,210 @@
+/*=============================
+04. Header Area Style CSS
+==============================*/
+.header-area {
+  padding: 30px 0;
+
+  @media #{$sm-device} {
+    padding: 15px 0;
+  }
+
+  .nav {
+    li {
+      margin-right: 35px;
+
+      @media #{$lg-device} {
+        margin-right: 20px;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      a {
+        color: $blackSoft;
+        display: block;
+        font-size: 15px;
+        font-weight: 600;
+        text-transform: uppercase;
+
+        &:hover {
+          color: $brandColor;
+        }
+      }
+    }
+  }
+}
+
+.site-logo {
+  @media #{$xs-device} {
+    margin-bottom: 10px;
+  }
+}
+
+.site-action {
+  .login-reg-nav {
+    li {
+      position: relative;
+
+      @media #{$sm-device} {
+        margin-right: 15px;
+      }
+
+      &:after {
+        content: '|';
+        position: absolute;
+        right: -20px;
+        top: 0;
+
+        @media #{$sm-device} {
+          right: -10px;
+        }
+
+        @media #{$lg-device} {
+          right: -12px;
+        }
+      }
+
+      &:last-child {
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.mini-cart-wrap {
+  margin-left: 60px;
+
+  @media #{$sm-device, $lg-device} {
+    margin-left: 30px;
+  }
+
+  .btn-mini-cart {
+    font-size: 25px;
+    line-height: 1;
+    position: relative;
+    color: $headingColor;
+
+    .cart-total {
+      background-color: $blackSoft;
+      border-radius: 50%;
+      color: $white;
+      display: block;
+      font-size: 50%;
+      text-align: center;
+      line-height: 20px;
+      height: 20px;
+      width: 20px;
+      position: absolute;
+      left: -10px;
+      top: 0;
+    }
+  }
+
+  .mini-cart-content {
+    background-color: $white;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    padding: 25px 20px;
+    position: absolute;
+    right: 15px;
+    top: 100%;
+    margin-top: 32px;
+    transform: translateY(20px);
+    @include hide;
+    width: 350px;
+    z-index: 99;
+
+    @media #{$sm-device} {
+      display: none;
+    }
+
+    &:before{
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 100%;
+      width: 100%;
+      height: 32px;
+    }
+  }
+
+  .mini-product {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &__thumb {
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      margin-right: 15px;
+      flex-basis: 80px;
+      width: 80px;
+    }
+
+    &__info {
+      flex-basis: calc(100% - 95px);
+      width: calc(100% - 95px);
+
+      .title {
+        font-size: 15px;
+        font-weight: 600;
+        margin-top: 0;
+        margin-bottom: 8px;
+
+        a {
+          color: $headingColor;
+
+          &:hover {
+            color: $brandColor;
+          }
+        }
+      }
+
+      .mini-calculation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .price {
+          margin-bottom: 0;
+          font-weight: 600;
+          vertical-align: middle;
+
+          span {
+            color: $brandColor;
+          }
+        }
+
+        .remove-pro {
+          font-size: 18px;
+          line-height: 1;
+
+          &:hover {
+            color: $brandColor;
+          }
+        }
+      }
+    }
+  }
+
+  &:hover{
+    .mini-cart-content{
+      transform: none;
+      @include show;
+    }
+  }
+}
+
+.responsive-menu {
+  margin-left: 50px;
+  font-size: 20px;
+
+  @media #{$sm-device} {
+    margin-left: 20px;
+  }
+}

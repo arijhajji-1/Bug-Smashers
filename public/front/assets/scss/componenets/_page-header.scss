@@ -1,0 +1,76 @@
+/*========================
+14. Page Header Style
+==========================*/
+
+.page-header-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+
+  @media #{$sm-device} {
+    height: 200px;
+  }
+
+  h1 {
+    color: $white;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 1;
+    margin-bottom: 0;
+
+    @media #{$xs-device} {
+      font-size: 28px;
+      line-height: 1.4;
+    }
+  }
+}
+
+.breadcrumb {
+  background-color: transparent;
+  border-radius: 0;
+  padding: 0;
+  justify-content: center;
+  margin-bottom: 0;
+  margin-top: 20px;
+
+  li {
+    position: relative;
+
+    &:after {
+      content: '>';
+      color: $white;
+      font-size: 18px;
+      font-family: $font-heading;
+      vertical-align: middle;
+      line-height: 1;
+      display: inline-block;
+      margin-top: -7px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    a {
+      color: $white;
+      font-size: 18px;
+      font-family: $font-heading;
+      font-weight: 300;
+      line-height: 1;
+
+      &:hover {
+        color: $brandColor;
+      }
+    }
+
+    &.current {
+      &:after {
+        display: none;
+      }
+
+      a {
+        color: $brandColor;
+        pointer-events: none;
+      }
+    }
+  }
+}

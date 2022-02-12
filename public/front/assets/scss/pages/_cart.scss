@@ -1,0 +1,266 @@
+/*==================================
+19. Cart Page Style Css
+===================================*/
+
+.shopping-cart-table {
+  thead {
+    th {
+      color: $blackSoft;
+      font-weight: 700;
+      font-size: 15px;
+      text-transform: uppercase;
+      border-bottom: 0;
+    }
+  }
+
+  tr {
+    td, th {
+      vertical-align: middle;
+      width: 15%;
+      padding: 10px;
+      border-color: $borderColor;
+      white-space: nowrap;
+
+      &.product-list {
+        width: 55%;
+      }
+    }
+  }
+
+  .product-list {
+    .remove-icon {
+      margin-right: 15px;
+
+      button {
+        color: $paragraph;
+
+        &:hover {
+          color: $brandColor;
+        }
+      }
+    }
+
+    .product-thumb {
+      display: block;
+      width: 120px;
+      margin-right: 20px;
+    }
+
+    .product-name {
+      color: $blackSoft;
+      line-height: 1;
+
+      &:hover {
+        color: $brandColor;
+      }
+    }
+  }
+
+  .pro-qty {
+    width: 120px;
+    line-height: 40px;
+
+    input {
+      padding: 10px 0;
+      font-weight: 400;
+      height: 40px;
+    }
+
+    a {
+      width: 30px;
+      line-height: 44px;
+      font-weight: 400;
+      font-size: 16px;
+    }
+  }
+
+  .add-cart {
+    .btn {
+      font-size: 13px;
+      padding: 0 20px;
+      height: 36px;
+      line-height: 30px;
+    }
+  }
+}
+
+.cart-coupon-update-area {
+  border: 1px solid $borderColor;
+  border-top: 0;
+  padding: 20px 30px 30px;
+
+  button {
+    font-size: 14px;
+    font-weight: 700;
+
+    &:hover {
+      color: $brandColor;
+    }
+  }
+
+  .coupon-form-wrap {
+    width: 55%;
+
+    @media #{$xs-device} {
+      width: 100%;
+    }
+
+    form {
+      position: relative;
+
+      input {
+        border: none;
+        border-bottom: 1px solid $borderColor;
+        display: block;
+        outline: none;
+        padding: 5px 100px 5px 0;
+        transition: 0.2s;
+        width: 100%;
+
+        &:focus {
+          border-color: $brandColor;
+        }
+      }
+
+      .btn-apply {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(0, -50%);
+      }
+    }
+  }
+
+  .cart-update-buttons {
+    button {
+      &:nth-child(1n + 2) {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+.cart-calculate-area {
+  background-color: #f7f7f7;
+  padding: 30px;
+
+  h5 {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .cart-cal-table {
+    white-space: nowrap;
+
+    table {
+      margin-bottom: 0;
+    }
+
+    td, th {
+      font-size: 16px;
+      font-weight: 400;
+      padding: 5px 0 15px;
+    }
+
+    .shipping-method {
+      li {
+        margin-bottom: 15px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      .custom-control-label {
+        &:before {
+          top: 5px;
+        }
+
+        &:after {
+          top: 5px;
+        }
+      }
+    }
+
+    .order-total {
+      border-top: 1px solid $borderColor;
+
+      th, td {
+        padding-top: 15px;
+      }
+    }
+  }
+
+  .proceed-checkout-btn {
+    margin: 15px 0 0;
+
+    .btn {
+      font-size: 14px;
+    }
+  }
+
+
+}
+
+.table-responsive, .list {
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    border: 0;
+    background-color: $brandColor;
+  }
+
+  &::-webkit-scrollbar {
+    background-color: rgba($brandColor, 0.3);
+    -webkit-appearance: none;
+    width: 15px;
+    height: 5px;
+  }
+}
+
+.custom-control {
+  &-input {
+    &:checked {
+      ~ {
+        .custom-control-label {
+          &:before {
+            border-color: $brandColor;
+            background-color: $brandColor;
+          }
+        }
+      }
+    }
+
+    &:focus, &:active, &:disabled {
+      ~ {
+        .custom-control-label {
+          &:before {
+            box-shadow: none;
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+
+  &.custom-checkbox {
+    .custom-control {
+      &-label {
+        &:before {
+          border-radius: 0;
+          height: 14px;
+          width: 14px;
+          top: 6px;
+        }
+
+        &:after {
+          background-size: 8px 10px;
+          top: 6px;
+          height: 14px;
+          width: 14px;
+        }
+      }
+    }
+  }
+}

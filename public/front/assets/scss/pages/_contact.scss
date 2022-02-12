@@ -1,0 +1,91 @@
+/*======================
+16. Contact Page Style
+========================*/
+
+.contact-info-item {
+  border: 1px solid $borderColor;
+  text-align: center;
+  padding: 60px 20px;
+  margin-top: 30px;
+
+  .con-info {
+    &-icon {
+      border: 1px solid $brandColor;
+      border-radius: 100px;
+      color: $brandColor;
+      font-size: 35px;
+      margin: 0 auto 20px;
+      transition: 0.4s;
+      line-height: 60px;
+      height: 60px;
+      width: 60px;
+    }
+
+    &-txt {
+      h4 {
+        font-size: 18px;
+        margin-top: -2px;
+      }
+    }
+  }
+
+  &:hover {
+    .con-info {
+      &-icon {
+        background-color: $brandColor;
+        color: $white;
+      }
+    }
+  }
+}
+
+.contact-form-content {
+  h2 {
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-top: -3px;
+  }
+}
+
+.input-item {
+  margin-top: 30px;
+
+  input, textarea {
+    border: 1px solid $borderColor;
+    display: block;
+    padding: 12px 15px;
+    transition: 0.4s;
+    width: 100%;
+
+    &:focus {
+      border-color: $brandColor;
+    }
+  }
+
+  .nice-select {
+    border-color: $borderColor;
+    height: 50px;
+    padding-left: 15px;
+    line-height: 50px;
+
+    .list{
+      max-height: 200px;
+      overflow: auto;
+    }
+  }
+
+  .btn-brand {
+    font-size: 14px;
+    border-radius: 2px;
+    margin-top: 10px;
+    letter-spacing: 1.6px;
+  }
+}
+
+.contact-map-wrapper {
+  height: 500px;
+
+  @media #{$sm-device} {
+    height: 300px;
+  }
+}

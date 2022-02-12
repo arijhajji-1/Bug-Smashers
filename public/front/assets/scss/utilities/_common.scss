@@ -1,0 +1,436 @@
+/*============================
+03. Common Style CSS
+==============================*/
+
+/*------------------
+3.1 - Buttons Style
+--------------------*/
+.btn-group {
+  .btn {
+    margin-right: 15px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.btn {
+  border: 2px solid darken($white, 15.4%);
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: $font-heading;
+  height: 45px;
+  letter-spacing: 0.025em;
+  line-height: 41px;
+  padding: 0 30px;
+  text-transform: uppercase;
+  transition: all 0.3s ease 0s;
+
+  &:focus, &:active {
+    outline: none;
+    box-shadow: none;
+  }
+
+  &-white {
+    background-color: darken($white, 15.4%);
+    border-radius: 25px;
+    color: $headingColor;
+
+    &:hover {
+      background-color: $brandColor;
+      border-color: $brandColor;
+      color: $white;
+    }
+  }
+
+  &-brand {
+    background-color: $brandColor;
+    border-color: $brandColor;
+    border-radius: 25px;
+    color: $headingColor;
+
+    &:hover {
+      background-color: darken($white, 15.4%);
+      border-color: darken($white, 15.4%);
+    }
+  }
+
+  &-black {
+    background-color: $blackSoft;
+    border-color: $blackSoft;
+    border-radius: 25px;
+    color: $white;
+
+    &:hover {
+      background-color: darken($white, 15.4%);
+      border-color: darken($white, 15.4%);
+      color: $blackSoft;
+    }
+  }
+
+  &-bordered{
+    border-radius: 0;
+    border-width: 1px;
+    font-size: 16px;
+    padding: 0 40px;
+    height: 50px;
+    line-height: 48px;
+
+    &:hover{
+      border-color: $brandColor;
+      color: $brandColor;
+    }
+  }
+}
+
+/*----------------------
+3.2 - Background Image
+-----------------------*/
+.bg-img {
+  background: no-repeat center center;
+  background-size: cover;
+
+  &-tr {
+    background: no-repeat top right;
+  }
+
+  &-tl {
+    background: no-repeat top left;
+  }
+
+  &-br {
+    background: no-repeat bottom right;
+  }
+
+  &-bl {
+    background: no-repeat bottom left;
+  }
+
+  &-nr {
+    background: no-repeat center center;
+    background-size: contain;
+  }
+}
+
+/*-----------------
+3.3 - Overflow
+-------------------*/
+.fix {
+  overflow: hidden;
+
+  &-x {
+    overflow-x: hidden;
+  }
+
+  &-y {
+    overflow-y: hidden;
+  }
+}
+
+/*-------------------------
+3.4 - Section title Style
+--------------------------*/
+.section-title {
+  margin-bottom: 60px;
+
+  @media #{$md-device} {
+    margin-bottom: 50px;
+  }
+
+  @media #{$sm-device} {
+    margin-bottom: 40px;
+  }
+
+  h2 {
+    font-size: 30px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 19px;
+  }
+}
+
+.container {
+  &-wide {
+    @media screen and (min-width: 1200px) {
+      max-width: 1200px;
+    }
+
+    @media screen and (min-width: 1500px) {
+      max-width: 1480px;
+    }
+  }
+}
+
+/*--------------------------------
+3.5 - Tippy Customization
+----------------------------------*/
+.tippy-popper {
+  .tippy-tooltip {
+    background-color: $brandColor;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    padding: 7px 13px;
+  }
+
+  &[x-placement^='top'] {
+    .tippy-arrow {
+      border-top-color: $brandColor !important;
+    }
+  }
+
+  &[x-placement^='bottom'] {
+    .tippy-arrow {
+      border-bottom-color: $brandColor !important;
+    }
+  }
+
+  &[x-placement^='left'] {
+    .tippy-arrow {
+      border-left-color: $brandColor !important;
+    }
+  }
+
+  &[x-placement^='right'] {
+    .tippy-arrow {
+      border-right-color: $brandColor !important;
+    }
+  }
+}
+
+/*--------------------------------
+3.6 - Magnific JS Customization
+----------------------------------*/
+.ht-mfp {
+  transition: 0.4s;
+
+  &.mfp-bg {
+    background: rgba(black, 0.4);
+    transition: 0.4s;
+  }
+
+  .mfp-content {
+    transition: 0.3s;
+
+    @media #{$xl-device} {
+      max-width: 70%;
+    }
+
+
+    .mfp-close {
+      display: none;
+    }
+  }
+
+  .mfp-close {
+    background-color: $brandColor;
+    color: $white;
+    padding: 0;
+    text-align: center;
+    opacity: 1;
+    top: 50px;
+    right: 50px;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+
+    @media #{$sm-device} {
+      top: 30px;
+      right: 30px;
+      height: 40px;
+      width: 40px;
+      line-height: 40px;
+    }
+
+    &:hover {
+      background-color: $brandColor;
+    }
+  }
+
+  .mfp-arrow {
+    background-color: $brandColor;
+    opacity: 1;
+    margin-left: 15px;
+    height: 55px;
+    width: 55px;
+
+    &:before {
+      display: none;
+    }
+
+    &:after {
+      content: '\f104';
+      color: $white;
+      font-family: $fa-icon;
+      font-size: 25px;
+      line-height: 40px;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    &-right {
+      margin-left: auto;
+      margin-right: 15px;
+
+      &:after {
+        content: '\f105';
+      }
+    }
+
+    &:hover {
+      background-color: darken($brandColor, 10%);
+    }
+  }
+
+  &.zoom-animate {
+    &.mfp-bg {
+      opacity: 0;
+    }
+
+    .mfp-content {
+      transform: scale(1.2);
+      opacity: 0;
+    }
+
+    // Animate In
+    &.mfp-ready {
+      &.mfp-bg {
+        opacity: 0.9;
+      }
+
+      .mfp-content {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    // Animate Out
+    &.mfp-removing {
+      .mfp-content {
+        transform: scale(1.2);
+        opacity: 0;
+      }
+
+      &.mfp-bg {
+        opacity: 0;
+      }
+
+      .mfp-close {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+/*--------------------------------
+3.7 - Blockquote Style
+----------------------------------*/
+blockquote, .blockquote {
+  background-color: #f8f9fc;
+  color: $headingColor;
+  font-size: 18px;
+  padding: 42px 44px 80px;
+  position: relative;
+
+  @media #{$sm-device} {
+    padding: 20px 22px 60px;
+  }
+
+  &:before {
+    content: '\f10e';
+    font-family: $fa-icon;
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+
+    @media #{$sm-device} {
+      right: 30px;
+      bottom: 20px;
+    }
+  }
+
+  &-title {
+    color: $brandColor;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    line-height: 1;
+  }
+}
+
+/*--------------------------------
+3.8 - Nice Select Customization
+----------------------------------*/
+.nice-select {
+  background-color: transparent;
+  border-radius: 0;
+  border: 1px solid $borderColor;
+  color: $headingColor;
+  float: inherit;
+  font-size: 15px;
+  padding-left: 0;
+
+  &:after {
+    border-right-color: $paragraph;
+    border-bottom-color: $paragraph;
+    height: 7px;
+    width: 7px;
+  }
+
+  .list {
+    border-radius: 0;
+    color: $headingColor;
+    font-size: 14px;
+    width: 100%;
+  }
+}
+
+/*--------------------------------
+3.9 - Site Boxed Layout
+----------------------------------*/
+.boxed-layout {
+  @media #{$xl-device} {
+    box-shadow: -3px 0 50px -2px rgba(0, 0, 0, 0.14);
+    max-width: 90%;
+    margin: auto;
+  }
+}
+
+/*--------------------
+3.10 - Video Play
+---------------------*/
+.video-play {
+  position: relative;
+
+  img {
+    width: 100%;
+  }
+
+  .btn-video-popup {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.btn-video-popup {
+  border-radius: 50%;
+  background-color: $brandColor;
+  color: $white;
+  display: inline-block;
+  font-size: 20px;
+  text-align: center;
+  line-height: 60px;
+  height: 60px;
+  width: 60px;
+}
