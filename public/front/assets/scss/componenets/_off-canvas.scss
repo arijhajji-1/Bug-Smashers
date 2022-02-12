@@ -1,0 +1,108 @@
+/*============================
+13. Off Canvas Style CSS
+=============================*/
+.off-canvas {
+  &-wrapper {
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: 0.3s;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    height: 100vh;
+    width: 100vw;
+    z-index: 9999;
+
+    &.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: visible;
+
+      .off-canvas-inner {
+        transform: none;
+      }
+
+      .btn-close {
+        display: block;
+      }
+
+      .off-canvas-overlay {
+        @include show;
+      }
+    }
+
+    .close-btn {
+      color: $brandColor;
+      font-size: 25px;
+      line-height: 1;
+      right: 0;
+      top: 0;
+      z-index: 9;
+      background: $white;
+      width: 100%;
+      text-align: right;
+
+      .btn-close {
+        margin-left: auto;
+      }
+
+      i {
+        line-height: 1;
+      }
+
+      &:hover {
+        color: $brandColor;
+      }
+    }
+  }
+
+  &-overlay {
+    background-color: rgba($black, 0.8);
+    cursor: url("../img/icons/cancel-white.png"), auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+    @include hide;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+  }
+
+  &-inner {
+    background-color: $white;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateX(100%);
+    transition: 0.45s;
+    height: 100%;
+    z-index: 3;
+    overflow-y: auto;
+  }
+
+  &-content {
+    width: 380px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 50px 0 60px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    @media #{$sm-device} {
+      padding: 45px 0 30px;
+    }
+    @media #{$xs-device} {
+      width: 280px;
+    }
+  }
+
+  &-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px 15px;
+    margin-bottom: 15px;
+  }
+}

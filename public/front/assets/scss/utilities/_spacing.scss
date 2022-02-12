@@ -1,0 +1,93 @@
+/*==========================
+3.0 - Template Spacing
+============================*/
+
+// Section Margin top
+.sm-top {
+  margin-top: 100px;
+
+  @media #{$md-device} {
+    margin-top: 80px;
+  }
+
+  @media #{$sm-device} {
+    margin-top: 60px;
+  }
+}
+
+// Section Margin bottom
+.sm-bottom {
+  margin-bottom: 100px;
+
+  @media #{$md-device} {
+    margin-bottom: 80px;
+  }
+
+  @media #{$sm-device} {
+    margin-bottom: 60px;
+  }
+}
+
+// Section Margin top With LineHeight
+.sm-top-lh {
+  margin-top: 95px;
+
+  @media #{$md-device} {
+    margin-top: 75px;
+  }
+
+  @media #{$sm-device} {
+    margin-top: 55px;
+  }
+}
+
+// Section Margin With LineHeight
+.sm-y-lh {
+  margin: 95px 0;
+
+  @media #{$md-device} {
+    margin: 75px 0;
+  }
+
+  @media #{$sm-device} {
+    margin: 60px 0;
+  }
+}
+
+// Section Padding top
+.sp-top {
+  padding-top: 100px;
+
+  @media #{$md-device} {
+    padding-top: 80px;
+  }
+
+  @media #{$sm-device} {
+    padding-top: 60px;
+  }
+}
+
+.sp-lg-top{
+  @media #{$lg-device, $xl-device} {
+    padding-top: 100px;
+  }
+}
+
+.sp-md-top{
+  @media #{$md-device} {
+    padding-top: 80px;
+  }
+}
+
+// Section Padding top & Bottom (Y)
+.sp-y {
+  padding: 100px 0;
+
+  @media #{$md-device} {
+    padding: 80px 0;
+  }
+
+  @media #{$sm-device} {
+    padding: 60px 0;
+  }
+}

@@ -1,0 +1,263 @@
+/*==========================================
+20. Checkout Page Style Css
+===========================================*/
+// Checkout Page Coupon
+.checkout-page-coupon-area {
+  .card {
+    border: none;
+    padding: 0;
+
+    h3 {
+      background-color: $brandColor;
+      color: $headingColor;
+      font-size: 16px;
+      line-height: 1.2;
+      margin: 0;
+      padding: 20px 30px;
+
+      @media #{$xs-device} {
+        font-size: 14px;
+        padding: 10px 15px;
+      }
+
+      i {
+        color: $white;
+        margin-right: 5px;
+        font-size: 20px;
+        vertical-align: middle;
+      }
+
+      span {
+        cursor: pointer;
+        transition: 0.2s;
+
+        &:hover {
+          color: $white;
+        }
+      }
+    }
+
+    .card-body {
+      padding: 0;
+      margin-top: 30px;
+
+      .apply-coupon-wrapper {
+
+        .form-input-item {
+          input {
+            font-size: 16px;
+            padding: 10px 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Checkout Billing Details
+.checkout-billing-details-wrap {
+  margin-top: 90px;
+
+  @media #{$md-device} {
+    margin-top: 60px;
+  }
+
+  @media #{$sm-device} {
+    margin-top: 40px;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1;
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 46px;
+
+    @media #{$sm-device} {
+      margin-bottom: 26px;
+    }
+
+    &:before {
+      background-color: $blackSoft;
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      width: 50px;
+    }
+  }
+}
+
+// Billing Form Style
+.billing-form-wrap {
+  .form-input-item {
+    margin-top: 40px;
+
+    input, textarea {
+      font-size: 16px;
+      padding: 5px 0;
+
+      &::placeholder {
+        color: $paragraph;
+      }
+    }
+
+    .nice-select {
+      &:after {
+        border-right-color: $paragraph;
+        border-bottom-color: $paragraph;
+      }
+
+      .current {
+        font-size: 16px;
+        color: $paragraph;
+      }
+    }
+  }
+}
+
+.checkout-box-wrap {
+  .account-create {
+    margin-top: 25px;
+    font-size: 16px;
+  }
+
+  .account-create, .ship-to-different {
+    display: none;
+  }
+}
+
+// Checkout Page Order Details
+.order-details-area-wrap {
+  border: 2px solid $borderColor;
+  padding: 50px 30px;
+  margin-top: 80px;
+
+  @media #{$xs-device} {
+    padding: 30px 20px;
+  }
+
+  @media #{$md-device} {
+    margin-top: 60px;
+  }
+
+  @media #{$sm-device} {
+    margin-top: 40px;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1;
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 35px;
+
+    @media #{$sm-device} {
+      margin-bottom: 26px;
+    }
+
+    &:before {
+      background-color: $blackSoft;
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      width: 50px;
+    }
+  }
+
+  .order-details-table {
+    line-height: 1;
+    white-space: nowrap;
+
+    .custom-control-label, th {
+      font-weight: 400;
+    }
+
+    .table {
+
+      thead {
+        border-bottom: 1px solid $borderColor;
+        margin-bottom: 27px;
+
+        th {
+          margin-bottom: 27px;
+        }
+      }
+
+      tbody {
+        border-bottom: 1px solid $borderColor;
+
+        .cart-item {
+          font-size: 16px;
+
+          &:first-child {
+            td {
+              padding-top: 30px;
+            }
+          }
+        }
+
+        .cart-item:last-child {
+          td {
+            padding-bottom: 30px;
+          }
+        }
+      }
+
+      tfoot {
+        .shipping {
+          .shipping-method {
+            li {
+              margin-bottom: 15px;
+
+              &:last-child {
+                margin-bottom: 0;
+              }
+            }
+
+            .custom-control{
+              &-label{
+                line-height: 23px;
+              }
+            }
+          }
+        }
+
+        .total-amount {
+          font-size: 20px;
+          font-weight: 600;
+        }
+
+        tr {
+          border-bottom: 1px solid $borderColor;
+        }
+      }
+
+      tr {
+        td, th {
+          padding: 15px 0;
+
+          &:last-child {
+            text-align: right;
+          }
+        }
+      }
+    }
+
+    .product-title {
+      .product-quantity {
+        color: #8d8d8d;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .order-details-footer {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,146 @@
+/*========================
+07. Call to action Style
+==========================*/
+.call-to-action-item {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-right: 30px;
+  margin-right: 30px;
+
+  @media #{$md-device} {
+    display: block;
+    margin-right: 10px;
+    padding-right: 0;
+  }
+
+  @media #{$sm-device} {
+    margin-top: 25px;
+    display: block;
+    text-align: center;
+    margin-right: 0;
+    padding-right: 0;
+  }
+
+  &:after {
+    background-color: darken($white, 15.4%);
+    position: absolute;
+    content: "";
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 50px;
+    width: 1px;
+
+    @media #{$sm-device, $md-device} {
+      display: none;
+    }
+  }
+
+  &__icon {
+    margin-right: 30px;
+    flex-basis: 45px;
+    max-width: 45px;
+
+    @media #{$sm-device, $md-device} {
+      max-width: 100%;
+      margin-right: 0;
+      margin-bottom: 15px;
+    }
+  }
+
+  &__info {
+    flex-basis: calc(100% - 75px);
+    max-width: calc(100% - 75px);
+
+    @media #{ $md-device} {
+      max-width: 100%;
+    }
+
+    @media #{ $sm-device} {
+      max-width: 75%;
+      margin: auto;
+    }
+
+    h3 {
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 1;
+      margin-top: -3px;
+    }
+  }
+}
+
+.call-to-action-area {
+  [class*="col-"] {
+    &:last-child {
+      .call-to-action-item {
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+
+// Call to action
+.call-to-action-content-area {
+  padding: 200px 0 170px;
+  margin-top: -130px;
+
+  @media #{$md-device} {
+    padding-top: 180px;
+  }
+
+  @media #{$sm-device} {
+    padding-top: 60px;
+    margin-top: 30px;
+  }
+
+
+  .call-to-action-txt {
+    h2 {
+      font-size: 40px;
+      margin-bottom: 35px;
+      margin-top: -7px;
+
+      @media #{$sm-device} {
+        font-size: 26px;
+
+        br {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &.home-2 {
+    padding-bottom: 170px;
+    margin-top: 0;
+    @extend .sp-top;
+
+  }
+}
+
+.call-to-action-image-area {
+  margin-top: -130px;
+
+  @media #{$sm-device} {
+    margin-bottom: 60px;
+  }
+
+  @media #{$xxs-device} {
+    margin-bottom: 95px;
+  }
+}
+
+.need-help-area {
+  padding: 50px 0 45px;
+}
+
+.about-content {
+  .h3, h2 {
+    margin-bottom: 20px;
+  }
+}

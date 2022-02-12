@@ -1,0 +1,54 @@
+/*==========================
+09. Countdown Clock Style
+============================*/
+.ht-countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .countdown-item {
+    text-align: center;
+    position: relative;
+    margin-right: 30px;
+
+    @media #{$xs-device} {
+      margin-right: 10px;
+    }
+
+    &:last-child {
+      padding-right: 0;
+      margin-right: 0;
+    }
+
+    &__time {
+      font-size: 40px;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    &__label {
+      color: $headingColor;
+      font-size: 22px;
+      display: block;
+      font-family: $font-heading;
+      font-weight: 700;
+    }
+  }
+
+  &--light {
+    .countdown-item {
+
+      &:after {
+        color: $white;
+      }
+
+      &__time {
+        color: $brandColor;
+      }
+
+      &__label {
+        color: rgba($white, 0.6);
+      }
+    }
+  }
+}

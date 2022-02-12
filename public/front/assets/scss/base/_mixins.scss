@@ -1,0 +1,42 @@
+// Overlay Mixin
+@mixin overlay($bg: $black, $alpha: 0.5) {
+  background-color: rgba($bg, $alpha);
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+// Element Hide Mixin
+@mixin hide() {
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.4s;
+}
+
+// Element Show Mixin
+@mixin show() {
+  opacity: 1;
+  visibility: visible;
+}
+
+// Element Center(X,Y) Mixin
+@mixin center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Element Horizontal Center(X) Mixin
+@mixin centerX() {
+  display: flex;
+  justify-content: center;
+}
+
+// Element Vertical Center(Y) Mixin
+@mixin centerY() {
+  display: flex;
+  align-items: center;
+}

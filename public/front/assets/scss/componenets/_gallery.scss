@@ -1,0 +1,52 @@
+/*=======================
+15. Gallery Style Css
+=========================*/
+
+.gallery-item {
+  position: relative;
+  background-color: #f7f7f7;
+  cursor: auto;
+  margin-top: 30px;
+
+  &:before {
+    @include overlay($blackSoft, 0.7);
+    @include hide;
+  }
+
+  img {
+    margin: auto;
+    display: block;
+  }
+
+  &__text {
+    h3 {
+      color: $white;
+      font-weight: 600;
+      font-size: 20px;
+      font-family: $baseFont;
+      text-transform: uppercase;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      @include hide;
+      width: 100%;
+      padding: 0 20px;
+      text-align: center;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    &:before {
+      @include show;
+    }
+
+    .gallery-item__text {
+      h3 {
+        @include show;
+      }
+    }
+  }
+}
