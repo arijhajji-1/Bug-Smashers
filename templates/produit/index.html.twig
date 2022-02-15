@@ -1,0 +1,98 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Hello ProduitController!{% endblock %}
+
+{% block body %}
+
+<div class="page-content-wrapper sp-y">
+    <div class="shop-page-action-bar mb-30">
+        <div class="container container-wide">
+            <div class="action-bar-inner">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="shop-layout-switcher mb-15 mb-sm-0">
+                            <ul class="layout-switcher nav">
+                                <li data-layout="grid" class="active"><i class="fa fa-th"></i></li>
+                                <li data-layout="list"><i class="fa fa-th-list"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="sort-by-wrapper">
+                            <label for="sort" class="sr-only">Sort By</label>
+                            <select name="sort" id="sort">
+                                <option value="sbp">Sort By Popularity</option>
+                                <option value="sbn">Sort By Newest</option>
+                                <option value="sbt">Sort By Trending</option>
+                                <option value="sbr">Sort By Rating</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </thead>
+        <tbody>
+        <div class="shop-page-product">
+            <div class="container container-wide">
+                <div class="product-wrapper product-layout layout-grid">
+                    <div class="row mtn-30">
+        {% for produit in produits %}
+
+
+                        <!-- Start Product Item -->
+                        <div class="col-sm-6 col-lg-4 col-xl-3">
+                            <div class="product-item">
+                                <div class="product-item__thumb">
+                                    <a href="single-product.html">
+                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/'~produit.imagePath)}}" alt="Product" />
+                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/'~produit.imagePath)}}" alt="Product" />
+                                    </a>
+
+                                    <div class="ratting">
+                                        {% set rating = produit.rating %}
+                                        {% for i in 1..5 %}
+                                            {% if rating > 0 %}
+                                                <span><i class="ion-android-star"></i></span>
+                                            {% else %}
+                                            <span><i class="ion-android-star-outline"></i></span>
+                                            {% endif %}
+                                                {% set rating = rating - 1 %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="product-item__content">
+                                    <div class="product-item__info">
+                                        <h4 class="title"><a href="single-product.html">{{ produit.nom }}</a></h4>
+                                        <span class="price"><strong>Price:</strong> {{ produit.prix }} dt</span>
+                                    </div>
+
+                                    <div class="product-item__action">
+                                        <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                        <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                        <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                        <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                    </div>
+
+                                    <div class="product-item__desc">
+                                        <p>{{ produit.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Product Item -->
+        {% else %}
+
+            <p>no records found</p>
+
+        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+                        {% endblock %}
