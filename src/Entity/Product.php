@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ProduitRepository;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ProduitRepository::class)
+ * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
-class Produit
+class Product
 {
     /**
      * @ORM\Id
@@ -18,7 +18,7 @@ class Produit
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
      */
     private $nom;
 
@@ -28,17 +28,12 @@ class Produit
     private $description;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $rating;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $idcat;
-
-    /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="decimal", precision=12, scale=2)
      */
     private $prix;
 
@@ -53,9 +48,15 @@ class Produit
     private $imagePath;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
      */
     private $marque;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
 
     public function getId(): ?int
     {
@@ -86,36 +87,24 @@ class Produit
         return $this;
     }
 
-    public function getRating(): ?float
+    public function getRating(): ?int
     {
         return $this->rating;
     }
 
-    public function setRating(float $rating): self
+    public function setRating(?int $rating): self
     {
         $this->rating = $rating;
 
         return $this;
     }
 
-    public function getIdcat(): ?int
-    {
-        return $this->idcat;
-    }
-
-    public function setIdcat(int $idcat): self
-    {
-        $this->idcat = $idcat;
-
-        return $this;
-    }
-
-    public function getPrix(): ?float
+    public function getPrix(): ?string
     {
         return $this->prix;
     }
 
-    public function setPrix(float $prix): self
+    public function setPrix(string $prix): self
     {
         $this->prix = $prix;
 
@@ -154,6 +143,18 @@ class Produit
     public function setMarque(string $marque): self
     {
         $this->marque = $marque;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
