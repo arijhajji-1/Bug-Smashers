@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,11 +19,13 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="le nom ne peut pas etre vide")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="L'article doit avoir une description")
      */
     private $description;
 
@@ -34,21 +36,25 @@ class Product
 
     /**
      * @ORM\Column(type="decimal", precision=12, scale=2)
+     * @Assert\NotBlank(message="le prix ne peut pas etre vide")
      */
     private $prix;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="la quantité du produit ne peut pas etre vide")
      */
     private $qte;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez ajouter une image du produit")
      */
     private $imagePath;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="L'article doit avoir une marque")
      */
     private $marque;
 

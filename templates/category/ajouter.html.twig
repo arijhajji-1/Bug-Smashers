@@ -1,0 +1,30 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Ajouter Catégorie{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">Créer une nouvelle catégorie</h1>
+
+            {{ form_start(form, {'class': 'forms-sample','attr':{'novalidate': 'novalidate'}} ) }}
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+            <div>
+                {{ form_errors(form) }}
+            </div>
+            <div class="form-group">
+                <div class="col">
+                    {{ form_row(form.label) }}
+                </div>
+            </div>
+            {{ form_widget(form) }}
+            <br>
+            <button class="btn btn-outline-dark btn-fw">{{ button_label|default('Enregistrer') }}</button>
+            <a href="{{ path('category')  }}" class="btn btn-outline-dark btn-fw" >Liste des categories</a>
+            {{ form_end(form) }}
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+{% endblock %}

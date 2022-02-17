@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Form\ProductModifierType;
+use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,10 +21,23 @@ class ProduitController extends AbstractController
     /**
      * @Route("/produit/afffront", name="produit_affichage_front")
      */
-    public function index(ProductRepository $produitRepository): Response
+    public function index(ProductRepository $produitRepository, CategoryRepository $categoryRepository): Response
     {
         return $this->render('produit/index.html.twig', [
             'produits' => $produitRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+        ]);
+    }
+    /**
+     * @Route("/produit/afffront/{cat}", name="produit_affichage_front_cat")
+     */
+    public function affbyCat(int $cat, ProductRepository $produitRepository, CategoryRepository $categoryRepository): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $category = $entityManager->getRepository(Category::class)->find($cat);
+        return $this->render('produit/index.html.twig', [
+            'produits' => $category->getProducts(),
+            'categories' => $categoryRepository->findAll(),
         ]);
     }
 
@@ -72,7 +86,6 @@ class ProduitController extends AbstractController
     public function modifyProduct(Request $request, int $id): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
-
         $produit = $entityManager->getRepository(Product::class)->find($id);
         $form = $this->createForm(ProductModifierType::class, $produit);
         $form->handleRequest($request);

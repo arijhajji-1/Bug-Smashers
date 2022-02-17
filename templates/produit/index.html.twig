@@ -1,10 +1,28 @@
 {% extends 'base-front.html.twig' %}
 
-{% block title %}Hello ProduitController!{% endblock %}
+{% block title %}Produits{% endblock %}
 
 {% block body %}
 
 <div class="page-content-wrapper sp-y">
+    <div class="container container-wide">
+    <div class="row">
+    <div class="col-lg-3 order-1 order-lg-0">
+        <div class="sidebar-area">
+            <div class="sidebar-item">
+                <h4 class="sidebar-title">Catégories De Produits</h4>
+                <div class="sidebar-body">
+                    <ul class="sidebar-list">
+                        <li><a href="{{path("produit_affichage_front")}}">All Product</a></li>
+                        {% for category in categories %}
+                        <li><a href="{{ path("produit_affichage_front_cat", {'cat':category.id })}}">{{ category.label }} <span>({{ category.getProducts().count() }})</span></a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9 order-0 order-lg-1">
     <div class="shop-page-action-bar mb-30">
         <div class="container container-wide">
             <div class="action-bar-inner">
@@ -68,7 +86,7 @@
                                 <div class="product-item__content">
                                     <div class="product-item__info">
                                         <h4 class="title"><a href="single-product.html">{{ produit.nom }}</a></h4>
-                                        <span class="price"><strong>Price:</strong> {{ produit.prix }} dt</span>
+                                        <span class="price"><strong>Price:</strong> <br>{{ produit.prix }} dt</span>
                                     </div>
 
                                     <div class="product-item__action">
@@ -90,6 +108,10 @@
             <p>no records found</p>
 
         {% endfor %}
+                    </div>
+                </div>
+                </div>
+                    </div>
                     </div>
                 </div>
             </div>

@@ -7,7 +7,7 @@
         <div class="card-body">
     <h1 class="card-title">Créer un nouveau produit</h1>
 
-    {{ form_start(form, {'class': 'forms-sample'}) }}
+    {{ form_start(form, {'class': 'forms-sample','attr':{'novalidate': 'novalidate'}} ) }}
             {% form_theme form 'bootstrap_4_layout.html.twig' %}
     <div>
         {{ form_errors(form) }}
