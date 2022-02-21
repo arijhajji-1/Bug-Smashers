@@ -1,0 +1,53 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %} Montage{% endblock %}
+
+{% block body %}
+
+
+
+    <div class="col-lg-12 stretch-card">
+
+    <div class="card">
+<div class="card-body">
+<table class="table table-bordered">
+    <thead>
+    <tr>
+                                    <th >id</th>
+                                   <th >Processeur </th>
+                                   <th >Carte graphique </th>
+                                    <th >Carte mere </th>
+    <th>Disque Systeme</th>
+    <th>boitier</th>
+    <th>Stockage Supp</th>
+
+
+</tr>
+</th>
+                                </thead>
+                                <tbody>
+<tr  {% for montage in montage %}>
+    <td >{{ montage.Id }}</td>
+    <td >{{ montage.Processeur }}</td>
+    <td >{{ montage.CarteGraphique }}</td>
+    <td >{{ montage.CarteMere }}</td>
+    <td>{{ montage.DisqueSysteme }}</td>
+    <td>{{ montage.boitier }}</td>
+    <td>{{ montage.StockageSupp }}</td>
+
+</tr>
+                                </tbody>
+
+                                {% endfor %}
+
+                            </table>
+
+
+
+
+</div>
+                </div>
+            </div>
+
+
+{% endblock %}

@@ -9,43 +9,44 @@
     <title>{% block title %}Reloua {% endblock %}</title>
 
     <!--== Favicon ==-->
-    <link rel="shortcut icon" href="{{asset('front/assets/img/logo.png')}}" type="image/x-icon" />
-
-    <!--== Google Fonts ==-->
-    <link href="https://fonts.googleapis.com/css?family=Oswald:400,500,600,700%7CPoppins:400,400i,500,600&display=swap" rel="stylesheet">
-
-    <!-- build:css assets/css/app.min.css -->
     {% block css %}
-    <!--== Leaflet Min CSS ==-->
-    <link href="{{ asset('front/assets/css/leaflet.min.css') }}" rel="stylesheet" />
-    <!--== Nice Select Min CSS ==-->
-    <link href="{{ asset('front/assets/css/nice-select.min.css') }}" rel="stylesheet" />
-    <!--== Slick Slider Min CSS ==-->
-    <link href="{{ asset('front/assets/css/slick.min.css') }}" rel="stylesheet" />
-    <!--== Magnific Popup Min CSS ==-->
-    <link href="{{ asset('front/assets/css/magnific-popup.min.css') }}" rel="stylesheet" />
-    <!--== Slicknav Min CSS ==-->
-    <link href="{{ asset('front/assets/css/slicknav.min.css') }}" rel="stylesheet" />
-    <!--== Animate Min CSS ==-->
-    <link href="{{ asset('front/assets/css/animate.min.css') }}" rel="stylesheet" />
-    <!--== Ionicons Min CSS ==-->
-    <link href="{{ asset('front/assets/css/ionicons.min.css') }}" rel="stylesheet" />
-    <!--== Font-Awesome Min CSS ==-->
-    <link href="{{ asset('front/assets/css/font-awesome.min.css') }}" rel="stylesheet" />
-    <!--== Bootstrap Min CSS ==-->
-    <link href="{{ asset('front/assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+        <link rel="shortcut icon" href="{{asset('front/assets/img/logo.png')}}" type="image/x-icon" />
 
-    <!--== Main Style CSS ==-->
-    <link href="{{ asset('front/assets/css/style.css') }}" rel="stylesheet" />
-    <!--== Helper Min CSS ==-->
-    <link href="{{ asset('front/assets/css/helper.min.css') }}" rel="stylesheet" />
-    <!-- endbuild -->
+        <!--== Google Fonts ==-->
+        <link href="https://fonts.googleapis.com/css?family=Oswald:400,500,600,700%7CPoppins:400,400i,500,600&display=swap" rel="stylesheet">
 
+        <!-- build:css assets/css/app.min.css -->
+
+        <!--== Leaflet Min CSS ==-->
+        <link href="{{ asset('front/assets/css/leaflet.min.css') }}" rel="stylesheet" />
+        <!--== Nice Select Min CSS ==-->
+        <link href="{{ asset('front/assets/css/nice-select.min.css') }}" rel="stylesheet" />
+        <!--== Slick Slider Min CSS ==-->
+        <link href="{{ asset('front/assets/css/slick.min.css') }}" rel="stylesheet" />
+        <!--== Magnific Popup Min CSS ==-->
+        <link href="{{ asset('front/assets/css/magnific-popup.min.css') }}" rel="stylesheet" />
+        <!--== Slicknav Min CSS ==-->
+        <link href="{{ asset('front/assets/css/slicknav.min.css') }}" rel="stylesheet" />
+        <!--== Animate Min CSS ==-->
+        <link href="{{ asset('front/assets/css/animate.min.css') }}" rel="stylesheet" />
+        <!--== Ionicons Min CSS ==-->
+        <link href="{{ asset('front/assets/css/ionicons.min.css') }}" rel="stylesheet" />
+        <!--== Font-Awesome Min CSS ==-->
+        <link href="{{ asset('front/assets/css/font-awesome.min.css') }}" rel="stylesheet" />
+        <!--== Bootstrap Min CSS ==-->
+        <link href="{{ asset('front/assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+
+        <!--== Main Style CSS ==-->
+        <link href="{{ asset('front/assets/css/style.css') }}" rel="stylesheet" />
+        <!--== Helper Min CSS ==-->
+        <link href="{{ asset('front/assets/css/helper.min.css') }}" rel="stylesheet" />
+        <!-- endbuild -->
+    {% endblock %}
     <!--[if lt IE 9]>
     <script src="{{ asset('//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js') }}"></script>
     <script src="{{ asset('//oss.maxcdn.com/respond/1.4.2/respond.min.js') }}"></script>
     <![endif]-->
-    {% endblock %}
+
 </head>
 
 <body>
@@ -66,14 +67,16 @@
                         <li class="has-submenu"><a href="{{ path('index') }}">Accueil</a>
 
                         </li>
-                        <li><a href="{{ path('about') }}">About</a></li>
+                        <li><a href="{{ path('about') }}">a propos</a></li>
                         <li class="has-submenu"><a href="{{ path('produit') }}">Produit</a>
 
                         </li>
                         <li class="has-submenu"><a href="{{ path('forum') }}">Forum</a>
 
                         </li>
+                        <li class="has-submenu"><a href="{{ path('montage') }}">Montage</a>
 
+                        </li>
 
                         </li>
                         <li><a href="{{ path('contact') }}">Contact</a></li>
@@ -153,33 +156,34 @@
 </header>
 <!--== End Header Area ==-->
 {% block body %}
-<!--== Start Slider Area Wrapper ==-->
-<div class="slider-area-wrapper">
-    <div class="slider-content-active">
-        <div class="slider-slide-item bg-img" data-bg="{{ asset('front/assets/img/slider/slider-1.jpg') }}">
-            <div class="container container-wide h-100">
-                <div class="row align-items-center h-100">
-                    <div class="col-lg-6">
-                        <div class="slide-content">
-                            <div class="slide-content-inner">
-                                <h3>NEW TECHNOLOGY & BUILD</h3>
+    <!--== Start Slider Area Wrapper ==-->
+    <div class="slider-area-wrapper">
+        <div class="slider-content-active">
+            <div class="slider-slide-item bg-img" data-bg="{{ asset('front/assets/img/slider/slider-1.jpg') }}">
+                <div class="container container-wide h-100">
+                    <div class="row align-items-center h-100">
+                        <div class="col-lg-6">
+                            <div class="slide-content">
+                                <div class="slide-content-inner">
+                                    <h3>NEW TECHNOLOGY & BUILD</h3>
 
-                                <a class="btn btn-white" href="shop.html">Shop Now</a>
+                                    <a class="btn btn-white" href="shop.html">Shop Now</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="slider-slide-item bg-img" data-bg="{{ asset('front/assets/img/slider/slider-2.jpg') }}">
-            <div class="container container-wide h-100">
-                <div class="row align-items-center h-100">
-                    <div class="col-12">
-                        <div class="slide-content">
-                            <div class="slide-content-inner">
-                                <h3>NEW TECHNOLOGY & BUILD</h3>
+            <div class="slider-slide-item bg-img" data-bg="{{ asset('front/assets/img/slider/slider-2.jpg') }}">
+                <div class="container container-wide h-100">
+                    <div class="row align-items-center h-100">
+                        <div class="col-12">
+                            <div class="slide-content">
+                                <div class="slide-content-inner">
+                                    <h3>NEW TECHNOLOGY & BUILD</h3>
 
-                                <a class="btn btn-white" href="shop.html">Shop Now</a>
+                                    <a class="btn btn-white" href="shop.html">Shop Now</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -187,727 +191,726 @@
             </div>
         </div>
     </div>
-</div>
-<!--== End Slider Area Wrapper ==-->
+    <!--== End Slider Area Wrapper ==-->
 
-<!--== Start Banner Area Wrapper ==-->
-<div class="banner-area-wrapper banner-mt">
-    <div class="container container-wide">
-        <div class="row">
-            <div class="col-md-6 col-lg-4">
-                <div class="banner-item">
-                    <div class="banner-item__img">
-                        <a href="#"><img src="{{ asset('front/assets/img/banner/banner-1.jpg') }}" alt="Banner" /></a>
+    <!--== Start Banner Area Wrapper ==-->
+    <div class="banner-area-wrapper banner-mt">
+        <div class="container container-wide">
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="banner-item">
+                        <div class="banner-item__img">
+                            <a href="#"><img src="{{ asset('front/assets/img/banner/banner-1.jpg') }}" alt="Banner" /></a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-6 col-lg-4">
-                <div class="banner-item">
-                    <div class="banner-item__img">
-                        <a href="#"><img src="{{ asset('front/assets/img/banner/banner-2.jpg') }}" alt="Banner" /></a>
+                <div class="col-md-6 col-lg-4">
+                    <div class="banner-item">
+                        <div class="banner-item__img">
+                            <a href="#"><img src="{{ asset('front/assets/img/banner/banner-2.jpg') }}" alt="Banner" /></a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-6 col-lg-4">
-                <div class="banner-item">
-                    <div class="banner-item__img">
-                        <a href="#"><img src="{{ asset('front/assets/img/banner/banner-3.jpg') }}" alt="Banner" /></a>
+                <div class="col-md-6 col-lg-4">
+                    <div class="banner-item">
+                        <div class="banner-item__img">
+                            <a href="#"><img src="{{ asset('front/assets/img/banner/banner-3.jpg') }}" alt="Banner" /></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!--== End Banner Area Wrapper ==-->
+    <!--== End Banner Area Wrapper ==-->
 
-<!--== Start Call to Action Area ==-->
-<div class="call-to-action-area sm-top">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-lg-4">
-                <div class="call-to-action-item mt-0">
-                    <div class="call-to-action-item__icon">
-                        <img src="{{ asset('front/assets/img/icons/icon-1.png') }}" alt="fast delivery">
-                    </div>
-                    <div class="call-to-action-item__info">
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-lg-4">
-                <div class="call-to-action-item">
-                    <div class="call-to-action-item__icon">
-                        <img src="{{ asset('front/assets/img/icons/icon-2.png') }}" alt="quality">
-                    </div>
-                    <div class="call-to-action-item__info">
-                        <h3>Quality Products</h3>
-                        <p>We ensure our product
-                            quality all times</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-lg-4">
-                <div class="call-to-action-item">
-                    <div class="call-to-action-item__icon">
-                        <img src="{{ asset('front/assets/img/icons/icon-3.png') }}" alt="return">
-                    </div>
-                    <div class="call-to-action-item__info">
-                        <h3>Online Support</h3>
-                        <p>To satisfy our customer we try
-                            to give support online</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--== End Call to Action Area ==-->
-
-<!--== Start Best Seller Products Area ==-->
-<div class="best-seller-products-area sm-top">
-    <div class="container container-wide">
-        <div class="row">
-            <div class="col-lg-5 m-auto text-center">
-                <div class="section-title">
-                    <h2 class="h3">Best Seller</h2>
-                    <p>All best seller product are now available for you and your can buy
-                        this product from here any time any where so sop now</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <div class="product-wrapper">
-                    <div class="product-carousel">
-                        <!-- Start Product Item -->
-                        <div class="product-item">
-                            <div class="product-item__thumb">
-                                <a href="single-product.html">
-                                    <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-1.png') }}" alt="Product" />
-                                    <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-2.png') }}" alt="Product" />
-                                </a>
-                            </div>
-
-                            <div class="product-item__content">
-                                <div class="ratting">
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star-half"></i></span>
-                                </div>
-                                <h4 class="title"><a href="single-product.html"></a></h4>
-                                <span class="price"><strong>Price:</strong> $165.00</span>
-                            </div>
-
-                            <div class="product-item__action">
-                                <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
-                            </div>
-
-                            <div class="product-item__sale">
-                                <span class="sale-txt">25%</span>
-                            </div>
-                        </div>
-                        <!-- End Product Item -->
-
-                        <!-- Start Product Item -->
-                        <div class="product-item">
-                            <div class="product-item__thumb">
-                                <a href="single-product.html">
-                                    <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-3.png') }}" alt="Product" />
-                                    <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-4.png') }}" alt="Product" />
-                                </a>
-                            </div>
-
-                            <div class="product-item__content">
-                                <div class="ratting">
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star-half"></i></span>
-                                    <span><i class="ion-android-star-half"></i></span>
-                                </div>
-                                <h4 class="title"><a href="single-product.html"></a></h4>
-                                <span class="price"><strong>Price:</strong> $615.00</span>
-                            </div>
-
-                            <div class="product-item__action">
-                                <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
-                            </div>
-                        </div>
-                        <!-- End Product Item -->
-
-                        <!-- Start Product Item -->
-                        <div class="product-item">
-                            <div class="product-item__thumb">
-                                <a href="single-product.html">
-                                    <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-4.png') }}" alt="Product" />
-                                    <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-5.png') }}" alt="Product" />
-                                </a>
-                            </div>
-
-                            <div class="product-item__content">
-                                <div class="ratting">
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                </div>
-                                <h4 class="title"><a href="single-product.html"></a></h4>
-                                <span class="price"><strong>Price:</strong> $65.00</span>
-                            </div>
-
-                            <div class="product-item__action">
-                                <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
-                            </div>
-
-                            <div class="product-item__sale">
-                                <span class="sale-txt">35%</span>
-                            </div>
-                        </div>
-                        <!-- End Product Item -->
-
-                        <!-- Start Product Item -->
-                        <div class="product-item">
-                            <div class="product-item__thumb">
-                                <a href="single-product.html">
-                                    <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-2.png') }}" alt="Product" />
-                                    <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-1.png') }}" alt="Product" />
-                                </a>
-                            </div>
-
-                            <div class="product-item__content">
-                                <div class="ratting">
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star-half"></i></span>
-                                </div>
-                                <h4 class="title"><a href="single-product.html"></a></h4>
-                                <span class="price"><strong>Price:</strong> $165.00</span>
-                            </div>
-
-                            <div class="product-item__action">
-                                <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
-                            </div>
-                        </div>
-                        <!-- End Product Item -->
-
-                        <!-- Start Product Item -->
-                        <div class="product-item">
-                            <div class="product-item__thumb">
-                                <a href="single-product.html">
-                                    <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-5.png') }}" alt="Product" />
-                                    <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-4.png') }}" alt="Product" />
-                                </a>
-                            </div>
-
-                            <div class="product-item__content">
-                                <div class="ratting">
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star-half"></i></span>
-                                </div>
-                                <h4 class="title"><a href="single-product.html"></a></h4>
-                                <span class="price"><strong>Price:</strong> $165.00</span>
-                            </div>
-
-                            <div class="product-item__action">
-                                <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
-                            </div>
-
-                            <div class="product-item__sale">
-                                <span class="sale-txt">21%</span>
-                            </div>
-                        </div>
-                        <!-- End Product Item -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--== End Best Seller Products Area ==-->
-
-<!--== Start Call to action Wrapper ==-->
-<div class="call-to-action-area">
-    <div class="call-to-action-content-area bg-img" data-bg="front/assets/img/bg/bg-1.jpg">
+    <!--== Start Call to Action Area ==-->
+    <div class="call-to-action-area sm-top">
         <div class="container">
             <div class="row">
-                <div class="col-12 text-center">
-                    <div class="call-to-action-txt">
-                        <h2>ALL KINDS OF PARTS THAT YOU <br> NEED CAN FIND HERE</h2>
-                        <a href="shop.html" class="btn btn-brand">Shop Now</a>
+                <div class="col-md-4 col-lg-4">
+                    <div class="call-to-action-item mt-0">
+                        <div class="call-to-action-item__icon">
+                            <img src="{{ asset('front/assets/img/icons/icon-1.png') }}" alt="fast delivery">
+                        </div>
+                        <div class="call-to-action-item__info">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-lg-4">
+                    <div class="call-to-action-item">
+                        <div class="call-to-action-item__icon">
+                            <img src="{{ asset('front/assets/img/icons/icon-2.png') }}" alt="quality">
+                        </div>
+                        <div class="call-to-action-item__info">
+                            <h3>Quality Products</h3>
+                            <p>We ensure our product
+                                quality all times</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-lg-4">
+                    <div class="call-to-action-item">
+                        <div class="call-to-action-item__icon">
+                            <img src="{{ asset('front/assets/img/icons/icon-3.png') }}" alt="return">
+                        </div>
+                        <div class="call-to-action-item__info">
+                            <h3>Online Support</h3>
+                            <p>To satisfy our customer we try
+                                to give support online</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!--== End Call to Action Area ==-->
 
-    <div class="call-to-action-image-area">
+    <!--== Start Best Seller Products Area ==-->
+    <div class="best-seller-products-area sm-top">
+        <div class="container container-wide">
+            <div class="row">
+                <div class="col-lg-5 m-auto text-center">
+                    <div class="section-title">
+                        <h2 class="h3">Best Seller</h2>
+                        <p>All best seller product are now available for you and your can buy
+                            this product from here any time any where so sop now</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="product-wrapper">
+                        <div class="product-carousel">
+                            <!-- Start Product Item -->
+                            <div class="product-item">
+                                <div class="product-item__thumb">
+                                    <a href="single-product.html">
+                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-1.png') }}" alt="Product" />
+                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-2.png') }}" alt="Product" />
+                                    </a>
+                                </div>
+
+                                <div class="product-item__content">
+                                    <div class="ratting">
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star-half"></i></span>
+                                    </div>
+                                    <h4 class="title"><a href="single-product.html"></a></h4>
+                                    <span class="price"><strong>Price:</strong> $165.00</span>
+                                </div>
+
+                                <div class="product-item__action">
+                                    <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                </div>
+
+                                <div class="product-item__sale">
+                                    <span class="sale-txt">25%</span>
+                                </div>
+                            </div>
+                            <!-- End Product Item -->
+
+                            <!-- Start Product Item -->
+                            <div class="product-item">
+                                <div class="product-item__thumb">
+                                    <a href="single-product.html">
+                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-3.png') }}" alt="Product" />
+                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-4.png') }}" alt="Product" />
+                                    </a>
+                                </div>
+
+                                <div class="product-item__content">
+                                    <div class="ratting">
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star-half"></i></span>
+                                        <span><i class="ion-android-star-half"></i></span>
+                                    </div>
+                                    <h4 class="title"><a href="single-product.html"></a></h4>
+                                    <span class="price"><strong>Price:</strong> $615.00</span>
+                                </div>
+
+                                <div class="product-item__action">
+                                    <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                </div>
+                            </div>
+                            <!-- End Product Item -->
+
+                            <!-- Start Product Item -->
+                            <div class="product-item">
+                                <div class="product-item__thumb">
+                                    <a href="single-product.html">
+                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-4.png') }}" alt="Product" />
+                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-5.png') }}" alt="Product" />
+                                    </a>
+                                </div>
+
+                                <div class="product-item__content">
+                                    <div class="ratting">
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                    </div>
+                                    <h4 class="title"><a href="single-product.html"></a></h4>
+                                    <span class="price"><strong>Price:</strong> $65.00</span>
+                                </div>
+
+                                <div class="product-item__action">
+                                    <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                </div>
+
+                                <div class="product-item__sale">
+                                    <span class="sale-txt">35%</span>
+                                </div>
+                            </div>
+                            <!-- End Product Item -->
+
+                            <!-- Start Product Item -->
+                            <div class="product-item">
+                                <div class="product-item__thumb">
+                                    <a href="single-product.html">
+                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-2.png') }}" alt="Product" />
+                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-1.png') }}" alt="Product" />
+                                    </a>
+                                </div>
+
+                                <div class="product-item__content">
+                                    <div class="ratting">
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star-half"></i></span>
+                                    </div>
+                                    <h4 class="title"><a href="single-product.html"></a></h4>
+                                    <span class="price"><strong>Price:</strong> $165.00</span>
+                                </div>
+
+                                <div class="product-item__action">
+                                    <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                </div>
+                            </div>
+                            <!-- End Product Item -->
+
+                            <!-- Start Product Item -->
+                            <div class="product-item">
+                                <div class="product-item__thumb">
+                                    <a href="single-product.html">
+                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-5.png') }}" alt="Product" />
+                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-4.png') }}" alt="Product" />
+                                    </a>
+                                </div>
+
+                                <div class="product-item__content">
+                                    <div class="ratting">
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star-half"></i></span>
+                                    </div>
+                                    <h4 class="title"><a href="single-product.html"></a></h4>
+                                    <span class="price"><strong>Price:</strong> $165.00</span>
+                                </div>
+
+                                <div class="product-item__action">
+                                    <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                </div>
+
+                                <div class="product-item__sale">
+                                    <span class="sale-txt">21%</span>
+                                </div>
+                            </div>
+                            <!-- End Product Item -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--== End Best Seller Products Area ==-->
+
+    <!--== Start Call to action Wrapper ==-->
+    <div class="call-to-action-area">
+        <div class="call-to-action-content-area bg-img" data-bg="front/assets/img/bg/bg-1.jpg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="call-to-action-txt">
+                            <h2>ALL KINDS OF PARTS THAT YOU <br> NEED CAN FIND HERE</h2>
+                            <a href="shop.html" class="btn btn-brand">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="call-to-action-image-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <img src="{{ asset('front/assets/img/bg/bg-car.png') }}" alt="Car" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--== End Call to action Wrapper ==-->
+
+    <!--== Start Promotion Code Banner Area ==-->
+    <div class="promotion-code-area-wrapper sm-top">
+        <div class="container container-wide">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="promotion-code-banner-item mb-sm-30">
+                        <img src="{{ asset('front/assets/img/banner/banner-5.jpg') }}" alt="Banner" />
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="promotion-code-banner-item">
+                        <img src="{{ asset('front/assets/img/banner/banner-6.jpg') }}" alt="Banner" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--== End Promotion Code Banner Area ==-->
+
+    <!--== Start Products Area Wrapper ==-->
+    <div class="products-area-wrapper sm-top">
+        <div class="container container-wide">
+            <div class="row">
+                <div class="col-lg-5 m-auto text-center">
+                    <div class="section-title">
+                        <h2 class="h3">All Of Our Products</h2>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="product-wrapper columns-5">
+                        <!-- Start Product Item -->
+                        <div class="col">
+                            <div class="product-item">
+                                <div class="product-item__thumb">
+                                    <a href="single-product.html">
+                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-6.png') }}" alt="Product" />
+                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-7.png') }}" alt="Product" />
+                                    </a>
+                                </div>
+
+                                <div class="product-item__content">
+                                    <div class="ratting">
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star-half"></i></span>
+                                    </div>
+                                    <h4 class="title"><a href="single-product.html">RTX</a></h4>
+                                    <span class="price"><strong>Price:</strong> $165.00</span>
+                                </div>
+
+                                <div class="product-item__action">
+                                    <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                </div>
+
+                                <div class="product-item__sale">
+                                    <span class="sale-txt">25%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Product Item -->
+
+                        <!-- Start Product Item -->
+                        <div class="col">
+                            <div class="product-item">
+                                <div class="product-item__thumb">
+                                    <a href="single-product.html">
+                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-8.png') }}" alt="Product" />
+                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-9.png') }}" alt="Product" />
+                                    </a>
+                                </div>
+
+                                <div class="product-item__content">
+                                    <div class="ratting">
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star-half"></i></span>
+                                        <span><i class="ion-android-star-half"></i></span>
+                                    </div>
+                                    <h4 class="title"><a href="single-product.html">Toshiba</a></h4>
+                                    <span class="price"><strong>Price:</strong> $615.00</span>
+                                </div>
+
+                                <div class="product-item__action">
+                                    <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Product Item -->
+
+                        <!-- Start Product Item -->
+                        <div class="col">
+                            <div class="product-item">
+                                <div class="product-item__thumb">
+                                    <a href="single-product.html">
+                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-7.png') }}" alt="Product" />
+                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-14.png') }}" alt="Product" />
+                                    </a>
+                                </div>
+
+                                <div class="product-item__content">
+                                    <div class="ratting">
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                    </div>
+                                    <h4 class="title"><a href="single-product.html">Acer</a></h4>
+                                    <span class="price"><strong>Price:</strong> $65.00</span>
+                                </div>
+
+                                <div class="product-item__action">
+                                    <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                </div>
+
+                                <div class="product-item__sale">
+                                    <span class="sale-txt">35%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Product Item -->
+
+                        <!-- Start Product Item -->
+                        <div class="col">
+                            <div class="product-item">
+                                <div class="product-item__thumb">
+                                    <a href="single-product.html">
+                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-10.png') }}" alt="Product" />
+                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-5.png') }}" alt="Product" />
+                                    </a>
+                                </div>
+
+                                <div class="product-item__content">
+                                    <div class="ratting">
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star-half"></i></span>
+                                    </div>
+                                    <h4 class="title"><a href="single-product.html">DELL</a></h4>
+                                    <span class="price"><strong>Price:</strong> $165.00</span>
+                                </div>
+
+                                <div class="product-item__action">
+                                    <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Product Item -->
+
+                        <!-- Start Product Item -->
+                        <div class="col">
+                            <div class="product-item">
+                                <div class="product-item__thumb">
+                                    <a href="single-product.html">
+                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-11.png') }}" alt="Product" />
+                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-4.png') }}" alt="Product" />
+                                    </a>
+                                </div>
+
+                                <div class="product-item__content">
+                                    <div class="ratting">
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star-half"></i></span>
+                                    </div>
+                                    <h4 class="title"><a href="single-product.html">HP</a></h4>
+                                    <span class="price"><strong>Price:</strong> $165.00</span>
+                                </div>
+
+                                <div class="product-item__action">
+                                    <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                </div>
+
+                                <div class="product-item__sale">
+                                    <span class="sale-txt">21%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Product Item -->
+
+                        <!-- Start Product Item -->
+                        <div class="col">
+                            <div class="product-item">
+                                <div class="product-item__thumb">
+                                    <a href="single-product.html">
+                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-13.png') }}" alt="Product" />
+                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-12.png') }}" alt="Product" />
+                                    </a>
+                                </div>
+
+                                <div class="product-item__content">
+                                    <div class="ratting">
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                    </div>
+                                    <h4 class="title"><a href="single-product.html">MSI</a></h4>
+                                    <span class="price"><strong>Price:</strong> $65.00</span>
+                                </div>
+
+                                <div class="product-item__action">
+                                    <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                </div>
+
+                                <div class="product-item__sale">
+                                    <span class="sale-txt">35%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Product Item -->
+
+                        <!-- Start Product Item -->
+                        <div class="col">
+                            <div class="product-item">
+                                <div class="product-item__thumb">
+                                    <a href="single-product.html">
+                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-14.png') }}" alt="Product" />
+                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-8.png') }}" alt="Product" />
+                                    </a>
+                                </div>
+
+                                <div class="product-item__content">
+                                    <div class="ratting">
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star-half"></i></span>
+                                    </div>
+                                    <h4 class="title"><a href="single-product.html">Pc ASUS</a></h4>
+                                    <span class="price"><strong>Price:</strong> $165.00</span>
+                                </div>
+
+                                <div class="product-item__action">
+                                    <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Product Item -->
+
+                        <!-- Start Product Item -->
+                        <div class="col">
+                            <div class="product-item">
+                                <div class="product-item__thumb">
+                                    <a href="single-product.html">
+                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-15.png') }}" alt="Product" />
+                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-4.png') }}" alt="Product" />
+                                    </a>
+                                </div>
+
+                                <div class="product-item__content">
+                                    <div class="ratting">
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star-half"></i></span>
+                                    </div>
+                                    <h4 class="title"><a href="single-product.html">nividia Geforce GTX</a></h4>
+                                    <span class="price"><strong>Price:</strong> $165.00</span>
+                                </div>
+
+                                <div class="product-item__action">
+                                    <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                </div>
+
+                                <div class="product-item__sale">
+                                    <span class="sale-txt">21%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Product Item -->
+
+                        <!-- Start Product Item -->
+                        <div class="col">
+                            <div class="product-item">
+                                <div class="product-item__thumb">
+                                    <a href="single-product.html">
+                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-12.png') }}" alt="Product" />
+                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-2.png') }}" alt="Product" />
+                                    </a>
+                                </div>
+
+                                <div class="product-item__content">
+                                    <div class="ratting">
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star-half"></i></span>
+                                    </div>
+                                    <h4 class="title"><a href="single-product.html">Mac book pro</a></h4>
+                                    <span class="price"><strong>Price:</strong> $165.00</span>
+                                </div>
+
+                                <div class="product-item__action">
+                                    <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                </div>
+
+                                <div class="product-item__sale">
+                                    <span class="sale-txt">25%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Product Item -->
+
+                        <!-- Start Product Item -->
+                        <div class="col">
+                            <div class="product-item">
+                                <div class="product-item__thumb">
+                                    <a href="single-product.html">
+                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-9.png') }}" alt="Product" />
+                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-4.png') }}" alt="Product" />
+                                    </a>
+                                </div>
+
+                                <div class="product-item__content">
+                                    <div class="ratting">
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star"></i></span>
+                                        <span><i class="ion-android-star-half"></i></span>
+                                        <span><i class="ion-android-star-half"></i></span>
+                                    </div>
+                                    <h4 class="title"><a href="single-product.html">Pc laptop leenovo </a></h4>
+                                    <span class="price"><strong>Price:</strong> $615.00</span>
+                                </div>
+
+                                <div class="product-item__action">
+                                    <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                    <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Product Item -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--== End Products Area Wrapper ==-->
+
+    <!--== Start Flash Deals Area ==-->
+
+    <!--== End Newsletter Area ==-->
+
+    <!--== Start Brand Logo Area Wrapper ==-->
+    <div class="brand-logo-area sm-top sm-bottom">
         <div class="container">
             <div class="row">
-                <div class="col-12 text-center">
-                    <img src="{{ asset('front/assets/img/bg/bg-car.png') }}" alt="Car" />
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--== End Call to action Wrapper ==-->
-
-<!--== Start Promotion Code Banner Area ==-->
-<div class="promotion-code-area-wrapper sm-top">
-    <div class="container container-wide">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="promotion-code-banner-item mb-sm-30">
-                    <img src="{{ asset('front/assets/img/banner/banner-5.jpg') }}" alt="Banner" />
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="promotion-code-banner-item">
-                    <img src="{{ asset('front/assets/img/banner/banner-6.jpg') }}" alt="Banner" />
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--== End Promotion Code Banner Area ==-->
-
-<!--== Start Products Area Wrapper ==-->
-<div class="products-area-wrapper sm-top">
-    <div class="container container-wide">
-        <div class="row">
-            <div class="col-lg-5 m-auto text-center">
-                <div class="section-title">
-                    <h2 class="h3">All Of Our Products</h2>
-                    <p></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <div class="product-wrapper columns-5">
-                    <!-- Start Product Item -->
-                    <div class="col">
-                        <div class="product-item">
-                            <div class="product-item__thumb">
-                                <a href="single-product.html">
-                                    <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-6.png') }}" alt="Product" />
-                                    <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-7.png') }}" alt="Product" />
-                                </a>
-                            </div>
-
-                            <div class="product-item__content">
-                                <div class="ratting">
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star-half"></i></span>
-                                </div>
-                                <h4 class="title"><a href="single-product.html">RTX</a></h4>
-                                <span class="price"><strong>Price:</strong> $165.00</span>
-                            </div>
-
-                            <div class="product-item__action">
-                                <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
-                            </div>
-
-                            <div class="product-item__sale">
-                                <span class="sale-txt">25%</span>
-                            </div>
+                <div class="col-12">
+                    <div class="brand-logo-content">
+                        <div class="brand-logo-item">
+                            <a href="#"><img src="{{ asset('front/assets/img/brand-logo/brand-1.png') }}" alt="Logo" /></a>
                         </div>
-                    </div>
-                    <!-- End Product Item -->
 
-                    <!-- Start Product Item -->
-                    <div class="col">
-                        <div class="product-item">
-                            <div class="product-item__thumb">
-                                <a href="single-product.html">
-                                    <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-8.png') }}" alt="Product" />
-                                    <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-9.png') }}" alt="Product" />
-                                </a>
-                            </div>
-
-                            <div class="product-item__content">
-                                <div class="ratting">
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star-half"></i></span>
-                                    <span><i class="ion-android-star-half"></i></span>
-                                </div>
-                                <h4 class="title"><a href="single-product.html">Toshiba</a></h4>
-                                <span class="price"><strong>Price:</strong> $615.00</span>
-                            </div>
-
-                            <div class="product-item__action">
-                                <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
-                            </div>
+                        <div class="brand-logo-item">
+                            <a href="#"><img src="{{ asset('front/assets/img/brand-logo/brand-2.png') }}" alt="Logo" /></a>
                         </div>
-                    </div>
-                    <!-- End Product Item -->
 
-                    <!-- Start Product Item -->
-                    <div class="col">
-                        <div class="product-item">
-                            <div class="product-item__thumb">
-                                <a href="single-product.html">
-                                    <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-7.png') }}" alt="Product" />
-                                    <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-14.png') }}" alt="Product" />
-                                </a>
-                            </div>
-
-                            <div class="product-item__content">
-                                <div class="ratting">
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                </div>
-                                <h4 class="title"><a href="single-product.html">Acer</a></h4>
-                                <span class="price"><strong>Price:</strong> $65.00</span>
-                            </div>
-
-                            <div class="product-item__action">
-                                <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
-                            </div>
-
-                            <div class="product-item__sale">
-                                <span class="sale-txt">35%</span>
-                            </div>
+                        <div class="brand-logo-item">
+                            <a href="#"><img src="{{ asset('front/assets/img/brand-logo/brand-3.png') }}" alt="Logo" /></a>
                         </div>
-                    </div>
-                    <!-- End Product Item -->
 
-                    <!-- Start Product Item -->
-                    <div class="col">
-                        <div class="product-item">
-                            <div class="product-item__thumb">
-                                <a href="single-product.html">
-                                    <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-10.png') }}" alt="Product" />
-                                    <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-5.png') }}" alt="Product" />
-                                </a>
-                            </div>
-
-                            <div class="product-item__content">
-                                <div class="ratting">
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star-half"></i></span>
-                                </div>
-                                <h4 class="title"><a href="single-product.html">DELL</a></h4>
-                                <span class="price"><strong>Price:</strong> $165.00</span>
-                            </div>
-
-                            <div class="product-item__action">
-                                <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
-                            </div>
+                        <div class="brand-logo-item">
+                            <a href="#"><img src="{{ asset('front/assets/img/brand-logo/brand-4.png') }}" alt="Logo" /></a>
                         </div>
-                    </div>
-                    <!-- End Product Item -->
 
-                    <!-- Start Product Item -->
-                    <div class="col">
-                        <div class="product-item">
-                            <div class="product-item__thumb">
-                                <a href="single-product.html">
-                                    <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-11.png') }}" alt="Product" />
-                                    <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-4.png') }}" alt="Product" />
-                                </a>
-                            </div>
-
-                            <div class="product-item__content">
-                                <div class="ratting">
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star-half"></i></span>
-                                </div>
-                                <h4 class="title"><a href="single-product.html">HP</a></h4>
-                                <span class="price"><strong>Price:</strong> $165.00</span>
-                            </div>
-
-                            <div class="product-item__action">
-                                <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
-                            </div>
-
-                            <div class="product-item__sale">
-                                <span class="sale-txt">21%</span>
-                            </div>
+                        <div class="brand-logo-item">
+                            <a href="#"><img src="{{ asset('front/assets/img/brand-logo/brand-5.png') }}" alt="Logo" /></a>
                         </div>
-                    </div>
-                    <!-- End Product Item -->
 
-                    <!-- Start Product Item -->
-                    <div class="col">
-                        <div class="product-item">
-                            <div class="product-item__thumb">
-                                <a href="single-product.html">
-                                    <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-13.png') }}" alt="Product" />
-                                    <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-12.png') }}" alt="Product" />
-                                </a>
-                            </div>
-
-                            <div class="product-item__content">
-                                <div class="ratting">
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                </div>
-                                <h4 class="title"><a href="single-product.html">MSI</a></h4>
-                                <span class="price"><strong>Price:</strong> $65.00</span>
-                            </div>
-
-                            <div class="product-item__action">
-                                <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
-                            </div>
-
-                            <div class="product-item__sale">
-                                <span class="sale-txt">35%</span>
-                            </div>
+                        <div class="brand-logo-item">
+                            <a href="#"><img src="{{ asset('front/assets/img/brand-logo/brand-3.png') }}" alt="Logo" /></a>
                         </div>
-                    </div>
-                    <!-- End Product Item -->
 
-                    <!-- Start Product Item -->
-                    <div class="col">
-                        <div class="product-item">
-                            <div class="product-item__thumb">
-                                <a href="single-product.html">
-                                    <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-14.png') }}" alt="Product" />
-                                    <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-8.png') }}" alt="Product" />
-                                </a>
-                            </div>
-
-                            <div class="product-item__content">
-                                <div class="ratting">
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star-half"></i></span>
-                                </div>
-                                <h4 class="title"><a href="single-product.html">Pc ASUS</a></h4>
-                                <span class="price"><strong>Price:</strong> $165.00</span>
-                            </div>
-
-                            <div class="product-item__action">
-                                <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
-                            </div>
+                        <div class="brand-logo-item">
+                            <a href="#"><img src="{{ asset('front/assets/img/brand-logo/brand-1.png') }}" alt="Logo" /></a>
                         </div>
-                    </div>
-                    <!-- End Product Item -->
-
-                    <!-- Start Product Item -->
-                    <div class="col">
-                        <div class="product-item">
-                            <div class="product-item__thumb">
-                                <a href="single-product.html">
-                                    <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-15.png') }}" alt="Product" />
-                                    <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-4.png') }}" alt="Product" />
-                                </a>
-                            </div>
-
-                            <div class="product-item__content">
-                                <div class="ratting">
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star-half"></i></span>
-                                </div>
-                                <h4 class="title"><a href="single-product.html">nividia Geforce GTX</a></h4>
-                                <span class="price"><strong>Price:</strong> $165.00</span>
-                            </div>
-
-                            <div class="product-item__action">
-                                <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
-                            </div>
-
-                            <div class="product-item__sale">
-                                <span class="sale-txt">21%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Product Item -->
-
-                    <!-- Start Product Item -->
-                    <div class="col">
-                        <div class="product-item">
-                            <div class="product-item__thumb">
-                                <a href="single-product.html">
-                                    <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-12.png') }}" alt="Product" />
-                                    <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-2.png') }}" alt="Product" />
-                                </a>
-                            </div>
-
-                            <div class="product-item__content">
-                                <div class="ratting">
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star-half"></i></span>
-                                </div>
-                                <h4 class="title"><a href="single-product.html">Mac book pro</a></h4>
-                                <span class="price"><strong>Price:</strong> $165.00</span>
-                            </div>
-
-                            <div class="product-item__action">
-                                <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
-                            </div>
-
-                            <div class="product-item__sale">
-                                <span class="sale-txt">25%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Product Item -->
-
-                    <!-- Start Product Item -->
-                    <div class="col">
-                        <div class="product-item">
-                            <div class="product-item__thumb">
-                                <a href="single-product.html">
-                                    <img class="thumb-primary" src="{{ asset('front/assets/img/product/product-9.png') }}" alt="Product" />
-                                    <img class="thumb-secondary" src="{{ asset('front/assets/img/product/product-4.png') }}" alt="Product" />
-                                </a>
-                            </div>
-
-                            <div class="product-item__content">
-                                <div class="ratting">
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star"></i></span>
-                                    <span><i class="ion-android-star-half"></i></span>
-                                    <span><i class="ion-android-star-half"></i></span>
-                                </div>
-                                <h4 class="title"><a href="single-product.html">Pc laptop leenovo </a></h4>
-                                <span class="price"><strong>Price:</strong> $615.00</span>
-                            </div>
-
-                            <div class="product-item__action">
-                                <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
-                                <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Product Item -->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--== End Products Area Wrapper ==-->
-
-<!--== Start Flash Deals Area ==-->
-
-<!--== End Newsletter Area ==-->
-
-<!--== Start Brand Logo Area Wrapper ==-->
-<div class="brand-logo-area sm-top sm-bottom">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="brand-logo-content">
-                    <div class="brand-logo-item">
-                        <a href="#"><img src="{{ asset('front/assets/img/brand-logo/brand-1.png') }}" alt="Logo" /></a>
-                    </div>
-
-                    <div class="brand-logo-item">
-                        <a href="#"><img src="{{ asset('front/assets/img/brand-logo/brand-2.png') }}" alt="Logo" /></a>
-                    </div>
-
-                    <div class="brand-logo-item">
-                        <a href="#"><img src="{{ asset('front/assets/img/brand-logo/brand-3.png') }}" alt="Logo" /></a>
-                    </div>
-
-                    <div class="brand-logo-item">
-                        <a href="#"><img src="{{ asset('front/assets/img/brand-logo/brand-4.png') }}" alt="Logo" /></a>
-                    </div>
-
-                    <div class="brand-logo-item">
-                        <a href="#"><img src="{{ asset('front/assets/img/brand-logo/brand-5.png') }}" alt="Logo" /></a>
-                    </div>
-
-                    <div class="brand-logo-item">
-                        <a href="#"><img src="{{ asset('front/assets/img/brand-logo/brand-3.png') }}" alt="Logo" /></a>
-                    </div>
-
-                    <div class="brand-logo-item">
-                        <a href="#"><img src="{{ asset('front/assets/img/brand-logo/brand-1.png') }}" alt="Logo" /></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!--== End Brand Logo Area Wrapper ==-->
+    <!--== End Brand Logo Area Wrapper ==-->
 {% endblock %}
 <!--== Start Footer Area Wrapper ==-->
 <footer class="footer-area">
@@ -1026,32 +1029,32 @@
 <!-- build:js assets/js/app.min.js -->
 <!--=== Modernizr Min Js ===-->
 {% block js %}
-<script src="{{ asset('front/assets/js/modernizr-3.6.0.min.js') }}"></script>
-<!--=== jQuery Min Js ===-->
-<script src="{{ asset('front/assets/js/jquery-3.3.1.min.js') }}"></script>
-<!--=== jQuery Migration Min Js ===-->
-<script src="{{ asset('front/assets/js/jquery-migrate-1.2.1.min.js') }}"></script>
-<!--=== Popper Min Js ===-->
-<script src="{{ asset('front/assets/js/popper.min.js') }}"></script>
-<!--=== Bootstrap Min Js ===-->
-<script src="{{ asset('front/assets/js/bootstrap.min.js') }}"></script>
-<!--=== Slicknav Min Js ===-->
-<script src="{{ asset('front/assets/js/jquery.slicknav.min.js') }}"></script>
-<!--=== Magnific Popup Min Js ===-->
-<script src="{{ asset('front/assets/js/jquery.magnific-popup.min.js') }}"></script>
-<!--=== Slick Slider Min Js ===-->
-<script src="{{ asset('front/assets/js/slick.min.js') }}"></script>
-<!--=== Nice Select Min Js ===-->
-<script src="{{ asset('front/assets/js/jquery.nice-select.min.js') }}"></script>
-<!--=== Leaflet Min Js ===-->
-<script src="{{ asset('front/assets/js/leaflet.min.js') }}"></script>
-<!--=== Countdown Js ===-->
-<script src="{{ asset('front/assets/js/countdown.js') }}"></script>
+    <script src="{{ asset('front/assets/js/modernizr-3.6.0.min.js') }}"></script>
+    <!--=== jQuery Min Js ===-->
+    <script src="{{ asset('front/assets/js/jquery-3.3.1.min.js') }}"></script>
+    <!--=== jQuery Migration Min Js ===-->
+    <script src="{{ asset('front/assets/js/jquery-migrate-1.2.1.min.js') }}"></script>
+    <!--=== Popper Min Js ===-->
+    <script src="{{ asset('front/assets/js/popper.min.js') }}"></script>
+    <!--=== Bootstrap Min Js ===-->
+    <script src="{{ asset('front/assets/js/bootstrap.min.js') }}"></script>
+    <!--=== Slicknav Min Js ===-->
+    <script src="{{ asset('front/assets/js/jquery.slicknav.min.js') }}"></script>
+    <!--=== Magnific Popup Min Js ===-->
+    <script src="{{ asset('front/assets/js/jquery.magnific-popup.min.js') }}"></script>
+    <!--=== Slick Slider Min Js ===-->
+    <script src="{{ asset('front/assets/js/slick.min.js') }}"></script>
+    <!--=== Nice Select Min Js ===-->
+    <script src="{{ asset('front/assets/js/jquery.nice-select.min.js') }}"></script>
+    <!--=== Leaflet Min Js ===-->
+    <script src="{{ asset('front/assets/js/leaflet.min.js') }}"></script>
+    <!--=== Countdown Js ===-->
+    <script src="{{ asset('front/assets/js/countdown.js') }}"></script>
 
-<!--=== Active Js ===-->
-<script src="{{ asset('front/assets/js/active.js') }}"></script>
-<!-- endbuild -->
+    <!--=== Active Js ===-->
 {% endblock %}
+<script src="{{ asset('front/assets/js/active.js') }}"></script>
+
 </body>
 
 </html>
