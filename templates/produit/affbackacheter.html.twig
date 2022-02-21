@@ -1,6 +1,6 @@
 {% extends 'base-back.html.twig' %}
 
-{% block title %}Affichers produits{% endblock %}
+{% block title %}Produits à Acheter{% endblock %}
 
 {% block body %}
 
@@ -34,8 +34,8 @@
                 </td>
                 <td> {{ product.prix }} </td>
                 <td> {{ product.qte }} </td>
-                <td><a href="{{ path("modifier_produit", {'id':product.id })}}">Modifier<i class="mdi mdi-pencil"></i></a></td>
-                <td><a href="{{ path("supprimer_produit", {'id':product.id}) }}">Supprimer
+                <td><a href="{{ path("modifier_produitA", {'id':product.id })}}">Modifier<i class="mdi mdi-pencil"></i></a></td>
+                <td><a href="{{ path("supprimer_produitA", {'id':product.id}) }}">Supprimer
                         <i class="mdi mdi-delete-forever"></i></a></td>
             </tr>
             {% endfor %}
@@ -43,7 +43,7 @@
         </table>
         <br>
         <div style="margin: 0 auto; text-align: center">
-        <a href="{{ path('produit_ajout')  }}" class="btn btn-outline-dark btn-fw" style="margin-left: 40%;
+        <a href="{{ path('produit_acheter_ajout')  }}" class="btn btn-outline-dark btn-fw" style="margin-left: 40%;
          margin-right: 40%; display:block;">Ajouter Un Produit</a>
             <a href="{{ path('produit_affichage_front')  }}" class="btn btn-outline-dark btn-fw" style="margin-left: 40%;
          margin-right: 40%; display:block;">Liste Des Produits</a>

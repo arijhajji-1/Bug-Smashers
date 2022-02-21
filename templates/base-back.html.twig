@@ -192,10 +192,19 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path("produit_affichage_back") }}">
+                    <a class="nav-link" data-toggle="collapse" href="#Produit" aria-expanded="false" aria-controls="Produit">
                         <span class="icon-bg"><i class="mdi mdi-cart"></i></span>
                         <span class="menu-title">Produits</span>
+                        <i class="menu-arrow"></i>
                     </a>
+                    <div class="collapse" id="Produit">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{ asset('back/pages/ui-features/buttons.html') }}">Ajouter Produit a acheter</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ asset('back/pages/ui-features/dropdowns.html') }}">Ajouter Produit a louer</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path("produit_acheter_affichage_back") }}">Afficher Produits Acheter</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path("produit_Louer_affichage_back") }}">Afficher Produits Louer</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path("category") }}">

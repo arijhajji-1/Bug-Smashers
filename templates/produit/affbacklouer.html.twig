@@ -1,0 +1,56 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Produits à Acheter{% endblock %}
+
+{% block body %}
+
+    <div class="card-body">
+        <h4 class="card-title">Les Produits</h4>
+        <p class="card-description"><code>Click to modify or delete</code>
+        </p>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th> id Produit </th>
+                <th> Nom </th>
+                <th> Rating </th>
+                <th> Categorie </th>
+                <th> Marque </th>
+                <th> Prix </th>
+                <th> Etat </th>
+                <th> Disponiblité </th>
+                <th colspan="2" class="text-center"> Les Actions </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+            <tr>
+                <td class="py-1">
+                    {{ product.id }}
+                </td>
+                <td> {{ product.nom }} </td>
+                <td> {{ product.rating }}</td>
+                <td> {{ product.category.getLabel() }}</td>
+                   <td> {{ product.marque }}
+                </td>
+                <td> {{ product.prix }} </td>
+                <td> {{ product.etat }} </td>
+                <td> {{ product.dispo }} </td>
+                <td><a href="{{ path("modifier_produitL", {'id':product.id })}}">Modifier<i class="mdi mdi-pencil"></i></a></td>
+                <td><a href="{{ path("supprimer_produitL", {'id':product.id}) }}">Supprimer
+                        <i class="mdi mdi-delete-forever"></i></a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <div style="margin: 0 auto; text-align: center">
+        <a href="{{ path('produit_louer_ajout')  }}" class="btn btn-outline-dark btn-fw" style="margin-left: 40%;
+         margin-right: 40%; display:block;">Ajouter Un Produit</a>
+            <a href="{{ path('produit_affichage_front')  }}" class="btn btn-outline-dark btn-fw" style="margin-left: 40%;
+         margin-right: 40%; display:block;">Liste Des Produits</a>
+
+        </div>
+    </div>
+
+{% endblock %}

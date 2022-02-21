@@ -1,15 +1,17 @@
 <?php
 
 namespace App\Entity;
-use Symfony\Component\Validator\Constraints as Assert;
-use App\Repository\ProductRepository;
+
+use App\Repository\ProduitAcheterRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=ProductRepository::class)
+ * @ORM\Entity(repositoryClass=ProduitAcheterRepository::class)
  */
-class Product
+class ProduitAcheter
 {
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -58,7 +60,7 @@ class Product
     private $marque;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="produitsAcheter")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;

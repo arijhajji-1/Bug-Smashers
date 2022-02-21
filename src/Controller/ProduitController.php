@@ -5,9 +5,15 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Entity\ProduitAcheter;
+use App\Form\ProduitAcheterType;
+use App\Entity\ProduitLouer;
+use App\Form\ProduitLouerType;
 use App\Form\ProductModifierType;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
+use App\Repository\ProduitAcheterRepository;
+use App\Repository\ProduitLouerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,13 +24,28 @@ use App\Service\FileUploader;
 
 class ProduitController extends AbstractController
 {
+
+    /**
+     * @Route("/single-productA/{id}", name="single_produitA")
+     */
+    public function singleProductA(Request $request, int $id): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $produit = $entityManager->getRepository(ProduitAcheter::class)->find($id);
+        return $this->render("produit/single-product.html.twig", [
+            "produit" => $produit,
+            "categorie" => $produit->getCategory()->getLabel(),
+        ]);
+    }
     /**
      * @Route("/produit/afffront", name="produit_affichage_front")
      */
-    public function index(ProductRepository $produitRepository, CategoryRepository $categoryRepository): Response
+    public function index(ProduitLouerRepository $produitLouerRepository,ProduitAcheterRepository $produitAcheterRepository,
+                          CategoryRepository $categoryRepository): Response
     {
         return $this->render('produit/index.html.twig', [
-            'produits' => $produitRepository->findAll(),
+            'produitsAcheter' => $produitAcheterRepository->findAll(),
+            'produitsLouer' => $produitLouerRepository->findAll(),
             'categories' => $categoryRepository->findAll(),
         ]);
     }
@@ -36,20 +57,21 @@ class ProduitController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $category = $entityManager->getRepository(Category::class)->find($cat);
         return $this->render('produit/index.html.twig', [
-            'produits' => $category->getProducts(),
+            'produitsAcheter' => $category->getProduitAcheter(),
+            'produitsLouer' => $category->getProduitLouer(),
             'categories' => $categoryRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/produit/ajouter", name="produit_ajout")
+     * @Route("/produit/ajouterA", name="produit_acheter_ajout")
      */
-    public function ajouter(Request $request, EntityManagerInterface $entityManager
+    public function ajouterA(Request $request, EntityManagerInterface $entityManager
         , FileUploader $fileUploader): Response
     {
-        $product = new Product();
+        $product = new ProduitAcheter();
         $category = new Category();
-        $form = $this->createForm(ProductType::class, $product);
+        $form = $this->createForm(ProduitAcheterType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -58,61 +80,131 @@ class ProduitController extends AbstractController
                 $fileName = $fileUploader->upload($file);
                 $product->setImagePath($fileName);
             }
-                        $entityManager->persist($product);
+            $entityManager->persist($product);
             $entityManager->flush();
 
-            return $this->redirectToRoute('produit_ajout', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('produit_acheter_ajout', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('produit/ajouter.html.twig', [
+        return $this->render('produit/ajouterA.html.twig', [
+            'produit' => $product,
+            'form' => $form->createView(),
+        ]);
+    }
+    /**
+     * @Route("/produit/ajouterL", name="produit_louer_ajout")
+     */
+    public function ajouterL(Request $request, EntityManagerInterface $entityManager
+        , FileUploader $fileUploader): Response
+    {
+        $product = new ProduitLouer();
+        $category = new Category();
+        $form = $this->createForm(ProduitLouerType::class, $product);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('imagePath')->getData();
+            if ($file) {
+                $fileName = $fileUploader->upload($file);
+                $product->setImagePath($fileName);
+            }
+            $entityManager->persist($product);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('produit_louer_ajout', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('produit/ajouterL.html.twig', [
             'produit' => $product,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/produit/affback", name="produit_affichage_back")
+     * @Route("/produit/affback/acheter", name="produit_acheter_affichage_back")
      */
-    public function back(ProductRepository $produitRepository): Response
+    public function backAcheter(ProduitAcheterRepository $produitRepository): Response
     {
-        return $this->render('produit/affback.html.twig', [
+        return $this->render('produit/affbackacheter.html.twig', [
+            'products' => $produitRepository->findAll(),
+        ]);
+    }
+    /**
+     * @Route("/produit/affback/louer", name="produit_Louer_affichage_back")
+     */
+    public function backLouer(ProduitLouerRepository $produitRepository): Response
+    {
+        return $this->render('produit/affbacklouer.html.twig', [
             'products' => $produitRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/modify-product/{id}", name="modifier_produit")
+     * @Route("/modify-productA/{id}", name="modifier_produitA")
      */
-    public function modifyProduct(Request $request, int $id): Response
+    public function modifyProductA(Request $request, int $id): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $produit = $entityManager->getRepository(Product::class)->find($id);
-        $form = $this->createForm(ProductModifierType::class, $produit);
+        $produit = $entityManager->getRepository(ProduitAcheter::class)->find($id);
+        $form = $this->createForm(ProduitAcheterType::class, $produit);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
         {
             $entityManager->flush();
 
-            return $this->redirectToRoute('produit_affichage_back', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('produit_acheter_affichage_back', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render("produit/modifierprod.html.twig", [
+        return $this->render("produit/modifierprodA.html.twig", [
+            "form" => $form->createView()
+        ]);
+    }
+    /**
+     * @Route("/modify-productL/{id}", name="modifier_produitL")
+     */
+    public function modifyProductL(Request $request, int $id): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $produit = $entityManager->getRepository(ProduitLouer::class)->find($id);
+        $form = $this->createForm(ProduitLouerType::class, $produit);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('produit_Louer_affichage_back', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render("produit/modifierprodL.html.twig", [
             "form" => $form->createView()
         ]);
     }
 
     /**
-     * @Route("/supprimer_produit/{id}", name="supprimer_produit")
+     * @Route("/supprimer_produitA/{id}", name="supprimer_produitA")
      */
-    public function deleteProduct(int $id): Response
+    public function deleteProductA(int $id): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $produit = $entityManager->getRepository(Product::class)->find($id);
+        $produit = $entityManager->getRepository(ProduitAcheter::class)->find($id);
         $entityManager->remove($produit);
         $entityManager->flush();
 
-        return $this->redirectToRoute("produit_affichage_back");
+        return $this->redirectToRoute("produit_acheter_affichage_back");
+    }
+    /**
+     * @Route("/supprimer_produitL/{id}", name="supprimer_produitL")
+     */
+    public function deleteProductL(int $id): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $produit = $entityManager->getRepository(ProduitLouer::class)->find($id);
+        $entityManager->remove($produit);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("produit_Louer_affichage_back");
     }
 
 }

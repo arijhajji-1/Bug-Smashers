@@ -10,12 +10,13 @@
     <div class="col-lg-3 order-1 order-lg-0">
         <div class="sidebar-area">
             <div class="sidebar-item">
-                <h4 class="sidebar-title">Catégories De Produits</h4>
+                <h4 class="sidebar-title">Catégories</h4>
                 <div class="sidebar-body">
                     <ul class="sidebar-list">
                         <li><a href="{{path("produit_affichage_front")}}">All Product</a></li>
                         {% for category in categories %}
-                        <li><a href="{{ path("produit_affichage_front_cat", {'cat':category.id })}}">{{ category.label }} <span>({{ category.getProducts().count() }})</span></a></li>
+                        <li><a href="{{ path("produit_affichage_front_cat", {'cat':category.id })}}">{{ category.label }} <span>({{ category.getProduitAcheter().count()+
+                                    category.getProduitLouer().count()}})</span></a></li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -58,19 +59,21 @@
             <div class="container container-wide">
                 <div class="product-wrapper product-layout layout-grid">
                     <div class="row mtn-30">
-        {% for produit in produits %}
+        {% for produit in produitsAcheter %}
 
 
                         <!-- Start Product Item -->
-                        <div class="col-sm-6 col-lg-4 col-xl-3">
+                        <div class="col-sm-6 col-lg-4">
                             <div class="product-item">
                                 <div class="product-item__thumb">
-                                    <a href="single-product.html">
-                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/'~produit.imagePath)}}" alt="Product" />
-                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/'~produit.imagePath)}}" alt="Product" />
+                                    <a href="{{ path("single_produitA", {'id':produit.id })}}">
+                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/'~produit.imagePath)}}" alt="{{ produit.nom }}" />
+                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/'~produit.imagePath)}}" alt="{{ produit.nom }}" />
+                                        <br>
                                     </a>
 
                                     <div class="ratting">
+
                                         {% set rating = produit.rating %}
                                         {% for i in 1..5 %}
                                             {% if rating > 0 %}
@@ -85,7 +88,7 @@
 
                                 <div class="product-item__content">
                                     <div class="product-item__info">
-                                        <h4 class="title"><a href="single-product.html">{{ produit.nom }}</a></h4>
+                                        <h4 class="title"><a href="{{ path("single_produitA", {'id':produit.id })}}">{{ produit.nom }}</a></h4>
                                         <span class="price"><strong>Price:</strong> <br>{{ produit.prix }} dt</span>
                                     </div>
 
@@ -103,11 +106,62 @@
                             </div>
                         </div>
                         <!-- End Product Item -->
-        {% else %}
-
-            <p>no records found</p>
 
         {% endfor %}
+                        {% for produit in produitsLouer %}
+
+
+                            <!-- Start Product Item -->
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="product-item">
+                                    <div class="product-item__thumb">
+                                        <a href="single-product.html">
+                                            <img class="thumb-primary" src="{{ asset('front/assets/img/product/'~produit.imagePath)}}" alt="{{ produit.nom }}" />
+                                            <img class="thumb-secondary" src="{{ asset('front/assets/img/product/'~produit.imagePath)}}" alt="{{ produit.nom }}" />
+                                        </a>
+
+                                        <div class="ratting">
+                                            <br>
+                                            {% set rating = produit.rating %}
+                                            {% for i in 1..5 %}
+                                                {% if rating > 0 %}
+                                                    <span><i class="ion-android-star"></i></span>
+                                                {% else %}
+                                                    <span><i class="ion-android-star-outline"></i></span>
+                                                {% endif %}
+                                                {% set rating = rating - 1 %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="product-item__content">
+                                        <div class="product-item__info">
+                                            <h4 class="title"><a href="single-product.html">{{ produit.nom }}</a></h4>
+                                            <span class="price"><strong>Price:</strong> <br>{{ produit.prix }} dt</span>
+                                        </div>
+
+                                        <div class="product-item__action">
+                                            <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                            <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                            <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                            <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                        </div>
+
+
+                                        <div class="product-item__desc">
+                                            <p>{{ produit.description }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="product-item__sale">
+                                        <span class="sale-txt">louer</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- End Product Item -->
+
+                        {% endfor %}
+
                     </div>
                 </div>
                 </div>

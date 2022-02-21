@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Entity;
-use Symfony\Component\Validator\Constraints as Assert;
-use App\Repository\ProductRepository;
+
+use App\Repository\ProduitLouerRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=ProductRepository::class)
+ * @ORM\Entity(repositoryClass=ProduitLouerRepository::class)
  */
-class Product
+class ProduitLouer
 {
     /**
      * @ORM\Id
@@ -41,10 +42,10 @@ class Product
     private $prix;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="la quantité du produit ne peut pas etre vide")
+     * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="l'etat du produit ne peut pas etre vide")
      */
-    private $qte;
+    private $etat;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -58,10 +59,15 @@ class Product
     private $marque;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="produitsLouer")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $dispo;
 
     public function getId(): ?int
     {
@@ -116,14 +122,14 @@ class Product
         return $this;
     }
 
-    public function getQte(): ?int
+    public function getEtat(): ?string
     {
-        return $this->qte;
+        return $this->etat;
     }
 
-    public function setQte(int $qte): self
+    public function setEtat(string $etat): self
     {
-        $this->qte = $qte;
+        $this->etat = $etat;
 
         return $this;
     }
@@ -160,6 +166,18 @@ class Product
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getDispo(): ?bool
+    {
+        return $this->dispo;
+    }
+
+    public function setDispo(bool $dispo): self
+    {
+        $this->dispo = $dispo;
 
         return $this;
     }

@@ -27,14 +27,21 @@ class Category
     private $label;
 
     /**
-     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="category")
+     * @ORM\OneToMany(targetEntity=ProduitAcheter::class, mappedBy="category")
      */
-    private $products;
+    private $produitsAcheter;
+    /**
+     * @ORM\OneToMany(targetEntity=ProduitLouer::class, mappedBy="category")
+     */
+    private $produitsLouer;
+
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        $this->produitsAcheter = new ArrayCollection();
+        $this->produitsLouer = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -54,29 +61,58 @@ class Category
     }
 
     /**
-     * @return Collection|Product[]
+     * @return Collection|ProduitsAcheter[]
      */
-    public function getProducts(): Collection
+    public function getProduitAcheter(): Collection
     {
-        return $this->products;
+        return $this->produitsAcheter;
     }
 
-    public function addProduct(Product $product): self
+    public function addProduitAcheter(ProduitAcheter $produitsAcheter): self
     {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-            $product->setCategory($this);
+        if (!$this->produitsAcheter->contains($produitsAcheter)) {
+            $this->produitsAcheter[] = $produitsAcheter;
+            $produitsAcheter->setCategory($this);
         }
 
         return $this;
     }
 
-    public function removeProduct(Product $product): self
+    public function removeProduitAcheter(ProduitAcheter $produitsAcheter): self
     {
-        if ($this->products->removeElement($product)) {
+        if ($this->produitsAcheter->removeElement($produitsAcheter)) {
             // set the owning side to null (unless already changed)
-            if ($product->getCategory() === $this) {
-                $product->setCategory(null);
+            if ($produitsAcheter->getCategory() === $this) {
+                $produitsAcheter->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+    /**
+     * @return Collection|ProduitsLouer[]
+     */
+    public function getProduitLouer(): Collection
+    {
+        return $this->produitsLouer;
+    }
+
+    public function addProduitLouer(ProduitLouer $produitsLouer): self
+    {
+        if (!$this->produitsLouer->contains($produitsLouer)) {
+            $this->produitsLouer[] = $produitsLouer;
+            $produitsLouer->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduitsLouer(ProduitLouer $produitsLouer): self
+    {
+        if ($this->produitsLouer->removeElement($produitsLouer)) {
+            // set the owning side to null (unless already changed)
+            if ($produitsLouer->getCategory() === $this) {
+                $produitsLouer->setCategory(null);
             }
         }
 

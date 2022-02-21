@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/category/affback", name="category")
+     * @Route("/categoryaffback", name="category")
      */
     public function back(CategoryRepository $categoryRepository): Response
     {
@@ -44,7 +44,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('category_ajouter', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('category/ajouter.html.twig', [
+        return $this->render('category/ajouterA.html.twig', [
             'category' => $category,
             'form' => $form->createView(),
         ]);
