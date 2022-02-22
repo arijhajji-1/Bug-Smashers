@@ -78,6 +78,12 @@ class CategoryController extends AbstractController
     {
         $entityManager = $this->getDoctrine()->getManager();
         $categorie = $entityManager->getRepository(Category::class)->find($id);
+        foreach ($categorie->getProduitLouer() as $element) {
+            $categorie->removeProduitsLouer($element);
+        }
+        foreach ($categorie->getProduitAcheter() as $element) {
+            $categorie->removeProduitAcheter($element);
+        }
         $entityManager->remove($categorie);
         $entityManager->flush();
 

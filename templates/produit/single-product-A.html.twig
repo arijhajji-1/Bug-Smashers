@@ -45,7 +45,7 @@
                                                         <th class="config-label">Catégorie</th>
                                                         <td class="config-option">
                                                             <div class="config-color">
-                                                                <a href="#">{{ categorie }}</a>
+                                                                <a>{{ categorie }}</a>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -53,7 +53,7 @@
                                                         <th class="config-label">Marque</th>
                                                         <td class="config-option">
                                                             <div class="config-color">
-                                                                <a href="#">{{ produit.marque }}</a>
+                                                                <a>{{ produit.marque }}</a>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -81,7 +81,7 @@
                                 <!-- Product Description Tab Menu -->
                                 <ul class="nav nav-tabs desc-review-tab-menu" id="desc-review-tab" role="tablist">
                                     <li>
-                                        <a class="active" id="desc-tab" data-toggle="tab" href="#descriptionContent" role="tab">Description</a>
+                                        <a class="active" id="desc-tab" data-toggle="tab" href="#descriptionContent" role="tab">Avis</a>
                                     </li>
                                 </ul>
 
@@ -95,100 +95,80 @@
 
                                         <div class="product-rating-wrap">
                                             <div class="average-rating">
-                                                <h4> {% if produit.rating %}
-                                                    produit.rating
+                                                <h4> {% if avis.count()>0 %}
+                                                    {% set rating = 0 %}
+                                                    {% for rati in avis %}
+                                                        {% set rating = rating + rati.rating %}
+                                                    {% endfor %}
+                                                    {% set rating = rating / avis|length %}
+                                                    {{ rating }}
                                                     {% else %}
                                                     0
                                                     {% endif %}<span>(Overall)</span></h4>
-                                                <span>Based on 2 Comments</span>
+                                                <span>Based on {{ avis.count()}} Comments</span>
                                             </div>
 
                                             <div class="display-ratings">
-                                                <div class="rating-item">
-                                                    <div class="rating-author-pic">
-                                                        <img src="assets/img/extra/author-1.jpg" alt="author" />
-                                                    </div>
-
-                                                    <div class="rating-author-txt">
-                                                        <div class="rating-star">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                        </div>
-
-                                                        <div class="rating-meta">
-                                                            <h3>Cristopher Lee</h3>
-                                                            <span class="time">- 07, Jun</span>
-                                                        </div>
-
-                                                        <p>Wonderful collection of WooThemes classics! A must buy for
-                                                            all
-                                                            Woo fans.</p>
-                                                    </div>
-                                                </div>
+                                                        {% for av in avis %}
 
                                                 <div class="rating-item">
                                                     <div class="rating-author-pic">
-                                                        <img src="assets/img/extra/author-2.jpg" alt="author" />
+                                                        <img src="{{ asset("front/assets/img/unknown.png") }}" alt="author" />
                                                     </div>
+
 
                                                     <div class="rating-author-txt">
                                                         <div class="rating-star">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-half-empty"></i>
+                                                            {% set rating = av.rating %}
+                                                            {% for i in 1..5 %}
+                                                                {% if rating > 0 %}
+                                                                    <span><i class="ion-android-star"></i></span>
+                                                                {% else %}
+                                                                    <span><i class="ion-android-star-outline"></i></span>
+                                                                {% endif %}
+                                                                {% set rating = rating - 1 %}
+                                                            {% endfor %}
                                                         </div>
 
                                                         <div class="rating-meta">
-                                                            <h3>Raju Ahammad</h3>
-                                                            <span class="time">- 02, Jun</span>
+                                                            <h3>{{ av.nom }}</h3>
+                                                            <span class="time">-  {{ av.email }}</span>
                                                         </div>
 
-                                                        <p>Voluptatem quia voluptas sit aspernat uptatem sequi Neque
-                                                            porro.</p>
+                                                        <p>{{av.description}}</p>
                                                     </div>
                                                 </div>
-                                            </div>
+                                                {% endfor %}
 
                                             <div class="rating-form-wrapper">
                                                 <h3>Add your Reviews</h3>
-                                                <form action="#" method="post">
+                                                <form action="{{ path("single_produitA", {'id':produit.id })}}"  method="POST">
                                                     <div class="rating-form row">
-                                                        <div class="col-12">
-                                                            <h5>Your Rating:</h5>
-                                                            <div class="rating-star fix mb-20">
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
+                                                        <div class="col-md-6">
+                                                            <div class="form-input-item mt-30 mt-md-0">
+                                                                {{ form_row(form.rating) }}
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-input-item mt-30 mt-md-0">
+                                                               {{ form_row(form.nom) }}
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-input-item mt-30 mt-md-0">
-                                                                <label for="name" class="sr-only">Name</label>
-                                                                <input type="text" id="name" placeholder="Name" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-input-item mt-30 mt-md-0">
-                                                                <label for="email" class="sr-only">Email</label>
-                                                                <input type="email" id="email" placeholder="Email" />
+                                                                {{ form_row(form.email) }}
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="form-input-item mt-30 mb-40">
-                                                                <label for="your-review" class="sr-only">review</label>
-                                                                <textarea rows="4" name="review" id="your-review" placeholder="Write a review"></textarea>
+                                                                {{ form_row(form.description,{'id' : 'your-review'}) }}
                                                             </div>
                                                         </div>
                                                         <div class="col-12 mt-22">
                                                             <button class="btn btn-brand">Submit</button>
                                                         </div>
+                                                        {{ form_widget(form) }}
                                                     </div>
                                                 </form>
                                             </div>

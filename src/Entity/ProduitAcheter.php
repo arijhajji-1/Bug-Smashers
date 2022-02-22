@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProduitAcheterRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -32,11 +34,6 @@ class ProduitAcheter
     private $description;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $rating;
-
-    /**
      * @ORM\Column(type="decimal", precision=12, scale=2)
      * @Assert\NotBlank(message="le prix ne peut pas etre vide")
      */
@@ -61,9 +58,19 @@ class ProduitAcheter
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="produitsAcheter")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $category;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="produitAcheter",orphanRemoval=true)
+     */
+    private $avis;
+
+    public function __construct()
+    {
+        $this->avis = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,18 +97,6 @@ class ProduitAcheter
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getRating(): ?int
-    {
-        return $this->rating;
-    }
-
-    public function setRating(?int $rating): self
-    {
-        $this->rating = $rating;
 
         return $this;
     }
@@ -162,6 +157,36 @@ class ProduitAcheter
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Avis[]
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): self
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis[] = $avi;
+            $avi->setProduitAcheter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): self
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getProduitAcheter() === $this) {
+                $avi->setProduitAcheter(null);
+            }
+        }
 
         return $this;
     }

@@ -27,7 +27,7 @@ class Category
     private $label;
 
     /**
-     * @ORM\OneToMany(targetEntity=ProduitAcheter::class, mappedBy="category")
+     * @ORM\OneToMany(targetEntity=ProduitAcheter::class, mappedBy="category", orphanRemoval=true)
      */
     private $produitsAcheter;
     /**
@@ -80,6 +80,7 @@ class Category
 
     public function removeProduitAcheter(ProduitAcheter $produitsAcheter): self
     {
+
         if ($this->produitsAcheter->removeElement($produitsAcheter)) {
             // set the owning side to null (unless already changed)
             if ($produitsAcheter->getCategory() === $this) {

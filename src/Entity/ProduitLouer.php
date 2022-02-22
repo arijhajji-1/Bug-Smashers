@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProduitLouerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -31,11 +33,6 @@ class ProduitLouer
     private $description;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $rating;
-
-    /**
      * @ORM\Column(type="decimal", precision=12, scale=2)
      * @Assert\NotBlank(message="le prix ne peut pas etre vide")
      */
@@ -60,7 +57,7 @@ class ProduitLouer
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="produitsLouer")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $category;
 
@@ -68,6 +65,16 @@ class ProduitLouer
      * @ORM\Column(type="boolean")
      */
     private $dispo;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="produitLouer",orphanRemoval=true)
+     */
+    private $avis;
+
+    public function __construct()
+    {
+        $this->avis = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -94,18 +101,6 @@ class ProduitLouer
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getRating(): ?int
-    {
-        return $this->rating;
-    }
-
-    public function setRating(?int $rating): self
-    {
-        $this->rating = $rating;
 
         return $this;
     }
@@ -178,6 +173,36 @@ class ProduitLouer
     public function setDispo(bool $dispo): self
     {
         $this->dispo = $dispo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Avis[]
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): self
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis[] = $avi;
+            $avi->setProduitLouer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): self
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getProduitLouer() === $this) {
+                $avi->setProduitLouer(null);
+            }
+        }
 
         return $this;
     }

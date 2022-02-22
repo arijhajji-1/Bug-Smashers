@@ -1,0 +1,190 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Modifier produit{% endblock %}
+
+{% block body %}
+
+    <!--== Start Page Content Wrapper ==-->
+    <div class="page-content-wrapper sp-y">
+        <div class="product-details-page-content">
+            <div class="container container-wide">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <!-- Start Product Thumbnail Area -->
+                            <div class="col-md-5">
+                                <div class="product-thumb-area">
+                                    <div class="product-details-thumbnail">
+                                        <div class="product-thumbnail-slider" id="thumb-gallery">
+                                            <figure class="pro-thumb-item" data-mfp-src="{{ asset('front/assets/img/product/'~produit.imagePath) }}">
+                                                <img src="{{ asset('front/assets/img/product/'~produit.imagePath) }}" alt="Product Details" />
+                                            </figure>
+                                        </div>
+
+                                        <a href="#thumb-gallery" class="btn-large-view btn-gallery-popup">View Larger <i class="fa fa-search-plus"></i></a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!-- End Product Thumbnail Area -->
+
+                            <!-- Start Product Info Area -->
+                            <div class="col-md-7">
+                                <div class="product-details-info-content-wrap">
+                                    <div class="prod-details-info-content">
+                                        <h1>A Louer</h1>
+                                        <h2>{{ produit.nom }}</h2>
+                                        <h5 class="price"><strong>Price:</strong> <span class="price-amount">{{
+                                                produit.prix }} DT</span>
+                                        </h5>
+                                        <p>{{ produit.description }}</p>
+                                        <div class="product-config">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                    <tr>
+                                                        <th class="config-label">Catégorie</th>
+                                                        <td class="config-option">
+                                                            <div class="config-color">
+                                                                <a>{{ categorie }}</a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="config-label">Marque</th>
+                                                        <td class="config-option">
+                                                            <div class="config-color">
+                                                                <a>{{ produit.marque }}</a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="product-meta">
+                                            <span class="sku_wrapper">Etat: <span class="sku">{{ produit.etat }}</span></span>
+
+
+                                            <span class="tagged_as">Disponibilité :
+                                            <a>{{ produit.dispo }}</a>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Product Info Area -->
+                        </div>
+                        <div class="row">
+                        <div class="col-12">
+                            <div class="product-description-review">
+                                <!-- Product Description Tab Menu -->
+                                <ul class="nav nav-tabs desc-review-tab-menu" id="desc-review-tab" role="tablist">
+                                    <li>
+                                        <a class="active" id="desc-tab" data-toggle="tab" href="#descriptionContent" role="tab">Avis</a>
+                                    </li>
+                                </ul>
+
+                                <!-- Product Description Tab Content -->
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="descriptionContent">
+                                        <div class="description-content">
+
+                                        </div>
+                                    </div>
+
+                                        <div class="product-rating-wrap">
+                                            <div class="average-rating">
+                                                <h4> {% if avis.count()>0 %}
+                                                    {% set rating = 0 %}
+                                                    {% for rati in avis %}
+                                                        {% set rating = rating + rati.rating %}
+                                                    {% endfor %}
+                                                    {% set rating = rating / avis|length %}
+                                                    {{ rating }}
+                                                {% else %}
+                                                    0
+                                                    {% endif %}<span>(Overall)</span></h4>
+                                                <span>Based on {% if avis %}
+                                                        {{ avis.count()  }}
+                                                    {% else %}
+                                                        0
+                                                    {% endif %} </span>
+                                            </div>
+
+                                            <div class="display-ratings">
+                                                        {% for av in avis %}
+
+                                                <div class="rating-item">
+                                                    <div class="rating-author-pic">
+                                                        <img src="{{ asset("front/assets/img/unknown.png") }}" alt="author" />
+                                                    </div>
+
+
+                                                    <div class="rating-author-txt">
+                                                        <div class="rating-star">
+                                                            {% set rating = av.rating %}
+                                                            {% for i in 1..5 %}
+                                                                {% if rating > 0 %}
+                                                                    <span><i class="ion-android-star"></i></span>
+                                                                {% else %}
+                                                                    <span><i class="ion-android-star-outline"></i></span>
+                                                                {% endif %}
+                                                                {% set rating = rating - 1 %}
+                                                            {% endfor %}
+                                                        </div>
+
+                                                        <div class="rating-meta">
+                                                            <h3>{{ av.nom }}</h3>
+                                                            <span class="time">-  {{ av.email }}</span>
+                                                        </div>
+
+                                                        <p>{{av.description}}</p>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+
+                                            <div class="rating-form-wrapper">
+                                                <h3>Add your Reviews</h3>
+                                                <form action="{{ path("single_produitL", {'id':produit.id })}}"  method="POST">
+                                                    <div class="rating-form row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-input-item mt-30 mt-md-0">
+                                                                {{ form_row(form.rating) }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-input-item mt-30 mt-md-0">
+                                                               {{ form_row(form.nom) }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-input-item mt-30 mt-md-0">
+                                                                {{ form_row(form.email) }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-input-item mt-30 mb-40">
+                                                                {{ form_row(form.description,{'id' : 'your-review'}) }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 mt-22">
+                                                            <button class="btn btn-brand">Submit</button>
+                                                        </div>
+                                                        {{ form_widget(form) }}
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

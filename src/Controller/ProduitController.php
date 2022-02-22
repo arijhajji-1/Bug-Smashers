@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Avis;
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Form\AvisType;
 use App\Form\ProductType;
 use App\Entity\ProduitAcheter;
 use App\Form\ProduitAcheterType;
@@ -26,15 +28,49 @@ class ProduitController extends AbstractController
 {
 
     /**
-     * @Route("/single-productA/{id}", name="single_produitA")
+     * @Route("/single-productA/{id}",name="single_produitA")
      */
     public function singleProductA(Request $request, int $id): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $produit = $entityManager->getRepository(ProduitAcheter::class)->find($id);
-        return $this->render("produit/single-product.html.twig", [
+        $avis = new Avis();
+        $avis->setProduitAcheter($produit);
+        $form = $this->createForm(AvisType::class, $avis);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($avis);
+            $entityManager->flush();
+            return $this->redirectToRoute('single_produitA', ['id'=>$id], Response::HTTP_SEE_OTHER);
+        }
+        return $this->render("produit/single-product-A.html.twig", [
             "produit" => $produit,
             "categorie" => $produit->getCategory()->getLabel(),
+            'form' => $form->createView(),
+            "avis" => $produit->getAvis(),
+        ]);
+    }
+    /**
+     * @Route("/single-productL/{id}",name="single_produitL")
+     */
+    public function singleProductL(Request $request, int $id): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $produit = $entityManager->getRepository(ProduitLouer::class)->find($id);
+        $avis = new Avis();
+        $avis->setProduitLouer($produit);
+        $form = $this->createForm(AvisType::class, $avis);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($avis);
+            $entityManager->flush();
+            return $this->redirectToRoute('single_produitL', ['id'=>$id], Response::HTTP_SEE_OTHER);
+        }
+        return $this->render("produit/single-product-L.html.twig", [
+            "produit" => $produit,
+            "categorie" => $produit->getCategory()->getLabel(),
+            'form' => $form->createView(),
+            "avis" => $produit->getAvis(),
         ]);
     }
     /**

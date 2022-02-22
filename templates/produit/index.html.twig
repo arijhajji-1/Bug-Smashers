@@ -73,8 +73,13 @@
                                     </a>
 
                                     <div class="ratting">
-
-                                        {% set rating = produit.rating %}
+                                        {% set rating = 0 %}
+                                        {% if produit.avis.count()>0 %}
+                                        {% for rati in produit.avis %}
+                                            {% set rating = rating + rati.rating %}
+                                        {% endfor %}
+                                        {% set rating = rating / produit.avis|length %}
+                                        {% endif %}
                                         {% for i in 1..5 %}
                                             {% if rating > 0 %}
                                                 <span><i class="ion-android-star"></i></span>
@@ -115,14 +120,20 @@
                             <div class="col-sm-6 col-lg-4">
                                 <div class="product-item">
                                     <div class="product-item__thumb">
-                                        <a href="single-product.html">
+                                        <a href="{{ path("single_produitL", {'id':produit.id })}}">
                                             <img class="thumb-primary" src="{{ asset('front/assets/img/product/'~produit.imagePath)}}" alt="{{ produit.nom }}" />
                                             <img class="thumb-secondary" src="{{ asset('front/assets/img/product/'~produit.imagePath)}}" alt="{{ produit.nom }}" />
                                         </a>
 
                                         <div class="ratting">
                                             <br>
-                                            {% set rating = produit.rating %}
+                                            {% set rating = 0 %}
+                                            {% if produit.avis.count()>0 %}
+                                            {% for rati in produit.avis %}
+                                                {% set rating = rating + rati.rating %}
+                                            {% endfor %}
+                                            {% set rating = rating / produit.avis|length %}
+                                            {% endif %}
                                             {% for i in 1..5 %}
                                                 {% if rating > 0 %}
                                                     <span><i class="ion-android-star"></i></span>
@@ -136,8 +147,8 @@
 
                                     <div class="product-item__content">
                                         <div class="product-item__info">
-                                            <h4 class="title"><a href="single-product.html">{{ produit.nom }}</a></h4>
-                                            <span class="price"><strong>Price:</strong> <br>{{ produit.prix }} dt</span>
+                                            <h4 class="title"><a href="{{ path("single_produitL", {'id':produit.id })}}">{{ produit.nom }}</a></h4>
+                                            <span class="price"><strong>Price:</strong> <br>{{ produit.prix }} Dt/jour</span>
                                         </div>
 
                                         <div class="product-item__action">
