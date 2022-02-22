@@ -77,8 +77,7 @@ class MontageType extends AbstractType
                     return $product->getNom().' |'.$product->getDescription().'| '.$product->getPrix();
                 }
             ])
-            ->add('montant',TextareaType::class,[
-        'attr' => ['class' => 'tinymce']])
+
         ;
     }
 

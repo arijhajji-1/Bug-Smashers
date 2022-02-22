@@ -51,6 +51,11 @@ class Reparation
      */
     private $etat;
 
+    /**
+     * @ORM\OneToOne(targetEntity=AvisReparation::class, mappedBy="idrep", cascade={"persist", "remove"})
+     */
+    private $avisReparation;
+
 
 
 
@@ -119,9 +124,22 @@ class Reparation
         return $this;
     }
 
+    public function getAvisReparation(): ?AvisReparation
+    {
+        return $this->avisReparation;
+    }
 
+    public function setAvisReparation(AvisReparation $avisReparation): self
+    {
+        // set the owning side of the relation if necessary
+        if ($avisReparation->getIdrep() !== $this) {
+            $avisReparation->setIdrep($this);
+        }
 
+        $this->avisReparation = $avisReparation;
 
+        return $this;
+    }
 
 
 

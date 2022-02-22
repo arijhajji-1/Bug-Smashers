@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Controller;
+use App\Entity\AvisReparation;
 use App\Entity\Montage;
 use App\Entity\Reparation;
 use App\Form\EtatType;
+use App\Repository\AvisReparationRepository;
 use App\Repository\MontageRepository;
 use App\Repository\ReparationRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -61,6 +63,17 @@ class IndexbackController extends AbstractController
         }
         return $this->render('indexback/updaterep.html.twig',[
             'form'=>$form->createView()
+        ]);
+    }
+    /**
+     * @Route("/afficheavis", name="AvisReparation_show")
+     */
+    public function show(AvisReparationRepository $repo)
+    {
+        $repo=$this->getDoctrine()->getRepository(AvisReparation::class);
+        $AvisReparation=$repo->findAll();
+        return $this->render('indexback/afficheAvis.html.twig',[
+            'AvisReparation'=>$AvisReparation
         ]);
     }
 }

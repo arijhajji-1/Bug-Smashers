@@ -189,10 +189,19 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">
+                    <a class="nav-link" data-toggle="collapse" href="#Produit" aria-expanded="false" aria-controls="Produit">
                         <span class="icon-bg"><i class="mdi mdi-cart"></i></span>
                         <span class="menu-title">Produits</span>
+                        <i class="menu-arrow"></i>
                     </a>
+                    <div class="collapse" id="Produit">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{ asset('back/pages/ui-features/buttons.html') }}">Ajouter Produit a acheter</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ asset('back/pages/ui-features/dropdowns.html') }}">Ajouter Produit a louer</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="">Afficher Produits Acheter</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="">Afficher Produits Louer</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('montage1') }}">
@@ -201,10 +210,20 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('reparation1') }}">
-                        <span class="icon-bg"><i class="mdi mdi-desktop-mac"></i></span>
-                        <span class="menu-title">Reparation</span>
+                    <a class="nav-link" data-toggle="collapse" href="#reparation" aria-expanded="false" aria-controls="auth">
+                        <span class="icon-bg"><i class="mdi mdi-cart"></i></span>
+                        <span class="menu-title">Réparation</span>
+                        <i class="menu-arrow"></i>
                     </a>
+                    <div class="collapse" id="reparation" >
+                        <ul class="nav flex-column sub-menu"  >
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('reparation1') }}">Réparation</a>
+
+                                <a class="nav-link" href="{{ path('AvisReparation_show') }}">Avis</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="">

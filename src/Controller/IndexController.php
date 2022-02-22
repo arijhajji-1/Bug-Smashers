@@ -97,6 +97,7 @@ class IndexController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             $em=$this->getDoctrine()->getManager();
+            //$montage->setMontant();
             $em->persist($montage);
             $em->flush();
             return $this->redirectToRoute("montage");
@@ -152,6 +153,7 @@ class IndexController extends AbstractController
             'form'=>$form->createView()
         ]);
     }
+
 
 
 }

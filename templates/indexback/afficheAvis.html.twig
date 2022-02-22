@@ -1,0 +1,47 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %} Avis{% endblock %}
+
+{% block body %}
+    <div class="col-lg-12 stretch-card">
+
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th >id</th>
+                        <th >nom </th>
+                        <th >email </th>
+                        <th >Description</th>
+                        <th>Reparation</th>
+
+
+
+                    </tr>
+                    </th>
+                    </thead>
+                    <tbody>
+                    <tr  {% for a in AvisReparation %}>
+                        <td >{{ a.Id }}</td>
+                        <td >{{ a.nom }}</td>
+                        <td >{{ a.email }}</td>
+                        <td >{{ a.Description }}</td>
+
+
+                    </tr>
+                    </tbody>
+
+                    {% endfor %}
+
+                </table>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

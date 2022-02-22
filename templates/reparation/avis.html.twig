@@ -1,0 +1,67 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Avis{% endblock %}
+{% block body %}
+    <!--== Start Page Content Wrapper ==-->
+    <div class="page-content-wrapper sp-y">
+    <div class="product-details-page-content">
+    <div class="container container-wide">
+    <div class="row">
+    <div class="col-12">
+
+    <div class="row">
+    <div class="col-12">
+    <div class="product-description-review">
+    <!-- Product Description Tab Menu -->
+
+
+    <!-- Product Description Tab Content -->
+    <div class="tab-content" id="myTabContent">
+
+
+    <div class="product-rating-wrap">
+
+
+
+
+
+<div class="rating-form-wrapper">
+    <h3>Add your Reviews</h3>
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+        <div class="col-md-6">
+            <div class="form-input-item mt-30 mt-md-0">
+                {{ form_row(form.nom) }}
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-input-item mt-30 mt-md-0">
+                {{ form_row(form.email) }}
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-input-item mt-30 mb-40">
+                {{ form_row(form.Description) }}
+            </div>
+        </div>
+        <div class="col-12 mt-22">
+            <button class="btn btn-brand">Submit</button>
+        </div>
+        {{ form_widget(form) }}
+</div>
+
+</div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    {{ form_end(form) }}
+
+{% endblock %}
