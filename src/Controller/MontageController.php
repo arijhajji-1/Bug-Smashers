@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use \Symfony\Bundle\MonologBundle\SwiftMailer;
 
 use App\Form\MontageType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,6 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Montage;
 use App\Form\MontageFormType;
 use App\Repository\MontageRepository;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+
 
 class MontageController extends AbstractController
 {
@@ -24,5 +28,6 @@ class MontageController extends AbstractController
             'controller_name' => 'MontageController',
         ]);
     }
+
 
 }

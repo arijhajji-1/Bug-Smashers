@@ -92,7 +92,6 @@ class IndexController extends AbstractController
     function add(Request $request){
         $montage=new montage() ;
         $form=$this->createForm(MontageType::class,$montage);
-        $form->add('Ajouter',SubmitType::class) ;
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){

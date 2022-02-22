@@ -8,10 +8,14 @@
 
     <hr style="visibility: hidden ">
     <div  class="container" style="max-width: 600px">
+
         {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
         {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
         <h1 align="center">Choisir les composants</h1>
+        <div class="col-12 mt-22">
+            <button class="btn btn-brand">Submit</button>
+        </div>
         {{ form_end(form) }}
         <a href="{{ path('affiche') }}" >votre demande</a>
     </div>
