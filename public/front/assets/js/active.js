@@ -183,7 +183,7 @@
         /*-------------------------
           07. Contact Map JS
         -----------------------------*/
-        var map_id = $('#map_content');
+        /* var map_id = $('#map_content');
         if (map_id.length > 0) {
             var $lat = map_id.data('lat'),
                 $lng = map_id.data('lng'),
@@ -207,7 +207,7 @@
         }
 
         $("select").niceSelect();
-
+*/
         /*--------------------------
             08. Shop Layout Change
         -----------------------------*/
