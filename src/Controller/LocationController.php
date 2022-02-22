@@ -101,7 +101,7 @@ class LocationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('location_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('AfficheB', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('location/editB.html.twig', [

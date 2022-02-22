@@ -26,7 +26,7 @@
             </tr>
             <tr>
                 <th>produit</th>
-                <td>{{ location.produit.title }}</td>
+                <td>{% for produit in location.produit %}{{ produit.title }} {% endfor %}</td>
             </tr>
         </tbody>
     </table>
