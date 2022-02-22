@@ -1,0 +1,73 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Votre panier{% endblock %}
+{% block count %} {{ dataPanier|length }} {% endblock %}
+{% block body %}
+    <section class="bg-light p-3">
+        <h1>Votre panier</h1>
+    </section>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Produit</th>
+            <th>Prix</th>
+            <th>Quantité</th>
+            <th>TYPE</th>
+            <th>Total</th>
+            <th>Modifier et supprimer</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        {% for element in dataPanier %}
+            <tr>
+                <td>{{ element.produit.title }}</td>
+                <td class="text-end">{{ element.produit.price }} DT</td>
+
+                <td>{{ element.quantite }}</td>
+                <td>{{ element.produit.TypeP }}</td>
+                <td class="text-end">{{ element.quantite * element.produit.price }} DT</td>
+
+                <td>
+                    <a href="{{path("cart_add", {id: element.produit.id})}}" class="btn ">add
+                        <i class="bi bi-cart-plus"></i>
+                    </a>
+                    <a href="{{path("cart_remove", {id: element.produit.id})}}" class="btn">drop
+                        <i class="bi bi-cart-dash"></i>
+                    </a>
+                    <a href="{{path("cart_delete", {id: element.produit.id})}}" class="btn">delete
+                        <i class="bi bi-cart-x"></i>
+                    </a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5" class="text-center">Votre panier est vide</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+
+        <tr>
+            <td colspan="3">Total</td>
+            <td class="text-end">{{ total }} DT</td>
+            <td>
+                <a href="{{path("produit_index")}}" class="btn ">retour au shop
+                    <i class="bi bi-cart-x"></i>
+                </a>
+                <a href="{{path("commande_new")}}" class="btn ">confirmer commmande
+                    <i class="bi bi-cart-x"></i>
+
+                </a>
+                <a href="{{path("commande_index")}}" class="btn ">afficher vos commandes
+                    <i class="bi bi-cart-x"></i>
+                </a>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+
+{% endblock %}

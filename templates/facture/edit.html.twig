@@ -1,0 +1,18 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}MODIFIER FACTURE{% endblock %}
+
+{% block body %}
+    <h1 align="center">MODIFIIER FACTURE</h1>
+
+
+
+
+    {{ include('facture/_form.html.twig', {'button_label': 'Modifier les informations'}) }}
+
+    {{ include('facture/_delete_form.html.twig') }}
+
+    <a href="{{ path('facture_index') }}" class="btn ">Back to list
+        <i class="bi bi-cart-x"></i>
+    </a>
+{% endblock %}

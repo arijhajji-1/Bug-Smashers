@@ -2,14 +2,16 @@
 
 namespace App\Controller;
 
+use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
     /**
-     * @Route("/index", name="index")
+     * @Route("/", name="index")
      */
     public function index(): Response
     {
@@ -29,11 +31,13 @@ class IndexController extends AbstractController
     /**
      * @Route("/produit", name="produit")
      */
-    public function produit(): Response
+    public function produit(SessionInterface $session,ProduitRepository $produitRepository)
     {
-        return $this->render('index/produit.html.twig', [
-            'controller_name' => 'IndexController',
+
+        return $this->render('produit/index.html.twig', [
+            'produits' => $produitRepository->findAll()
         ]);
+
     }
     /**
      * @Route("/forum", name="forum")

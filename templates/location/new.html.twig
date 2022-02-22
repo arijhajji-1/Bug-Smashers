@@ -1,0 +1,13 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}DEMANDE DE LOCATION{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <h1>DEMANDE DE LOCATION</h1>
+
+    {{ include('location/_form.html.twig') }}
+
+    <a href="{{ path('location_index') }}">RETOUR A LA LISTE</a>
+    </div>
+{% endblock %}

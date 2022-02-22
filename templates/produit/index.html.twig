@@ -1,0 +1,91 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <!--== Start Page Header Area ==-->
+    <div class="page-header-wrap bg-img" data-bg="{{ asset('front/assets/img/bg/page-header-bg.jpg') }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="page-header-content">
+                        <div class="page-header-content-inner">
+                            <h1>Shop</h1>
+
+                            <ul class="breadcrumb">
+                                <li><a href="{{ path('index') }}">Home</a></li>
+                                <li class="current"><a href="#">Shop</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--== End Page Header Area ==-->
+
+    <!--== Start Page Content Wrapper ==-->
+    <div class="page-content-wrapper sp-y">
+    <div class="shop-page-action-bar mb-30">
+        <div class="container container-wide">
+            <div class="action-bar-inner">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="shop-layout-switcher mb-15 mb-sm-0">
+                            <ul class="layout-switcher nav">
+                                <li data-layout="grid" class="active"><i class="fa fa-th"></i></li>
+                                <li data-layout="list"><i class="fa fa-th-list"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="sort-by-wrapper">
+                            <label for="sort" class="sr-only">Sort By</label>
+                            <select name="sort" id="sort">
+                                <option value="sbp">Sort By Popularity</option>
+                                <option value="sbn">Sort By Newest</option>
+                                <option value="sbt">Sort By Trending</option>
+                                <option value="sbr">Sort By Rating</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="shop-page-produit">
+    <div class="container container-wide">
+    <div class="produit-wrapper produit-layout layout-grid">
+    <div class="row mtn-30">
+        <!-- Start produit Item -->
+        <section class="bg-light p-3">
+            <h1>Les produits</h1>
+        </section>
+
+        <section class="row">
+            {% for produit in produits %}
+                <div class="col-4 mt-4">
+                    <div class="border border-dark rounded p-2 clearfix">
+                        <h2>{{ produit.title }}</h2>
+                        <p>{{ produit.price }} DT</p>
+                        <img class="w-100" src="{{ asset('uploads/') ~ produit.image }}" alt="Image de {{ produit.title }}">
+                        <hr>
+                        <a href="{{path("cart_add1", {id: produit.id})}}" class="btn btn-success">
+                            <i class="bi bi-cart-plus"></i> Ajouter
+
+                        </a>
+                        <a href="{{path("location_new", {id: produit.id})}}" class="btn btn-success">
+                            <i class="bi bi-cart-plus"></i> Louer
+
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+        <!-- End produit Item -->
+
+
+    </div>
+{% endblock %}

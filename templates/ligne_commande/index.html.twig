@@ -1,0 +1,40 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}L ETAT DES COMMANDES{% endblock %}
+
+{% block body %}
+    <h1>L ETAT DES COMMANDES</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+
+                <th>Status</th>
+                <th>Commande</th>
+                <th>Client</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for ligne_commande in ligne_commandes %}
+            <tr>
+                <td>{{ ligne_commande.id }}</td>
+                <td>{{ ligne_commande.Status }}</td>
+                <td>{{ ligne_commande.Commande.id }}</td>
+                <td>{{ ligne_commande.Commande.prenom }}</td>
+                <td>
+                    <a href="{{ path('ligne_commande_show', {'id': ligne_commande.id}) }}">AFFICHER L ETAT DES COMMANDES</a>
+                    <a href="{{ path('ligne_commande_edit', {'id': ligne_commande.id}) }}">MODIFIER L ETAT DES COMMANDES</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">PAS DE NOUVEAUX COMMANDES</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('ligne_commande_new') }}">AJOUTER UN ETAT POUR LES COMMANDES</a>
+
+{% endblock %}

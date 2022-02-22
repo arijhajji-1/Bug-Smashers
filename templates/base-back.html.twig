@@ -7,20 +7,20 @@
     <title>{% block title %}Reloua-admin{% endblock %}</title>
     <!-- plugins:css -->
     {% block css %}
-    <link rel="stylesheet" href="{{ asset('back/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('back/assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('back/assets/vendors/css/vendor.bundle.base.css') }}">
-    <!-- endinject -->
-    <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="{{ asset('back/assets/vendors/font-awesome/css/font-awesome.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('back/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <!-- endinject -->
-    <!-- Layout styles -->
-    <link rel="stylesheet" href="{{ asset('back/assets/css/style.css') }}">
-    <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{ asset('back/assets/images/reloua_logo_2-01.svg') }}" />
+        <link rel="stylesheet" href="{{ asset('back/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('back/assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('back/assets/vendors/css/vendor.bundle.base.css') }}">
+        <!-- endinject -->
+        <!-- Plugin css for this page -->
+        <link rel="stylesheet" href="{{ asset('back/assets/vendors/font-awesome/css/font-awesome.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('back/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
+        <!-- End plugin css for this page -->
+        <!-- inject:css -->
+        <!-- endinject -->
+        <!-- Layout styles -->
+        <link rel="stylesheet" href="{{ asset('back/assets/css/style.css') }}">
+        <!-- End layout styles -->
+        <link rel="shortcut icon" href="{{ asset('back/assets/images/reloua_logo_2-01.svg') }}" />
     {% endblock %}
 </head>
 <body>
@@ -61,13 +61,13 @@
                         </div>
 
 
-                            <div role="separator" class="dropdown-divider"></div>
-                            <h5 class="dropdown-header text-uppercase  pl-2 text-dark mt-2">Actions</h5>
+                        <div role="separator" class="dropdown-divider"></div>
+                        <h5 class="dropdown-header text-uppercase  pl-2 text-dark mt-2">Actions</h5>
 
-                            <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
-                                <span>Log Out</span>
-                                <i class="mdi mdi-logout ml-1"></i>
-                            </a>
+                        <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
+                            <span>Log Out</span>
+                            <i class="mdi mdi-logout ml-1"></i>
+                        </a>
 
                     </div>
                 </li>
@@ -185,38 +185,38 @@
                     </a>
                     <div class="collapse" id="ui-basic">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ asset('back/pages/ui-features/buttons.html') }}">Buttons</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ asset('back/pages/ui-features/dropdowns.html') }}">Dropdowns</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ asset('back/pages/ui-features/typography.html') }}">Typography</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="back/pages/ui-features/buttons.html">Buttons</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="back/pages/ui-features/dropdowns.html">Dropdowns</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="back/pages/ui-features/typography.html">Typography</a></li>
                         </ul>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ asset('back/pages/icons/mdi.html') }}">
+                    <a class="nav-link" href="back/pages/icons/mdi.html">
                         <span class="icon-bg"><i class="mdi mdi-cart"></i></span>
                         <span class="menu-title">Produits</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ asset('back/pages/forms/basic_elements.html') }}">
+                    <a class="nav-link" href="back/pages/forms/basic_elements.html">
                         <span class="icon-bg"><i class="mdi mdi-desktop-mac"></i></span>
                         <span class="menu-title">Montage</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ asset('back/pages/charts/chartjs.html') }}">
+                    <a class="nav-link" href="back/pages/charts/chartjs.html">
                         <span class="icon-bg"><i class="mdi mdi-calendar"></i></span>
                         <span class="menu-title">Événements</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ asset('back/pages/tables/basic-table.html') }}">
+                    <a class="nav-link" href="back/pages/tables/basic-table.html">
                         <span class="icon-bg"><i class="mdi mdi-book-open-page-variant"></i></span>
                         <span class="menu-title">Actualité</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ asset('back/pages/tables/basic-table.html') }}">
+                    <a class="nav-link" href="back/pages/tables/basic-table.html">
                         <span class="icon-bg"><i class="mdi mdi-alert-circle-outline"></i></span>
                         <span class="menu-title">Réclamations</span>
                     </a>
@@ -229,11 +229,13 @@
                     </a>
                     <div class="collapse" id="auth">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ asset('back/pages/samples/blank-page.html') }}"> Blank Page </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ asset('back/pages/samples/login.html') }}"> Login </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ asset('back/pages/samples/register.html') }}"> Register </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ asset('back/pages/samples/error-404.html') }}"> 404 </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ asset('back/pages/samples/error-500.html') }}"> 500 </a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{path('Affiche')}}"> Liste Commandes </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('facture_index') }}"> Liste des factures </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('ligne_commande_index') }}"> Confirmation des Commandes </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('AfficheB') }}"> LISTES DES DEMANDES DE LOCATIONS </a></li>
+
+
+
                         </ul>
                     </div>
                 </li>
@@ -253,20 +255,20 @@
 <!-- plugins:js -->
 {% block js %}
 
-<script src="{{ asset('back/assets/vendors/js/vendor.bundle.base.js') }}"></script>
-<!-- endinject -->
-<!-- Plugin js for this page -->
-<script src="{{ asset('back/assets/vendors/chart.js/Chart.min.js') }}"></script>
-<script src="{{ asset('back/assets/vendors/jquery-circle-progress/js/circle-progress.min.js') }}"></script>
-<!-- End plugin js for this page -->
-<!-- inject:js -->
-<script src="{{ asset('back/assets/js/off-canvas.js') }}"></script>
-<script src="{{ asset('back/assets/js/hoverable-collapse.js') }}"></script>
-<script src="{{ asset('back/assets/js/misc.js') }}"></script>
-<!-- endinject -->
-<!-- Custom js for this page -->
-<script src="{{ asset('back/assets/js/dashboard.js') }}"></script>
-<!-- End custom js for this page -->
+    <script src="{{ asset('back/assets/vendors/js/vendor.bundle.base.js') }}"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="{{ asset('back/assets/vendors/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ asset('back/assets/vendors/jquery-circle-progress/js/circle-progress.min.js') }}"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{{ asset('back/assets/js/off-canvas.js') }}"></script>
+    <script src="{{ asset('back/assets/js/hoverable-collapse.js') }}"></script>
+    <script src="{{ asset('back/assets/js/misc.js') }}"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="{{ asset('back/assets/js/dashboard.js') }}"></script>
+    <!-- End custom js for this page -->
 {% endblock %}
 </body>
 </html>

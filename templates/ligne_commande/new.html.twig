@@ -1,0 +1,11 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}MODIFICATION D UNE COMMANDE{% endblock %}
+
+{% block body %}
+    <h1>MODIFICATION D UNE COMMANDE</h1>
+
+    {{ include('ligne_commande/_form.html.twig') }}
+
+    <a href="{{ path('ligne_commande_index') }}">RETOUR A LA LISTE</a>
+{% endblock %}

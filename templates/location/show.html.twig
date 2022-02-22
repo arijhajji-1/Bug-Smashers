@@ -1,0 +1,40 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Location{% endblock %}
+
+{% block body %}
+    <h1>Location</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ location.id }}</td>
+            </tr>
+            <tr>
+                <th>DateDEB</th>
+                <td>{{ location.dateDEB ? location.dateDEB|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateFin</th>
+                <td>{{ location.dateFin ? location.dateFin|date('Y-m-d') : '' }}</td>
+            </tr>
+
+            <tr>
+                <th>TotalL</th>
+                <td>{{ location.TotalL }}</td>
+            </tr>
+            <tr>
+                <th>produit</th>
+                <td>{{ location.produit.title }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <a href="{{ path('location_edit', {'id': location.id}) }}">MODIFIER LA DEMANDE</a>
+
+    {{ include('location/_delete_form.html.twig') }}
+    <a href="{{ path('location_index') }}">RETOUR A LA LISTE</a>
+{% endblock %}

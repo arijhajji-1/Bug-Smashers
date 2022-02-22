@@ -1,0 +1,60 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}VOS COMMANDES{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <h1 align="center">VOS COMMANDES</h1>
+
+<div class="col-lg-12 stretch-card">
+
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Paiment</th>
+                <th>Adresse</th>
+                <th>Telephone</th>
+                <th>Modifier ou annuler</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.id }}</td>
+                <td>{{ commande.nom }}</td>
+                <td>{{ commande.prenom }}</td>
+                <td>{{ commande.paiment }}</td>
+                <td>{{ commande.Adresse }}</td>
+                <td>{{ commande.Telephone }}</td>
+                <td>
+                    <a href="{{ path('commande_show', {'id': commande.id}) }}" class="btn ">Facture
+                        <i class="bi bi-cart-x"></i>
+                    </a>
+                    <a href="{{ path('commande_edit', {'id': commande.id}) }}" class="btn ">Modification des informations
+                        <i class="bi bi-cart-x"></i>
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">PAS DE NOUVEAUX COMMANDES</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('produit_index') }}"class="btn ">retour au shop
+        <i class="bi bi-cart-x"></i>
+    </a>
+{% endblock %}

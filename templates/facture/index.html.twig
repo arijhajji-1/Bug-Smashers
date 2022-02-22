@@ -1,0 +1,54 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}LISTE Facture{% endblock %}
+
+{% block body %}
+    <h1>LISTE Facture</h1>
+    <form method="post" action="{{ path('recherche') }}">
+        <label>Recherche</label>
+        <input type="text" name="recherche"> <input type="submit" value="Recherche">
+    </form>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Remise</th>
+                <th>Total</th>
+
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for facture in factures %}
+            <tr>
+                <td>{{ facture.id }}</td>
+                <td>{{ facture.DateFact | date('d-m-y') }}</td>
+                <td>{{ facture.Remise }}</td>
+                <td>{{ facture.Total }}</td>
+
+                <td>
+                    <a href="{{ path('listef') }}" class="btn ">impression facture
+                        <i class="bi bi-cart-x"></i>
+                    </a>
+                    <a href="{{ path('facture_edit', {'id': facture.id}) }}" class="btn ">modifier ou supprimer une facture
+                        <i class="bi bi-cart-x"></i>
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="18">pas de nouveaux facture</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('facture_new') }}" class="btn ">AJOUTER UNE FACTURE
+        <i class="bi bi-cart-x"></i>
+    </a>
+    <a href="{{ path('indexback') }}" class="btn ">RETOUR AU MENU ADMIN
+        <i class="bi bi-cart-x"></i>
+    </a>
+
+{% endblock %}

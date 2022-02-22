@@ -1,0 +1,60 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}LISTE DES COMMANDES{% endblock %}
+
+{% block body %}
+
+    <h1>LISTE DES COMMANDES VALIDE</h1>
+
+
+
+<div class="col-lg-12 stretch-card">
+
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-bordered">
+                <form method="post" action="{{ path('recherche') }}">
+                    <label>Recherche</label>
+                    <input type="text" name="recherche"> <input type="submit" value="Recherche">
+                </form>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Paiment</th>
+            <th>Adresse</th>
+            <th>Telephone</th>
+            <th>Valider la commande ou annuler</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.id }}</td>
+                <td>{{ commande.nom }}</td>
+                <td>{{ commande.prenom }}</td>
+                <td>{{ commande.paiment }}</td>
+                <td>{{ commande.Adresse}}</td>
+                <td>{{ commande.Telephone}}</td>
+                <td>
+                    <a href="{{ path('commande_editB', {'id': commande.id}) }}" class="btn ">Annulation ou rectification de commande
+                        <i class="bi bi-cart-x"></i>
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">PAS DE COMMANDES VALIDES</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('indexback') }}"class="btn ">RETOUR AU MENU ADMIN
+        <i class="bi bi-cart-x"></i>
+    </a>
+            <a href="{{ path('listec') }}"class="btn ">IMPRESSION DE LISTE COMMANDE
+                <i class="bi bi-cart-x"></i>
+            </a>
+{% endblock %}
