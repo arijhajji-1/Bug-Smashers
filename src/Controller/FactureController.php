@@ -131,11 +131,10 @@ class FactureController extends AbstractController
         return $this->redirectToRoute('facture_index', [], Response::HTTP_SEE_OTHER);
     }
     /**
-     * @Route("facture/recherche",name="recherche")
-     *
+     * @Route("facture/recherche",name="rechercheB")
      */
     function recherche(FactureRepository $repository,Request $request){
-        $data=$request->get('recherche');
+        $data=$request->get('rechercheB');
         $facture=$repository->findBy(['id'=>$data]);
         return $this->render('facture/index.html.twig',['factures'=>$facture]);
     }
