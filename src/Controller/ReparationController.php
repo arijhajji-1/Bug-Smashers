@@ -37,6 +37,8 @@ class ReparationController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             $em=$this->getDoctrine()->getManager();
+            $reparation->setEtat("En cours");
+
             $em->persist($reparation);
             $em->flush();
             return $this->redirectToRoute("reparation");

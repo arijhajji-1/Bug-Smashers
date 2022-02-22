@@ -109,6 +109,7 @@ class IndexController extends AbstractController
 
     }
 
+
         /**
 * @Route("/affiche", name="affiche")
 */

@@ -29,7 +29,7 @@ class MontageType extends AbstractType
                     ->where('u.category = 1');},
                 'placeholder' => "choisir une option.",
                 'choice_label' => function (Product $product){
-                     return $product->getNom().' '.$product->getDescription().' '.$product->getPrix();
+                     return $product->getNom().' |'.$product->getDescription().'| '.$product->getPrix();
                 }
             ])
             ->add('carte_graphique',EntityType::class,['class' => Product::class,'query_builder' => function (EntityRepository $er) {
@@ -38,7 +38,7 @@ class MontageType extends AbstractType
                     ->where('u.category = 2');},
                 'placeholder' => "choisir une option.",
                 'choice_label' => function (Product $product){
-                    return $product->getNom().' '.$product->getDescription().' '.$product->getPrix();
+                    return $product->getNom().' |'.$product->getDescription().' |'.$product->getPrix();
                 }
             ])
             ->add('carte_mere',EntityType::class,['class' => Product::class,'query_builder' => function (EntityRepository $er) {
@@ -47,7 +47,7 @@ class MontageType extends AbstractType
                     ->where('u.category = 3');},
                 'placeholder' => "choisir une option.",
                 'choice_label' => function (Product $product){
-                    return $product->getNom().' '.$product->getDescription().' '.$product->getPrix();
+                    return $product->getNom().' |'.$product->getDescription().' |'.$product->getPrix();
                 }
             ])
             ->add('disque_systeme',EntityType::class,['class' => Product::class,'query_builder' => function (EntityRepository $er) {
@@ -56,7 +56,7 @@ class MontageType extends AbstractType
                     ->where('u.category = 4');},
                 'placeholder' => "choisir une option.",
                 'choice_label' => function (Product $product){
-                    return $product->getNom().' '.$product->getDescription().' '.$product->getPrix();
+                    return $product->getNom().'| '.$product->getDescription().' |'.$product->getPrix();
                 }
             ])
             ->add('boitier',EntityType::class,['class' => Product::class,'query_builder' => function (EntityRepository $er) {
@@ -65,7 +65,7 @@ class MontageType extends AbstractType
                     ->where('u.category = 5');},
                 'placeholder' => "choisir une option.",
                 'choice_label' => function (Product $product){
-                    return $product->getNom().' '.$product->getDescription().' '.$product->getPrix();
+                    return $product->getNom().'| '.$product->getDescription().'| '.$product->getPrix();
                 }
             ])
             ->add('stockage_supp',EntityType::class,['class' => Product::class,'query_builder' => function (EntityRepository $er) {
@@ -74,7 +74,7 @@ class MontageType extends AbstractType
                     ->where('u.category = 6');},
                 'placeholder' => "choisir une option.",
                 'choice_label' => function (Product $product){
-                    return $product->getNom().' '.$product->getDescription().' '.$product->getPrix();
+                    return $product->getNom().' |'.$product->getDescription().'| '.$product->getPrix();
                 }
             ])
             ->add('montant',TextareaType::class,[

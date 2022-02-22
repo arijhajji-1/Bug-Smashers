@@ -6,6 +6,7 @@ use App\Repository\ReparationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ReparationRepository::class)
@@ -21,23 +22,34 @@ class Reparation
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="This field must be filled")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="This field must be filled")
      */
     private $type;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\GreaterThan("today UTC")
+     * @Assert\NotBlank(message="This field must be filled")
+
      */
     private $Reserver;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="This field must be filled")
      */
     private $category;
+
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $etat;
 
 
 
@@ -91,6 +103,18 @@ class Reparation
     public function setCategory(string $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(string $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }
