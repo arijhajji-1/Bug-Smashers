@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\Avis;
+use App\Entity\Avis_Produit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Avis|null find($id, $lockMode = null, $lockVersion = null)
- * @method Avis|null findOneBy(array $criteria, array $orderBy = null)
- * @method Avis[]    findAll()
- * @method Avis[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Avis_Produit|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Avis_Produit|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Avis_Produit[]    findAll()
+ * @method Avis_Produit[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AvisRepository extends ServiceEntityRepository
+class Avis_ProduitRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Avis::class);
+        parent::__construct($registry, Avis_Produit::class);
     }
 
     // /**

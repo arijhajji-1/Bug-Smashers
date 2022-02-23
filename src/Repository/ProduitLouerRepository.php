@@ -49,7 +49,7 @@ class ProduitLouerRepository extends ServiceEntityRepository
         if (!empty($search->q))
         {
             $query=$query
-                ->andWhere('p.nom LIKE :q')
+                ->andWhere('p.nom LIKE :q OR p.description LIKE :q OR p.marque LIKE :q')
                 ->setParameter('q',"%{$search->q}%");
         }
         if (!empty($search->category))

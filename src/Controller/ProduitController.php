@@ -4,18 +4,14 @@ namespace App\Controller;
 
 use App\Data\SearchData;
 use App\Form\SearchForm;
-use App\Entity\Avis;
+use App\Entity\Avis_Produit;
 use App\Entity\Category;
-use App\Entity\Product;
 use App\Form\AvisType;
-use App\Form\ProductType;
 use App\Entity\ProduitAcheter;
 use App\Form\ProduitAcheterType;
 use App\Entity\ProduitLouer;
 use App\Form\ProduitLouerType;
-use App\Form\ProductModifierType;
 use App\Repository\CategoryRepository;
-use App\Repository\ProductRepository;
 use App\Repository\ProduitAcheterRepository;
 use App\Repository\ProduitLouerRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,7 +32,7 @@ class ProduitController extends AbstractController
     {
         $entityManager = $this->getDoctrine()->getManager();
         $produit = $entityManager->getRepository(ProduitAcheter::class)->find($id);
-        $avis = new Avis();
+        $avis = new Avis_Produit();
         $avis->setProduitAcheter($produit);
         $form = $this->createForm(AvisType::class, $avis);
         $form->handleRequest($request);
@@ -59,7 +55,7 @@ class ProduitController extends AbstractController
     {
         $entityManager = $this->getDoctrine()->getManager();
         $produit = $entityManager->getRepository(ProduitLouer::class)->find($id);
-        $avis = new Avis();
+        $avis = new Avis_Produit();
         $avis->setProduitLouer($produit);
         $form = $this->createForm(AvisType::class, $avis);
         $form->handleRequest($request);
@@ -97,7 +93,7 @@ class ProduitController extends AbstractController
     /**
      * @Route("/produit/afffront/{cat}", name="produit_affichage_front_cat")
      */
-    public function affbyCat(int $cat, ProductRepository $produitRepository, CategoryRepository $categoryRepository): Response
+    public function affbyCat(int $cat, CategoryRepository $categoryRepository): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $category = $entityManager->getRepository(Category::class)->find($cat);

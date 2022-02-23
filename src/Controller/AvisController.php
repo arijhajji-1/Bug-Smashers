@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Avis;
-use App\Repository\AvisRepository;
+use App\Entity\Avis_Produit;
+use App\Repository\Avis_ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,7 +22,7 @@ class AvisController extends AbstractController
     /**
      * @Route("/produit/affback/avis", name="avis_back")
      */
-    public function backAvis(AvisRepository $avisRepository): Response
+    public function backAvis(Avis_ProduitRepository $avisRepository): Response
     {
         return $this->render('produit/avisback.html.twig', [
             'Avis' => $avisRepository->findAll(),
@@ -34,7 +34,7 @@ class AvisController extends AbstractController
     public function deleteProductA(int $id): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $avis = $entityManager->getRepository(Avis::class)->find($id);
+        $avis = $entityManager->getRepository(Avis_Produit::class)->find($id);
         $entityManager->remove($avis);
         $entityManager->flush();
 

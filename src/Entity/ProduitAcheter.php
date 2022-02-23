@@ -63,9 +63,13 @@ class ProduitAcheter
     private $category;
 
     /**
-     * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="produitAcheter",orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Avis_Produit::class, mappedBy="produitAcheter",orphanRemoval=true)
      */
     private $avis;
+    /**
+     * @ORM\ManyToOne(targetEntity=Montage::class, inversedBy="produits")
+     */
+    private $montage;
 
     public function __construct()
     {
@@ -187,6 +191,18 @@ class ProduitAcheter
                 $avi->setProduitAcheter(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMontage(): ?Montage
+    {
+        return $this->montage;
+    }
+
+    public function setMontage(?Montage $montage): self
+    {
+        $this->montage = $montage;
 
         return $this;
     }

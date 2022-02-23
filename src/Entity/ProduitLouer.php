@@ -67,7 +67,7 @@ class ProduitLouer
     private $dispo;
 
     /**
-     * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="produitLouer",orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Avis_Produit::class, mappedBy="produitLouer",orphanRemoval=true)
      */
     private $avis;
 
