@@ -31,6 +31,7 @@
                                     </div>
                                 </div>
                             </article>
+
                             <div class="display-ratings">
                                 {% for av in avis %}
                                     <div class="rating-item">
@@ -50,7 +51,7 @@
                                         <br>
                                         <br>
                             <div class="rating-form-wrapper">
-                            <h3>Ajouter vos avis</h3>
+                            <h3>Ajouter un commentaire</h3>
                             <form action="{{ path("evenement_event", {'id':evenement.id })}}"  method="POST">
                                 <div class="rating-form row">
                                     <div class="col-md-6">
@@ -76,14 +77,16 @@
                                     <br>
                                     {{ form_widget(form) }}
                                 </div>
+
                             </form>
+
                         </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
+
         </div>
         <!--== End Slider Area Wrapper ==-->
     {% endblock %}
-
 

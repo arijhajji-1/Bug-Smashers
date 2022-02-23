@@ -4,10 +4,12 @@
 
 {% block body %}
     <h1> Modifier une actualité </h1>
-    {{ form_start(form,{'attr': {'novalidate':'novalidate'}} ) }}
+    {{ form_start(form,{'class': 'forms-sample','attr': {'novalidate':'novalidate'}} ) }}
     {% form_theme form 'bootstrap_4_layout.html.twig' %}
     {{ form_errors(form) }}
     {{ form_widget(form) }}
+
+
     {{ form_end(form) }}
 
 {% endblock %}

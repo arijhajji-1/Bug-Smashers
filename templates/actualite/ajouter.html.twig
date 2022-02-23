@@ -1,16 +1,21 @@
 {% extends 'base-back.html.twig' %}
 
-{% block title %}Hello ActualiteController!{% endblock %}
+{% block title %}Ajouter une actualité{% endblock %}
 
 {% block body %}
+<div class="card">
+    <div class="card-body">
     <h1>  Ajouter une actualité </h1>
 
-    {{ form_start(form,{'attr': {'novalidate':'novalidate'}} ) }}
+    {{ form_start(form,{'class': 'forms-sample','attr': {'novalidate':'novalidate'}} ) }}
     {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
     {{ form_widget(form) }}
     <button class="btn btn-outline-dark btn-fw">{{ button_label|default('AJOUTER') }}</button>
     {{ form_end(form) }}
     <br>
 
     <a href="{{ path('actualite_affiche')  }}" class="btn btn-outline-dark btn-fw" >Retour à la liste des actualités</a>
+    </div>
+</div>
 {% endblock %}
