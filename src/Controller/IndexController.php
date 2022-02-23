@@ -90,14 +90,14 @@ class IndexController extends AbstractController
      * @route("/montage", name="addmontage")
      */
     function add(Request $request){
-        $montage=new montage() ;
+        $montage=new Montage() ;
+
         $form=$this->createForm(MontageType::class,$montage);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
             $em=$this->getDoctrine()->getManager();
-            //$montage->setMontant();
             $em->persist($montage);
             $em->flush();
             return $this->redirectToRoute("montage");
@@ -141,7 +141,6 @@ class IndexController extends AbstractController
     {
         $montage=$repo->find($id);
         $form=$this->createForm(MontageType::class,$montage);
-        $form->add('update',SubmitType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())
         {

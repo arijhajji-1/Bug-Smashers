@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\AvisReparationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=AvisReparationRepository::class)
@@ -19,16 +21,23 @@ class AvisReparation
 
     /**
      * @ORM\Column(type="string", length=255)
+     *  * @Assert\NotBlank(message="This field must be filled")
      */
     private $Description;
 
     /**
      * @ORM\Column(type="string", length=50)
+     *  * @Assert\NotBlank(message="This field must be filled")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
+     *  * @Assert\NotBlank(message="This field must be filled")
      */
     private $email;
 

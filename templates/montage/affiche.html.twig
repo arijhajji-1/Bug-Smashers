@@ -24,6 +24,7 @@
                                 <th>Disque Systeme</th>
                                 <th>boitier</th>
                                 <th>Stockage Supp</th>
+                                <th>Montant</th>
 
 
                             </tr>
@@ -37,6 +38,7 @@
                             <td>{{ montage.DisqueSysteme }}</td>
                             <td>{{ montage.boitier }}</td>
                             <td>{{ montage.StockageSupp }}</td>
+                            <td>{{ montage.Montant }}</td>
                              <td><button  class="btn btn-brand"><a href="{{ path('delete', {'id': montage.Id}) }}"style="color: white;">Supprimer</a></button></td>
                              <td><button  class="btn btn-brand"><a href="{{ path('update', {'id': montage.Id}) }}"style="color: white;">Modifier</a></button></td>
                         </tr>
