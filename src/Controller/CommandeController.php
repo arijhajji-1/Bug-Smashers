@@ -35,20 +35,25 @@ class CommandeController extends AbstractController
      */
     public function new(Request $request, EntityManagerInterface $entityManager,SessionInterface $session): Response
     {
+
         $commande = new Commande();
+        $panier = $session->get("panier", []);
+        $session->set("panier", $panier);
         $form = $this->createForm(CommandeType::class, $commande);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager->persist($commande);
             $entityManager->flush();
             $session->remove("panier");
             $this->addFlash('success', 'VOTRE COMMANDE A ETE PASSE AVEC SUCCEE ET EN COUR DE LIVRAISON');
 
-            return $this->redirectToRoute('commande_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('commande_index', [],Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('commande/new.html.twig', [
+            'panier'=>$panier,
             'commande' => $commande,
             'form' => $form->createView(),
         ]);
@@ -57,7 +62,7 @@ class CommandeController extends AbstractController
     /**
      * @Route("/listc", name="listec", methods={"GET"})
      */
-    public function listc(CommandeRepository $commandeRepository): Response
+    public function listc(CommandeRepository $commandeRepository,SessionInterface $session): Response
     {
 
         $pdfOptions = new Options();
@@ -68,9 +73,12 @@ class CommandeController extends AbstractController
         $commande = $commandeRepository->findAll();
 
         // Retrieve the HTML generated in our twig file
-        $html = $this->renderView('commande/listec.html.twig', [
+        $html= $this->renderView('commande/listec.html.twig', [
             'commandes' => $commande,
+
         ]);
+
+
 
         // Load HTML to Dompdf
         $dompdf->loadHtml($html);

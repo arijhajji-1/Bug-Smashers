@@ -36,6 +36,14 @@ class Facture
      */
     private $total;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Commande::class, inversedBy="Facture")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $commande;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -73,6 +81,18 @@ class Facture
     public function setTotal(float $total): self
     {
         $this->total = $total;
+
+        return $this;
+    }
+
+    public function getCommande(): ?Commande
+    {
+        return $this->commande;
+    }
+
+    public function setCommande(?Commande $commande): self
+    {
+        $this->commande = $commande;
 
         return $this;
     }

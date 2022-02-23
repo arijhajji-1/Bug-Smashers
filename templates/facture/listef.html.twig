@@ -8,7 +8,7 @@
                 <th>Date</th>
                 <th>Remise</th>
                 <th>Total</th>
-
+                <th>NOMCLIENT</th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +18,8 @@
                 <td>{{ facture.DateFact | date('d-m-Y') }}</td>
                 <td>{{ facture.Remise }}</td>
                 <td>{{ facture.Total }}</td>
+                <td>{{ facture.commande.nom }}</td>
+
 
                 
             </tr>

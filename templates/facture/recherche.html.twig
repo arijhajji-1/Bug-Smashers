@@ -1,32 +1,29 @@
 {% block body %}
-</head>
-<body>
-<h1>Liste des Commande</h1>
-<form method="post" action="{{ path('rechercheB') }}">
-    <label>Recherche</label>
-    <input type="text"><input type="submit" value="Recherche">
-</form>
-<div class="col-lg-12 stretch-card">
+    <h1>LISTE Facture</h1>
+    <form method="post" action="{{ path('rechercheB') }}">
+        <label>Recherche</label>
+        <input type="text" name="recherche"> <input type="submit" value="Recherche">
+    </form>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>Remise</th>
+            <th>Total</th>
+            <th>NOMCLIENT</th>
 
-    <div class="card">
-        <div class="card-body">
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Date</th>
-                    <th>Remise</th>
-                    <th>Total</th>
-
-                </tr>
-                </thead>
-                <tbody>
-                {% for facture in factures %}
-                    <tr>
-                        <td>{{ facture.id }}</td>
-                        <td>{{ facture.DateFact | date('d-m-Y') }}</td>
-                        <td>{{ facture.Remise }}</td>
-                        <td>{{ facture.Total }}</td>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for facture in factures %}
+            <tr>
+                <td>{{ facture.id }}</td>
+                <td>{{ facture.DateFact | date('d-m-y') }}</td>
+                <td>{{ facture.Remise }}</td>
+                <td>{{ facture.Total }}</td>
+                <td>{{ facture.commande.nom }}</td>
 
 
                     </tr>

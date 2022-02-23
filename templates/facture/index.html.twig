@@ -6,7 +6,7 @@
     <h1>LISTE Facture</h1>
     <form method="post" action="{{ path('rechercheB') }}">
         <label>Recherche</label>
-        <input type="text" name="recherche"> <input type="submit" value="Recherche">
+        <input type="text" name="rechercheB"> <input type="submit" value="Recherche">
     </form>
     <table class="table table-bordered">
         <thead>
@@ -15,6 +15,7 @@
                 <th>Date</th>
                 <th>Remise</th>
                 <th>Total</th>
+                <th>NOMCLIENT</th>
 
                 <th>actions</th>
             </tr>
@@ -26,7 +27,7 @@
                 <td>{{ facture.DateFact | date('d-m-y') }}</td>
                 <td>{{ facture.Remise }}</td>
                 <td>{{ facture.Total }}</td>
-
+                <td>{{ facture.commande.nom }}</td>
                 <td>
                     <a href="{{ path('listef') }}" class="btn ">impression facture
                         <i class="bi bi-cart-x"></i>

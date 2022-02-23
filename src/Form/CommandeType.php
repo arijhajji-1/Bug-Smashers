@@ -14,27 +14,30 @@ class CommandeType extends AbstractType
     {
 
         $builder
+
             ->add('nom')
             ->add('prenom')
             ->add('adresse')
             ->add('Telephone')
             ->add('paiment', ChoiceType::class, [
                 'choices' => [
-                    'Carte bancaire'=>'Carte bancaire',
+                    'Carte bancaire' => 'Carte bancaire',
                     'Cash a la livraison' => 'Cash a la livraison',
-                    'Carte E-dinar'=>'Carte E-dinar',
-
+                    'Carte E-dinar' => 'Carte E-dinar',
 
                 ],
             ]);
+
     }
 
 
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => Commande::class,
-        ]);
-    }
+        public
+        function configureOptions(OptionsResolver $resolver): void
+        {
+            $resolver->setDefaults([
+                'data_class' => Commande::class,
+            ]);
+        }
+
 
 }

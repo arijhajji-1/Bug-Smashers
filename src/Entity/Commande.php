@@ -55,10 +55,18 @@ class Commande
      */
     private $Telephone;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Facture::class, mappedBy="commande")
+     */
+    private $Facture;
+
+
+
     public function __construct()
     {
 
         $this->LigneCommande = new ArrayCollection();
+        $this->Facture = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -152,6 +160,36 @@ class Commande
     public function setTelephone(int $Telephone): self
     {
         $this->Telephone = $Telephone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Facture[]
+     */
+    public function getFacture(): Collection
+    {
+        return $this->Facture;
+    }
+
+    public function addFacture(Facture $facture): self
+    {
+        if (!$this->Facture->contains($facture)) {
+            $this->Facture[] = $facture;
+            $facture->setCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFacture(Facture $facture): self
+    {
+        if ($this->Facture->removeElement($facture)) {
+            // set the owning side to null (unless already changed)
+            if ($facture->getCommande() === $this) {
+                $facture->setCommande(null);
+            }
+        }
 
         return $this;
     }
