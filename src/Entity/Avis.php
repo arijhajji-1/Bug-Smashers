@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AvisRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=AvisRepository::class)
@@ -19,16 +20,19 @@ class Avis
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank (message="Vous devez donner votre nom!")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Assert\NotBlank(message="Le champ email ne peut pas etre vide!")
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez donnez une description !")
      */
     private $description;
 
@@ -44,6 +48,7 @@ class Avis
 
     /**
      * @ORM\Column(type="smallint")
+     * @Assert\NotBlank(message="Le champ RATING ne peut pas être vide!")
      */
     private $rating;
 

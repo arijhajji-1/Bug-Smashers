@@ -140,29 +140,37 @@
                                                 </div>
                                                 {% endfor %}
 
+                                                {{ form_start(form, { 'attr':{'novalidate': 'novalidate'}} ) }}
+                                                {% form_theme form 'bootstrap_4_layout.html.twig' %}
                                             <div class="rating-form-wrapper">
                                                 <h3>Add your Reviews</h3>
                                                 <form action="{{ path("single_produitA", {'id':produit.id })}}"  method="POST">
                                                     <div class="rating-form row">
                                                         <div class="col-md-6">
                                                             <div class="form-input-item mt-30 mt-md-0">
-                                                                {{ form_row(form.rating) }}
+                                                                <div class="form-error" style="color: Red;">
+                                                                    {{ form_errors(form.rating) }}
+                                                                </div>
+                                                                {{ form_widget(form.rating) }}
                                                             </div>
 
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-input-item mt-30 mt-md-0">
-                                                               {{ form_row(form.nom) }}
+                                                                {{ form_errors(form.nom) }}
+                                                               {{ form_widget(form.nom) }}
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-input-item mt-30 mt-md-0">
-                                                                {{ form_row(form.email) }}
+                                                                {{ form_errors(form.email) }}
+                                                                {{ form_widget(form.email) }}
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="form-input-item mt-30 mb-40">
-                                                                {{ form_row(form.description,{'id' : 'your-review'}) }}
+                                                                {{ form_errors(form.description) }}
+                                                                {{ form_widget(form.description,{'id':'your-review'}) }}
                                                             </div>
                                                         </div>
                                                         <div class="col-12 mt-22">

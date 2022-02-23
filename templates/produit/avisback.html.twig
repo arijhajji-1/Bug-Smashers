@@ -1,0 +1,52 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Avis{% endblock %}
+
+{% block body %}
+
+    <div class="card-body">
+        <h4 class="card-title">Les Avis</h4>
+        <p class="card-description"><code>Click to modify or delete</code>
+        </p>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th> id Avis </th>
+                <th> Nom User </th>
+                <th> Email User </th>
+                <th> Description </th>
+                <th> Produit </th>
+                <th> Rating </th>
+                <th colspan="2" class="text-center"> Les Actions </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for avis in Avis %}
+                <tr>
+                    <td class="py-1">
+                        {{ avis.id }}
+                    </td>
+                    <td> {{ avis.nom }} </td>
+                    <td> {{ avis.email }}</td>
+                    <td> {{ avis.description }}
+                    </td>
+                    {% if avis.produitAcheter %}
+                    <td> {{ avis.produitAcheter.nom }} </td>
+                    {% else %}
+                    <td> {{ avis.produitLouer.nom }} </td>
+                    {% endif %}
+                    <td>{{ avis.rating }}</td>
+                    <td><a href="{{ path('supprimer_avis',{'id':avis.id}) }}">Supprimer<i class="mdi mdi-delete-forever"></i></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <div style="margin: 0 auto; text-align: center">
+            <a href="{{ path('produit_affichage_front')  }}" class="btn btn-outline-dark btn-fw" style="margin-left: 40%;
+         margin-right: 40%; display:block;">Liste Des Produits</a>
+
+        </div>
+    </div>
+
+{% endblock %}
