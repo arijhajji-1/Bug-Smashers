@@ -62,7 +62,7 @@ class Montage
     private $montant;
 
     /**
-     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="montage")
+     * @ORM\OneToMany(targetEntity=ProduitAcheter::class, mappedBy="montage")
      */
     private $produits;
 

@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductRepository;
+use App\Repository\ProduitLouerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=ProductRepository::class)
+ * @ORM\Entity(repositoryClass=ProduitLouerRepository::class)
  */
-class Product
+class ProduitLouer
 {
     /**
      * @ORM\Id
@@ -19,29 +22,27 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="le nom ne peut pas etre vide")
      */
     private $nom;
 
-
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="L'article doit avoir une description")
      */
     private $description;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $rating;
-
-    /**
      * @ORM\Column(type="decimal", precision=12, scale=2)
+     * @Assert\NotBlank(message="le prix ne peut pas etre vide")
      */
     private $prix;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="l'etat du produit ne peut pas etre vide")
      */
-    private $qte;
+    private $etat;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -50,19 +51,30 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="L'article doit avoir une marque")
      */
     private $marque;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="produitsLouer")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Montage::class, inversedBy="produits")
+     * @ORM\Column(type="boolean")
      */
-    private $montage;
+    private $dispo;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Avis_Produit::class, mappedBy="produitLouer",orphanRemoval=true)
+     */
+    private $avis;
+
+    public function __construct()
+    {
+        $this->avis = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -93,18 +105,6 @@ class Product
         return $this;
     }
 
-    public function getRating(): ?int
-    {
-        return $this->rating;
-    }
-
-    public function setRating(?int $rating): self
-    {
-        $this->rating = $rating;
-
-        return $this;
-    }
-
     public function getPrix(): ?string
     {
         return $this->prix;
@@ -117,14 +117,14 @@ class Product
         return $this;
     }
 
-    public function getQte(): ?int
+    public function getEtat(): ?string
     {
-        return $this->qte;
+        return $this->etat;
     }
 
-    public function setQte(int $qte): self
+    public function setEtat(string $etat): self
     {
-        $this->qte = $qte;
+        $this->etat = $etat;
 
         return $this;
     }
@@ -165,21 +165,45 @@ class Product
         return $this;
     }
 
-    public function __toString() {
-        return $this->nom;
+    public function getDispo(): ?bool
+    {
+        return $this->dispo;
     }
 
-    public function getMontage(): ?Montage
+    public function setDispo(bool $dispo): self
     {
-        return $this->montage;
-    }
-
-    public function setMontage(?Montage $montage): self
-    {
-        $this->montage = $montage;
+        $this->dispo = $dispo;
 
         return $this;
     }
 
+    /**
+     * @return Collection|Avis[]
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
 
+    public function addAvi(Avis $avi): self
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis[] = $avi;
+            $avi->setProduitLouer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): self
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getProduitLouer() === $this) {
+                $avi->setProduitLouer(null);
+            }
+        }
+
+        return $this;
+    }
 }

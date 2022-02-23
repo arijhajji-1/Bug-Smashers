@@ -87,11 +87,12 @@ class IndexController extends AbstractController
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
-     * @route("/montage")
+     * @route("/montage", name="addmontage")
      */
     function add(Request $request){
         $montage=new montage() ;
         $form=$this->createForm(MontageType::class,$montage);
+
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){

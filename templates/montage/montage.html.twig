@@ -13,11 +13,16 @@
 
         {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
         <h1 align="center">Choisir les composants</h1>
-        <div class="col-12 mt-22">
-            <button class="btn btn-brand">Submit</button>
-        </div>
+
         {{ form_end(form) }}
-        <a href="{{ path('affiche') }}" >votre demande</a>
+
+        <div class="col-12 mt-22">
+            <button class="btn btn-brand"><a href="{{ path ('addmontage') }} "style="color: white;">Ajouter</a> </button>
+            <button class="btn btn-brand"> <a href="{{ path('affiche') }}"style="color: white;" >votre demande</a></button>
+        </div>
+        <br>
+
+        <br>
     </div>
 
 

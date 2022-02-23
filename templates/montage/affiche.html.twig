@@ -31,14 +31,14 @@
                         </thead>
                         <tbody>
                         <tr  {% for montage in montage %}>
-                            <td >{{ montage.Processeur }}</td>
-                            <td >{{ montage.CarteGraphique }}</td>
+                            <td>{{ montage.Processeur }}</td>
+                            <td>{{ montage.CarteGraphique }}</td>
                             <td >{{ montage.CarteMere }}</td>
                             <td>{{ montage.DisqueSysteme }}</td>
                             <td>{{ montage.boitier }}</td>
                             <td>{{ montage.StockageSupp }}</td>
-                            <td class="btn"><a href="{{ path('delete', {'id': montage.Id}) }}">Supprimer</a></td>
-                            <td class="btn "><a href="{{ path('update', {'id': montage.Id}) }}">Modifier</a></td>
+                             <td><button  class="btn btn-brand"><a href="{{ path('delete', {'id': montage.Id}) }}"style="color: white;">Supprimer</a></button></td>
+                             <td><button  class="btn btn-brand"><a href="{{ path('update', {'id': montage.Id}) }}"style="color: white;">Modifier</a></button></td>
                         </tr>
                         </tbody>
 

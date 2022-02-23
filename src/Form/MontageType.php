@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Montage;
-use App\Entity\Product;
+use App\Entity\ProduitAcheter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,58 +23,58 @@ class MontageType extends AbstractType
     {
         $builder
 
-            ->add('processeur',EntityType::class,['class' => Product::class,'query_builder' => function (EntityRepository $er) {
+            ->add('processeur',EntityType::class,['class' => ProduitAcheter::class,'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('u')
                     ->orderBy('u.id', 'ASC')
                     ->where('u.category = 1');},
                 'placeholder' => "choisir une option.",
-                'choice_label' => function (Product $product){
-                     return $product->getNom().' |'.$product->getDescription().'| '.$product->getPrix();
+                'choice_label' => function (ProduitAcheter $ProduitAcheter){
+                     return $ProduitAcheter->getNom().' |'.$ProduitAcheter->getDescription().'| '.$ProduitAcheter->getPrix();
                 }
             ])
-            ->add('carte_graphique',EntityType::class,['class' => Product::class,'query_builder' => function (EntityRepository $er) {
+            ->add('carte_graphique',EntityType::class,['class' => ProduitAcheter::class,'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('u')
                     ->orderBy('u.id', 'ASC')
                     ->where('u.category = 2');},
                 'placeholder' => "choisir une option.",
-                'choice_label' => function (Product $product){
-                    return $product->getNom().' |'.$product->getDescription().' |'.$product->getPrix();
+                'choice_label' => function (ProduitAcheter $ProduitAcheter){
+                    return $ProduitAcheter->getNom().' |'.$ProduitAcheter->getDescription().' |'.$ProduitAcheter->getPrix();
                 }
             ])
-            ->add('carte_mere',EntityType::class,['class' => Product::class,'query_builder' => function (EntityRepository $er) {
+            ->add('carte_mere',EntityType::class,['class' => ProduitAcheter::class,'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('u')
                     ->orderBy('u.id', 'ASC')
                     ->where('u.category = 3');},
                 'placeholder' => "choisir une option.",
-                'choice_label' => function (Product $product){
-                    return $product->getNom().' |'.$product->getDescription().' |'.$product->getPrix();
+                'choice_label' => function (ProduitAcheter $ProduitAcheter){
+                    return $ProduitAcheter->getNom().' |'.$ProduitAcheter->getDescription().' |'.$ProduitAcheter->getPrix();
                 }
             ])
-            ->add('disque_systeme',EntityType::class,['class' => Product::class,'query_builder' => function (EntityRepository $er) {
+            ->add('disque_systeme',EntityType::class,['class' => ProduitAcheter::class,'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('u')
                     ->orderBy('u.id', 'ASC')
                     ->where('u.category = 4');},
                 'placeholder' => "choisir une option.",
-                'choice_label' => function (Product $product){
-                    return $product->getNom().'| '.$product->getDescription().' |'.$product->getPrix();
+                'choice_label' => function (ProduitAcheter $ProduitAcheter){
+                    return $ProduitAcheter->getNom().'| '.$ProduitAcheter->getDescription().' |'.$ProduitAcheter->getPrix();
                 }
             ])
-            ->add('boitier',EntityType::class,['class' => Product::class,'query_builder' => function (EntityRepository $er) {
+            ->add('boitier',EntityType::class,['class' => ProduitAcheter::class,'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('u')
                     ->orderBy('u.id', 'ASC')
                     ->where('u.category = 5');},
                 'placeholder' => "choisir une option.",
-                'choice_label' => function (Product $product){
-                    return $product->getNom().'| '.$product->getDescription().'| '.$product->getPrix();
+                'choice_label' => function (ProduitAcheter $ProduitAcheter){
+                    return $ProduitAcheter->getNom().'| '.$ProduitAcheter->getDescription().'| '.$ProduitAcheter->getPrix();
                 }
             ])
-            ->add('stockage_supp',EntityType::class,['class' => Product::class,'query_builder' => function (EntityRepository $er) {
+            ->add('stockage_supp',EntityType::class,['class' => ProduitAcheter::class,'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('u')
                     ->orderBy('u.id', 'ASC')
                     ->where('u.category = 6');},
                 'placeholder' => "choisir une option.",
-                'choice_label' => function (Product $product){
-                    return $product->getNom().' |'.$product->getDescription().'| '.$product->getPrix();
+                'choice_label' => function (ProduitAcheter $ProduitAcheter){
+                    return $ProduitAcheter->getNom().' |'.$ProduitAcheter->getDescription().'| '.$ProduitAcheter->getPrix();
                 }
             ])
 

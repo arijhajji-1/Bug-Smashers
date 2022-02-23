@@ -32,7 +32,6 @@ class ReparationController extends AbstractController
     function add(Request $request){
         $reparation=new Reparation() ;
         $form=$this->createForm(ReparationType::class,$reparation);
-        $form->add('Ajouter',SubmitType::class) ;
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){

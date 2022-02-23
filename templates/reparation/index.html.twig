@@ -11,7 +11,11 @@
         {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
 
         {{ form_end(form) }}
-        <a href="{{ path('afficherep') }}" >votre demande</a>
+        <div class="col-12 mt-22">
 
+        <button class="btn btn-brand"><a href="{{ path('reparation') }} "style="color: white;">Ajouter</a> </button>
+
+        <button  class="btn btn-brand"> <a href="{{ path('afficherep') }}" style="color: white;" >votre demande</a></button>
+        </div>
     </div>
 {% endblock %}
