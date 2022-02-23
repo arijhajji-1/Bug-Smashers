@@ -31,31 +31,44 @@
                                     </div>
                                 </div>
                             </article>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="product-description-review">
+                                        <!-- Product Description Tab Menu -->
+                                        <ul class="nav nav-tabs desc-review-tab-menu" id="desc-review-tab" role="tablist">
+                                            <li>
+                                                <a class="active" id="desc-tab" data-toggle="tab" href="#descriptionContent" role="tab">Avis</a>
+                                            </li>
+                                        </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="descriptionContent">
+                                    <div class="description-content">
 
+                                    </div>
+                                </div>
+<div class="product-rating-wrap">
                             <div class="display-ratings">
                                 {% for av in avis %}
-                                    <div class="rating-item">
-                                        <div class="rating-author-pic">
-                                            <img src="{{ asset("front/assets/img/unknown.png") }}" alt="author" />
-                                        </div>
-                                        <div class="rating-author-txt">
-                                            <div class="rating-meta">
-                                                <h3>{{ av.nom }}</h3>
-                                                <span class="time">-  {{ av.email }}</span>
-                                            </div>
+                                <div class="rating-item">
 
-                                            <p>{{av.description}}</p>
+                                    <div class="rating-author-txt">
+                                        <div class="rating-meta">
+                                            <h3>{{ av.nom }}</h3>
+                                            <span class="time">-  {{ av.email }}</span>
                                         </div>
-                                {% endfor %}
-                                        <br>
-                                        <br>
-                                        <br>
-                            <div class="rating-form-wrapper">
+
+                                        <p>{{av.description}}</p>
+                                    </div>
+                                </div>
+                                    {% endfor %}
+                                    {{form_start(form)}}
+                                    <div class="rating-form-wrapper">
                             <h3>Ajouter un commentaire</h3>
                             <form action="{{ path("evenement_event", {'id':evenement.id })}}"  method="POST">
                                 <div class="rating-form row">
                                     <div class="col-md-6">
                                         <div class="form-input-item mt-30 mt-md-0">
+
                                             {{ form_row(form.nom) }}
                                         </div>
                                     </div>
@@ -72,10 +85,8 @@
                                     <div class="col-12 mt-22">
                                         <button class="btn btn-white">Ajouter</button>
                                     </div>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    {{ form_widget(form) }}
+                                    {{form_widget(form)}}
+
                                 </div>
 
                             </form>
@@ -85,6 +96,16 @@
                     </div>
                 </div>
             </div>
+                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         </div>
         <!--== End Slider Area Wrapper ==-->

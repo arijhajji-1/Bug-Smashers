@@ -109,6 +109,7 @@ class EvenementController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $evenement = $entityManager->getRepository(Evenement::class)->find($id);
         $avis = new Avis();
+        $avis->setEvenement($evenement);
         $form = $this->createForm(AvisType::class, $avis);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
