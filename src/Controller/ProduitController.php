@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
+use App\Form\SearchForm;
 use App\Entity\Avis;
 use App\Entity\Category;
 use App\Entity\Product;
@@ -77,12 +79,19 @@ class ProduitController extends AbstractController
      * @Route("/produit/afffront", name="produit_affichage_front")
      */
     public function index(ProduitLouerRepository $produitLouerRepository,ProduitAcheterRepository $produitAcheterRepository,
-                          CategoryRepository $categoryRepository): Response
+                          CategoryRepository $categoryRepository,Request $request): Response
     {
+        $data = new SearchData();
+        $form = $this->createForm(SearchForm::class,$data, [
+            'method' => 'POST'
+        ]);
+        $form->handleRequest($request);
+        $produitA=$produitAcheterRepository->findSearch($data);
+        $produitL=$produitLouerRepository->findSearch($data);
         return $this->render('produit/index.html.twig', [
-            'produitsAcheter' => $produitAcheterRepository->findAll(),
-            'produitsLouer' => $produitLouerRepository->findAll(),
-            'categories' => $categoryRepository->findAll(),
+            'produitsAcheter' => $produitA,
+            'produitsLouer' => $produitL,
+            'form' => $form->createView()
         ]);
     }
     /**

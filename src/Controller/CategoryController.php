@@ -44,7 +44,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('category_ajouter', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('category/ajouterA.html.twig', [
+        return $this->render('category/ajouter.html.twig', [
             'category' => $category,
             'form' => $form->createView(),
         ]);

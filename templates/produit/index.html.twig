@@ -10,14 +10,24 @@
     <div class="col-lg-3 order-1 order-lg-0">
         <div class="sidebar-area">
             <div class="sidebar-item">
+                <h4 class="sidebar-title">Search</h4>
+                <div class="sidebar-body">
+                    <div class="sidebar-search">
+                        {{ form_start(form) }}
+                        {{ form_row(form.q) }}
+                            <button class="btn-src"><i class="fa fa-search"></i></button>
+
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-item">
                 <h4 class="sidebar-title">Catégories</h4>
                 <div class="sidebar-body">
                     <ul class="sidebar-list">
-                        <li><a href="{{path("produit_affichage_front")}}">All Product</a></li>
-                        {% for category in categories %}
-                        <li><a href="{{ path("produit_affichage_front_cat", {'cat':category.id })}}">{{ category.label }} <span>({{ category.getProduitAcheter().count()+
-                                    category.getProduitLouer().count()}})</span></a></li>
-                        {% endfor %}
+                        {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                        {{ form_row(form.category )}}
+                        {{ form_end(form) }}
+
                     </ul>
                 </div>
             </div>
@@ -81,8 +91,10 @@
                                         {% set rating = rating / produit.avis|length %}
                                         {% endif %}
                                         {% for i in 1..5 %}
-                                            {% if rating > 0 %}
+                                            {% if rating > 0.7 %}
                                                 <span><i class="ion-android-star"></i></span>
+                                            {% elseif rating > 0.3 %}
+                                                <span><i class="ion-android-star-half"></i></span>
                                             {% else %}
                                             <span><i class="ion-android-star-outline"></i></span>
                                             {% endif %}
@@ -101,7 +113,9 @@
                                         <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
                                         <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
                                         <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
-                                        <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                        <a class="btn-add-to-cart"
+                                           href="{{ path("single_produitA", {'id':produit.id })}}"><i
+                                                    class="ion-eye"></i></a>
                                     </div>
 
                                     <div class="product-item__desc">
@@ -135,8 +149,10 @@
                                             {% set rating = rating / produit.avis|length %}
                                             {% endif %}
                                             {% for i in 1..5 %}
-                                                {% if rating > 0 %}
+                                                {% if rating > 0.7 %}
                                                     <span><i class="ion-android-star"></i></span>
+                                                {% elseif rating > 0.3 %}
+                                                    <span><i class="ion-android-star-half"></i></span>
                                                 {% else %}
                                                     <span><i class="ion-android-star-outline"></i></span>
                                                 {% endif %}
@@ -155,7 +171,9 @@
                                             <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
                                             <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
                                             <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
-                                            <button class="btn-add-to-cart"><i class="ion-eye"></i></button>
+                                            <a class="btn-add-to-cart"
+                                               href="{{ path("single_produitL", {'id':produit.id })}}"><i
+                                                        class="ion-eye"></i></a>
                                         </div>
 
 
