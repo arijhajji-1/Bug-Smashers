@@ -1,0 +1,51 @@
+{% extends 'base-back.html.twig' %}
+
+    {% block title %}Home{% endblock %}
+
+    {% block body %}
+        <br>
+        <br>
+<h1>La liste des événements</h1>
+<br>
+<br>
+<table>
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Nom
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Heure
+        </th>
+    </tr>
+    {% for evenement in evenements %}
+        <tr>
+            <td>
+                {{evenement.id}}
+            </td>
+            <td>
+                {{evenement.nom}}
+            </td>
+            <td>
+                {{ evenement.date|date("m/d/Y") }}
+            </td>
+            <td>
+                {{evenement.heure}}
+            </td>
+
+            <td class="btn"><a href="{{ path('evenement_supprimer', {'id': evenement.Id}) }}">Supprimer</a></td>
+            <td class="btn "><a href="{{ path('evenement_modifier', {'id': evenement.Id}) }}">Modifier</a></td>
+        </tr>
+
+    {% endfor %}
+</table>
+        <br>
+        <br>
+    <a href="{{ path('evenement_ajout')  }}" class="btn btn-outline-dark btn-fw" >Ajouter un nouveau événement</a>
+
+    {% endblock %}

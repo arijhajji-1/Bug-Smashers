@@ -1,0 +1,50 @@
+{% extends 'base-back.html.twig' %}
+
+    {% block title %}Home{% endblock %}
+
+    {% block body %}
+        <br>
+        <br>
+        <h1>La liste des actualités</h1>
+        <br>
+        <br>
+
+<table ">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Titre
+        </th>
+        <th>
+            Date
+        </th>
+
+    </tr>
+    {% for actualite in actualites %}
+        <tr>
+            <td>
+                {{actualite.id}}
+            </td>
+            <td>
+                {{actualite.titre}}
+            </td>
+            <td>
+                {{ actualite.date|date("m/d/Y") }}
+            </td>
+
+
+            <td class="btn"><a href="{{ path('supprimer', {'id': actualite.Id}) }}">Supprimer</a></td>
+            <td class="btn "><a href="{{ path('modifier', {'id': actualite.Id}) }}">Modifier</a></td>
+        </tr>
+    {% endfor %}
+
+</table>
+<br>
+        <br>
+        <a href="{{ path('actualite_ajout')  }}" class="btn btn-outline-dark btn-fw" >Ajouter une nouvelle actualité</a>
+
+    {% endblock %}
+
+

@@ -1,0 +1,15 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Evenement{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un événement </h1>
+    <br>
+    <br>
+    {{ form_start(form,{'attr': {'novalidate':'novalidate'}} ) }}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    {{ form_widget(form) }}
+    <button class="btn btn-outline-dark btn-fw">{{ button_label|default('AJOUTER') }}</button>
+    {{ form_end(form) }}
+    <a href="{{ path('evenement_affiche')  }}" class="btn btn-outline-dark btn-fw" >Retour à la liste des événements</a>
+{% endblock %}

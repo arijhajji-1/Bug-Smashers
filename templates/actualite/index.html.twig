@@ -1,0 +1,108 @@
+
+{% extends 'base-front.html.twig' %}
+
+    {% block title %}Home{% endblock %}
+
+    {% block body %}
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+<link rel="stylesheet" href="css/style.css">
+
+        <div class="example-wrapper">
+            <div class="slider-area-wrapper">
+                <div class="slider-content-active">
+                    {% for actualite in actualites %}
+                        <div class="slider-slide-item bg-img" data-bg="{{ asset('front/assets/img/actualite/'~actualite.imageName) }}">
+                            <div class="container container-wide h-100">
+                                <div class="row align-items-center h-100">
+                                    <div class="col-lg-6">
+                                        <div class="slide-content">
+                                            <div class="slide-content-inner">
+                                                <h2>{{ actualite.titre }}</h2>
+                                                <h3>{{ actualite.date|date("m/d/Y") }}</h3>
+<br>
+                                                <br>
+                                                <a class="btn btn-white" href="{{  path('actualite_description', {'id':actualite.id })  }}">Description</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="banner-area-wrapper banner-mt">
+                <div class="container container-wide">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="banner-item">
+                                <div class="banner-item__img">
+                                    <a href="#"><img src="{{ asset('front/assets/img/banner/banner-1.jpg') }}" alt="Banner" /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <section class="ftco-section">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 text-center">
+                <h2 class="heading-section mb-5 pb-md-4">Nos événements</h2>
+            </div>
+            <div class="col-md-12">
+                <div class="featured-carousel owl-carousel">
+                    {% for evenement in evenements %}
+                        <div class="item">
+                            <div class="blog-entry">
+                                <a href="#" class="block-20 d-flex align-items-start" style="background-image: url('/front/assets/img/actualite/{{ evenement.imageName }}') ;">
+                                    <div class="meta-date text-center p-2">
+                                        <span class="day">{{ evenement.date|date("d") }}</span>
+                                        <span class="mos">{{ evenement.date|date("m") }}</span>
+                                        <span class="yr">{{ evenement.date|date("Y") }}</span>
+                                    </div>
+                                </a>
+
+                                <div class="text border border-top-0 p-4">
+                                    <h3 class="heading"><a href="#">{{ evenement.nom }}</a></h3>
+                                    <p>Commence à : {{ evenement.heure}}</p>
+                                    <div class="d-flex align-items-center mt-4">
+                                        <p class="mb-0"><a href="{{  path('evenement_event', {'id':evenement.id })}}"
+                                         class="btn btn-white">Plus de détails <span class="ion-ios-arrow-round-forward"></span></a></p>
+                                        <p class="ml-auto meta2 mb-0">
+                                            <a href="#" class="mr-2">1</a>
+                                            <a href="#" class="meta-chat"><span class="ion-ios-chatboxes"></span> 3</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+            </section>
+        </div>
+
+
+
+                    <!--== End Slider Area Wrapper ==-->
+
+                    <script src="js/jquery.min.js"></script>
+                    <script src="js/popper.js"></script>
+                    <script src="js/bootstrap.min.js"></script>
+                    <script src="js/owl.carousel.min.js"></script>
+                    <script src="js/main.js"></script>
+    {% endblock %}
+
+
