@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\EvenementRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 
 /**
@@ -47,6 +49,16 @@ class Evenement
      * @ORM\Column(type="string", length=255)
      */
     private $ImageName;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="evenement",orphanRemoval=true)
+     */
+    private $avis;
+
+    public function __construct()
+    {
+        $this->avis = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -112,4 +124,12 @@ class Evenement
 
         return $this;
     }
+    /**
+     * @return Collection|Avis[]
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
 }

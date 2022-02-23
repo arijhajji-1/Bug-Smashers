@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Evenement;
 
 use App\Form\EvenementType;
+use App\Form\AvisType;
 use App\Repository\EvenementRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Avis;
 
 class EvenementController extends AbstractController
 {
@@ -106,9 +108,18 @@ class EvenementController extends AbstractController
     {
         $entityManager = $this->getDoctrine()->getManager();
         $evenement = $entityManager->getRepository(Evenement::class)->find($id);
-
+        $avis = new Avis();
+        $form = $this->createForm(AvisType::class, $avis);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($avis);
+            $entityManager->flush();
+            return $this->redirectToRoute('evenement_event', ['id'=>$id], Response::HTTP_SEE_OTHER);
+        }
         return $this->render("evenement/event.html.twig", [
             "evenement" => $evenement,
+            'form' => $form->createView(),
+            "avis" => $evenement->getAvis(),
         ]);
     }
 

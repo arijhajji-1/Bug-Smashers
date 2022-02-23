@@ -31,6 +31,53 @@
                                     </div>
                                 </div>
                             </article>
+                            <div class="display-ratings">
+                                {% for av in avis %}
+                                    <div class="rating-item">
+                                        <div class="rating-author-pic">
+                                            <img src="{{ asset("front/assets/img/unknown.png") }}" alt="author" />
+                                        </div>
+                                        <div class="rating-author-txt">
+                                            <div class="rating-meta">
+                                                <h3>{{ av.nom }}</h3>
+                                                <span class="time">-  {{ av.email }}</span>
+                                            </div>
+
+                                            <p>{{av.description}}</p>
+                                        </div>
+                                {% endfor %}
+                                        <br>
+                                        <br>
+                                        <br>
+                            <div class="rating-form-wrapper">
+                            <h3>Ajouter vos avis</h3>
+                            <form action="{{ path("evenement_event", {'id':evenement.id })}}"  method="POST">
+                                <div class="rating-form row">
+                                    <div class="col-md-6">
+                                        <div class="form-input-item mt-30 mt-md-0">
+                                            {{ form_row(form.nom) }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-input-item mt-30 mt-md-0">
+                                            {{ form_row(form.email) }}
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-input-item mt-30 mb-40">
+                                            {{ form_row(form.description,{'id' : 'your-review'}) }}
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-22">
+                                        <button class="btn btn-white">Ajouter</button>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    {{ form_widget(form) }}
+                                </div>
+                            </form>
+                        </div>
                         </div>
                     </div>
                 </div>
