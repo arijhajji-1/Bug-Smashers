@@ -3,8 +3,8 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User </h1>
-
+    <h1>Les Utilisateurs </h1>
+<div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
@@ -24,6 +24,7 @@
         </thead>
         <tbody>
         {% for user in users %}
+            {% if user.roles!=["ROLE_ADMIN"]  %}
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
@@ -31,16 +32,18 @@
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.lastName }}</td>
                 <td>{{ user.adresse }}</td>
-                <td>{{ user.photo }}</td>
+                <td><img src="{{ asset('uploads/' ~ user.photo) }}"/></td>
                 <td>{{ user.telephone }}</td>
                 <td>{{ user.cin }}</td>
                 <td>{{ user.dateNaissance ? user.dateNaissance|date('Y-m-d ') : '' }}</td>
                 <!--<td>{{ user.password }}</td>-->
                 <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-info">show</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-success">edit</a>
+                    <a href="{{ path('user_delete', {'id': user.id}) }}" class="btn btn-danger">delete</a>
                 </td>
             </tr>
+            {% endif %}
         {% else %}
             <tr>
                 <td colspan="12">no records found</td>
@@ -48,6 +51,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('user_new') }}">Create new</a>
+</div>
 {% endblock %}

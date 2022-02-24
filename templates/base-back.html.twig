@@ -64,7 +64,7 @@
                             <div role="separator" class="dropdown-divider"></div>
                             <h5 class="dropdown-header text-uppercase  pl-2 text-dark mt-2">Actions</h5>
 
-                            <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
+                            <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="{{ path('app_logout') }}">
                                 <span>Log Out</span>
                                 <i class="mdi mdi-logout ml-1"></i>
                             </a>
@@ -185,9 +185,20 @@
                     </a>
                     <div class="collapse" id="ui-basic">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ asset('back/pages/ui-features/buttons.html') }}">Buttons</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ asset('back/pages/ui-features/dropdowns.html') }}">Dropdowns</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ asset('back/pages/ui-features/typography.html') }}">Typography</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('admin_index') }}">list des utilisateurs</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                        <span class="icon-bg"><i class="mdi mdi-cart"></i></span>
+                        <span class="menu-title">Publications</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('publication_index') }}">list des publications</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('publication_new') }}">Add publication</a></li>
                         </ul>
                     </div>
                 </li>

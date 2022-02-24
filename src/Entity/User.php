@@ -51,8 +51,7 @@ class User implements UserInterface
      */
     private $adresse;
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", length=500, nullable=true)
      */
     private $photo;
 
@@ -80,7 +79,7 @@ class User implements UserInterface
     private $cin;
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Assert\NotBlank
+     * @Assert\Date
      */
     private $date_naissance;
     /**
@@ -94,9 +93,13 @@ class User implements UserInterface
      */
     private $password;
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Publication", mappedBy="users")
+     * @ORM\OneToMany(targetEntity="App\Entity\Publication", mappedBy="users", cascade={"persist", "remove"})
      */
     private $publications;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="users", cascade={"persist", "remove"})
+     */
+    private $commentaires;
     public function getId(): ?int
     {
         return $this->id;
@@ -275,6 +278,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->publications = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
     }
     /**
      * @return Collection|Publication[]
@@ -282,6 +286,13 @@ class User implements UserInterface
     public function getPublications(): Collection
     {
         return $this->publications;
+    }
+    /**
+     * @return Collection|Commentaire[]
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
     }
 
 }
