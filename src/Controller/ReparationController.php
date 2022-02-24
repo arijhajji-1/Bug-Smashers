@@ -78,7 +78,6 @@ class ReparationController extends AbstractController
     {
         $reparation=$repo->find($id);
         $form=$this->createForm(ReparationType::class,$reparation);
-        $form->add('update',SubmitType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())
         {

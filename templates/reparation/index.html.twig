@@ -9,13 +9,15 @@
         {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
         {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+        {{ form_widget(form) }}
 
-        {{ form_end(form) }}
+
         <div class="col-12 mt-22">
 
-        <button class="btn btn-brand"><a href="{{ path('reparation') }} "style="color: white;">Ajouter</a> </button>
+        <button type="submit" class="btn btn-brand" style="color: white;">Ajouter</button>
 
         <button  class="btn btn-brand"> <a href="{{ path('afficherep') }}" style="color: white;" >votre demande</a></button>
         </div>
+        {{ form_end(form) }}
     </div>
 {% endblock %}

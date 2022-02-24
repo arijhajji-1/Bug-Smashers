@@ -10,6 +10,14 @@
         {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
         <h1 align="center">Demande de reparation</h1>
 
+
+        {{ form_widget(form) }}
+
+        <div class="col-12 mt-22">
+
+        <button type="submit" class="btn btn-brand" style="color: white;">Ajouter </button>
+        </div>
+
         {{ form_end(form) }}
     </div>
 {% endblock %}

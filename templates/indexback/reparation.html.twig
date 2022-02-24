@@ -35,7 +35,7 @@
                         <td>{{ reparation.description }}</td>
                         <td >{{ reparation.Reserver| date('d/m/Y H:i')}}</td>
                         <td>{{ reparation.etat }}</td>
-                        <td><i class="mdi mdi-pencil"><a href="{{ path('updateback', {'id': reparation.Id}) }}">Modifier</a></i></td>
+                        <td><a href="{{ path('updateback', {'id': reparation.Id}) }}">Modifier<i class="mdi mdi-pencil"></i></a></td>
 
 
                     </tr>

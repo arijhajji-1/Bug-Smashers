@@ -52,7 +52,7 @@ class Reparation
     private $etat;
 
     /**
-     * @ORM\OneToOne(targetEntity=AvisReparation::class, mappedBy="idrep", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=AvisReparation::class, mappedBy="idrep", cascade={"persist", "remove"},orphanRemoval=true)
      */
     private $avisReparation;
 
