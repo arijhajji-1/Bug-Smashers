@@ -16,6 +16,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 use App\Entity\Montage;
 use App\Form\MontageFormType;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\MontageRepository;
 class IndexController extends AbstractController
@@ -100,6 +101,7 @@ class IndexController extends AbstractController
             $em=$this->getDoctrine()->getManager();
             $em->persist($montage);
             $em->flush();
+            $this->addFlash('success', 'Montage ajouté');
             return $this->redirectToRoute("montage");
 
 
@@ -123,6 +125,24 @@ class IndexController extends AbstractController
         ]);
     }
 
+    /**
+     * @route("/affichemobile",name="AfficheMobile")
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
+     */
+    public function Affichemobile(NormalizerInterface $normalizer,MontageRepository $repo): Response
+    {
+        $repo=$this->getDoctrine()->getRepository(Montage::class) ;
+        $stage=$repo->findAll();
+        $jsonContent=$normalizer->normalize($stage,'json',['groups'=>'montage']);
+
+
+        return new Response(json_encode($jsonContent));
+
+        //return $this->render('montage/affiche.html.twig',['montage'=>json_encode($montage)]);
+
+
+    }
+
 /**
 * @Route("/delete{id}", name="delete")
 */
@@ -132,7 +152,23 @@ class IndexController extends AbstractController
         $em=$this->getDoctrine()->getManager();
         $em->remove($montage);
         $em->flush();
+        $this->addFlash('success', 'Montage supprimé');
+
         return $this->redirectToRoute('affiche');
+
+    }
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @route("/Deletemobile/{id}",name="deletem")
+     */
+
+    public function deletemobile($id,MontageRepository $repository){
+        $montage=$repository->find($id);
+        $em = $this->getDoctrine()->getManager() ;
+        $em -> remove($montage);
+        $em -> flush();
+        return  new Response("montage supprimé");
+
     }
     /**
      * @Route ("/update/{id}", name="update")

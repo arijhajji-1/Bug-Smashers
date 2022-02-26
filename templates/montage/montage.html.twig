@@ -4,7 +4,11 @@
 
 {% block body %}
 
-
+    {% for messages in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ messages }}
+        </div>
+    {% endfor %}
 
     <hr style="visibility: hidden ">
     <div  class="container" style="max-width: 600px">

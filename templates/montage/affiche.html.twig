@@ -1,12 +1,18 @@
 {% extends 'base-front.html.twig' %}
-
 {% block title %} Montage{% endblock %}
+
+
 
 {% block body %}
 
 
     <div class="example-wrapper">
         <h1 align="center">Votre demande</h1>
+        {% for messages in app.flashes('success') %}
+            <div class="alert alert-danger">
+                {{ messages }}
+            </div>
+        {% endfor %}
     </div>
     <hr style="visibility: hidden ">
     <div  align="center">
@@ -39,7 +45,7 @@
                             <td>{{ montage.boitier }}</td>
                             <td>{{ montage.StockageSupp }}</td>
                             <td>{{ montage.Montant }}</td>
-                             <td><button  class="btn btn-brand"><a href="{{ path('delete', {'id': montage.Id}) }}"style="color: white;">Supprimer</a></button></td>
+                             <td><button  class="btn btn-brand"><a href="{{ path('delete', {'id': montage.Id}) }}"style="color: white;" onclick="return confirm('Etes vous sûr de supprimer ce montage?')"; >Supprimer</a></button></td>
                              <td><button  class="btn btn-brand"><a href="{{ path('update', {'id': montage.Id}) }}"style="color: white;">Modifier</a></button></td>
                         </tr>
                         </tbody>
