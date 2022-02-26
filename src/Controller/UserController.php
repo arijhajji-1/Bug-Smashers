@@ -60,6 +60,7 @@ class UserController extends AbstractController
             /** @var UploadedFile $brochureFile */
             $brochureFile = $form->get('photo')->getData();
             //some changes
+            //sdgdsg
 
             // this condition is needed because the 'brochure' field is not required
             // so the PDF file must be processed only when a file is uploaded
