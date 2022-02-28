@@ -5,6 +5,9 @@ namespace App\Controller;
 use App\Entity\Commande;
 use App\Form\CommandeType;
 use App\Repository\CommandeRepository;
+use phpDocumentor\Reflection\DocBlock\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Dompdf\Dompdf;
@@ -14,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * @Route("/commande")
@@ -179,6 +183,19 @@ class CommandeController extends AbstractController
         $data=$request->get('recherche');
         $commande=$repository->findBy(['nom'=>$data]);
         return $this->render('commande/showB.html.twig',['commandes'=>$commande]);
+    }
+
+    /**
+     * @Route("/commande/newliste", name="commande_liste", methods={"GET", "POST"})
+     */
+    public function getcommande(SerializerInterface $serializerInterface,CommandeRepository $repo): Response
+    {
+        $commande=$repo->findAll();
+        $json=$serializerInterface->serialize($commande,'json',['groups'=>'commande']);
+        dump($json);
+        die;
+
+
     }
 
 

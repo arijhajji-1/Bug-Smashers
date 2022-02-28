@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=CommandeRepository::class)
  */
@@ -16,30 +17,35 @@ class Commande
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups ("commande")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="empty field")
+     * @Groups ("commande")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="empty field")
+     * @Groups ("commande")
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="empty field")
+     * @Groups ("commande")
      */
     private $paiment;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="empty field")
+     * @Groups ("commande")
      */
     private $adresse;
 
@@ -47,16 +53,20 @@ class Commande
 
     /**
      * @ORM\OneToMany(targetEntity=LigneCommande::class, mappedBy="Commande")
+     * @Groups ("commande")
      */
     private $LigneCommande;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups ("commande")
+     *
      */
     private $Telephone;
 
     /**
      * @ORM\OneToMany(targetEntity=Facture::class, mappedBy="commande")
+     * @Groups ("commande")
      */
     private $Facture;
 

@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 
 /**
@@ -137,5 +138,23 @@ class FactureController extends AbstractController
         $data=$request->get('rechercheB');
         $facture=$repository->findBy(['id'=>$data]);
         return $this->render('facture/index.html.twig',['factures'=>$facture]);
+    }
+
+    /**
+     * @route("/affichemobileFact",name="AfficheMobileFact")
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
+     */
+    public function affichemobileFact(NormalizerInterface $normalizer,FactureRepository $repo): Response
+    {
+        $repo=$this->getDoctrine()->getRepository(Facture::class) ;
+        $facture=$repo->findAll();
+        $jsonContent=$normalizer->normalize($facture,'json',['groups'=>'post:read']);
+
+
+        return new Response(json_encode($jsonContent));
+
+        //return $this->render('Reparation/afficherep.html.twig',['reparation'=>json_encode($reparation)]);
+
+
     }
 }
