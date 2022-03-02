@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=MontageRepository::class)
  */
@@ -17,47 +17,55 @@ class Montage
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups ("post:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="processeur is required")
+     * @Groups ("post:read")
      */
     private $processeur;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="carte graphique is required")
+     * @Groups ("post:read")
      */
     private $carte_graphique;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="carte mere is required")
+     * @Groups ("post:read")
      */
     private $carte_mere;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="disque systeme is required")
+     * @Groups ("post:read")
      */
     private $disque_systeme;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="boitier is required")
+     * @Groups ("post:read")
      */
     private $boitier;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="stockage supp is required")
+     * @Groups ("post:read")
      */
     private $stockage_supp;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups ("post:read")
      */
     private $montant;
 
@@ -65,6 +73,11 @@ class Montage
      * @ORM\OneToMany(targetEntity=ProduitAcheter::class, mappedBy="montage")
      */
     private $produits;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
 
     public function __construct()
     {
@@ -161,31 +174,43 @@ class Montage
     }
 
     /**
-     * @return Collection|Product[]
+     * @return Collection|ProduitAcheter[]
      */
-    public function getProduits(): Collection
+    public function getProduitAcheters(): Collection
     {
-        return $this->produits;
+        return $this->ProduitAcheters;
     }
 
-    public function addProduit(Product $produit): self
+    public function addProduitAcheter(ProduitAcheter $ProduitAcheter): self
     {
-        if (!$this->produits->contains($produit)) {
-            $this->produits[] = $produit;
-            $produit->setMontage($this);
+        if (!$this->ProduitAcheters->contains($ProduitAcheter)) {
+            $this->ProduitAcheters[] = $ProduitAcheter;
+            $ProduitAcheter->setMontage($this);
         }
 
         return $this;
     }
 
-    public function removeProduit(Product $produit): self
+    public function removeProduitAcheter(ProduitAcheter $ProduitAcheter): self
     {
-        if ($this->produits->removeElement($produit)) {
+        if ($this->ProduitAcheters->removeElement($ProduitAcheter)) {
             // set the owning side to null (unless already changed)
-            if ($produit->getMontage() === $this) {
-                $produit->setMontage(null);
+            if ($ProduitAcheter->getMontage() === $this) {
+                $ProduitAcheter->setMontage(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
 
         return $this;
     }

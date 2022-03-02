@@ -3,7 +3,6 @@
 {% block title %} Montage{% endblock %}
 
 {% block body %}
-
     {% for messages in app.flashes('success') %}
         <div class="alert alert-success">
             {{ messages }}
@@ -39,6 +38,7 @@
 
 
     <script src="{{ asset('front/assets/js/montage.js') }}"></script>
+
 
 
 

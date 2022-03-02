@@ -5,6 +5,7 @@ use App\Entity\AvisReparation;
 use App\Form\AvisReparationType;
 use App\Entity\Reparation;
 use App\Repository\AvisReparationRepository;
+use App\Entity\User;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -30,13 +31,16 @@ class AvisReparationController extends AbstractController
      */
     function addAvis(Request $request,Reparation $id){
         $AvisReparation=new AvisReparation() ;
+        $AvisReparation->setIdrep($id);
+        $AvisReparation->setNom($this->getUser()->getFirstName());
+
+        $AvisReparation->setEmail($this->getUser()->getEmail());
         $form=$this->createForm(AvisReparationType::class,$AvisReparation);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
             $em=$this->getDoctrine()->getManager();
-            $AvisReparation->setIdrep($id);
 
             $em->persist($AvisReparation);
             $em->flush();

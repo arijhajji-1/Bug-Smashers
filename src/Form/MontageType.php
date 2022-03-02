@@ -102,7 +102,9 @@ class MontageType extends AbstractType
                     return ['data-prix' => $produitAcheter->getPrix()];
                 }
             ])
-        ->add ( 'montant',HiddenType::class    );
+        ->add ( 'montant',HiddenType::class    )
+        ->add ( 'email',HiddenType::class    );
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

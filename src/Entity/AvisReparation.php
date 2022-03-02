@@ -37,7 +37,7 @@ class AvisReparation
      *     message = "The email '{{ value }}' is not a valid email.",
      *     checkMX = true
      * )
-     *  * @Assert\NotBlank(message="This field must be filled")
+     * @Assert\NotBlank(message="This field must be filled")
      */
     private $email;
 

@@ -13,8 +13,6 @@ class AvisReparationType extends AbstractType
     {
         $builder
 
-            ->add('nom')
-            ->add('email')
             ->add('Description')
         ;
     }

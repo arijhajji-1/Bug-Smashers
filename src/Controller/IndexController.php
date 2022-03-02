@@ -7,16 +7,22 @@ use App\Form\MontageType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Product;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Validator\Constraints\Json;
+use App\Entity\ProduitAcheter;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 use App\Entity\Montage;
 use App\Form\MontageFormType;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\MontageRepository;
 class IndexController extends AbstractController
@@ -92,6 +98,7 @@ class IndexController extends AbstractController
      */
     function add(Request $request){
         $montage=new Montage() ;
+        $montage->setEmail($this->getUser()->getEmail());
 
         $form=$this->createForm(MontageType::class,$montage);
 
@@ -132,8 +139,8 @@ class IndexController extends AbstractController
     public function Affichemobile(NormalizerInterface $normalizer,MontageRepository $repo): Response
     {
         $repo=$this->getDoctrine()->getRepository(Montage::class) ;
-        $stage=$repo->findAll();
-        $jsonContent=$normalizer->normalize($stage,'json',['groups'=>'montage']);
+        $montage=$repo->findAll();
+        $jsonContent=$normalizer->normalize($montage,'json',['groups'=>'post:read']);
 
 
         return new Response(json_encode($jsonContent));
@@ -189,6 +196,36 @@ class IndexController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/addmontage", name="add_montage")
+     * @Method("POST")
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
+     */
 
+    public function ajouterMontageAction(Request $request)
+    {
+        $montage = new Montage();
+        $Processeur = $request->query->get("Processeur");
+        $CarteGraphique = $request->query->get("CarteGraphique");
+        $CarteMere = $request->query->get("CarteMere");
 
+        $DisqueSysteme = $request->query->get("DisqueSysteme");
+        $Boitier = $request->query->get("Boitier");
+        $StockageSupp = $request->query->get("StockageSupp");
+        $em = $this->getDoctrine()->getManager();
+
+        $montage->setCarteGraphique($CarteGraphique);
+        $montage->setProcesseur($Processeur);
+        $montage->setCarteMere($CarteMere);
+        $montage->setDisqueSysteme($DisqueSysteme);
+        $montage->setBoitier($Boitier);
+        $montage->setStockageSupp($StockageSupp);
+
+        $em->persist($montage);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($montage);
+        return new JsonResponse($formatted);
+
+    }
 }

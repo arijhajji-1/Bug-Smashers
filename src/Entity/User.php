@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use App\Repository\UserRepository;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;

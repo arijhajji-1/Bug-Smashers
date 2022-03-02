@@ -8,10 +8,17 @@ use App\Form\ReparationType;
 use App\Repository\ReparationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Validator\Constraints\Json;
 use App\Entity\Category;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class ReparationController extends AbstractController
 {
@@ -31,6 +38,8 @@ class ReparationController extends AbstractController
      */
     function add(Request $request){
         $reparation=new Reparation() ;
+        $reparation->setEmail($this->getUser()->getEmail());
+
         $form=$this->createForm(ReparationType::class,$reparation);
         $form->handleRequest($request);
 
@@ -88,6 +97,118 @@ class ReparationController extends AbstractController
         return $this->render('Reparation/update1.html.twig',[
             'form'=>$form->createView()
         ]);
+    }
+    /**
+     * @route("/affichemobilerep",name="AfficheMobilerep")
+     */
+    public function Affichemobilerep(NormalizerInterface $normalizer,ReparationRepository $repo): Response
+    {
+        $repo=$this->getDoctrine()->getRepository(Reparation::class) ;
+        $reparation=$repo->findAll();
+        $jsonContent=$normalizer->normalize($reparation,'json',['groups'=>'post:read']);
+
+
+        return new Response(json_encode($jsonContent));
+
+dump($jsonContent);
+die;
+
+    }
+
+    /**
+     * @Route("/addreparation", name="add_reparation")
+     * @Method("GET")
+     */
+
+    public function ajouterreparationAction(Request $request)
+    {
+        $reparation = new Reparation();
+        $Category = $request->query->get("Category");
+        $Type = $request->query->get("Type");
+        $Description = $request->query->get("Description");
+
+        $Reserver =  new \DateTime('now');
+        $Etat = $request->query->get("Etat");
+        $em = $this->getDoctrine()->getManager();
+
+        $reparation->setType($Type);
+        $reparation->setCategory($Category);
+        $reparation->setDescription($Description);
+        $reparation->setReserver($Reserver);
+        $reparation->setEtat("En cours");
+
+        $em->persist($reparation);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($reparation);
+        return new JsonResponse($formatted);
+
+    }
+    /**
+     * @Route("/deletereparation", name="delete_reparation")
+     */
+
+    public function deletereparationAction(Request $request) {
+        $id = $request->get("id");
+
+        $em = $this->getDoctrine()->getManager();
+        $reparation = $em->getRepository(reparation::class)->find($id);
+        if($reparation!=null ) {
+            $em->remove($reparation);
+            $em->flush();
+
+            $serialize = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serialize->normalize("reparation a ete supprimee avec success.");
+            return new JsonResponse($formatted);
+
+        }
+        return new JsonResponse("id reparation invalide.");
+
+
+    }
+
+    /******************Modifier reparation*****************************************/
+    /**
+     * @Route("/updatereparation", name="update_reparation")
+     */
+    public function modifierreparationAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $reparation = $this->getDoctrine()->getManager()
+            ->getRepository(reparation::class)
+            ->find($request->get("id"));
+        $reparation->setType($request->get("Type"));
+        $reparation->setCategory($request->get("Category"));
+        $reparation->setDescription($request->get("Description"));
+        $reparation->setReserver($request->get("Reserver"));
+
+
+        $em->persist($reparation);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($reparation);
+        return new JsonResponse("reparation a ete modifiee avec success.");
+
+    }
+    /**
+     * @Route("/detailreparation", name="detail_reparation")
+     * @Method("GET")
+     */
+
+    //Detail reparation
+    public function detailreparationAction(Request $request)
+    {
+        $id = $request->get("id");
+
+        $em = $this->getDoctrine()->getManager();
+        $reparation = $this->getDoctrine()->getManager()->getRepository(reparation::class)->find($id);
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getDescription();
+        });
+        $serializer = new Serializer([$normalizer], [$encoder]);
+        $formatted = $serializer->normalize($reparation);
+        return new JsonResponse($formatted);
     }
 
 }
