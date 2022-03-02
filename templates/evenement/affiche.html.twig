@@ -26,6 +26,7 @@
         <th>
             Heure
         </th>
+
         <th colspan="2" class="text-center"> Les Actions </th>
     </tr>
     </thead>
@@ -45,6 +46,8 @@
             <td>
                 {{evenement.heure}}
             </td>
+           
+
 
             <td ><a href="{{ path('evenement_supprimer', {'id': evenement.Id}) }}">Supprimer<i class="mdi mdi-delete-forever"></i></a></td>
             <td ><a href="{{ path('evenement_modifier', {'id': evenement.Id}) }}">Modifier<i class="mdi mdi-pencil"></i></a></td>

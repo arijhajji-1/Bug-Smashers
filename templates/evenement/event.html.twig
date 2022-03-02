@@ -37,7 +37,7 @@
                                         <!-- Product Description Tab Menu -->
                                         <ul class="nav nav-tabs desc-review-tab-menu" id="desc-review-tab" role="tablist">
                                             <li>
-                                                <a class="active" id="desc-tab" data-toggle="tab" href="#descriptionContent" role="tab">Avis</a>
+                                                <a class="active" id="desc-tab" data-toggle="tab" href="#descriptionContent" role="tab">Commentaire</a>
                                             </li>
                                         </ul>
                             <div class="tab-content" id="myTabContent">
@@ -48,7 +48,13 @@
                                 </div>
 <div class="product-rating-wrap">
                             <div class="display-ratings">
+                                {% for message in app.flashes('success') %}
+                                    <div class="alert alert-success">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
                                 {% for av in avis %}
+
                                 <div class="rating-item">
 
                                     <div class="rating-author-txt">
@@ -62,6 +68,9 @@
                                 </div>
                                     {% endfor %}
                                     {{form_start(form)}}
+
+
+
                                     <div class="rating-form-wrapper">
                             <h3>Ajouter un commentaire</h3>
                             <form action="{{ path("evenement_event", {'id':evenement.id })}}"  method="POST">

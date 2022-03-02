@@ -14,6 +14,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Service\FileUploader;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Form\ActualiteFormType;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
+use Symfony\Bundle\FrameworkBundle\Controller;
+
 
 
 
@@ -59,6 +63,9 @@ class ActualiteController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
+
     /**
      * @Route("/actualite/affiche", name="actualite_affiche")
      */
@@ -113,4 +120,17 @@ class ActualiteController extends AbstractController
             "actualite" => $actualite,
         ]);
     }
+
+
+    /**
+     * @Route("/testingg",name="testingg")
+     */
+    public function getProduits(ActualiteRepository $repo,NormalizerInterface $ni){
+        $actualites=$repo->findAll();
+        $json = $ni->normalize($actualites,'json',['groups' => 'actualite']);
+        return new Response(json_encode($json));
+    }
+
+
+
 }

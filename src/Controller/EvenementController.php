@@ -7,6 +7,7 @@ use App\Entity\Evenement;
 
 use App\Form\EvenementType;
 use App\Form\AvisType;
+use App\Repository\ActualiteRepository;
 use App\Repository\EvenementRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Avis;
+
 
 class EvenementController extends AbstractController
 {
@@ -113,8 +115,11 @@ class EvenementController extends AbstractController
         $form = $this->createForm(AvisType::class, $avis);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $avis->setEvenement($evenement);
             $entityManager->persist($avis);
             $entityManager->flush();
+            $this->addFlash('success','commentaire ajouté avec succès');
+
             return $this->redirectToRoute('evenement_event', ['id'=>$id], Response::HTTP_SEE_OTHER);
         }
         return $this->render("evenement/event.html.twig", [
@@ -123,5 +128,8 @@ class EvenementController extends AbstractController
             "avis" => $evenement->getAvis(),
         ]);
     }
+
+
+
 
 }
