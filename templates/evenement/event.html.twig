@@ -64,6 +64,7 @@
                                         </div>
 
                                         <p>{{av.description}}</p>
+
                                     </div>
                                 </div>
                                     {% endfor %}
@@ -75,6 +76,7 @@
                             <h3>Ajouter un commentaire</h3>
                             <form action="{{ path("evenement_event", {'id':evenement.id })}}"  method="POST">
                                 <div class="rating-form row">
+
                                     <div class="col-md-6">
                                         <div class="form-input-item mt-30 mt-md-0">
 
@@ -91,6 +93,28 @@
                                             {{ form_row(form.description,{'id' : 'your-review'}) }}
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4 offset-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleFormControlInput1">Are you a robot ?</label>
+                                                {{ form_widget(form.captchaCode , {'attr' : { 'class' :'form-control' }}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {% set formErrors = form.vars.errors.form.getErrors(true) %}
+                                    {% if formErrors|length %}
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            {% for error in formErrors %}
+                                                <li>{{ error.message }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    {% endif %}
+
+
                                     <div class="col-12 mt-22">
                                         <button class="btn btn-white">Ajouter</button>
                                     </div>
@@ -119,4 +143,5 @@
         </div>
         <!--== End Slider Area Wrapper ==-->
     {% endblock %}
+
 

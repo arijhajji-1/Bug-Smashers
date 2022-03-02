@@ -8,6 +8,7 @@ use App\Entity\Evenement;
 use App\Form\EvenementType;
 use App\Form\AvisType;
 use App\Repository\ActualiteRepository;
+use App\Repository\AvisRepository;
 use App\Repository\EvenementRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
@@ -129,7 +130,39 @@ class EvenementController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/evenement/comment", name="evenement_comment")
+     */
+    public function Comment(EvenementRepository $repo){
 
+        $repo=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$repo->findAll();
+        return $this->render('/evenement/comment.html.twig',[
+            'evenements'=>$evenement
+        ]);
+    }
 
+    /**
+     * @Route("/supprimer/comment/{id}", name="comment_supprimer")
+     */
+    public function SupprimerComment($id, EvenementRepository $repo)
+    {
+        $evenement=$repo->find($id);
+        $em=$this->getDoctrine()->getManager();
+        $em->remove($evenement);
+        $em->flush();
+        return $this->redirectToRoute('evenement_comment');
+    }
+    /**
+     * @Route("/supprimer/avisClient/{id}", name="avisClient_supprimer")
+     */
+    public function SupprimerAvisClient($id, EvenementRepository $repo)
+    {
+        $evenement=$repo->find($id);
+        $em=$this->getDoctrine()->getManager();
+        $em->remove($evenement);
+        $em->flush();
+        return $this->redirectToRoute('evenement_event');
+    }
 
 }
