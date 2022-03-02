@@ -1,0 +1,81 @@
+{% extends 'loginTemplate.html.twig' %}
+
+{% block title %}New User{% endblock %}
+ {% block customStyle %}
+<style>
+         form{
+             margin-top:400px;
+             height: 1450px;
+             width: 400px;
+             background-color: rgba(255,255,255,0.13);
+             position: absolute;
+             transform: translate(-50%,-50%);
+             top: 50%;
+             left: 50%;
+             border-radius: 10px;
+             backdrop-filter: blur(10px);
+             border: 2px solid rgba(255,255,255,0.1);
+             box-shadow: 0 0 40px rgba(8,7,16,0.6);
+             padding: 50px 35px;
+
+         }
+</style>
+ {% endblock %}
+{% block body %}
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    <h1 class="h3 mb-3 font-weight-normal">Inscription</h1>
+    <div class="form-group row">
+        {{ form_label(form.lastName) }}
+        {{ form_widget(form.lastName, {'attr': {'class':'form-control'}}) }}
+        <span style="color:red">{{ form_errors(form.lastName) }}</span>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.firstName) }}
+        {{ form_widget(form.firstName, {'attr': {'class':'form-control'}}) }}
+        <span style="color:red">  {{ form_errors(form.firstName) }}</span>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email, {'attr': {'class':'form-control'}}) }}
+        <span style="color:red">  {{ form_errors(form.email) }}</span>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.password) }}
+        {{ form_widget(form.password, {'attr': {'class':'form-control'}}) }}
+        <span style="color:red"> {{ form_errors(form.password) }}</span>
+    </div>
+
+    <div class="form-group row">
+        {{ form_label(form.adresse) }}
+        {{ form_widget(form.adresse, {'attr': {'class':'form-control'}}) }}
+        <span style="color:red"> {{ form_errors(form.adresse) }}</span>
+    </div>
+
+    <div class="form-group row">
+        {{ form_label(form.telephone) }}
+        {{ form_widget(form.telephone, {'attr': {'class':'form-control'}}) }}
+        <span style="color:red"> {{ form_errors(form.telephone) }}</span>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.cin) }}
+        {{ form_widget(form.cin, {'attr': {'class':'form-control'}}) }}
+       <span style="color:red"> {{ form_errors(form.cin) }}</span>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.photo ) }}
+        {{ form_widget(form.photo) }}
+        <span style="color:red"> {{ form_errors(form.photo) }}</span>
+    </div>
+
+    <div class="form-group row">
+        {{ form_label(form.date_naissance) }}
+        {{ form_widget(form.date_naissance,{'attr': {'class':'form-control', 'value':"date('d/m/Y')"}} ) }}
+        <span style="color:red">{{ form_errors(form.date_naissance) }}</span>
+    </div>
+
+
+    <button style="background-color: #1b8dbf" class="btn btn-success">{{ button_label|default('Signup') }}</button>
+    {{ form_end(form) }}
+
+{% endblock %}

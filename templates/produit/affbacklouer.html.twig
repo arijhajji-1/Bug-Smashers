@@ -4,10 +4,25 @@
 
 {% block body %}
 
+    {% block form %}
+        <form class="d-flex align-items-center h-100" method="POST" action="{{ path('produit_acheter_affichage_back') }}">
+    {% endblock %}
+
+    {% block chercher %}
+        {{ form_start(form) }}
+        {{ form_widget(form.q,{ 'attr': {'class': 'form-control bg-transparent border-0'} }) }}
+    {% endblock %}
+    <script src="{{ asset('front/assets/js/node_modules/jquery/dist/jquery.js') }}"></script>
+
     <div class="card-body">
         <h4 class="card-title">Les Produits</h4>
         <p class="card-description"><code>Click to modify or delete</code>
         </p>
+        {% for message in app.flashes('modifL') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
         <table class="table table-striped">
             <thead>
             <tr>
@@ -21,7 +36,7 @@
                 <th colspan="2" class="text-center"> Les Actions </th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="ach">
             {% for product in products %}
             <tr>
                 <td class="py-1">
@@ -50,5 +65,51 @@
 
         </div>
     </div>
+
+
+    <script>
+        function delay(fn, ms) {
+            let timer = 0
+            return function(...args) {
+                clearTimeout(timer)
+                timer = setTimeout(fn.bind(this, ...args), ms || 0)
+            }
+        }
+        $('#q').keyup(delay(function(e){
+            var serie=$('#q').val();
+            var DATA =  {'q' : serie};
+            console.log(DATA);
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "{{ path('louer')}}",
+                data:DATA,
+                success: function (data) {
+                    $("#ach").replaceWith("<tbody id='ach'>")
+                    console.log(data);
+                    $.each(data,function(k,el) {
+                        var test="{{path('supprimer_produitL', {'id':'ReplacewithcorrectValue' })}}'>"
+                        var supp = test.replace("ReplacewithcorrectValue", el.id)
+                        var test = "{{ path("modifier_produitL", {'id':'ReplacewithcorrectValue' })}}'>"
+                        var modif= test.replace("ReplacewithcorrectValue", el.id)
+                        $('#ach').append(
+                            "<tr>"+"<td class='py-1'>"+el.id+"</td>"+
+                            "<td>"+el.nom+"</td>"+"<td>"+el.category+"</td>"+
+                            "<td>"+el.marque+"</td>"+"<td>"+el.prix+"</td>"+
+                            "<td>"+el.etat+"</td>"+"<td>"+el.dispo+"</td>"+
+                            "<td>"+"<a href='"+modif+"Modifier"+"<i class='mdi mdi-pencil'>"+"</i>"+"</a>"+"</td>"
+                            +"<td>"+"<a href='"+supp+"Supprimer"+
+                            "<i class='mdi mdi-delete-forever'>"+"</i>"+"</a>"+"</td>"
+
+                        );
+                    });
+                },
+                error:function ()
+                {
+                    $("#ach").replaceWith("<tbody id='ach'>")
+                }
+            });
+        },500));
+    </script>
 
 {% endblock %}

@@ -3,7 +3,7 @@
 {% block title %}Modifier produit{% endblock %}
 
 {% block body %}
-
+<script src="{{ asset('front/assets/js/node_modules/js-image-zoom/js-image-zoom.js') }}"></script>
     <!--== Start Page Content Wrapper ==-->
     <div class="page-content-wrapper sp-y">
         <div class="product-details-page-content">
@@ -16,8 +16,10 @@
                                 <div class="product-thumb-area">
                                     <div class="product-details-thumbnail">
                                         <div class="product-thumbnail-slider" id="thumb-gallery">
-                                            <figure class="pro-thumb-item" data-mfp-src="{{ asset('front/assets/img/product/'~produit.imagePath) }}">
+                                            <figure  id="image-container" class="pro-thumb-item" data-mfp-src="{{ asset('front/assets/img/product/'~produit.imagePath) }}">
+
                                                 <img src="{{ asset('front/assets/img/product/'~produit.imagePath) }}" alt="Product Details" />
+
                                             </figure>
                                         </div>
 
@@ -30,9 +32,11 @@
                             <!-- End Product Thumbnail Area -->
 
                             <!-- Start Product Info Area -->
-                            <div class="col-md-7">
+
+                            <div class="col-md-7" id="test">
                                 <div class="product-details-info-content-wrap">
                                     <div class="prod-details-info-content">
+
                                         <h2>{{ produit.nom }}</h2>
                                         <h5 class="price"><strong>Price:</strong> <span class="price-amount">{{
                                                 produit.prix }} DT</span>
@@ -143,40 +147,58 @@
                                                 {{ form_start(form, { 'attr':{'novalidate': 'novalidate'}} ) }}
                                                 {% form_theme form 'bootstrap_4_layout.html.twig' %}
                                             <div class="rating-form-wrapper">
-                                                <h3>Add your Reviews</h3>
+                                                <h3>Donner votre avis?</h3>
                                                 <form action="{{ path("single_produitA", {'id':produit.id })}}"  method="POST">
                                                     <div class="rating-form row">
-                                                        <div class="col-md-6">
+                                                        {% for message in app.flashes('success') %}
+                                                        <div class="alert alert-success">
+                                                            {{ message }}
+                                                        </div>
+                                                        {% endfor %}
+                                                        <div class="col-md-12">
                                                             <div class="form-input-item mt-30 mt-md-0">
                                                                 <div class="form-error" style="color: Red;">
-                                                                    {{ form_errors(form.rating) }}
-                                                                </div>
-                                                                {{ form_widget(form.rating) }}
-                                                            </div>
 
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-input-item mt-30 mt-md-0">
-                                                                {{ form_errors(form.nom) }}
-                                                               {{ form_widget(form.nom) }}
+                                                                    {{ form_errors(form.rating) }}
+
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-input-item mt-30 mt-md-0">
-                                                                {{ form_errors(form.email) }}
-                                                                {{ form_widget(form.email) }}
-                                                            </div>
+                                                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                                                            <div class="star-rating"><s><s><s><s><s></s></s></s></s></s></div>
+                                                            <div class="show-result">No stars selected yet.</div>
+                                                            <script>$(function() {
+                                                                    $("div.star-rating > s").on("click", function(e) {
+
+                                                                        // remove all active classes first, needed if user clicks multiple times
+                                                                        $(this).closest('div').find('.active').removeClass('active');
+
+                                                                        $(e.target).parentsUntil("div").addClass('active'); // all elements up from the clicked one excluding self
+                                                                        $(e.target).addClass('active');  // the element user has clicked on
+
+
+                                                                        var numStars = $(e.target).parentsUntil("div").length+1;
+                                                                        $('.show-result').text(numStars + (numStars == 1 ? " star" : " stars!"));
+                                                                        document.getElementById("avis_rating").value = numStars;
+                                                                    });
+                                                                });</script>
+
+                                                            {{ form_widget(form.rating) }}
+                                                            {{ form_widget(form) }}
+
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="form-input-item mt-30 mb-40">
-                                                                {{ form_errors(form.description) }}
                                                                 {{ form_widget(form.description,{'id':'your-review'}) }}
+                                                                <div class="form-error" style="color: Red;">
+
+                                                                    {{ form_errors(form.description) }}
+
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-12 mt-22">
                                                             <button class="btn btn-brand">Submit</button>
                                                         </div>
-                                                        {{ form_widget(form) }}
                                                     </div>
                                                 </form>
                                             </div>
@@ -191,5 +213,15 @@
             </div>
         </div>
     </div>
+    <script>
+        var options = {
+            width:400,
+            height:400,
+            zoomWidth:400,
+            zoomContainer:document.getElementById('test'),
+            zoomPosition:'original'
+        }
+        new ImageZoom(document.getElementById('image-container'),options,)
+    </script>
 
 {% endblock %}

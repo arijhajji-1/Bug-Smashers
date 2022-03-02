@@ -3,7 +3,6 @@
 {% block title %}Produits{% endblock %}
 
 {% block body %}
-
 <div class="page-content-wrapper sp-y">
     <div class="container container-wide">
     <div class="row">
@@ -68,7 +67,12 @@
         <div class="shop-page-product">
             <div class="container container-wide">
                 <div class="product-wrapper product-layout layout-grid">
-                    <div class="row mtn-30">
+                    <br>
+                    <h1>A achéter :</h1>
+                    {% if produitsAcheter|length >0 %}
+                    <div class="row mtn-30" id="ach">
+
+
         {% for produit in produitsAcheter %}
 
 
@@ -127,6 +131,19 @@
                         <!-- End Product Item -->
 
         {% endfor %}
+
+
+                    </div>
+                        <br>
+                        {{ knp_pagination_render(produitsAcheter) }}
+                    {% else %}
+                        <h5>Aucun produit trouvé</h5>
+                    {% endif %}
+                    <br>
+                    <h1>A louer :</h1>
+                    <br>
+                    <div class="row mtn-30">
+                        {% if produitsLouer|length >0 %}
                         {% for produit in produitsLouer %}
 
 
@@ -158,6 +175,7 @@
                                                 {% endif %}
                                                 {% set rating = rating - 1 %}
                                             {% endfor %}
+
                                         </div>
                                     </div>
 
@@ -191,8 +209,14 @@
 
                         {% endfor %}
 
+
                     </div>
+                    {% else %}
+                        <h5>&nbsp;&nbsp;Aucun produit trouvé</h5>
+                    {% endif %}
                 </div>
+                <br>
+                {{ knp_pagination_render(produitsLouer) }}
                 </div>
                     </div>
                     </div>

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ProduitAcheterRepository::class)
@@ -18,12 +19,14 @@ class ProduitAcheter
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("produit")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank(message="le nom ne peut pas etre vide")
+     * @Groups("produit")
      */
     private $nom;
 
@@ -36,12 +39,14 @@ class ProduitAcheter
     /**
      * @ORM\Column(type="decimal", precision=12, scale=2)
      * @Assert\NotBlank(message="le prix ne peut pas etre vide")
+     * @Groups("produit")
      */
     private $prix;
 
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="la quantité du produit ne peut pas etre vide")
+     * @Groups("produit")
      */
     private $qte;
 

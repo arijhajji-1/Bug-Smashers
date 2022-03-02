@@ -6,7 +6,11 @@
     <div class="card">
         <div class="card-body">
     <h1 class="card-title">Créer un nouveau produit</h1>
-
+            {% for message in app.flashes('ajoutL') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
     {{ form_start(form, {'class': 'forms-sample','attr':{'novalidate': 'novalidate'}} ) }}
             {% form_theme form 'bootstrap_4_layout.html.twig' %}
     <div>
