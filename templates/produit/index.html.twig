@@ -1,0 +1,229 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Produits{% endblock %}
+
+{% block body %}
+<div class="page-content-wrapper sp-y">
+    <div class="container container-wide">
+    <div class="row">
+    <div class="col-lg-3 order-1 order-lg-0">
+        <div class="sidebar-area">
+            <div class="sidebar-item">
+                <h4 class="sidebar-title">Search</h4>
+                <div class="sidebar-body">
+                    <div class="sidebar-search">
+                        {{ form_start(form) }}
+                        {{ form_row(form.q) }}
+                            <button class="btn-src"><i class="fa fa-search"></i></button>
+
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-item">
+                <h4 class="sidebar-title">Catégories</h4>
+                <div class="sidebar-body">
+                    <ul class="sidebar-list">
+                        {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                        {{ form_row(form.category )}}
+                        {{ form_end(form) }}
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9 order-0 order-lg-1">
+    <div class="shop-page-action-bar mb-30">
+        <div class="container container-wide">
+            <div class="action-bar-inner">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="shop-layout-switcher mb-15 mb-sm-0">
+                            <ul class="layout-switcher nav">
+                                <li data-layout="grid" class="active"><i class="fa fa-th"></i></li>
+                                <li data-layout="list"><i class="fa fa-th-list"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="sort-by-wrapper">
+                            <label for="sort" class="sr-only">Sort By</label>
+                            <select name="sort" id="sort">
+                                <option value="sbp">Sort By Popularity</option>
+                                <option value="sbn">Sort By Newest</option>
+                                <option value="sbt">Sort By Trending</option>
+                                <option value="sbr">Sort By Rating</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </thead>
+        <tbody>
+        <div class="shop-page-product">
+            <div class="container container-wide">
+                <div class="product-wrapper product-layout layout-grid">
+                    <br>
+                    <h1>A achéter :</h1>
+                    {% if produitsAcheter|length >0 %}
+                    <div class="row mtn-30" id="ach">
+
+
+        {% for produit in produitsAcheter %}
+
+
+                        <!-- Start Product Item -->
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="product-item">
+                                <div class="product-item__thumb">
+                                    <a href="{{ path("single_produitA", {'id':produit.id })}}">
+                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/'~produit.imagePath)}}" alt="{{ produit.nom }}" />
+                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/'~produit.imagePath)}}" alt="{{ produit.nom }}" />
+                                        <br>
+                                    </a>
+
+                                    <div class="ratting">
+                                        {% set rating = 0 %}
+                                        {% if produit.avis.count()>0 %}
+                                        {% for rati in produit.avis %}
+                                            {% set rating = rating + rati.rating %}
+                                        {% endfor %}
+                                        {% set rating = rating / produit.avis|length %}
+                                        {% endif %}
+                                        {% for i in 1..5 %}
+                                            {% if rating > 0.7 %}
+                                                <span><i class="ion-android-star"></i></span>
+                                            {% elseif rating > 0.3 %}
+                                                <span><i class="ion-android-star-half"></i></span>
+                                            {% else %}
+                                            <span><i class="ion-android-star-outline"></i></span>
+                                            {% endif %}
+                                                {% set rating = rating - 1 %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="product-item__content">
+                                    <div class="product-item__info">
+                                        <h4 class="title"><a href="{{ path("single_produitA", {'id':produit.id })}}">{{ produit.nom }}</a></h4>
+                                        <span class="price"><strong>Price:</strong> <br>{{ produit.prix }} dt</span>
+                                    </div>
+
+                                    <div class="product-item__action">
+                                        <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                        <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                        <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                        <a class="btn-add-to-cart"
+                                           href="{{ path("single_produitA", {'id':produit.id })}}"><i
+                                                    class="ion-eye"></i></a>
+                                    </div>
+
+                                    <div class="product-item__desc">
+                                        <p>{{ produit.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Product Item -->
+
+        {% endfor %}
+
+
+                    </div>
+                        <br>
+                        {{ knp_pagination_render(produitsAcheter) }}
+                    {% else %}
+                        <h5>Aucun produit trouvé</h5>
+                    {% endif %}
+                    <br>
+                    <h1>A louer :</h1>
+                    <br>
+                    <div class="row mtn-30">
+                        {% if produitsLouer|length >0 %}
+                        {% for produit in produitsLouer %}
+
+
+                            <!-- Start Product Item -->
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="product-item">
+                                    <div class="product-item__thumb">
+                                        <a href="{{ path("single_produitL", {'id':produit.id })}}">
+                                            <img class="thumb-primary" src="{{ asset('front/assets/img/product/'~produit.imagePath)}}" alt="{{ produit.nom }}" />
+                                            <img class="thumb-secondary" src="{{ asset('front/assets/img/product/'~produit.imagePath)}}" alt="{{ produit.nom }}" />
+                                        </a>
+
+                                        <div class="ratting">
+                                            <br>
+                                            {% set rating = 0 %}
+                                            {% if produit.avis.count()>0 %}
+                                            {% for rati in produit.avis %}
+                                                {% set rating = rating + rati.rating %}
+                                            {% endfor %}
+                                            {% set rating = rating / produit.avis|length %}
+                                            {% endif %}
+                                            {% for i in 1..5 %}
+                                                {% if rating > 0.7 %}
+                                                    <span><i class="ion-android-star"></i></span>
+                                                {% elseif rating > 0.3 %}
+                                                    <span><i class="ion-android-star-half"></i></span>
+                                                {% else %}
+                                                    <span><i class="ion-android-star-outline"></i></span>
+                                                {% endif %}
+                                                {% set rating = rating - 1 %}
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+
+                                    <div class="product-item__content">
+                                        <div class="product-item__info">
+                                            <h4 class="title"><a href="{{ path("single_produitL", {'id':produit.id })}}">{{ produit.nom }}</a></h4>
+                                            <span class="price"><strong>Price:</strong> <br>{{ produit.prix }} Dt/jour</span>
+                                        </div>
+
+                                        <div class="product-item__action">
+                                            <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                            <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                            <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                            <a class="btn-add-to-cart"
+                                               href="{{ path("single_produitL", {'id':produit.id })}}"><i
+                                                        class="ion-eye"></i></a>
+                                        </div>
+
+
+                                        <div class="product-item__desc">
+                                            <p>{{ produit.description }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="product-item__sale">
+                                        <span class="sale-txt">louer</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- End Product Item -->
+
+                        {% endfor %}
+
+
+                    </div>
+                    {% else %}
+                        <h5>&nbsp;&nbsp;Aucun produit trouvé</h5>
+                    {% endif %}
+                </div>
+                <br>
+                {{ knp_pagination_render(produitsLouer) }}
+                </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+    <div class="cursor-dot-outline"></div>
+    <div class="cursor-dot"></div>
+                        {% endblock %}

@@ -86,10 +86,11 @@ class Avis
 
     public function setEvenement(?Evenement $evenement): self
     {
-        $this->$evenement = $evenement;
+        $this->evenement = $evenement;
 
         return $this;
     }
+
 
     public function getRating(): ?int
     {

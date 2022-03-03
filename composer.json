@@ -12,6 +12,7 @@
         "doctrine/doctrine-bundle": "^2.5",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.11",
+        "knplabs/knp-paginator-bundle": "^5.8",
         "phpdocumentor/reflection-docblock": "^5.3",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "4.4.*",
@@ -25,6 +26,7 @@
         "symfony/http-client": "4.4.*",
         "symfony/intl": "4.4.*",
         "symfony/mailer": "4.4.*",
+        "symfony/messenger": "4.4.*",
         "symfony/monolog-bundle": "^3.1",
         "symfony/process": "4.4.*",
         "symfony/property-access": "4.4.*",
@@ -43,8 +45,8 @@
         "symfony/yaml": "4.4.*",
         "twbs/bootstrap": "4.0.0",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
-
+        "twig/twig": "^2.12|^3.0",
+        "twilio/sdk": "^6.35"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",

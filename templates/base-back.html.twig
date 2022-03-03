@@ -36,12 +36,16 @@
                 <span class="mdi mdi-menu"></span>
             </button>
             <div class="search-field d-none d-xl-block">
-                <form class="d-flex align-items-center h-100" action="#">
+                {% block form %}
+                <form class="d-flex align-items-center h-100">
+                    {% endblock %}
                     <div class="input-group">
                         <div class="input-group-prepend bg-transparent">
                             <i class="input-group-text border-0 mdi mdi-magnify"></i>
                         </div>
-                        <input type="text" class="form-control bg-transparent border-0" placeholder="Search products">
+                        {% block chercher %}
+                        <input type="text" id="chercher" class="form-control bg-transparent border-0" placeholder="Chercher produits">
+                        {% endblock %}
                     </div>
                 </form>
             </div>
@@ -183,10 +187,7 @@
                         <span class="menu-title">Utilisateurs</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="ui-basic">
-                        <ul class="nav flex-column sub-menu">
-                        </ul>
-                    </div>
+
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#Produit" aria-expanded="false" aria-controls="Produit">
@@ -196,12 +197,18 @@
                     </a>
                     <div class="collapse" id="Produit">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ asset('back/pages/ui-features/buttons.html') }}">Ajouter Produit a acheter</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ asset('back/pages/ui-features/dropdowns.html') }}">Ajouter Produit a louer</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="">Afficher Produits Acheter</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="">Afficher Produits Louer</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path("produit_acheter_affichage_back") }}">Liste Produits Acheter</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path("produit_Louer_affichage_back") }}">Liste Produits Louer</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('avis_back') }}">Les Avis sur les produits</a></li>
                         </ul>
                     </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path("category") }}">
+                        <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
+                        <span class="menu-title">Categorie</span>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('montage1') }}">
@@ -251,7 +258,11 @@
                     </a>
                     <div class="collapse" id="auth">
                         <ul class="nav flex-column sub-menu">
-
+                            <li class="nav-item"> <a class="nav-link" href=""> Blank Page </a></li>
+                            <li class="nav-item"> <a class="nav-link" href=""> Login </a></li>
+                            <li class="nav-item"> <a class="nav-link" href=""> Register </a></li>
+                            <li class="nav-item"> <a class="nav-link" href=""> 404 </a></li>
+                            <li class="nav-item"> <a class="nav-link" href=""> 500 </a></li>
                         </ul>
                     </div>
                 </li>
@@ -273,8 +284,8 @@
 
 <script src="{{ asset('back/assets/vendors/js/vendor.bundle.base.js') }}"></script>
 <!-- endinject -->
-<!-- Plugin js for this page
-<!--<script src="{{ asset('back/assets/vendors/chart.js/Chart.min.js') }}"></script>-->
+<!-- Plugin js for this page -->
+<script src="{{ asset('back/assets/vendors/chart.js/Chart.min.js') }}"></script>
 <script src="{{ asset('back/assets/vendors/jquery-circle-progress/js/circle-progress.min.js') }}"></script>
 <!-- End plugin js for this page -->
 <!-- inject:js -->
@@ -283,7 +294,7 @@
 <script src="{{ asset('back/assets/js/misc.js') }}"></script>
 <!-- endinject -->
 <!-- Custom js for this page -->
-    <!--<script src="{{ asset('back/assets/js/dashboard.js') }}"></script>-->
+<script src="{{ asset('back/assets/js/dashboard.js') }}"></script>
 <!-- End custom js for this page -->
 {% endblock %}
 </body>

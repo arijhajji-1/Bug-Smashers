@@ -1,13 +1,63 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-back.html.twig' %}
 
 {% block title %}Edit User{% endblock %}
 
 {% block body %}
+    <div class="container p-5">
     <h1>Edit User</h1>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    <h1 class="h3 mb-3 font-weight-normal">Edit user</h1>
+    <div class="form-group row">
+        {{ form_label(form.lastName) }}
+        {{ form_widget(form.lastName, {'attr': {'class':'form-control'}}) }}
+        <span style="color:red">{{ form_errors(form.lastName) }}</span>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.firstName) }}
+        {{ form_widget(form.firstName, {'attr': {'class':'form-control'}}) }}
+        <span style="color:red">  {{ form_errors(form.firstName) }}</span>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email, {'attr': {'class':'form-control'}}) }}
+        <span style="color:red">  {{ form_errors(form.email) }}</span>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.password) }}
+        {{ form_widget(form.password, {'attr': {'class':'form-control'}}) }}
+        <span style="color:red"> {{ form_errors(form.password) }}</span>
+    </div>
 
-    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="form-group row">
+        {{ form_label(form.adresse) }}
+        {{ form_widget(form.adresse, {'attr': {'class':'form-control'}}) }}
+        <span style="color:red"> {{ form_errors(form.adresse) }}</span>
+    </div>
 
-    <a href="{{ path('user_index') }}">back to list</a>
+    <div class="form-group row">
+        {{ form_label(form.telephone) }}
+        {{ form_widget(form.telephone, {'attr': {'class':'form-control'}}) }}
+        <span style="color:red"> {{ form_errors(form.telephone) }}</span>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.cin) }}
+        {{ form_widget(form.cin, {'attr': {'class':'form-control'}}) }}
+        <span style="color:red"> {{ form_errors(form.cin) }}</span>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.photo ) }}
+        {{ form_widget(form.photo) }}
+        <span style="color:red"> {{ form_errors(form.photo) }}</span>
+    </div>
 
-    {{ include('user/_delete_form.html.twig') }}
+    <div class="form-group row">
+        {{ form_label(form.date_naissance) }}
+        {{ form_widget(form.date_naissance,{'attr': {'class':'form-control', 'value':"date('d/m/Y')"}} ) }}
+        <span style="color:red">{{ form_errors(form.date_naissance) }}</span>
+    </div>
+
+
+    <button style="background-color: #1b8dbf" class="btn btn-success">{{ button_label|default('Edit') }}</button>
+    {{ form_end(form) }}
+    </div>
 {% endblock %}

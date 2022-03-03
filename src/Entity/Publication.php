@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=PublicationRepository::class)
  */
@@ -21,24 +22,37 @@ class Publication
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your title cannot contains digit"
+     * )
      */
     private $titre;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 8,
+     *      minMessage = "Your description must be at least 8 caracters"
+     * )
      */
     private $desription;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="publications")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=true)
      */
     private $users;
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="publications")
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="publications" , cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="commentaire", referencedColumnName="id", nullable=true)
      */
     private $commentaires;
     public function getId(): ?int

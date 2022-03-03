@@ -20,19 +20,17 @@ class Avis_Produit
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank (message="Vous devez donner votre nom!")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=150)
-     * @Assert\NotBlank(message="Le champ email ne peut pas etre vide!")
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Vous devez donnez une description !")
+     * @Assert\NotBlank(message="Vous devez donner une description !")
      */
     private $description;
 
@@ -48,7 +46,7 @@ class Avis_Produit
 
     /**
      * @ORM\Column(type="smallint")
-     * @Assert\NotBlank(message="Le champ RATING ne peut pas être vide!")
+     * @Assert\NotBlank(message="Vous devez choisir au moin 1 star !")
      */
     private $rating;
 

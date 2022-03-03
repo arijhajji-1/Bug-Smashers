@@ -3159,6 +3159,7 @@ only screen and (min-width: 1200px) {
     width: 60%;
 }
 
+
 .sidebar-list li {
     margin-bottom: 15px;
 }
@@ -3708,6 +3709,53 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
 .product-rating-wrap .rating-form-wrapper .rating-form input:focus,
 .product-rating-wrap .rating-form-wrapper .rating-form textarea:focus {
     border-color: #dc3545;
+}
+.show-result {
+    margin: 10px;
+    padding: 10px;
+    color: green;
+    font-size: 20px;
+}
+
+.star-rating s:hover,
+.star-rating s.active {
+    color: #dc3545;
+}
+.star-rating-rtl s:hover,
+.star-rating-rtl s.active {
+    color: #dc3545;
+}
+
+.star-rating s {
+    color: #dc3545;
+    font-size: 50px;
+    cursor: default;
+    text-decoration: none;
+    line-height: 50px;
+}
+.star-rating {
+    padding: 2px;
+}
+.star-rating-rtl {
+    background: #555;
+    display: inline-block;
+    border: 2px solid #444;
+}
+.star-rating-rtl s {
+    color: yellow;
+}
+.star-rating s:hover:before,
+.star-rating s.rated:before,
+.star-rating s.active:before {
+    content: "\2605";
+}
+.star-rating s:before {
+    content: "\2606";
+}
+.star-rating-rtl s:hover:after,
+.star-rating-rtl s.rated:after,
+.star-rating-rtl s.active:after {
+    content: "\2605";
 }
 
 /*==================================

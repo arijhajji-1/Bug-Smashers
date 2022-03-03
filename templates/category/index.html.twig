@@ -1,0 +1,46 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Catégorie{% endblock %}
+
+{% block body %}
+    <div class="card-body">
+        <h4 class="card-title">Les Categories</h4>
+        <p class="card-description"><code>Click to modify or delete</code>
+        </p>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th> id Categorie </th>
+                <th> Nom Catégorie</th>
+                <th colspan="2"> Les Actions </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for Category in Categories %}
+                <tr>
+                    <td class="py-1">
+                        {{ Category.id }}
+                    </td>
+                    <td> {{ Category.label }} </td>
+
+                    <td><a href="{{ path("modifier_categorie", {'id':Category.id })}}">Modifier<i class="mdi mdi-pencil"></i></a></td>
+                    <td><a href="{{ path("supprimer_categorie", {'id':Category.id}) }}">Supprimer
+                            <i class="mdi mdi-delete-forever"></i></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br>
+
+        <div style="margin: 0 auto; text-align: center">
+            <a href="{{ path('category_ajouter')  }}" class="btn btn-outline-dark btn-fw" style="margin-left: 40%;
+         margin-right: 40%; display:block;">Ajouter Une Categorie</a>
+            <a href="{{ path('produit_acheter_affichage_back')  }}" class="btn btn-outline-dark btn-fw" style="margin-left: 40%;
+         margin-right: 40%; display:block;">
+                Liste Des Produits à Acheter</a>
+            <a href="{{ path('produit_Louer_affichage_back')  }}" class="btn btn-outline-dark btn-fw" style="margin-left: 40%;
+         margin-right: 40%; display:block;">
+                Liste Des Produits à Louer</a>
+        </div>
+    </div>
+{% endblock %}
