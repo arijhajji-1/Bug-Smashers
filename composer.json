@@ -34,6 +34,7 @@
         "symfony/security-csrf": "4.4.*",
         "symfony/sendgrid-mailer": "4.4.*",
         "symfony/serializer": "4.4.*",
+        "symfony/swiftmailer-bundle": "^3.5",
         "symfony/translation": "4.4.*",
         "symfony/twig-bundle": "4.4.*",
         "symfony/validator": "4.4.*",
@@ -43,8 +44,10 @@
         "twbs/bootstrap": "4.0.0",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
+
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "4.4.*",
         "symfony/css-selector": "4.4.*",

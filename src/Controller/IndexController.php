@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 use App\Entity\Category;
-
 use App\Form\MontageType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -92,11 +91,10 @@ class IndexController extends AbstractController
         ]);
     }
     /**
-     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @route("/montage", name="addmontage")
      */
-    function add(Request $request){
+    function add(Request $request,\Swift_Mailer $mailer){
         $montage=new Montage() ;
         $montage->setEmail($this->getUser()->getEmail());
 
@@ -108,6 +106,20 @@ class IndexController extends AbstractController
             $em=$this->getDoctrine()->getManager();
             $em->persist($montage);
             $em->flush();
+
+            $message = (new \Swift_Message( 'Demande Montage!'))
+                ->setFrom('Reloua.tunisie@gmail.com')
+
+                ->setTo($montage->getEmail())
+                ->setBody(
+
+                    $this->renderView(
+                        'montage/email.html.twig', compact('montage')
+                    ),
+                    'text/html'
+                )
+            ;
+            $mailer->send($message);
             $this->addFlash('success', 'Montage ajouté');
             return $this->redirectToRoute("montage");
 
