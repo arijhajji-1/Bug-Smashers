@@ -141,7 +141,7 @@ class FactureController extends AbstractController
     }
 
     /**
-     * @route("/affichemobileFact",name="AfficheMobileFact")
+     * @Route("/affichemobileFact",name="AfficheMobileFact")
      * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
     public function affichemobileFact(NormalizerInterface $normalizer,FactureRepository $repo): Response

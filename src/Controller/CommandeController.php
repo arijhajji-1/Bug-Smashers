@@ -1,14 +1,17 @@
 <?php
 
 namespace App\Controller;
-
 use App\Entity\Commande;
+use App\Entity\User;
 use App\Form\CommandeType;
 use App\Repository\CommandeRepository;
 use phpDocumentor\Reflection\DocBlock\Serializer;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Validator\Constraints\Json;
 use Symfony\Component\Validator\Constraints as Assert;
-
 use Doctrine\ORM\EntityManagerInterface;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -18,7 +21,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 /**
  * @Route("/commande")
  */
@@ -37,19 +39,33 @@ class CommandeController extends AbstractController
     /**
      * @Route("/new", name="commande_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager,SessionInterface $session): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,SessionInterface $session,\Swift_Mailer $mailer): Response
     {
 
         $commande = new Commande();
         $panier = $session->get("panier", []);
-        $session->set("panier", $panier);
         $form = $this->createForm(CommandeType::class, $commande);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $session->set("panier", $panier);
             $entityManager->persist($commande);
             $entityManager->flush();
+            $message = (new \Swift_Message( 'Nouvelle Commande!'))
+                ->setFrom('Reloua.tunisie@gmail.com')
+
+                ->setTo($this->getUser()->getEmail())
+                ->setBody(
+
+
+                    'VOTRE COMMANDE A ETE PASSE AVEC SUCCEE ET EN COUR DE LIVRAISON,$session->set("panier", $panier);'
+
+
+
+                )
+            ;
+            $mailer->send($message);
             $session->remove("panier");
             $this->addFlash('success', 'VOTRE COMMANDE A ETE PASSE AVEC SUCCEE ET EN COUR DE LIVRAISON');
 
@@ -62,6 +78,39 @@ class CommandeController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/commande/add2", name="add_commande",methods={"GET", "POST"})
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
+     */
+
+    public function addcommande(Request $request)
+    {
+        $commande = new commande();
+        $nom = $request->query->get("nom");
+        $prenom = $request->query->get("prenom");
+        $paiment = $request->query->get("paiment");
+
+        $adresse = $request->query->get("adresse");
+        $telephone = $request->query->get("telephone");
+
+        $em = $this->getDoctrine()->getManager();
+
+        $commande->setNom($nom);
+        $commande->setPrenom($prenom);
+        $commande->setPaiment($paiment);
+        $commande->setAdresse($adresse);
+        $commande->setTelephone($telephone);
+
+
+        $em->persist($commande);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($commande);
+        return new JsonResponse($formatted);
+
+    }
+
 
     /**
      * @Route("/listc", name="listec", methods={"GET"})
@@ -109,7 +158,22 @@ class CommandeController extends AbstractController
             'commande' => $commande,
         ]);
     }
+
     /**
+     * @Route("/commande/liste",name="liste_commande",methods={"GET"})
+     */
+    public function getCommande(NormalizerInterface $normalizer,CommandeRepository $repo): Response
+    {
+        $repo=$this->getDoctrine()->getRepository(Commande::class) ;
+        $commande=$repo->findAll();
+        $jsonContent=$normalizer->normalize($commande,'json',['groups'=>'commande']);
+
+
+        return new Response(json_encode($jsonContent));
+
+    }
+
+        /**
      * @param CommandeRepository $repo
      * @return Response \Symfony\Component\HttpFoundation\Response
      * @Route("/commande/show1", name="Affiche")
@@ -176,7 +240,7 @@ class CommandeController extends AbstractController
         return $this->redirectToRoute('commande_index', [], Response::HTTP_SEE_OTHER);
     }
     /**
-     * @Route("commande/recherche",name="recherche")
+     * @Route("/commande/recherche",name="recherche")
      *
      */
     function recherche(CommandeRepository $repository,Request $request){
@@ -185,18 +249,7 @@ class CommandeController extends AbstractController
         return $this->render('commande/showB.html.twig',['commandes'=>$commande]);
     }
 
-    /**
-     * @Route("/commande/newliste", name="commande_liste", methods={"GET", "POST"})
-     */
-    public function getcommande(SerializerInterface $serializerInterface,CommandeRepository $repo): Response
-    {
-        $commande=$repo->findAll();
-        $json=$serializerInterface->serialize($commande,'json',['groups'=>'commande']);
-        dump($json);
-        die;
 
-
-    }
 
 
 

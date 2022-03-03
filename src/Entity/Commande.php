@@ -53,7 +53,6 @@ class Commande
 
     /**
      * @ORM\OneToMany(targetEntity=LigneCommande::class, mappedBy="Commande")
-     * @Groups ("commande")
      */
     private $LigneCommande;
 
@@ -66,7 +65,6 @@ class Commande
 
     /**
      * @ORM\OneToMany(targetEntity=Facture::class, mappedBy="commande")
-     * @Groups ("commande")
      */
     private $Facture;
 
