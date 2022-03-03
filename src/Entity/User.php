@@ -58,13 +58,13 @@ class User implements UserInterface
     private $photo;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      * @Assert\NotBlank
      * @Assert\Length(
-     *      min = 8,
-     *      max = 8,
-     *      minMessage = "Your telephone must be 8 numbers",
-     *      maxMessage = "Your telephone must be 8 numbers"
+     *      min = 11,
+     *      max = 11,
+     *      minMessage = "Your telephone must be 11 numbers",
+     *      maxMessage = "Your telephone must be 11 numbers"
      * )
      */
     private $telephone;
@@ -214,12 +214,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getTelephone(): ?int
+    public function getTelephone(): ?string
     {
         return $this->telephone;
     }
 
-    public function setTelephone(int $telephone): self
+    public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
 

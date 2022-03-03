@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Reparation;
 
 use App\Form\ReparationType;
+use App\Message\GenerateReport;
 use App\Repository\ReparationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -39,7 +40,7 @@ class ReparationController extends AbstractController
     function add(Request $request){
         $reparation=new Reparation() ;
         $reparation->setEmail($this->getUser()->getEmail());
-
+        $reparation->setTelephone($this->getUser()->getTelephone());
         $form=$this->createForm(ReparationType::class,$reparation);
         $form->handleRequest($request);
 

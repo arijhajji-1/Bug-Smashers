@@ -31,3 +31,12 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Services\MessageHandler:
+        arguments:
+            $fromNumber: '%env(TWILIO_NUMBER)%'
+
+    twilio.client:
+        class: Twilio\Rest\Client
+        arguments: [ '%env(TWILIO_SID)%', '%env(TWILIO_AUTH_TOKEN)%' ]
+
+    Twilio\Rest\Client: '@twilio.client'

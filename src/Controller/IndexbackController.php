@@ -3,8 +3,11 @@
 namespace App\Controller;
 use App\Entity\AvisReparation;
 use App\Entity\Montage;
+use App\Entity\User;
+
 use App\Entity\Reparation;
 use App\Form\EtatType;
+use App\Message\GenerateReport;
 use App\Repository\AvisReparationRepository;
 use App\Repository\MontageRepository;
 use App\Repository\ReparationRepository;
@@ -59,6 +62,8 @@ class IndexbackController extends AbstractController
         {
             $em=$this->getDoctrine()->getManager();
             $em->flush();
+            $this->dispatchMessage(new GenerateReport($reparation->getEmail(), $reparation->getTelephone()));
+
             return $this->redirectToRoute('reparation1');
         }
         return $this->render('indexback/updaterep.html.twig',[

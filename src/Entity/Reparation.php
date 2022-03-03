@@ -67,6 +67,12 @@ class Reparation
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="string",length=20)
+     */
+    private $telephone;
+
+
 
 
 
@@ -160,6 +166,18 @@ class Reparation
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(string $telephone): self
+    {
+        $this->telephone = $telephone;
 
         return $this;
     }
