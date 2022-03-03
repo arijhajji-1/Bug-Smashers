@@ -49,7 +49,7 @@ class CommandeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $session->set("panier", $panier);
+
             $entityManager->persist($commande);
             $entityManager->flush();
             $message = (new \Swift_Message( 'Nouvelle Commande!'))
@@ -66,7 +66,7 @@ class CommandeController extends AbstractController
                 )
             ;
             $mailer->send($message);
-            $session->remove("panier");
+
             $this->addFlash('success', 'VOTRE COMMANDE A ETE PASSE AVEC SUCCEE ET EN COUR DE LIVRAISON');
 
             return $this->redirectToRoute('commande_index', [],Response::HTTP_SEE_OTHER);
