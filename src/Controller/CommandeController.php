@@ -59,7 +59,7 @@ class CommandeController extends AbstractController
                 ->setBody(
 
 
-                    'VOTRE COMMANDE A ETE PASSE AVEC SUCCEE ET EN COUR DE LIVRAISON,$session->set("panier", $panier);'
+                    'VOTRE COMMANDE A ETE PASSE AVEC SUCCEE ET EN COUR DE LIVRAISON'
 
 
 
