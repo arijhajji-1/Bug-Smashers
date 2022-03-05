@@ -1,5 +1,7 @@
+{% include ('cursor.html.twig') %}
+
 <!DOCTYPE html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="zxx"  >
 
 <head>
     <meta charset="utf-8">
@@ -12,11 +14,13 @@
     <link rel="shortcut icon" href="{{asset('front/assets/img/logo.png')}}" type="image/x-icon" />
 
     <!--== Google Fonts ==-->
-    <link href="https://fonts.googleapis.com/css?family=Oswald:400,500,600,700%7CPoppins:400,400i,500,600&display=swap" rel="stylesheet">
+
 
     <!-- build:css assets/css/app.min.css -->
     {% block css %}
+        <link href="{{ asset('https://fonts.googleapis.com/css?family=Oswald:400,500,600,700%7CPoppins:400,400i,500,600&display=swap') }}" rel="stylesheet">
     <!--== Leaflet Min CSS ==-->
+        <link rel="stylesheet" href="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css') }}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="{{ asset('front/assets/css/leaflet.min.css') }}" rel="stylesheet" />
     <!--== Nice Select Min CSS ==-->
     <link href="{{ asset('front/assets/css/nice-select.min.css') }}" rel="stylesheet" />
@@ -41,17 +45,16 @@
     <link href="{{ asset('front/assets/css/helper.min.css') }}" rel="stylesheet" />
     <!-- endbuild -->
 
-    <!--[if lt IE 9]>
-    <script src="{{ asset('//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js') }}"></script>
-    <script src="{{ asset('//oss.maxcdn.com/respond/1.4.2/respond.min.js') }}"></script>
-    <![endif]-->
+    <!--[if lt IE 9]><![endif]-->
     {% endblock %}
 </head>
 
 <body>
 
 <!--== Start Header Area ==-->
-<header class="header-area">
+      <header class="header-area">
+
+
     <div class="container container-wide">
         <div class="row align-items-center">
             <div class="col-sm-4 col-lg-2">
@@ -159,7 +162,7 @@
             </div>
         </div>
     </div>
-</header>
+    </header>
 <!--== End Header Area ==-->
 {% block body %}
 <!--== Start Slider Area Wrapper ==-->
@@ -1030,7 +1033,6 @@
 </aside>
 <!--== End Responsive Menu Wrapper ==-->
 
-
 <!--=======================Javascript============================-->
 <!-- build:js assets/js/app.min.js -->
 <!--=== Modernizr Min Js ===-->
@@ -1056,10 +1058,16 @@
 <script src="{{ asset('front/assets/js/leaflet.min.js') }}"></script>
 <!--=== Countdown Js ===-->
 <script src="{{ asset('front/assets/js/countdown.js') }}"></script>
-
+    <script src="{{ asset('//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js') }}"></script>
+    <script src="{{ asset('//oss.maxcdn.com/respond/1.4.2/respond.min.js') }}"></script>
 <!--=== Active Js ===-->
 <script src="{{ asset('front/assets/js/active.js') }}"></script>
+    <script src="{{ asset('https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN') }}" crossorigin="anonymous"></script>
+    <script src="{{ asset('https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js') }}" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js') }}" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <!-- endbuild -->
+    <script src="{{ asset('front/assets/js/montage.js') }}"></script>
+
 {% endblock %}
 </body>
 

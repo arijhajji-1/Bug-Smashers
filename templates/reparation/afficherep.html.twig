@@ -3,9 +3,9 @@
 {% block title %}Reparation {% endblock %}
 
 {% block body %}
+
     <h1 align="center">Liste réparation</h1>
     <div class="container">
-
 
         <table class="table-bordered">
             <thead>
@@ -45,7 +45,18 @@
                 </tr>
             {% endfor %}
             </tbody>
+
+
         </table>
 
     </div>
+    <br>
+    <br>
+<nav aria-label="Page navigation example">
+    <ul class="pagination pagination-template d-flex justify-content-center">
+
+    {{ knp_pagination_render(reparation) }}
+
+    </ul>
+</nav>
 {% endblock %}

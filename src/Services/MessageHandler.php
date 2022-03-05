@@ -27,13 +27,13 @@ class MessageHandler implements MessageHandlerInterface
 
         $this->twilio->messages->create($toNumber, [
             'from' => $this->fromNumber,
-            'body' => "Hi $toName! Vous pouvez recuperer votre appreil"
+            'body' => "Bonjour $toName! Vous pouvez recuperer votre appreil"
         ]);
 
         //sleep(random_int(10, 15));
 
         // Print in the console so we can confirm the message was handled correctly
-        var_dump('Report generated!');
+        var_dump('message sent!');
 
        /* $this->twilio->messages->create($toNumber, [
             'from' => $this->fromNumber,

@@ -33,6 +33,13 @@ class IndexController extends AbstractController
      */
     public function HomePage(): Response
     {
+        return $this->render('/animation.html.twig');
+    }
+    /**
+     * @Route("/index", name="home")
+     */
+    public function Home(): Response
+    {
         return $this->render('index/homePage.html.twig');
     }
     /**

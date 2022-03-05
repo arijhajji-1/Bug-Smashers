@@ -37,15 +37,18 @@
                         </th>
                         </thead>
                         <tbody>
+
+
                         <tr  {% for montage in montage %}>
                             <td>{{ montage.Processeur }}</td>
                             <td>{{ montage.CarteGraphique }}</td>
-                            <td >{{ montage.CarteMere }}</td>
+                            <td>{{ montage.CarteMere }}</td>
                             <td>{{ montage.DisqueSysteme }}</td>
                             <td>{{ montage.boitier }}</td>
                             <td>{{ montage.StockageSupp }}</td>
                             <td>{{ montage.Montant }}</td>
-                             <td><button  class="btn btn-brand"><a href="{{ path('delete', {'id': montage.Id}) }}"style="color: white;" onclick="return confirm('Etes vous sûr de supprimer ce montage?')"; >Supprimer</a></button></td>
+
+                            <td><button  class="btn btn-brand"><a href="{{ path('delete', {'id': montage.Id}) }}"style="color: white;" onclick="return confirm('Etes vous sûr de supprimer ce montage?')"; >Supprimer</a></button></td>
                              <td><button  class="btn btn-brand"><a href="{{ path('update', {'id': montage.Id}) }}"style="color: white;">Modifier</a></button></td>
                         </tr>
                         </tbody>
@@ -63,6 +66,5 @@
 
     </div>
 
-    </div>
-    </div>
+
 {% endblock %}

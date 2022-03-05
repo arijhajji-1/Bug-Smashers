@@ -4564,3 +4564,38 @@ Start Comment Area Wrapper
 .single-comment-wrap .comment-footer a.btn-reply:hover {
     color: #dc3545;
 }
+
+
+
+.cursor {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    border: 2px solid rgb(41, 41, 41);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition:
+            top 50ms linear,
+            left 50ms linear,
+            width 500ms ease,
+            height 500ms ease;
+    z-index: 1;
+    pointer-events: none;
+}
+.cursor.enlarged {
+    width: 50px;
+    height: 50px;
+}
+
+.cursor2 {
+    transition: 10ms;
+    z-index: 1;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: black;
+    pointer-events: none;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+

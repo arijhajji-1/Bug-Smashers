@@ -20,6 +20,7 @@ use App\Entity\Category;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Knp\Component\Pager\PaginatorInterface;
 
 class ReparationController extends AbstractController
 {
@@ -62,10 +63,14 @@ class ReparationController extends AbstractController
     /**
      * @Route("/afficherep", name="afficherep")
      */
-    public function AfficheReparation(ReparationRepository $repo)
+    public function AfficheReparation(Request $request,ReparationRepository $repo,PaginatorInterface $paginator)
     {
         $repo=$this->getDoctrine()->getRepository(Reparation::class);
-        $reparation=$repo->findAll();
+        $reparation = $paginator->paginate(
+            $reparation=$repo->findAll(), // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            4 // Nombre de résultats par page
+        );
         return $this->render('Reparation/afficherep.html.twig',[
             'reparation'=>$reparation
         ]);

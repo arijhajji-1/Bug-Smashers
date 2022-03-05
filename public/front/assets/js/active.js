@@ -381,3 +381,20 @@
         }
     }); // End Scroll Function
 }(jQuery));
+const cursor = document.querySelector('.cursor');
+const cursor2 = document.querySelector('.cursor2');
+const links = document.querySelectorAll('a')
+
+links.forEach(link => {
+    link.addEventListener('mouseenter', e => {
+        cursor.classList.add('enlarged')
+    })
+    link.addEventListener('mouseout', e => {
+        cursor.classList.remove('enlarged')
+    })
+})
+
+document.addEventListener('mousemove', e => {
+    cursor.setAttribute("style", "top: " + e.pageY + "px; left: " + e.pageX + "px;")
+    cursor2.setAttribute("style", "top: " + e.pageY + "px; left: " + e.pageX + "px;")
+})
