@@ -1,0 +1,51 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Reparation {% endblock %}
+
+{% block body %}
+    <h1 align="center">Liste réparation</h1>
+    <div class="container">
+
+
+        <table class="table-bordered">
+            <thead>
+            <tr>
+                <th style="padding-right: 20px;">Category</th>
+                <th style="padding-right: 20px;">Type</th>
+                <th style="padding-right: 20px;">Description</th>
+
+                <th style="padding-right: 20px;">date</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr >
+                {% for reparation in reparation %}
+                <td>{{ reparation.category }}</td>
+
+                <td>{{ reparation.type }}</td>
+                <td >{{ reparation.description }}</td>
+                <td >{{ reparation.Reserver| date('d/m/Y H:i') }}</td>
+                <td>
+                <button class="btn btn-brand"><a href="{{ path('delete1', {'id': reparation.Id}) }}"style="color: white;">Supprimer</a></button>
+                </td>
+                <td>
+                <button class="btn btn-brand"><a href="{{ path('update1', {'id': reparation.Id}) }}"style="color: white;">Modifier</a></button>
+
+                </td>
+                <td>
+                <button class="btn btn-brand"><a href="{{ path('avis_reparation', {'id': reparation.Id}) }}" style="color: white;">Donner avis</a></button>
+
+                </td>
+            </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}

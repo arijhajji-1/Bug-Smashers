@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Entity;
+use App\Repository\UserRepository;
 
 use Symfony\Component\Security\Core\User\UserInterface;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
@@ -51,18 +52,19 @@ class User implements UserInterface
      */
     private $adresse;
     /**
-     * @ORM\Column(type="string", length=500, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $photo;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      * @Assert\NotBlank
      * @Assert\Length(
-     *      min = 8,
-     *      max = 8,
-     *      minMessage = "Your telephone must be 8 numbers",
-     *      maxMessage = "Your telephone must be 8 numbers"
+     *      min = 11,
+     *      max = 11,
+     *      minMessage = "Your telephone must be 11 numbers",
+     *      maxMessage = "Your telephone must be 11 numbers"
      * )
      */
     private $telephone;
@@ -79,7 +81,7 @@ class User implements UserInterface
     private $cin;
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Assert\Date
+     * @Assert\NotBlank
      */
     private $date_naissance;
     /**
@@ -92,14 +94,7 @@ class User implements UserInterface
      * )
      */
     private $password;
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Publication", mappedBy="users", cascade={"persist", "remove"})
-     */
-    private $publications;
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="users", cascade={"persist", "remove"})
-     */
-    private $commentaires;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -219,12 +214,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getTelephone(): ?int
+    public function getTelephone(): ?string
     {
         return $this->telephone;
     }
 
-    public function setTelephone(int $telephone): self
+    public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
 
@@ -275,24 +270,5 @@ class User implements UserInterface
         $this->cin = $cin;
     }
 
-    public function __construct()
-    {
-        $this->publications = new ArrayCollection();
-        $this->commentaires = new ArrayCollection();
-    }
-    /**
-     * @return Collection|Publication[]
-     */
-    public function getPublications(): Collection
-    {
-        return $this->publications;
-    }
-    /**
-     * @return Collection|Commentaire[]
-     */
-    public function getCommentaires(): Collection
-    {
-        return $this->commentaires;
-    }
 
 }

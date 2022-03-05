@@ -1,0 +1,23 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Reparation {% endblock %}
+
+{% block body %}
+    <h1 align="center">Demande de reparation</h1>
+
+    <div class="container" style="max-width: 600px">
+        {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+        {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+        {{ form_widget(form) }}
+
+
+        <div class="col-12 mt-22">
+
+        <button type="submit" class="btn btn-brand" style="color: white;">Ajouter</button>
+
+        <button  class="btn btn-brand"> <a href="{{ path('afficherep') }}" style="color: white;" >votre demande</a></button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

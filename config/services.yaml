@@ -33,3 +33,12 @@ services:
     App\Service\FileUploader:
         arguments:
             $targetDirectory: '%products_directory%'
+    App\Services\MessageHandler:
+        arguments:
+            $fromNumber: '%env(TWILIO_NUMBER)%'
+
+    twilio.client:
+        class: Twilio\Rest\Client
+        arguments: [ '%env(TWILIO_SID)%', '%env(TWILIO_AUTH_TOKEN)%' ]
+
+    Twilio\Rest\Client: '@twilio.client'

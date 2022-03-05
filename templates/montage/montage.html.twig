@@ -1,0 +1,45 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %} Montage{% endblock %}
+
+{% block body %}
+    {% for messages in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ messages }}
+        </div>
+    {% endfor %}
+
+    <hr style="visibility: hidden ">
+    <div  class="container" style="max-width: 600px">
+
+        {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+        {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+        <h1 align="center">Choisir les composants</h1>
+
+{{ form_widget(form) }}
+        <div class="col-12 mt-22">
+            <button type="submit" class="btn btn-brand" style="color: white;">Ajouter </button>
+            <button class="btn btn-brand"> <a href="{{ path('affiche') }}"style="color: white;" >votre demande</a></button>
+        </div>
+        <div class="col-12 mt-22">
+            <br>
+       <h3>montant:  <h4 id="total"  style="color: #23a2f6" >  </h4> </h3>
+        </div>
+        {{ form_end(form) }}
+        <br>
+
+        <br>
+    </div>
+
+
+{% endblock %}
+{% block js %}
+
+
+    <script src="{{ asset('front/assets/js/montage.js') }}"></script>
+
+
+
+
+{% endblock %}

@@ -1,12 +1,21 @@
 <?php
 
 namespace App\Controller;
-
+use App\Entity\Category;
+use App\Form\MontageType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Validator\Constraints\Json;
+use App\Entity\ProduitAcheter;
+use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
+
 
 class IndexController extends AbstractController
 {
@@ -71,13 +80,5 @@ class IndexController extends AbstractController
             'controller_name' => 'IndexController',
         ]);
     }
-    /**
-     * @Route("/montage", name="montage")
-     */
-    public function montage(): Response
-    {
-        return $this->render('index/montage.html.twig', [
-            'controller_name' => 'IndexController',
-        ]);
-    }
+
 }

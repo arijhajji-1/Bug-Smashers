@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ReparationRepository::class)
@@ -17,18 +18,21 @@ class Reparation
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups ("post:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="This field must be filled")
+     * @Groups ("post:read")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="This field must be filled")
+     * @Groups ("post:read")
      */
     private $type;
 
@@ -36,6 +40,7 @@ class Reparation
      * @ORM\Column(type="datetime", nullable=true)
      * @Assert\GreaterThan("today UTC")
      * @Assert\NotBlank(message="This field must be filled")
+     * @Groups ("post:read")
 
      */
     private $Reserver;
@@ -43,6 +48,7 @@ class Reparation
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="This field must be filled")
+     *  @Groups ("post:read")
      */
     private $category;
 
@@ -52,9 +58,20 @@ class Reparation
     private $etat;
 
     /**
-     * @ORM\OneToOne(targetEntity=AvisReparation::class, mappedBy="idrep", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=AvisReparation::class, mappedBy="idrep", cascade={"persist", "remove"},orphanRemoval=true)
      */
     private $avisReparation;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string",length=20)
+     */
+    private $telephone;
+
 
 
 
@@ -137,6 +154,30 @@ class Reparation
         }
 
         $this->avisReparation = $avisReparation;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(string $telephone): self
+    {
+        $this->telephone = $telephone;
 
         return $this;
     }

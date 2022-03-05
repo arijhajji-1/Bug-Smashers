@@ -8,11 +8,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/service-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/web-link" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/translation" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/finder" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/routing" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/intl" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-client" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-client-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/monolog-bridge" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-intl-normalizer" />
@@ -23,7 +21,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/config" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security-http" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/twig/twig" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/mailer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/twig/extra-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/mime" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php72" />
@@ -35,7 +32,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-intl-idn" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sensio/framework-extra-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/web-profiler-bundle" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/maker-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/console" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security-guard" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-kernel" />
@@ -43,7 +39,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-intl-icu" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/yaml" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/twig-bridge" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/serializer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/monolog/monolog" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/debug" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/process" />
@@ -112,7 +107,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/monolog-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/css-selector" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/cache" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security-core" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php80" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/inflector" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/property-info" />
@@ -136,6 +130,16 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/cmen/google-charts-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/knplabs/knp-paginator-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/knplabs/knp-components" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/messenger" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/swiftmailer-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/swiftmailer/swiftmailer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/twilio/sdk" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/serializer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security-core" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/maker-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/mailer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security-bundle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

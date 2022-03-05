@@ -5,11 +5,9 @@
       <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/web-link" />
       <path value="$PROJECT_DIR$/vendor/symfony/translation" />
-      <path value="$PROJECT_DIR$/vendor/symfony/security-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/finder" />
       <path value="$PROJECT_DIR$/vendor/symfony/routing" />
       <path value="$PROJECT_DIR$/vendor/symfony/intl" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-client" />
       <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/monolog-bridge" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
@@ -20,7 +18,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/config" />
       <path value="$PROJECT_DIR$/vendor/symfony/security-http" />
       <path value="$PROJECT_DIR$/vendor/twig/twig" />
-      <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
       <path value="$PROJECT_DIR$/vendor/twig/extra-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/mime" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
@@ -32,7 +29,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
       <path value="$PROJECT_DIR$/vendor/sensio/framework-extra-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/web-profiler-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/maker-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/console" />
       <path value="$PROJECT_DIR$/vendor/symfony/security-guard" />
       <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
@@ -40,7 +36,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-icu" />
       <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
       <path value="$PROJECT_DIR$/vendor/symfony/twig-bridge" />
-      <path value="$PROJECT_DIR$/vendor/symfony/serializer" />
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
       <path value="$PROJECT_DIR$/vendor/symfony/debug" />
       <path value="$PROJECT_DIR$/vendor/symfony/process" />
@@ -109,7 +104,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/monolog-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
       <path value="$PROJECT_DIR$/vendor/symfony/cache" />
-      <path value="$PROJECT_DIR$/vendor/symfony/security-core" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/vendor/symfony/inflector" />
       <path value="$PROJECT_DIR$/vendor/symfony/property-info" />
@@ -133,6 +127,16 @@
       <path value="$PROJECT_DIR$/vendor/cmen/google-charts-bundle" />
       <path value="$PROJECT_DIR$/vendor/knplabs/knp-paginator-bundle" />
       <path value="$PROJECT_DIR$/vendor/knplabs/knp-components" />
+      <path value="$PROJECT_DIR$/vendor/symfony/messenger" />
+      <path value="$PROJECT_DIR$/vendor/symfony/swiftmailer-bundle" />
+      <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/vendor/twilio/sdk" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client" />
+      <path value="$PROJECT_DIR$/vendor/symfony/serializer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-core" />
+      <path value="$PROJECT_DIR$/vendor/symfony/maker-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1">
