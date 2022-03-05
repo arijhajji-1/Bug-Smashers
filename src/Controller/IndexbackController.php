@@ -29,4 +29,56 @@ class IndexbackController extends AbstractController
             'controller_name' => 'IndexbackController',
         ]);
     }
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @route("/montage1",name="montage1")
+     */
+    public function AfficheP(){
+        $repo=$this->getDoctrine()->getRepository(Montage::class) ;
+        $montage=$repo->findAll();
+        return $this->render('indexback/montage.html.twig',['montage'=>$montage]);
+
+    }
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @route("/reparation1",name="reparation1")
+     */
+    public function AfficheR(){
+        $repo=$this->getDoctrine()->getRepository(Reparation::class) ;
+        $reparation=$repo->findAll();
+        return $this->render('indexback/reparation.html.twig',['reparation'=>$reparation]);
+
+    }
+    /**
+     * @Route ("/updateback/{id}", name="updateback")
+     */
+    public function UpdateReparation(ReparationRepository $repo,$id,Request $request)
+    {
+        $reparation=$repo->find($id);
+        $form=$this->createForm(EtatType::class,$reparation);
+        $form->add('update',SubmitType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $em=$this->getDoctrine()->getManager();
+            $em->flush();
+            $this->dispatchMessage(new GenerateReport($reparation->getEmail(), $reparation->getTelephone()));
+
+            return $this->redirectToRoute('reparation1');
+        }
+        return $this->render('indexback/updaterep.html.twig',[
+            'form'=>$form->createView()
+        ]);
+    }
+    /**
+     * @Route("/afficheavis", name="AvisReparation_show")
+     */
+    public function show(AvisReparationRepository $repo)
+    {
+        $repo=$this->getDoctrine()->getRepository(AvisReparation::class);
+        $AvisReparation=$repo->findAll();
+        return $this->render('indexback/afficheAvis.html.twig',[
+            'AvisReparation'=>$AvisReparation
+        ]);
+    }
 }
