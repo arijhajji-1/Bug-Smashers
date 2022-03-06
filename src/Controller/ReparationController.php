@@ -236,5 +236,26 @@ die;
             'AvisReparation'=>$AvisReparation
         ]);
     }
+    /**
+     * @Route ("/updateback/{id}", name="updateback")
+     */
+    public function UpdatesReparation(ReparationRepository $repo,$id,Request $request)
+    {
+        $reparation=$repo->find($id);
+        $form=$this->createForm(EtatType::class,$reparation);
+        $form->add('update',SubmitType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $em=$this->getDoctrine()->getManager();
+            $em->flush();
+            $this->dispatchMessage(new GenerateReport($reparation->getEmail(), $reparation->getTelephone()));
+
+            return $this->redirectToRoute('reparation1');
+        }
+        return $this->render('indexback/updaterep.html.twig',[
+            'form'=>$form->createView()
+        ]);
+    }
 
 }
