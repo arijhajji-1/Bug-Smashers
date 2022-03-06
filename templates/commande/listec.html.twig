@@ -1,5 +1,7 @@
 {% block body %}
-    <h1 align="center">VOTRE FACTURE</h1>
+    <a>
+        <img src="{{ 'uploads/reloua logo-01.png'}}" alt="" width="150">
+    </a><h1 align="center">VOTRE FACTURE</h1>
 
     <div class="col-lg-12 stretch-card">
 
@@ -16,6 +18,16 @@
             <th>Adresse</th>
             <th>Telephone</th>
 
+
+        </tr>
+        </thead>
+        <thead>
+        <tr>
+        <th>Produit</th>
+        <th>Prix</th>
+        <th>Quantité</th>
+        <th>TYPE</th>
+        <th>Total</th>
         </tr>
         </thead>
         <tbody>
@@ -28,7 +40,17 @@
                 <td>{{ commande.Adresse}}</td>
                 <td>{{ commande.Telephone}}</td>
 
+                {% for element in dataPanier %}
+            <tr>
 
+                <td>{{ element.produit.title }}</td>
+                <td>{{ element.produit.price }} DT</td>
+
+                <td>{{ element.quantite }}</td>
+                <td>{{ element.produit.TypeP }}</td>
+                <td>{{ element.quantite * element.produit.price }} DT</td>
+
+                {% endfor %}
 
 
             </tr>

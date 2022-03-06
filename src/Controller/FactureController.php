@@ -120,7 +120,7 @@ class FactureController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="facture_delete", methods={"POST"})
+     * @Route("/{id}", name="facture_delete")
      */
     public function delete(Request $request, Facture $facture, EntityManagerInterface $entityManager): Response
     {

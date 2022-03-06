@@ -4,8 +4,15 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    brochures_directory: '%kernel.project_dir%/public/uploads/brochures'
 
 services:
+    object_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
+        # Important! Tag this service or it wouldn't work
+        tags:
+            - { name: serializer.normalizer }
+
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
@@ -19,6 +26,7 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+            - '../src/Tests/'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -26,5 +34,10 @@ services:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+
+
+    twilio.client:
+        class: Twilio\Rest\Client
+        arguments: [ '%env(TWILIO_SID)%', '%env(TWILIO_AUTH_TOKEN)%' ]
+
+    Twilio\Rest\Client: '@twilio.client'

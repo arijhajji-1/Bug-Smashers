@@ -43,6 +43,8 @@ class CartController extends AbstractController
     }
 
 
+
+
     /**
      * @Route("/add/{id}", name="add")
      */
@@ -134,7 +136,7 @@ class CartController extends AbstractController
     {
         $session->remove("panier");
 
-        return $this->redirectToRoute("cart_index");
+        return $this->redirectToRoute("info_cart");
     }
 
 

@@ -5,6 +5,7 @@ use App\Entity\Commande;
 use App\Entity\User;
 use App\Form\CommandeType;
 use App\Repository\CommandeRepository;
+use App\Repository\ProduitRepository;
 use phpDocumentor\Reflection\DocBlock\Serializer;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -21,6 +22,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 /**
  * @Route("/commande")
  */
@@ -35,6 +38,8 @@ class CommandeController extends AbstractController
             'commandes' => $commandeRepository->findAll(),
         ]);
     }
+
+
 
     /**
      * @Route("/new", name="commande_new", methods={"GET", "POST"})
@@ -52,20 +57,21 @@ class CommandeController extends AbstractController
 
             $entityManager->persist($commande);
             $entityManager->flush();
-            $message = (new \Swift_Message( 'Nouvelle Commande!'))
+            $message = (new \Swift_Message( 'VOTRE COMMANDE A ETE PASSE AVEC SUCCEE ET EN COUR DE LIVRAISON!'))
                 ->setFrom('Reloua.tunisie@gmail.com')
 
                 ->setTo($this->getUser()->getEmail())
                 ->setBody(
 
-
-                    'VOTRE COMMANDE A ETE PASSE AVEC SUCCEE ET EN COUR DE LIVRAISON'
-
-
-
+                    $this->renderView(
+                        'mail/welcome.html.twig', compact('commande')
+                    ),
+                    'text/html'
                 )
             ;
             $mailer->send($message);
+
+
 
             $this->addFlash('success', 'VOTRE COMMANDE A ETE PASSE AVEC SUCCEE ET EN COUR DE LIVRAISON');
 
@@ -77,6 +83,32 @@ class CommandeController extends AbstractController
             'commande' => $commande,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/commande/info_commande", name="info_cart")
+     */
+    public function sh(SessionInterface $session,produitRepository $produitRepository)
+    {
+        $panier = $session->get("panier", []);
+
+        // On "fabrique" les données
+        $dataPanier = [];
+        $total = 0;
+
+
+        foreach ($panier as $id => $quantite) {
+            $TypeP = $produitRepository->findAll();
+            $product = $produitRepository->find($id);
+            $dataPanier[] = [
+                "produit" => $product,
+                "quantite" => $quantite,
+                "Type" => $TypeP,
+            ];
+            $total += $product->getPrice() * $quantite;
+
+        }
+        return $this->render('commande/info_commande.html.twig', compact("dataPanier", "total"));
     }
 
     /**
@@ -115,7 +147,7 @@ class CommandeController extends AbstractController
     /**
      * @Route("/listc", name="listec", methods={"GET"})
      */
-    public function listc(CommandeRepository $commandeRepository,SessionInterface $session): Response
+    public function listc(CommandeRepository $commandeRepository,SessionInterface $session,produitRepository $produitRepository): Response
     {
 
         $pdfOptions = new Options();
@@ -124,10 +156,28 @@ class CommandeController extends AbstractController
         // Instantiate Dompdf with our options
         $dompdf = new Dompdf($pdfOptions);
         $commande = $commandeRepository->findAll();
+        $panier = $session->get("panier", []);
+        $dataPanier = [];
+        $total = 0;
+
+        foreach ($panier as $id => $quantite) {
+            $TypeP = $produitRepository->findAll();
+            $product = $produitRepository->find($id);
+            $dataPanier[] = [
+                "produit" => $product,
+                "quantite" => $quantite,
+                "Type" => $TypeP,
+            ];
+            $total += $product->getPrice() * $quantite;
+
+        }
 
         // Retrieve the HTML generated in our twig file
         $html= $this->renderView('commande/listec.html.twig', [
             'commandes' => $commande,
+            'dataPanier' => $dataPanier,
+            'panier'=>$panier,
+            'total'=>$total,
 
         ]);
 
@@ -178,11 +228,16 @@ class CommandeController extends AbstractController
      * @return Response \Symfony\Component\HttpFoundation\Response
      * @Route("/commande/show1", name="Affiche")
      */
-    public function show1(CommandeRepository $CommandeRepository): Response
+    public function show1(CommandeRepository $CommandeRepository,Request $request, PaginatorInterface $paginator): Response
     {
-        return $this->render('commande/showB.html.twig', [
-            'commandes' => $CommandeRepository->findAll(),
-        ]);
+        $donnees=$CommandeRepository->findAll();
+
+        $commande= $paginator->paginate(
+            $donnees, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            2 // Nombre de résultats par page
+        );
+        return $this->render('commande/showB.html.twig',['commandes'=>$commande]);
     }
 
 
@@ -238,6 +293,19 @@ class CommandeController extends AbstractController
         }
 
         return $this->redirectToRoute('commande_index', [], Response::HTTP_SEE_OTHER);
+    }
+    /**
+     * @Route("/deleteB/{id}", name="commande_deleteB", methods={"POST"})
+     */
+    public function d(Request $request, Commande $commande, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $commande->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($commande);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('Affiche', [], Response::HTTP_SEE_OTHER);
     }
     /**
      * @Route("/commande/recherche",name="recherche")

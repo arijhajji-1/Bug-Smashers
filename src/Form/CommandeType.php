@@ -14,7 +14,6 @@ class CommandeType extends AbstractType
     {
 
         $builder
-
             ->add('nom')
             ->add('prenom')
             ->add('adresse')
@@ -37,6 +36,7 @@ class CommandeType extends AbstractType
             $resolver->setDefaults([
                 'data_class' => Commande::class,
             ]);
+
         }
 
 

@@ -51,10 +51,11 @@
         </tbody>
     </table>
 
-    <a href="{{ path('indexback') }}"class="btn ">RETOUR AU MENU ADMIN
+    <a href="{{ path('indexback') }}" class="btn ">RETOUR AU MENU ADMIN
         <i class="bi bi-cart-x"></i>
     </a>
-            <a href="{{ path('listec') }}"class="btn ">IMPRESSION DE LISTE COMMANDE
+            <a href="{{ path('listec') }}" class="btn ">IMPRESSION DE LISTE COMMANDE
                 <i class="bi bi-cart-x"></i>
             </a>
+            {{ knp_pagination_render(commandes) }}
 {% endblock %}
