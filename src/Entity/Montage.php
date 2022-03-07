@@ -79,6 +79,11 @@ class Montage
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $iduser;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
@@ -211,6 +216,18 @@ class Montage
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getIduser(): ?int
+    {
+        return $this->iduser;
+    }
+
+    public function setIduser(int $iduser): self
+    {
+        $this->iduser = $iduser;
 
         return $this;
     }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 use App\Entity\AvisReparation;
 use App\Entity\Reparation;
+use App\Entity\User;
 use App\Form\EtatType;
 use App\Message\GenerateReport;
 use App\Repository\AvisReparationRepository;
@@ -19,6 +20,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Montage;
 use App\Repository\MontageRepository;
+use App\Repository\UserRepository;
+
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -50,6 +53,7 @@ class MontageController extends AbstractController
     function add(Request $request,\Swift_Mailer $mailer){
         $montage=new Montage() ;
         $montage->setEmail($this->getUser()->getEmail());
+        $montage->setIduser($this->getUser()->getId());
 
         $form=$this->createForm(MontageType::class,$montage);
 

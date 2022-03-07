@@ -72,6 +72,11 @@ class Reparation
      */
     private $telephone;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $iduser;
+
 
 
 
@@ -185,6 +190,18 @@ class Reparation
     public function __toString()
     {
         return $this->getType();
+    }
+
+    public function getIduser(): ?int
+    {
+        return $this->iduser;
+    }
+
+    public function setIduser(int $iduser): self
+    {
+        $this->iduser = $iduser;
+
+        return $this;
     }
 
 }

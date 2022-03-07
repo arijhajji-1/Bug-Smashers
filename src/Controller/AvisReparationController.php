@@ -33,6 +33,7 @@ class AvisReparationController extends AbstractController
         $AvisReparation=new AvisReparation() ;
         $AvisReparation->setIdrep($id);
         $AvisReparation->setNom($this->getUser()->getFirstName());
+        $AvisReparation->setIduser($this->getUser()->getId());
 
         $AvisReparation->setEmail($this->getUser()->getEmail());
         $form=$this->createForm(AvisReparationType::class,$AvisReparation);

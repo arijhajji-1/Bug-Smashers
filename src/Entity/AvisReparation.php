@@ -47,6 +47,11 @@ class AvisReparation
      */
     private $idrep;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $iduser;
+
 
 
     public function getId(): ?int
@@ -100,6 +105,18 @@ class AvisReparation
     public function setIdrep(Reparation $idrep): self
     {
         $this->idrep = $idrep;
+
+        return $this;
+    }
+
+    public function getIduser(): ?int
+    {
+        return $this->iduser;
+    }
+
+    public function setIduser(int $iduser): self
+    {
+        $this->iduser = $iduser;
 
         return $this;
     }

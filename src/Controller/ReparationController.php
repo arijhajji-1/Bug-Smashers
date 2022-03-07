@@ -42,6 +42,8 @@ class ReparationController extends AbstractController
      */
     function add(Request $request){
         $reparation=new Reparation() ;
+        $reparation->setIduser($this->getUser()->getId());
+
         $reparation->setEmail($this->getUser()->getEmail());
         $reparation->setTelephone($this->getUser()->getTelephone());
         $form=$this->createForm(ReparationType::class,$reparation);
@@ -71,7 +73,7 @@ class ReparationController extends AbstractController
         $reparation = $paginator->paginate(
             $reparation=$repo->findAll(), // Requête contenant les données à paginer (ici nos articles)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            4 // Nombre de résultats par page
+            2 // Nombre de résultats par page
         );
         return $this->render('Reparation/afficherep.html.twig',[
             'reparation'=>$reparation

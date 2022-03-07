@@ -39,7 +39,10 @@
                         <tbody>
 
 
-                        <tr  {% for montage in montage %}>
+                        <tr>
+
+                            {% for montage in montage %}
+
                             <td>{{ montage.Processeur }}</td>
                             <td>{{ montage.CarteGraphique }}</td>
                             <td>{{ montage.CarteMere }}</td>
