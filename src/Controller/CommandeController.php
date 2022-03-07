@@ -3,6 +3,8 @@
 namespace App\Controller;
 use App\Entity\Commande;
 use App\Entity\User;
+use App\Data\SearchDataCommande;
+use App\Form\SearchCommandeForm;
 use App\Form\CommandeType;
 use App\Repository\CommandeRepository;
 use App\Repository\ProduitRepository;
@@ -228,17 +230,18 @@ class CommandeController extends AbstractController
 
     }
 
-        /**
-     * @param CommandeRepository $repo
-     * @return Response \Symfony\Component\HttpFoundation\Response
-     * @Route("/commande/show1", name="Affiche")
-     */
-    public function show1(CommandeRepository $CommandeRepository,Request $request, PaginatorInterface $paginator): Response
+      // /**
+     //* @param CommandeRepository $repo
+     //* @return Response \Symfony\Component\HttpFoundation\Response
+     //* @Route("/commande/show1", name="Affiche")
+     //*/
+    /* public function show1(CommandeRepository $CommandeRepository,Request $request, PaginatorInterface $paginator): Response
     {
         return $this->render('commande/showB.html.twig', [
             'commandes' => $CommandeRepository->findAll(),
         ]);
     }
+    */
 
 
     /**
@@ -317,28 +320,51 @@ class CommandeController extends AbstractController
         return $this->render('commande/showB.html.twig',['commandes'=>$commande]);
     }
 
-/**
-* @Route("/commande/triee", name="triee")
-*/
-    public function Triid()
+
+
+    /**
+     * @Route("/commande/show1", name="commandeSearch")
+     */
+    public function chercherEvent(CommandeRepository $CommandeRepository, Request $request): Response
     {
-
-        $em = $this->getDoctrine()->getManager();
-
-        $query = $em->createQuery(
-            'SELECT c FROM App\Entity\Commande c
-            ORDER BY c.prenom '
-        );
-
-
-        $rep = $query->getResult();
-
-        return $this->render('commande/showB.html.twig',
-            array('commandes' => $rep));
-
+        $data = new SearchDataCommande();
+        $form = $this->createForm(SearchCommandeForm::class,$data, [
+            'method' => 'POST'
+        ]);
+        $form->handleRequest($request);
+        $commandes=$CommandeRepository->findSearch($data);
+        return $this->render('commande/showB.html.twig', [
+            'commandes' => $commandes,
+            'form' => $form->createView(),
+        ]);
     }
 
+    /**
+     * @Route("/commande/show1", name="searchEvent")
+     */
+    public function searchEvent(CommandeRepository $CommandeRepository, Request $request)
+    {
+        $data = new SearchDataCommande();
+        $form = $this->createForm(SearchCommandeForm::class,$data, [
+            'method' => 'POST'
+        ]);
+        $form->handleRequest($request);
+        if ($request->isXmlHttpRequest()) {
+            $commande=$CommandeRepository->findSearch($data);
+            foreach($commande as $item) {
+                $arrayCollection[] = array(
+                    'id' => $item->getId(),
+                    'nom' => $item->getNom(),
+                    'prenom' => $item->getPrenom(),
+                    'paiment' => $item->getPaiment(),
+                    'adresse' => $item->getAdresse(),
+                    'telephone' => $item->getTelephone(),
 
+                );
+            }
+            return new JsonResponse($arrayCollection);
+        }
+    }
 
 
 

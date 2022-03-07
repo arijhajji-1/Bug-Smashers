@@ -36,13 +36,18 @@
                 <span class="mdi mdi-menu"></span>
             </button>
             <div class="search-field d-none d-xl-block">
-                <form class="d-flex align-items-center h-100" action="#">
+                {% block form %}
+                <form class="d-flex align-items-center h-100">
+                    {% endblock %}
                     <div class="input-group">
                         <div class="input-group-prepend bg-transparent">
                             <i class="input-group-text border-0 mdi mdi-magnify"></i>
                         </div>
-                        <input type="text" class="form-control bg-transparent border-0" placeholder="Search products">
+                        {% block chercher %}
+                            <input type="text" id="chercher" class="form-control bg-transparent border-0" >
+                        {% endblock %}
                     </div>
+
                 </form>
             </div>
             <ul class="navbar-nav navbar-nav-right">
@@ -230,7 +235,7 @@
                     </a>
                     <div class="collapse" id="auth">
                         <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="{{path('Affiche')}}"> Liste Commandes </a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{path('commandeSearch')}}"> Liste Commandes </a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ path('facture_index') }}"> Liste des factures </a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ path('ligne_commande_index') }}"> Confirmation des Commandes </a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ path('AfficheB') }}"> LISTES DES DEMANDES DE LOCATIONS </a></li>

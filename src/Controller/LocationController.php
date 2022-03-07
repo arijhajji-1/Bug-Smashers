@@ -123,6 +123,7 @@ class LocationController extends AbstractController
 
         return $this->redirectToRoute('location_index', [], Response::HTTP_SEE_OTHER);
     }
+
     /**
      * @Route("/deleteB/{id}", name="location_deleteB", methods={"POST"})
      */

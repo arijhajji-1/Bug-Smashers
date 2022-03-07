@@ -157,4 +157,23 @@ class FactureController extends AbstractController
 
 
     }
+    /**
+     * @Route("/facture/triee", name="triee")
+     */
+    public function T()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->createQuery(
+            'SELECT f FROM App\Entity\Facture f
+            ORDER BY f.commande'
+        );
+
+
+        $rep = $query->getResult();
+
+        return $this->render('facture/index.html.twig',
+            array('factures' => $rep));
+    }
 }
