@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Commande;
 use App\Entity\Location;
 use App\Form\LocationType;
 use App\Repository\CommandeRepository;
@@ -121,5 +122,18 @@ class LocationController extends AbstractController
         }
 
         return $this->redirectToRoute('location_index', [], Response::HTTP_SEE_OTHER);
+    }
+    /**
+     * @Route("/deleteB/{id}", name="location_deleteB", methods={"POST"})
+     */
+    public function d(Request $request, Location $location, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $location->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($location);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('AfficheB', [], Response::HTTP_SEE_OTHER);
     }
 }

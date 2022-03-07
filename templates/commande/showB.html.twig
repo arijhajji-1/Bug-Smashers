@@ -5,23 +5,32 @@
 {% block body %}
 
     <h1>LISTE DES COMMANDES VALIDE</h1>
-
-
+    <input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Rechercher" aria-label="search" aria-describedby="search">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#hi tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 <div class="col-lg-12 stretch-card">
 
     <div class="card">
         <div class="card-body">
-            <table class="table table-bordered">
-                <form method="post" action="{{ path('recherche') }}">
-                    <label>Recherche</label>
-                    <input type="text" name="recherche"> <input type="submit" value="Recherche">
-                </form>
+            <table class="table" id="tab">
+
         <thead>
         <tr>
             <th>Id</th>
             <th>Nom</th>
-            <th>Prenom</th>
+            <th><a href="{{ path('triee') }}" class="fa fa-sort-amount-desc" >Prenom</a></th>
             <th>Paiment</th>
             <th>Adresse</th>
             <th>Telephone</th>
@@ -51,11 +60,13 @@
         </tbody>
     </table>
 
+
     <a href="{{ path('indexback') }}" class="btn ">RETOUR AU MENU ADMIN
         <i class="bi bi-cart-x"></i>
     </a>
             <a href="{{ path('listec') }}" class="btn ">IMPRESSION DE LISTE COMMANDE
                 <i class="bi bi-cart-x"></i>
             </a>
-            {{ knp_pagination_render(commandes) }}
+
+
 {% endblock %}

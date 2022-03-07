@@ -32,11 +32,16 @@ class CommandeController extends AbstractController
     /**
      * @Route("/", name="commande_index", methods={"GET"})
      */
-    public function index(CommandeRepository $commandeRepository): Response
+    public function index(CommandeRepository $CommandeRepository,Request $request, PaginatorInterface $paginator): Response
     {
-        return $this->render('commande/index.html.twig', [
-            'commandes' => $commandeRepository->findAll(),
-        ]);
+        $donnees=$CommandeRepository->findAll();
+
+        $commande= $paginator->paginate(
+            $donnees, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            6 // Nombre de résultats par page
+        );
+        return $this->render('commande/index.html.twig',['commandes'=>$commande]);
     }
 
 
@@ -230,14 +235,9 @@ class CommandeController extends AbstractController
      */
     public function show1(CommandeRepository $CommandeRepository,Request $request, PaginatorInterface $paginator): Response
     {
-        $donnees=$CommandeRepository->findAll();
-
-        $commande= $paginator->paginate(
-            $donnees, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            2 // Nombre de résultats par page
-        );
-        return $this->render('commande/showB.html.twig',['commandes'=>$commande]);
+        return $this->render('commande/showB.html.twig', [
+            'commandes' => $CommandeRepository->findAll(),
+        ]);
     }
 
 
@@ -317,6 +317,26 @@ class CommandeController extends AbstractController
         return $this->render('commande/showB.html.twig',['commandes'=>$commande]);
     }
 
+/**
+* @Route("/commande/triee", name="triee")
+*/
+    public function Triid()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->createQuery(
+            'SELECT c FROM App\Entity\Commande c
+            ORDER BY c.prenom '
+        );
+
+
+        $rep = $query->getResult();
+
+        return $this->render('commande/showB.html.twig',
+            array('commandes' => $rep));
+
+    }
 
 
 

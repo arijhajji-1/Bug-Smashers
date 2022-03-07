@@ -10,12 +10,13 @@
         </div>
     {% endfor %}
     <h1 align="center">VOS COMMANDES</h1>
-
+    <input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Rechercher" aria-label="search" aria-describedby="search">
+    <table class="table" id="tab">
 <div class="col-lg-12 stretch-card">
 
     <div class="card">
         <div class="card-body">
-            <table class="table table-bordered">
+
         <thead>
             <tr>
                 <th>Id</th>
@@ -55,9 +56,26 @@
             </tr>
         {% endfor %}
         </tbody>
+    </div>
+    </div>
+</div>
     </table>
 
     <a href="{{ path('produit_index') }}" class="btn ">retour au shop
         <i class="bi bi-cart-x"></i>
     </a>
+    {{ knp_pagination_render(commandes) }}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#hi tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 {% endblock %}
