@@ -62,7 +62,7 @@ class ReparationRepository extends ServiceEntityRepository
         {
             $query=$query
                 ->andWhere('x.email LIKE :y')
-                ->setParameter('y',"%{$search->y}%");
+                ->setParameter('y',"{$search->y}%");
         }
 
         return $query->getQuery()->getResult();

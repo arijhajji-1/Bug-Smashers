@@ -18,7 +18,7 @@
 
 
             <div class="card-body">
-                <table class="table table-bordered">
+                <table class="table table-striped">
                     <thead>
                     <tr>
                         <th style="padding-right: 20px;">Id</th>
@@ -35,9 +35,11 @@
                     </thead>
                     <tbody id="rec">
 
-                    <tr >
+
                         {% for reparation in reparation %}
-                        <td class="py-1">{{ reparation.id }}</td>
+                    <tr >
+
+                    <td class="py-1">{{ reparation.id }}</td>
 
                         <td >{{ reparation.category }}</td>
 
@@ -51,9 +53,9 @@
 
 
                     </tr>
-                    </tbody>
 
                     {% endfor %}
+                    </tbody>
 
                 </table>
 
@@ -89,7 +91,7 @@ console.log(f);
                         var test="{{path('updateback', {'id':'ReplacewithcorrectValue' })}}'>"
                         var modif = test.replace("ReplacewithcorrectValue", f.id)
 
-                        $('#ach').append(
+                        $('#rec').append(
                             "<tr>"+"<td class='py-1'>"+f.id+"</td>"+
                             "<td>"+f.category+"</td>"+"<td>"+f.type+"</td>"+
                             "<td>"+f.description+"</td>"+"<td>"+f.Reserver.date+"</td>"+
