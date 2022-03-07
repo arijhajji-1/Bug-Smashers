@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Controller;
+use App\Data\SearchDataReparation;
 use App\Entity\AvisReparation;
 use App\Entity\Montage;
 use App\Entity\User;
 
 use App\Entity\Reparation;
 use App\Form\EtatType;
+use App\Form\SearchFormReparation;
 use App\Message\GenerateReport;
 use App\Repository\AvisReparationRepository;
 use App\Repository\MontageRepository;
@@ -14,6 +16,7 @@ use App\Repository\ReparationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,15 +42,23 @@ class IndexbackController extends AbstractController
         return $this->render('indexback/montage.html.twig',['montage'=>$montage]);
 
     }
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @route("/reparation1",name="reparation1")
-     */
-    public function AfficheR(){
-        $repo=$this->getDoctrine()->getRepository(Reparation::class) ;
-        $reparation=$repo->findAll();
-        return $this->render('indexback/reparation.html.twig',['reparation'=>$reparation]);
 
+    /**
+     *
+     * @Route("/reparation1", name="reparation1")
+     */
+    public function backreparation(ReparationRepository $reparationRepository, Request $request): Response
+    {
+        $data = new SearchDataReparation();
+        $form = $this->createForm(SearchFormReparation::class,$data, [
+            'method' => 'POST'
+        ]);
+        $form->handleRequest($request);
+        $reparation=$reparationRepository->findSearch($data);
+        return $this->render('indexback/reparation.html.twig', [
+            'reparation' => $reparation,
+            'form' => $form->createView(),
+        ]);
     }
     /**
      * @Route ("/updateback/{id}", name="updateback")
@@ -80,5 +91,31 @@ class IndexbackController extends AbstractController
         return $this->render('indexback/afficheAvis.html.twig',[
             'AvisReparation'=>$AvisReparation
         ]);
+    }
+    /**
+     * @Route("/inv", name="reparer")
+     */
+    public function reparationAction(ReparationRepository $reparationRepository,Request $request)
+    {
+        $data = new SearchDataReparation();
+        $form = $this->createForm(SearchFormReparation::class, $data, [
+            'method' => 'POST'
+        ]);
+        $form->handleRequest($request);
+        if ($request->isXmlHttpRequest()) {
+            $reparation = $reparationRepository->findSearch($data);
+            foreach ($reparation as $item) {
+                $arrayCollection[] = array(
+                    'id' => $item->getId(),
+                    'type' => $item->getType(),
+                    'description' => $item->getDescription(),
+                    'category' => $item->getCategory(),
+                    'Reserver' => $item->getReserver(),
+                    'email' => $item->getEmail(),
+                    'etat' => $item->getEtat(),
+                );
+            }
+            return new JsonResponse($arrayCollection);
+        }
     }
 }

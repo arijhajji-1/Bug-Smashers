@@ -4,11 +4,19 @@
 
 {% block body %}
 
+ {% block form %}
+     <form class="d-flex align-items-center h-100" method="POST" action="{{ path('reparation1') }}">
+    {% endblock %}
+
+    {% block chercher %}
+        {{ form_start(form) }}
+        {{ form_widget(form.y,{ 'attr': {'class': 'form-control bg-transparent border-0'} }) }}
+    {% endblock %}
+
+    <script src="{{ asset('front/assets/js/node_modules/jquery/dist/jquery.js') }}"></script>
 
 
-    <div class="col-lg-12 stretch-card">
 
-        <div class="card">
             <div class="card-body">
                 <table class="table table-bordered">
                     <thead>
@@ -25,11 +33,11 @@
 
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="rec">
 
                     <tr >
                         {% for reparation in reparation %}
-                        <td >{{ reparation.id }}</td>
+                        <td class="py-1">{{ reparation.id }}</td>
 
                         <td >{{ reparation.category }}</td>
 
@@ -53,8 +61,51 @@
 
 
             </div>
-        </div>
-    </div>
 
+
+    <script>
+        function dfay(fn, ms) {
+            let timer = 0
+            return function(...args) {
+                clearTimeout(timer)
+                timer = setTimeout(fn.bind(this, ...args), ms || 0)
+            }
+        }
+        $('#y').keyup(dfay(function(e){
+            var serie=$('#y').val();
+            var DATA =  {'y' : serie};
+            console.log(DATA);
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "{{ path('reparer')}}",
+                data:DATA,
+                success: function (data) {
+                    $("#rec").replaceWith("<tbody id='rec'>")
+                    console.log(data);
+                    $.each(data,function(k,f) {
+console.log(f);
+
+                        var test="{{path('updateback', {'id':'ReplacewithcorrectValue' })}}'>"
+                        var modif = test.replace("ReplacewithcorrectValue", f.id)
+
+                        $('#ach').append(
+                            "<tr>"+"<td class='py-1'>"+f.id+"</td>"+
+                            "<td>"+f.category+"</td>"+"<td>"+f.type+"</td>"+
+                            "<td>"+f.description+"</td>"+"<td>"+f.Reserver.date+"</td>"+
+                            "<td>"+f.etat+"</td>"+"<td>"+f.email+"</td>"+
+                            "<td>"+"<a href='"+modif+"Modifier"+"<i class='mdi mdi-pencil'>"+"</i>"+"</a>"+"</td>"
+
+
+                        );
+                    });
+                },
+                error:function ()
+                {
+                    $("#rec").replaceWith("<tbody id='rec'>")
+                }
+            });
+        }, 500));
+    </script>
 
 {% endblock %}

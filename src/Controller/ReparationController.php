@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Data\SearchDataReparation;
 use App\Entity\Reparation;
 
 use App\Form\ReparationType;
+use App\Form\SearchFormReparation;
 use App\Message\GenerateReport;
 use App\Repository\ReparationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

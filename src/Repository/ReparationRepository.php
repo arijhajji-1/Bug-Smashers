@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Data\SearchDataReparation;
 use App\Entity\Reparation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -47,4 +48,23 @@ class ReparationRepository extends ServiceEntityRepository
         ;
     }
     */
+    /**
+     * recupere les annonces en lien avec recherche
+     * @return Reparation[]
+     */
+    public function findSearch(SearchDataReparation $search):array
+    {
+        $query= $this
+            ->createQueryBuilder('x');
+
+
+        if (!empty($search->y))
+        {
+            $query=$query
+                ->andWhere('x.email LIKE :y')
+                ->setParameter('y',"%{$search->y}%");
+        }
+
+        return $query->getQuery()->getResult();
+    }
 }
