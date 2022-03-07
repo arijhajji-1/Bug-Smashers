@@ -9,6 +9,7 @@ use App\Form\ReparationType;
 use App\Form\SearchFormReparation;
 use App\Message\GenerateReport;
 use App\Repository\ReparationRepository;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -46,6 +47,7 @@ class ReparationController extends AbstractController
 
         $reparation->setEmail($this->getUser()->getEmail());
         $reparation->setTelephone($this->getUser()->getTelephone());
+        $reparation->setReserver(new \DateTime());
         $form=$this->createForm(ReparationType::class,$reparation);
         $form->handleRequest($request);
 
@@ -79,6 +81,27 @@ class ReparationController extends AbstractController
             'reparation'=>$reparation
         ]);
     }
+
+    /**
+     *
+     * @Route("/tri", name="tri")
+     */
+    public function TriReparation(ReparationRepository $reparationRepository, Request $request): Response
+    {
+        $data = new SearchDataReparation();
+        $form = $this->createForm(SearchFormReparation::class,$data, [
+            'method' => 'POST'
+        ]);
+        $form->handleRequest($request);
+        $reparation=$reparationRepository->findSearch($data);
+        $reparation = $reparationRepository->findByResultam();
+
+        return $this->render('indexback/reparation.html.twig', [
+            'reparation' => $reparation,
+            'form' => $form->createView(),
+        ]);
+    }
+
     /**
      * @Route("/delete1/{id}", name="delete1")
      */

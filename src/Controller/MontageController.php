@@ -149,10 +149,9 @@ class MontageController extends AbstractController
     /**
      * @Route ("/update/{id}", name="update")
      */
-    public function UpdateMontage(MontageRepository $repo,$id,Request $request)
+    public function UpdateMontage(Request $request, Montage $montage)
     {
-        $montage=$repo->find($id);
-        $form=$this->createForm(MontageType::class,$montage);
+        $form=$this->createForm(MontageType::class, $montage);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())
         {

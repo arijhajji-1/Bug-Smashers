@@ -48,6 +48,19 @@ class ReparationRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findByResultam()
+    {
+
+        $entityManager =$this ->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT e
+            FROM  App\Entity\Reparation e
+            order by e.Reserver desc');
+
+        // returns an array of Product objects
+        return $query->getResult();
+
+    }
     /**
      * recupere les annonces en lien avec recherche
      * @return Reparation[]
@@ -61,7 +74,7 @@ class ReparationRepository extends ServiceEntityRepository
         if (!empty($search->y))
         {
             $query=$query
-                ->andWhere('x.email LIKE :y')
+                ->andWhere('x.email LIKE :y OR x.etat LIKE :y')
                 ->setParameter('y',"{$search->y}%");
         }
 

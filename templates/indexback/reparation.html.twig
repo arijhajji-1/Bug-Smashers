@@ -6,6 +6,7 @@
 
  {% block form %}
      <form class="d-flex align-items-center h-100" method="POST" action="{{ path('reparation1') }}">
+
     {% endblock %}
 
     {% block chercher %}
@@ -18,6 +19,13 @@
 
 
             <div class="card-body">
+
+
+<div class="btn-toolbar" role="toolbar" aria-label="Programmatic control">
+    <div class="btn-group btn-group-sm" aria-label="Set Select2 option">
+                <a href="{{ path('tri') }}"> <input class="js-programmatic-set-val btn btn-outline-primary mr-1 mb-1" type="button" value="Tri par date"></a>
+    </div>
+</div>
                 <table class="table table-striped">
                     <thead>
                     <tr>
