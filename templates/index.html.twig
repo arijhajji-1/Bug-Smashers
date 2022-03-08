@@ -1,0 +1,42 @@
+{% extends 'base-back.html.twig' %}
+{% block title %}
+    <head>
+        <title> Liste des livraisons </title>
+    </head>
+{% endblock %}
+
+{% block body %}
+    <h1>LISTE DES Livraisons</h1>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-warning">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+<table border="1" class="table table-striped table-bordered table-hover table-condensed">
+    <tr>
+        <th> commande</th>
+<th> modpai </th>
+        <th> modlivr</th>
+        <th> region</th>
+        <th> description</th>
+        <th> date</th>
+        <th> livreur</th>
+        <th> actions </th>
+    </tr>
+    <tr {% for item in livraisons %}>
+        <td > {{ item.commande}} </td>
+<td>{{ item.modpaie}} </td>
+        <td>{{ item.modlivr}} </td>
+        <td>{{ item.region }} </td>
+        <td>{{ item.description }} </td>
+        <td>{{ item.date|date('d-m-Y') }} </td>
+        <td>{{ item.livreur }} </td>
+        <td>
+            <a href="{{ path('livraison_show', {'id': item.id}) }}">show</a>
+            <a href="{{ path('livraison_edit', {'id': item.id}) }}">edit</a>
+        </td>
+    </tr {% endfor %}>
+</table>
+
+{% endblock %}

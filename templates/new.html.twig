@@ -1,0 +1,82 @@
+
+
+{% extends 'base-front.html.twig' %}
+
+    {% block title %}
+        <head>
+            <title>Bootstrap Example</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+            <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet'>
+            {% block stylesheets %}
+                <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+            {% endblock %}
+        </head>
+
+    {% endblock %}
+
+
+{% block body %}
+    {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div  class="container-fluid mx-auto" >
+        <form method="post"  class="form-group has-success has-feedback">
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+            {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+            <h1 style="padding-right: 10px; text-align-all: center" >formulaire de livraison</h1>
+            <div class="col-sm-10 mx-auto"  class="form-group">
+                {{ form_label(form.commande, "Commande:") }}
+                {{ form_widget(form.commande) }}
+            </div>
+            <div class="col-sm-10" class="form-group">
+                {{ form_label(form.modpaie, "mode de paiement:") }}
+                {{ form_widget(form.modpaie) }}
+            </div>
+            <div class="col-sm-10" class="form-group" class="dropdown">
+                {{ form_label(form.modlivr, "mode de livraison:") }}
+                {{ form_widget(form.modlivr) }}
+            </div>
+            <div class="col-sm-10" class="form-group">
+                {{ form_label(form.region, "region:") }}
+                {{ form_widget(form.region) }}
+            </div>
+            <div class="col-sm-10" class="form-group">
+                {{ form_label(form.livreur, "livreur:") }}
+                {{ form_widget(form.livreur) }}
+            </div>
+            <div class="col-sm-10" class="form-group">
+                {{ form_label(form.date, "date:") }}
+                {{ form_widget(form.date) }}
+            </div>
+            <div class="col-sm-10" class="form-group">
+                {{ form_label(form.description, "description:") }}
+                {{ form_widget(form.description) }}
+            </div>
+
+            <a href="{{ path('livraison_index') }}">back to list</a>
+            <div class="col-sm-10" class="form-group">
+                <button type="submit" class="btn btn-primary">envoyer!</button>
+            </div>
+            {{ form_end(form) }}
+
+        </form>
+    </div>
+
+
+
+{% endblock %}
+{% block javascripts %}
+    <!-- Flashy depends on jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Load Flashy default JavaScript -->
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+{% endblock %}
+
