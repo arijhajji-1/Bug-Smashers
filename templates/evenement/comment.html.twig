@@ -1,0 +1,65 @@
+{% extends 'base-back.html.twig' %}
+
+    {% block title %}Commentaire{% endblock %}
+
+    {% block body %}
+        <br>
+        <br>
+        <div class="card-body">
+            <h1 class="card-title">La liste des commentaires</h1>
+
+
+            <br>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>
+                        id
+                    </th>
+                    <th>
+                       nom
+                    </th>
+                    <th>
+                        mail
+                    </th>
+                    <th>
+                        description
+                    </th>
+
+                    <th colspan="2" class="text-center"> suppression </th>
+                    <th colspan="2" class="text-center"> signal </th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for av in avis %}
+
+
+
+
+<tr>
+    <td>{{ av.id }}</td>
+                                <td>{{ av.nom }}</td>
+                                <td> {{ av.email }}</td>
+
+
+                            <td>{{av.description}}</td>
+
+    <td ><a href="{{ path('comment_supprimer', {'id': av.id}) }}">Supprimer<i class="mdi mdi-delete-forever"></i></a></td>
+
+</tr>
+
+
+
+                {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <br>
+            <div style="margin: 0 auto; text-align: center">
+                <a href="{{ path('evenement_affiche')  }}" class="btn btn-outline-dark btn-fw" >Retour aux évènements</a>
+            </div>
+        </div>
+    {% endblock %}
