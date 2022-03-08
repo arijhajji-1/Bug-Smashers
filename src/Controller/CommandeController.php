@@ -36,13 +36,16 @@ class CommandeController extends AbstractController
      */
     public function index(CommandeRepository $CommandeRepository,Request $request, PaginatorInterface $paginator): Response
     {
+
         $donnees=$CommandeRepository->findAll();
 
         $commande= $paginator->paginate(
             $donnees, // Requête contenant les données à paginer (ici nos articles)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
             6 // Nombre de résultats par page
+
         );
+
         return $this->render('commande/index.html.twig',['commandes'=>$commande]);
     }
 
@@ -57,6 +60,7 @@ class CommandeController extends AbstractController
         $commande = new Commande();
         $panier = $session->get("panier", []);
         $form = $this->createForm(CommandeType::class, $commande);
+        $commande->setIduser($this->getUser()->getId());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

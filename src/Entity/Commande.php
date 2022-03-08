@@ -68,6 +68,11 @@ class Commande
      */
     private $Facture;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $iduser;
+
 
 
     public function __construct()
@@ -205,6 +210,18 @@ class Commande
     public function __toString(): string
     {
         return $this->getNom();
+    }
+
+    public function getIduser(): ?int
+    {
+        return $this->iduser;
+    }
+
+    public function setIduser(int $iduser): self
+    {
+        $this->iduser = $iduser;
+
+        return $this;
     }
 
 }
