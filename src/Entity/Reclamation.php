@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ReclamationRepository;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -41,12 +42,15 @@ class Reclamation
     private $categorie;
 
     /**
+     *   @Assert\NotBlank(message = "La date de début doit être saisie.")
+     * @Assert\Date(message = "La date de début n'est pas valide.")
      * @ORM\Column(type="date")
      * @Groups("post:read")
      */
     private $date;
 
     /**
+
      * @ORM\Column(type="boolean",nullable="yes")
      *@Groups("post:read")
      */
@@ -65,6 +69,11 @@ class Reclamation
      * @Groups("post:read")
      */
     private $sujet;
+
+    public function __construct()
+    {
+        $this->date = new \Datetime;
+    }
 
     public function getId(): ?int
     {
@@ -98,6 +107,14 @@ class Reclamation
     public function getCategorie(): ?string
     {
         return $this->categorie;
+    }
+    public function registerBundles()
+    {
+        return array(
+            // ...
+            new MercurySeries\FlashyBundle\MercurySeriesFlashyBundle(),
+            // ...
+        );
     }
 
     public function setCategorie(string $categorie): self
@@ -154,10 +171,10 @@ class Reclamation
 
         return $this;
     }
-    public function __construct()
+   /* public function __construct()
     {
         $this->date = new \Datetime;
 
-    }
+    }*/
 
 }

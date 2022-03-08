@@ -6,9 +6,11 @@ use App\Entity\Commande;
 use App\Entity\Livreur;
 use App\Repository\LivraisonRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use MercurySeries\FlashyBundle\MercurySeriesFlashyBundle;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 
 /**
  * @ORM\Entity(repositoryClass=LivraisonRepository::class)
@@ -72,6 +74,16 @@ class Livraison
         $this->livreur = new ArrayCollection();
     }
 */
+
+    public function registerBundles()
+    {
+        return array(
+            // ...
+            new MercurySeries\FlashyBundle\MercurySeriesFlashyBundle(),
+            // ...
+        );
+    }
+
 
     public function getId(): ?int
     {
