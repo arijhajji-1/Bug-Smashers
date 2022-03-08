@@ -247,32 +247,47 @@ class ProduitController extends AbstractController
     /**
      * @Route("/produit/affback/acheter", name="produit_acheter_affichage_back")
      */
-    public function backAcheter(ProduitAcheterRepository $produitRepository, Request $request): Response
+    public function backAcheter(ProduitAcheterRepository $produitRepository, Request $request,EntityManagerInterface $em,
+                                PaginatorInterface $paginator): Response
     {
         $data = new SearchData();
         $form = $this->createForm(SearchForm::class,$data, [
             'method' => 'POST'
         ]);
         $form->handleRequest($request);
-        $produitA=$produitRepository->findSearch($data);
+        $dql   = "SELECT p FROM App\Entity\ProduitAcheter p";
+        $query = $em->createQuery($dql);
+        $produit = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            6 // Nombre de résultats par page
+        );
         return $this->render('produit/affbackacheter.html.twig', [
-            'products' => $produitA,
+            'products' => $produit,
             'form' => $form->createView(),
         ]);
     }
     /**
      * @Route("/produit/affback/louer", name="produit_Louer_affichage_back")
      */
-    public function backLouer(ProduitLouerRepository $produitRepository, Request $request): Response
+    public function backLouer(ProduitLouerRepository $produitRepository,EntityManagerInterface $em,
+                              PaginatorInterface $paginator, Request $request): Response
     {
         $data = new SearchData();
         $form = $this->createForm(SearchForm::class,$data, [
             'method' => 'POST'
         ]);
         $form->handleRequest($request);
-        $produitL=$produitRepository->findSearch($data);
+        $dql   = "SELECT p FROM App\Entity\ProduitAcheter p";
+        $query = $em->createQuery($dql);
+        $produit = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            6 // Nombre de résultats par page
+        );
+
         return $this->render('produit/affbacklouer.html.twig', [
-            'products' => $produitL,
+            'products' => $produit,
             'form' => $form->createView(),
         ]);
     }

@@ -95,6 +95,11 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Wishlist::class, mappedBy="users", cascade={"persist", "remove"})
+     */
+    private $wishlist;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -268,6 +273,28 @@ class User implements UserInterface
     public function setCin($cin): void
     {
         $this->cin = $cin;
+    }
+
+    public function getWishlist(): ?Wishlist
+    {
+        return $this->wishlist;
+    }
+
+    public function setWishlist(?Wishlist $wishlist): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($wishlist === null && $this->wishlist !== null) {
+            $this->wishlist->setUsers(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($wishlist !== null && $wishlist->getUsers() !== $this) {
+            $wishlist->setUsers($this);
+        }
+
+        $this->wishlist = $wishlist;
+
+        return $this;
     }
 
 
