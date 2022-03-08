@@ -278,7 +278,7 @@ class ProduitController extends AbstractController
             'method' => 'POST'
         ]);
         $form->handleRequest($request);
-        $dql   = "SELECT p FROM App\Entity\ProduitAcheter p";
+        $dql   = "SELECT p FROM App\Entity\ProduitLouer p";
         $query = $em->createQuery($dql);
         $produit = $paginator->paginate(
             $query,
