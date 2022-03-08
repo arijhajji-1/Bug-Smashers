@@ -61,10 +61,10 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      * @Assert\NotBlank
      * @Assert\Length(
-     *      min = 11,
-     *      max = 11,
-     *      minMessage = "Your telephone must be 11 numbers",
-     *      maxMessage = "Your telephone must be 11 numbers"
+     *      min = 12,
+     *      max = 12,
+     *      minMessage = "Your telephone must be 12 numbers",
+     *      maxMessage = "Your telephone must be 12 numbers"
      * )
      */
     private $telephone;
