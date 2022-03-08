@@ -1,0 +1,36 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Modifier produit{% endblock %}
+
+{% block body %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th> id Produit</th>
+                <th> Nom </th>
+                <th>Categorie</th>
+                <th> Marque </th>
+                <th> Prix</th>
+                <th> Quantité </th>
+            </tr>
+            </thead>
+            <tbody id="ach">
+            {% for product in product %}
+                <tr>
+                    <td class="py-1">
+                        {{ product.id }}
+                    </td>
+                    <td> {{ product.nom }} </td>
+                    <td> {{ product.category.getLabel() }}</td>
+                    <td> {{ product.marque }}
+                    </td>
+                    <td> {{ product.prix-(product.prix*product.getPromotion().getPourcentage()/100) }} </td>
+                    <td> {{ product.qte }} </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}

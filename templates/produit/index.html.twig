@@ -111,7 +111,14 @@
                                 <div class="product-item__content">
                                     <div class="product-item__info">
                                         <h4 class="title"><a href="{{ path("single_produitA", {'id':produit.id })}}">{{ produit.nom }}</a></h4>
-                                        <span class="price"><strong>Price:</strong> <br>{{ produit.prix }} dt</span>
+                                        <span class="price"><strong>Price:</strong>
+                                            {% if produit.getPromotion() %}
+
+                                            <br><del>{{ produit.prix }} dt </del> <br>{{ produit.prix-(produit.prix*produit.getPromotion().getPourcentage()/100) }}dt</span>
+                                                {% else %}
+                                                 <br>   </span>
+                                                    {% endif %}
+
                                     </div>
 
                                     <div class="product-item__action">
@@ -129,8 +136,14 @@
                                         <p>{{ produit.description }}</p>
                                     </div>
                                 </div>
+                                    {% if produit.getPromotion() %}
+                                    <div class="product-item__sale">
+                                        <span class="sale-txt">-{{ produit.getPromotion().getPourcentage }}%</span>
+                                    </div>
+                                    {% endif %}
+                                </div>
                             </div>
-                        </div>
+
                         <!-- End Product Item -->
 
         {% endfor %}

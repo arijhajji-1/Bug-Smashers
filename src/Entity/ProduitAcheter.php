@@ -81,6 +81,11 @@ class ProduitAcheter
      */
     private $wishlists;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Promotion::class, inversedBy="produitAcheter")
+     */
+    private $promotion;
+
     public function __construct()
     {
         $this->avis = new ArrayCollection();
@@ -245,6 +250,18 @@ class ProduitAcheter
         if ($this->wishlists->removeElement($wishlist)) {
             $wishlist->removeProduitAcheter($this);
         }
+
+        return $this;
+    }
+
+    public function getPromotion(): ?Promotion
+    {
+        return $this->promotion;
+    }
+
+    public function setPromotion(?Promotion $promotion): self
+    {
+        $this->promotion = $promotion;
 
         return $this;
     }
