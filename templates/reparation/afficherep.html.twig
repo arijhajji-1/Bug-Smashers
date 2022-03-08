@@ -22,6 +22,8 @@
 
             <tr >
                 {% for reparation in reparation %}
+                {% if app.user.id== reparation.iduser%}
+
                 <td>{{ reparation.category }}</td>
 
                 <td>{{ reparation.type }}</td>
@@ -39,10 +41,8 @@
 
                 </td>
             </tr>
-            {% else %}
-                <tr>
-                    <td colspan="4">no records found</td>
-                </tr>
+
+                {% endif %}
             {% endfor %}
             </tbody>
 

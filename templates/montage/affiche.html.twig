@@ -23,6 +23,8 @@
                     <table class="table table-bordered">
                         <thead>
                         <th>
+
+
                             <tr>
                                 <th >Processeur </th>
                                 <th >Carte graphique </th>
@@ -42,7 +44,7 @@
                         <tr>
 
                             {% for montage in montage %}
-
+                            {% if app.user.id== montage.iduser%}
                             <td>{{ montage.Processeur }}</td>
                             <td>{{ montage.CarteGraphique }}</td>
                             <td>{{ montage.CarteMere }}</td>
@@ -55,9 +57,9 @@
                              <td><button  class="btn btn-brand"><a href="{{ path('update', {'id': montage.Id}) }}"style="color: white;">Modifier</a></button></td>
                         </tr>
                         </tbody>
+                        {% endif %}
 
                         {% endfor %}
-
                     </table>
 
 

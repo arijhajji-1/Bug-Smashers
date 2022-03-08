@@ -18,12 +18,13 @@ class ReparationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('category',        EntityType::class,
-                [
-                    'class'                 => 'App\Entity\Category',
-                    'choice_label'          => 'label',
-
-                ])
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.id', 'ASC');},
+                'choice_label' => 'label',
+            ])
             ->add('type')
             ->add('description')
             ->add('Reserver')
