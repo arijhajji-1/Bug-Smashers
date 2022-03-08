@@ -71,4 +71,14 @@ class IndexController extends AbstractController
             'controller_name' => 'IndexController',
         ]);
     }
+
+    /**
+     * @Route("/reclamation", name="indexreclamation")
+     */
+    public function reclamation(): Response
+    {
+        return $this->render('index/reclamation.html.twig', [
+            'controller_name' => 'IndexController',
+        ]);
+    }
 }

@@ -17,4 +17,14 @@ class IndexbackController extends AbstractController
             'controller_name' => 'IndexbackController',
         ]);
     }
+
+    /**
+     * @Route("/indexback_reclamation", name="reclamation")
+     */
+    public function reclamation(): Response
+    {
+        return $this->render('indexback/listeReclamation.html.twig', [
+            'controller_name' => 'IndexController',
+        ]);
+    }
 }

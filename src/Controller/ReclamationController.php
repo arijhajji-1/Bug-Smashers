@@ -6,6 +6,7 @@ use App\Form\ReclamationType;
 //use http\Env\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -19,9 +20,23 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Normalizer\NormalizableInterface;
 
 class ReclamationController extends AbstractController
 {
+    /**
+     * @Route("/reclamation/home", name="acceuil_reclamation")
+     */
+
+public function home(){
+
+    return $this->render('reclamation/home.html.twig',
+    ['controller_name'=>'ReclamationController']);
+
+}
+
+
+
 
 
 
@@ -29,7 +44,7 @@ class ReclamationController extends AbstractController
      * @Route("/reclamation/add", name="ajout_reclamation")
      */
 //fonction de l'utilisateur pour ajouter une réclamation
-    public function addrecl(Request $request){
+    public function addrecl(Request $request, FlashyNotifier $flashy){
 
         //créer une nouvelle réclamation
         $reclaim= new Reclamation();
@@ -66,7 +81,7 @@ class ReclamationController extends AbstractController
         $em=$this->getDoctrine()->getManager();
         $em->persist($reclaim);
         $em->flush();
-
+           // $flashy->success('relamation enregistrée !');
             $this->addFlash('success', 'relamation enregistrée !');
         return $this->redirectToRoute('ajout_reclamation');
         }
@@ -87,11 +102,15 @@ class ReclamationController extends AbstractController
       */
 
      //fonction de l'admnistrateur pour afficher la liste des réclamations
-    public function reclaimlist()
+    public function reclaimlist( Request $request)
     {
-
+//NormalizableInterface $normalizer,
         $reclamations = $this->getDoctrine()->getRepository(Reclamation::class)->findAll();
-        return $this->render('reclamation/listeReclamation.html.twig', ['reclamations' => $reclamations]);
+       // $jsoncontent= $normalizer->normalize($reclamations,'json',['groups'=>'post:read']);
+        return $this->render('reclamation/listeReclamation.html.twig', [
+            //'data'=>$jsoncontent
+            'reclamations' => $reclamations
+        ]);
         if (!$reclamations) {
             throw $this->createNotFoundException(
                 'Aucune reclamation trouvée dans la base de données'
@@ -134,6 +153,7 @@ class ReclamationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->flush();
+            $this->addFlash('success', 'relamation modifiée !');
             return $this->redirectToRoute('list_reclamation');
         }
         return $this->render('reclamation/update.html.twig', [
@@ -160,6 +180,7 @@ class ReclamationController extends AbstractController
 
      $em->remove($reclamation);
      $em->flush();
+     $this->addFlash('success', 'relamation modifiée!');
      return $this->redirectToRoute('list_reclamation');
 
  }

@@ -2,138 +2,106 @@
 
 namespace App\Controller;
 
+use App\Entity\Commande;
 use App\Entity\Livraison;
-use App\Entity\Livreur;
-use App\Form\LivraisonType;
+use App\Form\Livraison1Type;
+use App\Repository\LivraisonRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 
+/**
+ * @Route("/livraison")
+ */
 class LivraisonController extends AbstractController
 {
     /**
-     * @Route("/livraison", name="livraison")
+     * @Route("/list/livraison", name="livraison_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(LivraisonRepository $livraisonRepository): Response
     {
+        $livraison = $this->getDoctrine()->getRepository(Livraison::class)->findAll();
         return $this->render('livraison/index.html.twig', [
-            'controller_name' => 'LivraisonController',
+            'livraisons' => $livraison
+        ]);
+       /* return $this->render('livraison/index.html.twig', [
+            'livraisons' => $livraisonRepository->findAll(),
+        ]);*/
+    }
+
+    /**
+     * @Route("/add/livraison", name="livraison_new", methods={"GET", "POST"})
+     */
+    public function new(Request $request, EntityManagerInterface $entityManager , FlashyNotifier $flashy): Response
+    {
+        $livraison = new Livraison();
+        $livraison->setDate(new \Datetime());
+
+       // $commande = new Commande();
+        $commande = $this->getDoctrine()->getRepository(Commande::class)->findOneByid(12);
+
+        $livraison->setCommande($commande);
+        $form = $this->createForm(Livraison1Type::class, $livraison);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($livraison);
+            $entityManager->flush();
+            $this->addFlash('success', 'livraison enregistrée!');
+            return $this->redirectToRoute('livraison_index', [], Response::HTTP_SEE_OTHER);
+            //$flashy->success('livraison enregistrée!', 'http://your-awesome-link.com');
+        }
+
+        return $this->render('livraison/new.html.twig', [
+            'livraison' => $livraison,
+            'form' => $form->createView(),
         ]);
     }
 
+    /**
+     * @Route("/list/{id}", name="livraison_show", methods={"GET"})
+     */
+    public function show(Livraison $livraison): Response
+    {
+        return $this->render('livraison/show.html.twig', [
+            'livraison' => $livraison,
+        ]);
+    }
 
     /**
-     * @Route("/livraison/add", name="ajout_livraison")
+     * @Route("/{id}/edit", name="livraison_edit", methods={"GET", "POST"})
      */
-//fonction de l'utilisateur pour ajouter une réclamation
-    public function addlivr(Request $request){
-
-        //créer une nouvelle réclamation
-        $livraison= new Livraison();
-        // Cette date sera donc préaffichée dans le formulaire, cela facilite le travail de l'utilisateur
-       // $reclaim->setDate(new \Datetime());
-        //recuperer le formulaire
-        $form= $this->createForm(LivraisonType::class,$livraison);
-        //ajout d'un bouton submit
-        //$form->add('ajouter', SubmitType::class);
-
+    public function edit(Request $request, Livraison $livraison, EntityManagerInterface $entityManager, FlashyNotifier $flashy): Response
+    {
+        $form = $this->createForm(Livraison1Type::class, $livraison);
         $form->handleRequest($request);
-        //controle de saisie
-        if($form->isSubmitted()&& $form->isValid())
-        {
-            $em=$this->getDoctrine()->getManager();
-            $em->persist($livraison);
-            $em->flush();
-            return $this->redirectToRoute('ajout_livraison');
-        }
-        //rendre la vue et generer le html du formulaire
-        return $this->render('livraison/livraison.html.twig',[
-            'form'=>$form->createView()]);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            $this->addFlash('success', 'livraison modifiée !');
+            return $this->redirectToRoute('livraison_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('livraison/edit.html.twig', [
+            'livraison' => $livraison,
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
-     * @Route("/livraison/infos", name="infos_livraison")
+     * @Route("/{id}", name="livraison_delete", methods={"POST"})
      */
-public function addreponse(Request $request){
+    public function delete(Request $request, Livraison $livraison, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$livraison->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($livraison);
+            $entityManager->flush();
+            $this->addFlash('success', 'livraison supprimée !');
+        }
 
-
-    $livraison = new livraison();
-    $formBuilder = $this->createFormBuilder($livraison);
-    $formBuilder
-        ->add('region',
-            ChoiceType::class,
-            ['choices'  => [
-                'ariana' => "ariana",
-                'tunis' => "tunis",
-                'el aouina' => "el aouina",
-                'la marsa' => "la marsa",
-                'lac1' => "lac1",
-                'menzah 5' => "menzah 5",],
-            ])
-        ->add('modpaie',ChoiceType::class,
-            ['choices'  => [
-                'cash à la livraison' => "cash à la livraison",
-                'par carte' => "par carte",],
-                'expanded'=> true,
-            ])
-        ->add('modlivr',ChoiceType::class,
-            ['choices'  => [
-                'à domicile' => "à domicile",
-                'dans un point relai' => "dans un point relai",],
-                'expanded'=> true,
-            ]);
-    $form= $formBuilder->getForm();
-    $form->handleRequest($request);
-
-    $livraison->setdescription("votre comande a bien été reçu!! vous serez
-     livré dans 48h (ou vous pouvez passer retirer dans un de nos points relais)");
-    // Cette date sera donc préaffichée dans le formulaire, cela facilite le travail de l'utilisateur
-     $livraison->setDate(new \Datetime());
-    $livreur = new livreur();
-
-    $livraison->addLivreur($livreur);
-    if($form->isSubmitted()&& $form->isValid()) {
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($livreur);
-        $entityManager->persist($livraison);
-        $entityManager->flush();
-       // return $this->redirectToRoute('infos_livraison');
+        return $this->redirectToRoute('livraison_index', [], Response::HTTP_SEE_OTHER);
     }
-
-    return $this->render('livraison/livraison.html.twig',[
-        'form'=>$form->createView()]);
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
