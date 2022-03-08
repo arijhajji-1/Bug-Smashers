@@ -76,9 +76,15 @@ class ProduitAcheter
      */
     private $montage;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Wishlist::class, mappedBy="produitAcheter")
+     */
+    private $wishlists;
+
     public function __construct()
     {
         $this->avis = new ArrayCollection();
+        $this->wishlists = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -214,5 +220,32 @@ class ProduitAcheter
     public function __toString()
     {
         return $this->getNom();
+    }
+
+    /**
+     * @return Collection<int, Wishlist>
+     */
+    public function getWishlists(): Collection
+    {
+        return $this->wishlists;
+    }
+
+    public function addWishlist(Wishlist $wishlist): self
+    {
+        if (!$this->wishlists->contains($wishlist)) {
+            $this->wishlists[] = $wishlist;
+            $wishlist->addProduitAcheter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWishlist(Wishlist $wishlist): self
+    {
+        if ($this->wishlists->removeElement($wishlist)) {
+            $wishlist->removeProduitAcheter($this);
+        }
+
+        return $this;
     }
 }
