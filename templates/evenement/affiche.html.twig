@@ -38,7 +38,9 @@
                 {{evenement.id}}
             </td>
             <td>
-                {{evenement.nom}}
+
+                <a class="btn btn-white" href="{{  path('evenement_comment', {'id': evenement.id })  }}"> {{ evenement.nom }}</a>
+
             </td>
             <td>
                 {{ evenement.date|date("m/d/Y") }}
