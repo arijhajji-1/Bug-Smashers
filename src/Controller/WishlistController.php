@@ -15,7 +15,7 @@ class WishlistController extends AbstractController
     /**
      * @Route("/AjouterpAWish/{id}", name="AjouterpAWish")
      */
-    public function ajouterpAWish(Request $request, int $id,\Swift_Mailer $mailer): Response
+    public function ajouterpAWish(Request $request, int $id): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $produit = $entityManager->getRepository(ProduitAcheter::class)->find($id);
@@ -28,19 +28,7 @@ class WishlistController extends AbstractController
             $this->getUser()->getWishlist()->addProduitAcheter($produit) ;
         }
         $entityManager->flush();
-        $message = (new \Swift_Message( 'WishList!'))
-            ->setFrom('Reloua.tunisie@gmail.com')
 
-            ->setTo($this->getUser()->getEmail())
-            ->setBody(
-
-                $this->renderView(
-                    'wishlist/email.html.twig', compact('produit')
-                ),
-                'text/html'
-            )
-        ;
-        $mailer->send($message);
         return $this->redirectToRoute("afficher_wishlist");
     }
     /**

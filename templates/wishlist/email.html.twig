@@ -46,7 +46,11 @@
                style="text-align: justify-all;
                               align-items: center;
                               font-size: 15px;
-                              padding-bottom: 12px;">{{ produit.nom }} a été ajotuer a votre wishlist avec succées
+                              padding-bottom: 12px;">Le produit : "{{ produit.nom }}" est maintenant en promotion de {{
+                produit.getPromotion().getPourcentage }}% <hr>
+            <h1>Prix :</h1>
+            <br><del>{{ produit.prix }} dt </del> <br>
+            {{ produit.prix-(produit.prix*produit.getPromotion().getPourcentage()/100) }} dt</span>
             </p>
 
         </td>

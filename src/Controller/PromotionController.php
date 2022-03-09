@@ -82,7 +82,7 @@ class PromotionController extends AbstractController
     /**
      * @Route("/produit/ajouterAtoP/{id}", name="Ajouter_ProduitToProm")
      */
-    public function ajouterAtoP(Request $request, EntityManagerInterface $entityManager, $id): Response
+    public function ajouterAtoP(Request $request, EntityManagerInterface $entityManager, $id,\Swift_Mailer $mailer): Response
     {
 
         $form = $this->createForm(AjouterProduitPromType::class);
@@ -93,8 +93,22 @@ class PromotionController extends AbstractController
             $promotion=$form->get("Promotion")->getData();
             $produit->setPromotion($promotion);
             $entityManager->flush();
-
+            foreach($produit->getWishlists() as $item) {
+                $email = $item->getUsers()->getEmail();
+                $message = (new \Swift_Message( 'Promotion!!'))
+                    ->setFrom('Reloua.tunisie@gmail.com')
+                    ->setTo($email)
+                    ->setBody(
+                        $this->renderView(
+                            'wishlist/email.html.twig', compact('produit')
+                        ),
+                        'text/html'
+                    )
+                ;
+                $mailer->send($message);
+            }
             $this->addFlash('ajoutP', 'Promotion ajouté avec succés');
+
 
             return $this->redirectToRoute('Ajouter_ProduitToProm', ["id"=>$id], Response::HTTP_SEE_OTHER);
         }

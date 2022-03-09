@@ -114,7 +114,8 @@
                                         <span class="price"><strong>Price:</strong>
                                             {% if produit.getPromotion() %}
 
-                                            <br><del>{{ produit.prix }} dt </del> <br>{{ produit.prix-(produit.prix*produit.getPromotion().getPourcentage()/100) }} dt</span>
+                                            <br><del>{{ produit.prix }} dt </del> <br>
+                                            {{ produit.prix-(produit.prix*produit.getPromotion().getPourcentage()/100) }} dt</span>
                                                 {% else %}
                                                  <br> {{ produit.prix }} dt  </span>
                                                     {% endif %}
