@@ -23,7 +23,10 @@ class ReparationType extends AbstractType
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
                         ->orderBy('u.id', 'ASC');},
-                'choice_label' => 'label',
+                'choice_value' => function ($value) {
+                    return $value;
+                }
+
             ])
             ->add('type')
             ->add('description')

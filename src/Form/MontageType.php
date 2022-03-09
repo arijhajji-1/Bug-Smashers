@@ -34,6 +34,9 @@ class MontageType extends AbstractType
                 },
                 'choice_attr' => function (ProduitAcheter $produitAcheter) {
                     return ['data-prix' => $produitAcheter->getPrix()];
+                },
+                'choice_value' => function ($value) {
+                    return $value;
                 }
 
             ])
@@ -48,6 +51,9 @@ class MontageType extends AbstractType
                 },
                 'choice_attr' => function (ProduitAcheter $produitAcheter) {
                     return ['data-prix' => $produitAcheter->getPrix()];
+                },
+                'choice_value' => function ($value) {
+                    return $value;
                 }
             ])
             ->add('carte_mere', EntityType::class, ['class' => ProduitAcheter::class, 'query_builder' => function (EntityRepository $er) {
@@ -61,6 +67,9 @@ class MontageType extends AbstractType
                 },
                 'choice_attr' => function (ProduitAcheter $produitAcheter) {
                     return ['data-prix' => $produitAcheter->getPrix()];
+                },
+                'choice_value' => function ($value) {
+                    return $value;
                 }
             ])
             ->add('disque_systeme', EntityType::class, ['class' => ProduitAcheter::class, 'query_builder' => function (EntityRepository $er) {
@@ -74,6 +83,9 @@ class MontageType extends AbstractType
                 },
                 'choice_attr' => function (ProduitAcheter $produitAcheter) {
                     return ['data-prix' => $produitAcheter->getPrix()];
+                },
+                'choice_value' => function ($value) {
+                    return $value;
                 }
             ])
             ->add('boitier', EntityType::class, ['class' => ProduitAcheter::class, 'query_builder' => function (EntityRepository $er) {
@@ -87,6 +99,9 @@ class MontageType extends AbstractType
                 },
                 'choice_attr' => function (ProduitAcheter $produitAcheter) {
                     return ['data-prix' => $produitAcheter->getPrix()];
+                },
+                'choice_value' => function ($value) {
+                    return $value;
                 }
             ])
             ->add('stockage_supp', EntityType::class, ['class' => ProduitAcheter::class, 'query_builder' => function (EntityRepository $er) {
@@ -100,6 +115,9 @@ class MontageType extends AbstractType
                 },
                 'choice_attr' => function (ProduitAcheter $produitAcheter) {
                     return ['data-prix' => $produitAcheter->getPrix()];
+                },
+                'choice_value' => function ($value) {
+                    return $value;
                 }
             ])
             ->add ( 'montant',HiddenType::class    )

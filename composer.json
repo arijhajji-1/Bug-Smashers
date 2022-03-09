@@ -8,7 +8,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
-        "captcha-com/symfony-captcha-bundle": "^4.2",
+        "captcha-com/symfony-captcha-bundle": "4.*",
         "cmen/google-charts-bundle": "^5.0",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.5",
