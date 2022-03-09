@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AvisRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -37,7 +39,19 @@ class Avis
      * @ORM\ManyToOne(targetEntity=Evenement::class, inversedBy="avis")
      */
     private $evenement;
+
     protected $captchaCode;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reply::class, mappedBy="avis", orphanRemoval=true)
+     */
+    private $replies;
+
+
+    public function __construct()
+    {
+        $this->replies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -100,6 +114,38 @@ class Avis
     {
         $this->captchaCode = $captchaCode;
     }
+
+    /**
+     * @return Collection|Reply[]
+     */
+    public function getReplies(): Collection
+    {
+        return $this->replies;
+    }
+
+    public function addReply(Reply $reply): self
+    {
+        if (!$this->replies->contains($reply)) {
+            $this->replies[] = $reply;
+            $reply->setAvis($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReply(Reply $reply): self
+    {
+        if ($this->replies->removeElement($reply)) {
+            // set the owning side to null (unless already changed)
+            if ($reply->getAvis() === $this) {
+                $reply->setAvis(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 
 
 }

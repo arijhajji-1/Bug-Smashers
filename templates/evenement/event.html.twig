@@ -54,9 +54,9 @@
                                     </div>
                                 {% endfor %}
                                 {% for av in avis %}
+                                    <h6>Le Commentaire :</h6>
 
                                 <div class="rating-item">
-
                                     <div class="rating-author-txt">
                                         <div class="rating-author-pic">
                                         </div>
@@ -66,9 +66,28 @@
                                         </div>
 
                                         <p>{{av.description}}</p>
-
+                                        <h3 align="right"> <a href="{{ path("reply",{'id':av.id}) }}"><i class="ion-ios-undo"></i></a></h3>
                                     </div>
+
                                 </div>
+                                    {% if av.getReplies()|length() %}
+                                    <h6>Les réponses :</h6>
+                                    {% endif %}
+                                    {% for r in av.getReplies() %}
+                                        <div class="rating-item">
+                                            <div class="rating-author-txt">
+                                                <div class="rating-author-pic">
+                                                </div>
+                                                <div class="rating-meta">
+                                                    <h3>{{ r.nom }}</h3>
+                                                    <span class="time">-  {{ r.email }}</span>
+                                                </div>
+
+                                                <p>{{r.description}}</p>
+
+                                            </div>
+                                        </div>
+                                    {% endfor %}
                                     {% endfor %}
                                     {{form_start(form)}}
 

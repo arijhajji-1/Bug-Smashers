@@ -8,9 +8,9 @@
 
     <h1 class="card-title">Ajouter un événement </h1>
     <br>
-    <br>
-    {{ form_start(form,{'class': 'forms-sample','attr': {'novalidate':'novalidate'}} ) }}
-    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    <br>{{ form_start(form,{'class': 'forms-sample','attr': {'novalidate':'novalidate'}} ) }}
+        {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
 
     {{ form_widget(form) }}
     <button class="btn btn-outline-dark btn-fw">{{ button_label|default('AJOUTER') }}</button>
@@ -20,4 +20,5 @@
 
     </div>
 </div>
+
 {% endblock %}
