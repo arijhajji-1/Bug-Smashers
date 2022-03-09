@@ -1,0 +1,27 @@
+{% extends 'listelivreur.html.twig' %}
+
+{% block content %}
+    <hr>
+    <spacer size="20"></spacer>
+    <row>
+        <columns>
+            <p>
+                What a week {{ livreur.nomLivreur }}! Here's a quick review of what you've been up to on delivrery this week
+            </p>
+        </columns>
+    </row>
+    <row>
+        <columns>
+            {{ include('livraison_detail.html.twig') }}
+        </columns>
+    </row>
+    <row>
+        <columns>
+            <center>
+                <spacer size="20"></spacer>
+                <button href="{{ url('listelivreur.html.twig') }}">Check on the Space Bar</button>
+                <spacer size="20"></spacer>
+            </center>
+        </columns>
+    </row>
+{% endblock %}

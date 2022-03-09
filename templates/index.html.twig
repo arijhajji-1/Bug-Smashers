@@ -35,6 +35,7 @@
         <td>
             <a href="{{ path('livraison_show', {'id': item.id}) }}">show</a>
             <a href="{{ path('livraison_edit', {'id': item.id}) }}">edit</a>
+            <a href="{{ path('livraison_left', {'id': item.id}) }}">left days</a>
         </td>
     </tr {% endfor %}>
 </table>

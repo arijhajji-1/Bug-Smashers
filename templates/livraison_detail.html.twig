@@ -1,0 +1,28 @@
+{% extends 'livraison/index.html' %}
+{% block body %}
+
+    <table class="table table-striped">
+        <tr>
+            <th> commande</th>
+            <th> modpai </th>
+            <th> modlivr</th>
+            <th> region</th>
+            <th> description</th>
+            <th> date</th>
+            <th> livreur</th>
+        </tr>
+        {% for item in livraisons %}
+            <tr>
+                <td > {{ item.commande}} </td>
+                <td>{{ item.modpaie}} </td>
+                <td>{{ item.modlivr}} </td>
+                <td>{{ item.region }} </td>
+                <td>{{ item.description }} </td>
+                <td>{{ item.date|date('d-m-Y') }} </td>
+                <td>{{ item.livreur }} </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+{% endblock %}

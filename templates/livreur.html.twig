@@ -1,0 +1,43 @@
+{% extends 'base-back.html.twig' %}
+
+    {% block title %}
+
+        </head>{% endblock %}
+{% block body %}
+    <div  class="container-fluid">
+        <form method="post"  class="form-group has-success has-feedback">
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+            {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+            <h1 style="padding-right: 10px;" >Ajouter un livreur</h1>
+            <div class="col-sm-10"  class="form-group">
+                {{ form_label(form.nomLivreur, "nom:") }}
+                {{ form_widget(form.nomLivreur) }}
+            </div>
+            <div class="col-sm-10" class="form-group">
+                {{ form_label(form.prenom, "prenom:") }}
+                {{ form_widget(form.prenom) }}
+            </div>
+            <div class="col-sm-10" class="form-group" class="dropdown">
+                {{ form_label(form.cin, "cin:") }}
+                {{ form_widget(form.cin) }}
+            </div>
+            <div class="col-sm-10" class="form-group">
+                {{ form_label(form.adresse, "adresse:") }}
+                {{ form_widget(form.adresse) }}
+            </div>
+            <div class="col-sm-10" class="form-group">
+                {{ form_label(form.email, "email:") }}
+                {{ form_widget(form.email) }}
+            </div>
+            <div class="col-sm-10" class="form-group">
+                {{ form_label(form.statut, "statut:") }}
+                {{ form_widget(form.statut) }}
+            </div>
+            <div class="col-sm-10" class="form-group">
+                <button type="submit" class="btn btn-primary">envoyer!</button>
+            </div>
+            {{ form_end(form) }}
+
+        </form>
+    </div>
+{% endblock%}

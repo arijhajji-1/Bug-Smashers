@@ -1,0 +1,45 @@
+{% extends 'base-back.html.twig' %}
+{% block title %}
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    </head>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <canvas id="livraison" width="100%" height="40" style="margin:45px 0 15px 0;"></canvas>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+            integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        let ctx= document.querySelector("#livraison");
+        let graph = new Chart(ctx,{
+
+            type: 'bar',
+            data:{
+                labels: {{ dates|raw}},
+                datasets: [{
+                    label: 'livraison par jour',
+                    data: {{ reclcount|raw }},
+                    borderColor: 'sky',
+                    backgroundColor:['orange','blue','grey']
+                }]
+
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },
+
+        })
+    </script>
+{% endblock %}

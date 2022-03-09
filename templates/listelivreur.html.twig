@@ -1,0 +1,66 @@
+{% extends 'base-back.html.twig' %}
+{% block title %}
+    <head>
+        <title> Liste des Reclamations </title>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css"
+              integrity="sha256-5veQuRbWaECuYxwap/IOE/DAwNxgm4ikX7nrgsqYp88=" crossorigin="anonymous">
+        {% block stylesheets %}
+            <style>
+                #calendrier{
+             width: 80%;
+                    margin: auto;
+                }
+            </style>
+        {% endblock %}
+    </head>
+{% endblock %}
+
+{% block body %}
+    <h1>LISTE DES LIVREURS</h1>
+    <div id="calendrier">
+
+    </div>
+    <table border="1" class="table table-striped table-bordered table-hover table-condensed">
+        <tr>
+            <th> nom</th>
+            <th> prenom</th>
+            <th> cin</th>
+            <th> adresse</th>
+            <th> email</th>
+            <th> statut</th>
+        </tr>
+        <tr {% for item in livreur %}>
+            <td>{{ item.nomLivreur }} </td>
+            <td>{{ item.prenom }} </td>
+            <td>{{ item.cin }} </td>
+            <td>{{ item.adresse }} </td>
+            <td>{{ item.email }} </td>
+            <td>{{ item.statut }} </td>
+            <td>
+                <a href="{{ path('delete_livreur',{'id':item.id}) }}">
+                    <button type="button" class="btn btn-default btn-sm">
+                        <span class="mdi-delete"></span> supprimer
+                    </button>
+                </a>
+
+            <a href="{{ path('update_livreur',{'id':item.id}) }}">  <button type="button" class="btn btn-default btn-sm">
+                    <span class="icon-bg">
+                        <i class="mdi-pencil"></i>modifier
+                    </span></button>
+                </a>
+
+
+                <a href="{{ path('delete_livreur',{'id':item.id}) }}">
+                    <button type="button" class="btn btn-default btn-sm">
+                        <span class="mdi-delete"></span> calendrier livraison
+                    </button>
+                </a>
+
+
+            </td>
+        </tr {% endfor %}>
+    </table>
+
+{% endblock %}
+
