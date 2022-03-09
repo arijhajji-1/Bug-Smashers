@@ -146,22 +146,25 @@ class ProduitController extends AbstractController
      * @Security("is_granted('ROLE_USER') or is_granted('ROLE_ADMIN')")
      */
     public function index(ProduitLouerRepository $produitLouerRepository,ProduitAcheterRepository $produitAcheterRepository,
-                          CategoryRepository $categoryRepository,Request $request, PaginatorInterface $paginator): Response
+                          CategoryRepository $categoryRepository,Request $request, PaginatorInterface $paginator,
+                          EntityManagerInterface $em): Response
     {
         $data = new SearchData();
         $form = $this->createForm(SearchForm::class,$data, [
             'method' => 'POST'
         ]);
         $form->handleRequest($request);
-        $produitA=$produitAcheterRepository->findSearch($data);
-        $produitL=$produitLouerRepository->findSearch($data);
+        $dql   = "SELECT a FROM App\Entity\ProduitAcheter a";
+        $query = $em->createQuery($dql);
         $produitA = $paginator->paginate(
-            $produitA, // Requête contenant les données à paginer (ici nos articles)
+            $query, // Requête contenant les données à paginer (ici nos articles)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
             6 // Nombre de résultats par page
         );
+        $dql   = "SELECT a FROM App\Entity\ProduitLouer a";
+        $query = $em->createQuery($dql);
         $produitL = $paginator->paginate(
-            $produitL, // Requête contenant les données à paginer (ici nos articles)
+            $query, // Requête contenant les données à paginer (ici nos articles)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
             3 // Nombre de résultats par page
         );

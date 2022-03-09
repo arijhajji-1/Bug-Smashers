@@ -58,7 +58,7 @@
 
     <div class="container container-wide">
         <div class="row align-items-center">
-            <div class="col-sm-4 col-lg-2">
+            <div class="col-sm-3 col-lg-2">
                 <div class="site-logo text-center text-sm-left">
                     <a href="{{ path('index') }}"><img src="{{ asset('front/assets/img/logo.png') }}" alt="Logo" /></a>
                 </div>
@@ -91,16 +91,20 @@
                 <div class="site-action d-flex justify-content-center justify-content-sm-end align-items-center">
                     {% if app.user %}
                         <ul class="login-reg-nav nav">
-                            <li>Hello, {{ app.user.firstName }}</li>
+                            <li>{{ app.user.firstName }}</li>
                             <li><a href="{{ path('app_logout') }}">Logout</a></li>
                         </ul>
+                        <div class="mini-cart-wrap">
+                            <a href="{{ path("afficher_wishlist") }}" class="btn-mini-cart">
+                                <i class="ion-ios-heart-outline"></i>
+                            </a>
+                        </div>
                     {% else %}
                         <ul class="login-reg-nav nav">
                             <li><a href="{{ path('app_login') }}">Login</a></li>
                             <li><a href="{{ path('user_new') }}">Inscription</a></li>
                         </ul>
                     {% endif %}
-
                     <div class="mini-cart-wrap">
                         <a href="cart.html" class="btn-mini-cart">
                             <i class="ion-bag"></i>

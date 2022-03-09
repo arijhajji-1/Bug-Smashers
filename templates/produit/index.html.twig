@@ -38,7 +38,7 @@
         <div class="container container-wide">
             <div class="action-bar-inner">
                 <div class="row align-items-center">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <div class="shop-layout-switcher mb-15 mb-sm-0">
                             <ul class="layout-switcher nav">
                                 <li data-layout="grid" class="active"><i class="fa fa-th"></i></li>
@@ -46,17 +46,12 @@
                             </ul>
                         </div>
                     </div>
+                    <br>
+                    <div class="col-sm-8">
+                        <ul class="layout-switcher nav">
+                            <li value="tpc">{{ knp_pagination_sortable(produitsAcheter, 'Trier les produits par prix', 'a.prix') }}</li>
+                        </ul>
 
-                    <div class="col-sm-6">
-                        <div class="sort-by-wrapper">
-                            <label for="sort" class="sr-only">Sort By</label>
-                            <select name="sort" id="sort">
-                                <option value="sbp">Sort By Popularity</option>
-                                <option value="sbn">Sort By Newest</option>
-                                <option value="sbt">Sort By Trending</option>
-                                <option value="sbr">Sort By Rating</option>
-                            </select>
-                        </div>
                     </div>
                 </div>
             </div>
