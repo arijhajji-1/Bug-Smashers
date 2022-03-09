@@ -23,6 +23,8 @@ class LivraisonRepository extends ServiceEntityRepository
     //  * @return Livraison[] Returns an array of Livraison objects
     //  */
     /*
+     *
+
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('l')
@@ -35,6 +37,21 @@ class LivraisonRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     *
+     */
+    public function countday()
+    {
+
+        $qb = $this->createQueryBuilder('l')
+            ->select('SUBSTRING(l.date,1,7) AS date, COUNT(l) AS count')
+            ->groupBy('date');
+
+        return $qb->getQuery()
+            ->getResult();
+
+    }
 
     /*
     public function findOneBySomeField($value): ?Livraison
