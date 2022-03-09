@@ -28,7 +28,7 @@
         {% for user in users %}
             {% if user.roles!=["ROLE_ADMIN"]  %}
             <tr>
-                <td>{{ user.id }}</td>
+                <td class="py-1">{{ user.id }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 <td>{{ user.firstName }}</td>
