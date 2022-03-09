@@ -43,6 +43,11 @@ class Location
      */
     private $produit;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $iduser;
+
 
 
     public function __construct()
@@ -93,14 +98,14 @@ class Location
     }
 
     /**
-     * @return Collection|Produit[]
+     * @return Collection|produitLouer[]
      */
     public function getProduit(): Collection
     {
         return $this->produit;
     }
 
-    public function addProduit(Produit $produit): self
+    public function addProduit(produitLouer $produit): self
     {
         if (!$this->produit->contains($produit)) {
             $this->produit[] = $produit;
@@ -110,7 +115,7 @@ class Location
         return $this;
     }
 
-    public function removeProduit(Produit $produit): self
+    public function removeProduit(produitLouer $produit): self
     {
         if ($this->produit->removeElement($produit)) {
             // set the owning side to null (unless already changed)
@@ -118,6 +123,18 @@ class Location
                 $produit->setLocation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIduser(): ?int
+    {
+        return $this->iduser;
+    }
+
+    public function setIduser(int $iduser): self
+    {
+        $this->iduser = $iduser;
 
         return $this;
     }

@@ -1,0 +1,50 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Votre Commande{% endblock %}
+
+{% block body %}
+<section class="bg-light p-3">
+    <h1>Information de votre commande</h1>
+</section>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Produit</th>
+        <th>Prix</th>
+        <th>Quantité</th>
+        <th>Marque</th>
+        <th>Total</th>
+        <th>Annuler la commande</th>
+    </tr>
+    </thead>
+    <tbody>
+
+
+    {% for element in dataPanier %}
+    <tr>
+        <td>{{ element.produitAcheter.nom }}</td>
+        <td class="text-end">{{ element.produitAcheter.prix }} DT</td>
+
+        <td>{{ element.quantite }}</td>
+        <td>{{ element.produitAcheter.marque }}</td>
+        <td class="text-end">{{ element.quantite * element.produitAcheter.prix }} DT</td>
+        <td>
+            <a href="{{path("cart_delete_all", {id: element.produitAcheter.id})}}" class="btn">delete
+                <i class="bi bi-cart-x"></i>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+        <tfoot>
+
+        <tr>
+            <td colspan="3">Total</td>
+            <td class="text-end">{{ total }} DT</td>
+            <td>
+            </td>
+        </tr>
+        </tfoot>
+</table>
+    {% endfor %}
+{% endblock %}

@@ -112,6 +112,7 @@
                                     <div class="product-item__info">
                                         <h4 class="title"><a href="{{ path("single_produitA", {'id':produit.id })}}">{{ produit.nom }}</a></h4>
                                         <span class="price"><strong>Price:</strong>
+
                                             {% if produit.getPromotion() %}
 
                                             <br><del>{{ produit.prix }} dt </del> <br>
@@ -123,8 +124,7 @@
                                     </div>
 
                                     <div class="product-item__action">
-                                        <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
-                                        <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                        <a href="{{path("cart_add", {id: produit.id})}}" class="btn-add-to-cart"><i class="ion-bag"></i></a>                                        <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
                                         <a class="btn-add-to-cart"
                                                 href="{{ path("AjouterpAWish", {'id':produit.id })}}">
                                             <i class="ion-ios-heart-outline"></i></a>
@@ -201,10 +201,9 @@
                                             <h4 class="title"><a href="{{ path("single_produitL", {'id':produit.id })}}">{{ produit.nom }}</a></h4>
                                             <span class="price"><strong>Price:</strong> <br>{{ produit.prix }} Dt/jour</span>
                                         </div>
-
                                         <div class="product-item__action">
-                                            <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
-                                            <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                            <a href="{{path("location_new", {id: produit.id})}}" class="btn-add-to-cart"><i class="ion-bag"></i></a>
+                                            <a href="{{ path('location_index') }}" class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></a>
                                             <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
                                             <a class="btn-add-to-cart"
                                                href="{{ path("single_produitL", {'id':produit.id })}}"><i

@@ -1,0 +1,86 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}VOS COMMANDES{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <h1 align="center">VOS COMMANDES</h1>
+    <input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Rechercher" aria-label="search" aria-describedby="search">
+    <table class="table" id="tab">
+<div class="col-lg-12 stretch-card">
+
+    <div class="card">
+        <div class="card-body">
+
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Paiment</th>
+                <th>Adresse</th>
+                <th>Telephone</th>
+                <th>Modifier ou annuler</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            {% if app.user.id==commande.iduser %}
+            <tr>
+                <td>{{ commande.id }}</td>
+                <td>{{ commande.nom }}</td>
+                <td>{{ commande.prenom }}</td>
+                <td>{{ commande.paiment }}</td>
+                <td>{{ commande.Adresse }}</td>
+                <td>{{ commande.Telephone }}</td>
+                <td>
+                    <a href="{{ path('commande_show', {'id': commande.id}) }}" class="btn ">Facture
+                        <i class="bi bi-cart-x"></i>
+                    </a>
+                    <a href="{{ path('commande_edit', {'id': commande.id}) }}" class="btn ">Modification des informations
+                        <i class="bi bi-cart-x"></i>
+                    </a>
+                    <a href="{{path("info_cart")}}" class="btn ">consulter votre commande
+                        <i class="bi bi-cart-x"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endif %}
+        {% else %}
+
+
+            <tr>
+                <td colspan="5">PAS DE NOUVEAUX COMMANDES</td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </div>
+    </div>
+</div>
+    </table>
+
+    <a href="{{ path('produit_affichage_front') }}" class="btn ">retour au shop
+        <i class="bi bi-cart-x"></i>
+    </a>
+    {{ knp_pagination_render(commandes) }}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#hi tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+{% endblock %}

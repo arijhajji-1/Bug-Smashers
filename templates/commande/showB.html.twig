@@ -1,0 +1,118 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}LISTE DES COMMANDES{% endblock %}
+
+{% block body %}
+    {% block form %}
+        <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search" method="POST" action="{{ path('commandeSearch') }}">
+    {% endblock %}
+    {% block chercher %}
+        {{ form_start(form) }}
+        {{ form_widget(form.q,{ 'attr': {'class': 'form-control bg-transparent border-0'} }) }}
+    {% endblock %}
+
+
+
+
+
+
+
+    <div class="card-body">
+        <h1>LISTE DES COMMANDES VALIDE</h1>
+    <table class="table table-striped">
+
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Paiment</th>
+            <th>Adresse</th>
+            <th>Telephone</th>
+            <th>Valider la commande ou annuler</th>
+        </tr>
+        </thead>
+        <tbody id="ach">
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.id }}</td>
+                <td>{{ commande.nom }}</td>
+                <td>{{ commande.prenom }}</td>
+                <td>{{ commande.paiment }}</td>
+                <td>{{ commande.Adresse}}</td>
+                <td>{{ commande.Telephone}}</td>
+                <td>
+                    <a href="{{ path('commande_editB', {'id': commande.id}) }}" class="btn ">Annulation ou rectification de commande
+                        <i class="bi bi-cart-x"></i>
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">PAS DE COMMANDES VALIDES</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+
+    <a href="{{ path('indexback') }}" class="btn ">RETOUR AU MENU ADMIN
+        <i class="bi bi-cart-x"></i>
+    </a>
+            <a href="{{ path('listec') }}" class="btn ">IMPRESSION DE LISTE COMMANDE
+                <i class="bi bi-cart-x"></i>
+            </a>
+    </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script>
+        function delay(fn, ms) {
+            let timer = 0
+            return function(...args) {
+                clearTimeout(timer)
+                timer = setTimeout(fn.bind(this, ...args), ms || 0)
+            }
+        }
+        $('#q').keyup(delay(function(e){
+            var serie=$('#q').val();
+            var DATA =  {'q' : serie};
+            console.log(DATA);
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "{{ path('searchEvent')}}",
+                data:DATA,
+                success: function (data) {
+                    $("#ach").replaceWith("<tbody id='ach'>")
+                    console.log(data);
+                    $.each(data,function(k,el) {
+
+                        console.log(el)
+                        var test="{{path('commande_deleteB', {'id':'ReplacewithcorrectValue' })}}'>"
+                        var supp = test.replace("ReplacewithcorrectValue", el.id)
+                        var test = "{{ path("commande_editB", {'id':'ReplacewithcorrectValue' })}}'>"
+                        var modif= test.replace("ReplacewithcorrectValue", el.id)
+                        $('#ach').append(
+                            "<tr>"+"<td class='py-1'>"+el.id+"</td>"+
+                            "<td>"+el.nom+"</td>"+
+                            "<td>"+el.prenom+"</td>"+
+                            "<td>"+el.paiment+"</td>"+
+                            "<td>"+el.Adresse+"</td>"+
+                            "<td>"+el.Telephone+"</td>"+
+                            "<td>"+"<a href='"+modif+"Modifier"+"<i class='mdi mdi-pencil'>"+"</i>"+"</a>"+"</td>"
+                            +"<td>"+"<a href='"+supp+"Supprimer"+
+                            "<i class='mdi mdi-delete-forever'>"+"</i>"+"</a>"+"</td>"
+
+                        );
+                    });
+                },
+                error:function ()
+                {
+                    $("#ach").replaceWith("<tbody id='ach'>")
+                }
+            });
+        },500));
+    </script>
+
+{% endblock %}

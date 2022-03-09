@@ -1,0 +1,7 @@
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+    {{ form_widget(form) }}
+<div>
+    <button class="btn">{{ button_label|default('VALIDER VOTRE COMMANDE') }}</button>
+</div>
+{{ form_end(form) }}

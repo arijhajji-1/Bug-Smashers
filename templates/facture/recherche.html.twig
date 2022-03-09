@@ -1,0 +1,39 @@
+{% block body %}
+    <h1>LISTE Facture</h1>
+    <form method="post" action="{{ path('rechercheB') }}">
+        <label>Recherche</label>
+        <input type="text" name="recherche"> <input type="submit" value="Recherche">
+    </form>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>Remise</th>
+            <th>Total</th>
+            <th>NOMCLIENT</th>
+
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for facture in factures %}
+            <tr>
+                <td>{{ facture.id }}</td>
+                <td>{{ facture.DateFact | date('d-m-y') }}</td>
+                <td>{{ facture.Remise }}</td>
+                <td>{{ facture.Total }}</td>
+                <td>{{ facture.commande.nom }}</td>
+
+
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="18">pas de facture</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+            {% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}DEMANDE DE LOCATION UN PRODUIT{% endblock %}
+
+{% block body %}
+    <h1>DEMANDE DE LOCATION UN PRODUIT</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateDEB</th>
+                <th>DateFin</th>
+                <th>Produit LOUER</th>
+                <th>TotalL</th>
+                <th>MODIFIER LOCATION</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for location in locations %}
+            <tr>
+                <td>{{ location.id }}</td>
+                <td>{{ location.dateDEB ? location.dateDEB|date('Y-m-d') : '' }}</td>
+                <td>{{ location.dateFin ? location.dateFin|date('Y-m-d') : '' }}</td>
+                <td>{% for Produit in location.Produit %}{{ Produit.nom }} {% endfor %}</td>
+                <td>{{ location.TotalL }}</td>
+                <td>
+                    <a href="{{ path('location_show', {'id': location.id}) }}">VOS PRODUITS</a>
+                    <a href="{{ path('location_edit', {'id': location.id}) }}">MODIFICATION DE LA DEMANDE</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">PAS DE DEMANDE DE LOCATION</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('produit_affichage_front') }}">RETOUR AU SHOP</a>
+{% endblock %}

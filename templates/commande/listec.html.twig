@@ -1,0 +1,74 @@
+{% block body %}
+    <body style="
+  background-size: 200px 200px;
+  background-color:#ffd700;">
+
+
+
+
+
+
+        <a><img src="{{ 'uploads/reloua.png' }}" alt="" width="150"></a> <h1 align="center">VOTRE FACTURE</h1>
+    <h2 align="center">INFORMATIONS DE VOTRE COMMANDE</h2>
+    <div class="col-lg-12 stretch-card">
+    <div class="card">
+    <div class="card-body">
+    <table class="table table-bordered">
+
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Paiment</th>
+            <th>Adresse</th>
+            <th>Telephone</th>
+
+
+        </tr>
+        </thead>
+        <thead>
+        <tr>
+        <th>Produit</th>
+        <th>Prix</th>
+        <th>Quantité</th>
+        <th>Marque</th>
+        <th>Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            {% if app.user.id==commande.iduser %}
+            <tr>
+                <td>{{ commande.nom }}</td>
+                <td>{{ commande.prenom }}</td>
+                <td>{{ commande.paiment }}</td>
+                <td>{{ commande.Adresse}}</td>
+                <td>{{ commande.Telephone}}</td>
+
+                {% for element in dataPanier %}
+                    {% if app.user.id==commande.iduser %}
+            <tr>
+
+                <td>{{ element.produitAcheter.nom }}</td>
+                <td>{{ element.produitAcheter.prix }} DT</td>
+
+                <td>{{ element.quantite }}</td>
+                <td>{{ element.produitAcheter.marque }}</td>
+                <td>{{ element.quantite * element.produitAcheter.prix }} DT</td>
+                    {% endif %}
+                {% endfor %}
+
+
+            </tr>
+
+            {% endif %}
+        {% else %}
+            <tr>
+                <td colspan="18">pas de facture</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

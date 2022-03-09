@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Commande;
+use App\Data\SearchDataCommande;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +18,25 @@ class CommandeRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Commande::class);
+    }
+    /**
+     * recupere les annonces en lien avec recherche
+     * @return Commande[]
+     */
+    public function findSearch(SearchDataCommande $search):array
+    {
+        $query= $this
+            ->createQueryBuilder('p');
+
+
+        if (!empty($search->q))
+        {
+            $query=$query
+                ->andWhere('p.prenom LIKE :q OR p.nom LIKE :q')
+                ->setParameter('q',"%{$search->q}%");
+        }
+
+        return $query->getQuery()->getResult();
     }
 
     // /**

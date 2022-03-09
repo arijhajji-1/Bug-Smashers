@@ -77,7 +77,7 @@
                                 <span>Log Out</span>
                                 <i class="mdi mdi-logout ml-1"></i>
                             </a>
-                        <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="{{ path('index') }}">
+                        <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="{{ path('home') }}">
                             <span>Home</span>
                             <i class="mdi mdi-home ml-1"></i>
                         </a>
@@ -186,11 +186,10 @@
                     </a>
                     <div class="collapse" id="auth">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href=""> Blank Page </a></li>
-                            <li class="nav-item"> <a class="nav-link" href=""> Login </a></li>
-                            <li class="nav-item"> <a class="nav-link" href=""> Register </a></li>
-                            <li class="nav-item"> <a class="nav-link" href=""> 404 </a></li>
-                            <li class="nav-item"> <a class="nav-link" href=""> 500 </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{path('commandeSearch')}}"> Liste Commandes </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('facture_index') }}"> Liste des factures </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('ligne_commande_index') }}"> Confirmation des Commandes </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('AfficheB') }}"> LISTES DES DEMANDES DE LOCATIONS </a></li>
                         </ul>
                     </div>
                 </li>

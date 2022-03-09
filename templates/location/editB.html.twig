@@ -1,0 +1,13 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}MODIFIER UNE DEMANDE{% endblock %}
+
+{% block body %}
+    <h1>MODIFIER UNE DEMANDE</h1>
+
+    {{ include('location/_form.html.twig', {'button_label': 'MODIFIER LA DEMANDE'}) }}
+
+    <a href="{{ path('AfficheB') }}">RETOUR A LA LISTE DES DEMANDES</a>
+
+    {{ include('location/_delete_form.html.twig') }}
+{% endblock %}
