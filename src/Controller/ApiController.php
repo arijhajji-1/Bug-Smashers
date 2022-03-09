@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use Date;
+use DateTime;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,24 +32,22 @@ class ApiController extends AbstractController
         $donnees = json_decode($request->getContent());
 
         if(
+            isset($donnees->title) && !empty($donnees->title) &&
+            isset($donnees->start) && !empty($donnees->start)
 
-            isset($donnees->date) && !empty($donnees->date)
+
 
         ){
 
             $code = 200;
 
-            if(!$calendar){
 
-                $calendar = new Evenement;
+            $calendar->setNom($donnees->title);
+            $calendar->setDate(new \DateTime($donnees->date));
 
-                $code = 201;
-            }
-            $calendar->setNom($donnees->nom);
-            $calendar->setDate(new Date ($donnees->date));
             $em = $this->getDoctrine()->getManager();
-            $em->persist($calendar);
-            $em->flush();
+
+            //$em->flush();
 
             // On retourne le code
             return new Response('Ok', $code);

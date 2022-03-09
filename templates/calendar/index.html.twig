@@ -38,18 +38,23 @@
             })
 
             calendar.on('eventChange', (e) => {
-                let url = `/api/${e.event.id}/edit`
+
+                let url = `{{path('app_api_edit',{'id':"Re"})}}`
+                url = url.replace("Re",e.event.id)
+
                 let donnees ={
 
 
-                    "nom": e.event.nom,
-                    "date": e.event.date,
+                    "title": e.event.title,
+                    "start": e.event.start,
+                    "end": e.event.start,
 
 
 
 
 
                 }
+                console.log(donnees);
                 let xhr = new XMLHttpRequest
 
                 xhr.open("PUT", url)

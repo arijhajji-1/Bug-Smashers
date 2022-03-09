@@ -3,7 +3,11 @@
 {% block title %}Actualité{% endblock %}
 
 {% block body %}
-    <h1> Modifier une actualité </h1>
+<div class="card">
+    <div class="card-body">
+            <h1> Modifier une actualité </h1>
+        <br>
+        <br>
     {{ form_start(form,{'class': 'forms-sample','attr': {'novalidate':'novalidate'}} ) }}
     {% form_theme form 'bootstrap_4_layout.html.twig' %}
     {{ form_errors(form) }}
@@ -11,5 +15,7 @@
 
 
     {{ form_end(form) }}
-
+        <br>
+    </div>
+</div>
 {% endblock %}

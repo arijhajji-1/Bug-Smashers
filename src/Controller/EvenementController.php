@@ -117,6 +117,7 @@ class EvenementController extends AbstractController
         $avis = new Avis();
         $avis->setEvenement($evenement);
         $form = $this->createForm(AvisType::class, $avis);
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $avis->setEvenement($evenement);
@@ -126,20 +127,25 @@ class EvenementController extends AbstractController
 
             return $this->redirectToRoute('evenement_event', ['id'=>$id], Response::HTTP_SEE_OTHER);
         }
+        $endDate =$evenement->getDate();
+        $startDate =new \DateTime();
+        $difference = $endDate->diff($startDate);
+        $totalDaysDiff = $difference->format("%a");
         return $this->render("evenement/event.html.twig", [
             "evenement" => $evenement,
             'form' => $form->createView(),
-            "avis" => $evenement->getAvis(),
+            'avis' => $evenement->getAvis(),
+             'jours' => $totalDaysDiff
         ]);
     }
 
     /**
-     * @Route("/evenement/comment", name="evenement_comment")
+     * @Route("/evenement/comment/{id}", name="evenement_comment")
      */
-    public function Comment(AvisRepository $repo){
+    public function Comment(AvisRepository $repo, $id){
 
-        $repo=$this->getDoctrine()->getRepository(Avis::class);
-        $avis=$repo->findAll();
+        $repo=$this->getDoctrine()->getRepository(Evenement::class);
+        $avis=$repo->find($id)->getAvis();
         return $this->render('/evenement/comment.html.twig',[
             'avis'=>$avis
         ]);
@@ -194,7 +200,7 @@ class EvenementController extends AbstractController
     public function mailSupp( \Swift_Mailer $mailer)
     {
         $message = (new \Swift_Message('un évenement  est annulé!!  '))
-            ->setFrom('Reloua.tunisie@gmail.com')
+            ->setFrom('nourelhoudamakkari@gmail.com')
             ->setTo('nourelhoudamakkari@gmail.com')
             ->setBody(
                 $this->renderView(

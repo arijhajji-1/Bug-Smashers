@@ -21,9 +21,9 @@
                                         <div class="col-md-9 col-lg-8 m-auto order-0">
                                             <div class="blog-post-txt">
                                                 <h1>{{evenement.nom}}</h1>
-                                                <h2>{{ evenement.date|date("m/d/Y") }}</h2>
+                                                <h2>{{ evenement.date|date("d/m/Y") }}</h2>
                                                 <h2>{{evenement.heure}}</h2>
-
+                                                <h3>J- {{ jours }}</h3>
                                                 <p>{{evenement.description}}</p>
 
                                             </div>
@@ -58,6 +58,8 @@
                                 <div class="rating-item">
 
                                     <div class="rating-author-txt">
+                                        <div class="rating-author-pic">
+                                        </div>
                                         <div class="rating-meta">
                                             <h3>{{ av.nom }}</h3>
                                             <span class="time">-  {{ av.email }}</span>

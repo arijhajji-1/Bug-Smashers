@@ -132,5 +132,4 @@ class ActualiteController extends AbstractController
     }
 
 
-
 }
