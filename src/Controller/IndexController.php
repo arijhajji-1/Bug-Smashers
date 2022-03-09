@@ -67,7 +67,7 @@ class IndexController extends AbstractController
      */
     public function Home(): Response
     {
-        return $this->render('index/homePage.html.twig');
+        return $this->redirectToRoute('indexing');
     }
 
     /**

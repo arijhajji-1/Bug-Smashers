@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\AvisProduitRepository;
+use App\Repository\AvisRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
- * @ORM\Entity(repositoryClass=AvisProduitRepository::class)
+ * @ORM\Entity(repositoryClass=AvisRepository::class)
  */
 class Avis
 {
@@ -37,6 +40,18 @@ class Avis
      */
     private $evenement;
 
+    protected $captchaCode;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reply::class, mappedBy="avis", orphanRemoval=true)
+     */
+    private $replies;
+
+
+    public function __construct()
+    {
+        $this->replies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -91,16 +106,46 @@ class Avis
         return $this;
     }
 
-
-    public function getRating(): ?int
+    public function getCaptchaCode()
     {
-        return $this->rating;
+        return $this->captchaCode;
+    }
+    public function setCaptchaCode($captchaCode)
+    {
+        $this->captchaCode = $captchaCode;
     }
 
-    public function setRating(int $rating): self
+    /**
+     * @return Collection|Reply[]
+     */
+    public function getReplies(): Collection
     {
-        $this->rating = $rating;
+        return $this->replies;
+    }
+
+    public function addReply(Reply $reply): self
+    {
+        if (!$this->replies->contains($reply)) {
+            $this->replies[] = $reply;
+            $reply->setAvis($this);
+        }
 
         return $this;
     }
+
+    public function removeReply(Reply $reply): self
+    {
+        if ($this->replies->removeElement($reply)) {
+            // set the owning side to null (unless already changed)
+            if ($reply->getAvis() === $this) {
+                $reply->setAvis(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+
 }

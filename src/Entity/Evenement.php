@@ -30,6 +30,7 @@ class Evenement
     /**
      * @ORM\Column(type="date")
      * @Assert\NotBlank(message="veuillez entrer la date de l'événement")
+     * @Assert\GreaterThan("today UTC")
      */
     private $date;
 

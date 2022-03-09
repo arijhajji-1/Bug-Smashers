@@ -7,6 +7,7 @@
 parameters:
     products_directory: '%kernel.project_dir%/public/front/assets/img/product'
     brochures_directory: '%kernel.project_dir%/public/uploads'
+    events_directory: '%kernel.project_dir%/public/front/assets/img/actualite'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -36,6 +37,9 @@ services:
     App\Service\FileUploader:
         arguments:
             $targetDirectory: '%products_directory%'
+    App\Service\FileUploaderE:
+        arguments:
+            $targetDirectoryE: '%events_directory%'
     App\Services\MessageHandler:
         arguments:
             $fromNumber: '%env(TWILIO_NUMBER)%'

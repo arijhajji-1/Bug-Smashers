@@ -1,0 +1,87 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Répondre{% endblock %}
+
+{% block body %}
+
+
+<div class="page-content-wrapper sp-y">
+    <div class="blog-details-page-wrapper">
+        <div class="container container-wide">
+            <div class="row">
+                <div class="col-12">
+                    <div class="product-rating-wrap">
+                        <div class="display-ratings">
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="product-description-review">
+                                        <!-- Product Description Tab Menu -->
+                                        <ul class="nav nav-tabs desc-review-tab-menu" id="desc-review-tab" role="tablist">
+                                            <li>
+                                                <a class="active" id="desc-tab" data-toggle="tab" href="#descriptionContent" role="tab">Reponse</a>
+                                            </li>
+                                        </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="descriptionContent">
+                                    <div class="description-content">
+
+                                    </div>
+                                </div>
+
+                                <h3>Répondre à :</h3>
+        <div class="rating-item">
+
+
+            <div class="rating-author-txt">
+                <div class="rating-author-pic">
+                </div>
+                <div class="rating-meta">
+                    <h3>{{ avis.nom }}</h3>
+                    <span class="time">-  {{ avis.email }}</span>
+                </div>
+
+                <p>{{avis.description}}</p>
+
+            </div>
+        </div>
+
+    {{form_start(form)}}
+
+
+
+    <div class="rating-form-wrapper">
+        <h3>Votre réponse</h3>
+        <form action="{{ path("evenement_event", {'id':avis.getEvenement().getId() })}}"  method="POST">
+            <div class="rating-form row">
+
+
+                <div class="col-12">
+                    <div class="form-input-item mt-30 mb-40">
+                        {{ form_row(form.description,{'id' : 'your-review'}) }}
+                    </div>
+                </div>
+                {{ form_widget(form) }}
+
+
+                <div class="col-12 mt-22">
+                    <button class="btn btn-white">Ajouter</button>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
