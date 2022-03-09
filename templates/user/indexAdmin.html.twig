@@ -3,9 +3,11 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>Les Utilisateurs </h1>
-<div class="table-responsive">
-    <table class="table">
+    <div class="card-body">
+        <h1>Les Utilisateurs </h1>
+
+    <table class="table table-striped">
+
         <thead>
             <tr>
                 <th>Id</th>
@@ -38,9 +40,9 @@
                 <td>{{ user.dateNaissance ? user.dateNaissance|date('Y-m-d ') : '' }}</td>
                 <!--<td>{{ user.password }}</td>-->
                 <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-info">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-success">edit</a>
-                    <a href="{{ path('user_delete', {'id': user.id}) }}" class="btn btn-danger">delete</a>
+                    <a href="{{ path('user_show', {'id': user.id}) }}" >show</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit<i class="mdi mdi-pencil"></i></a>
+                    <a href="{{ path('user_delete', {'id': user.id}) }}" >delete<i class="mdi mdi-delete-forever"></i></a>
                 </td>
             </tr>
             {% endif %}

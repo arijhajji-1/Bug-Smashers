@@ -105,12 +105,17 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                    <a class="nav-link" data-toggle="collapse" href="#User" aria-expanded="false" aria-controls="ui-basic">
                         <span class="icon-bg"><i class="mdi mdi-account-multiple"></i></span>
                         <span class="menu-title">Utilisateurs</span>
                         <i class="menu-arrow"></i>
                     </a>
+                    <div class="collapse" id="User">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{ path("admin_index") }}">Liste des utilisateurs</a></li>
 
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#Produit" aria-expanded="false" aria-controls="Produit">

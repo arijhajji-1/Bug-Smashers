@@ -33,6 +33,15 @@ class IndexbackController extends AbstractController
         ]);
     }
     /**
+     * @Route("/b", name="back")
+     */
+    public function animation(): Response
+    {
+        return $this->render('animationback.html.twig', [
+            'controller_name' => 'IndexbackController',
+        ]);
+    }
+    /**
      * @return \Symfony\Component\HttpFoundation\Response
      * @route("/montage1",name="montage1")
      */
