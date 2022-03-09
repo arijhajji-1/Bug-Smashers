@@ -43,11 +43,13 @@ class ApiController extends AbstractController
 
 
             $calendar->setNom($donnees->title);
-            $calendar->setDate(new \DateTime($donnees->date));
+            $d=new DateTime($donnees->end);
+            $d->modify('+1 day');
+            $calendar->setDate($d);
 
             $em = $this->getDoctrine()->getManager();
-
-            //$em->flush();
+            $em->persist($calendar);
+            $em->flush();
 
             // On retourne le code
             return new Response('Ok', $code);
