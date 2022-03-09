@@ -47,6 +47,20 @@
     <!-- endbuild -->
 
     <!--[if lt IE 9]><![endif]-->
+        <link rel="stylesheet" href="{{ asset('back/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('back/assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('back/assets/vendors/css/vendor.bundle.base.css') }}">
+        <!-- endinject -->
+        <!-- Plugin css for this page -->
+        <link rel="stylesheet" href="{{ asset('back/assets/vendors/font-awesome/css/font-awesome.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('back/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
+        <!-- End plugin css for this page -->
+        <!-- inject:css -->
+        <!-- endinject -->
+        <!-- Layout styles -->
+        <link rel="stylesheet" href="{{ asset('back/assets/css/style.css') }}">
+        <!-- End layout styles -->
+        <link rel="shortcut icon" href="{{ asset('back/assets/images/reloua_logo_2-01.svg') }}" />
     {% endblock %}
 </head>
 
@@ -74,7 +88,7 @@
                         <li class="has-submenu"><a href="{{ path('produit_affichage_front') }}">Produit</a>
 
                         </li>
-                        <li class="has-submenu"><a href="{{ path('forum') }}">Forum</a>
+                        <li class="has-submenu"><a href="{{ path('user_index') }}">Forum</a>
 
                         </li>
                         <li class="has-submenu"><a href="{{ path('addmontage') }}">Montage</a>
@@ -91,9 +105,52 @@
                 <div class="site-action d-flex justify-content-center justify-content-sm-end align-items-center">
                     {% if app.user %}
                         <ul class="login-reg-nav nav">
-                            <li>Hello, {{ app.user.firstName }}</li>
-                            <li><a href="{{ path('app_logout') }}">Logout</a></li>
+                            <!--<li>Hello, {{ app.user.firstName }}</li>-->
+                            <!--<li><a href="{{ path('app_logout') }}">Logout</a></li>-->
+                            <ul class="navbar-nav navbar-nav-right">
+                                <li class="nav-item nav-profile dropdown">
+                                    <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                                        <div class="nav-profile-img">
+                                            {% block customStyle %}
+                                                <style >
+
+                                                    img.profile {
+                                                        border-radius: 50%;
+                                                    }
+
+                                                </style>
+                                            {% endblock %}
+                                            <img src="{{ asset('uploads/' ~ app.user.photo) }}" alt="avatar" class="profile" style="width:50px;height:50px">
+                                        </div>
+                                        <div class="nav-profile-text">
+                                            <p class="mb-1 text-black">Hello, {{ app.user.firstName }}</p>
+
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="profileDropdown" data-x-placement="bottom-end">
+                                        <div class="p-3 text-center bg-primary">
+                                            <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{ asset('uploads/' ~ app.user.photo) }}" alt=""style="width:50px;height:50px">
+                                        </div>
+
+
+                                        <div role="separator" class="dropdown-divider"></div>
+                                        <h5 class="dropdown-header text-uppercase  pl-2 text-dark mt-2">Actions</h5>
+                                        <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="{{ path('profile') }}">
+                                            <span>Profile</span>
+                                            <i class="mdi mdi-home-account ml-1"></i>
+                                        </a>
+
+                                        <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="{{ path('app_logout') }}">
+                                            <span>Log Out</span>
+                                            <i class="mdi mdi-logout ml-1"></i>
+                                        </a>
+
+                                    </div>
+                                </li>
+                            </ul>
+
                         </ul>
+
                     {% else %}
                         <ul class="login-reg-nav nav">
                             <li><a href="{{ path('app_login') }}">Login</a></li>
