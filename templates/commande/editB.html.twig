@@ -3,8 +3,9 @@
 {% block title %}MODIFIER LES INFORMATIONS D UNE COMMANDE{% endblock %}
 
 {% block body %}
-    <h1 align="center">MODIFIER LES INFORMATIONS D UNE COMMANDE</h1>
-    <div class="container" style="max-width: 600px">
+    <div class="card-body" >
+        <h1 align="center">MODIFIER LES INFORMATIONS D UNE COMMANDE</h1>
+
         {% form_theme form 'bootstrap_4_layout.html.twig' %}
         <div>
             {{ include('commande/_form.html.twig', {'button_label': 'Modifier les informations'}) }}

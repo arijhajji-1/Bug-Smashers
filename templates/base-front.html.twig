@@ -47,20 +47,7 @@
     <!-- endbuild -->
 
     <!--[if lt IE 9]><![endif]-->
-        <link rel="stylesheet" href="{{ asset('back/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('back/assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('back/assets/vendors/css/vendor.bundle.base.css') }}">
-        <!-- endinject -->
-        <!-- Plugin css for this page -->
-        <link rel="stylesheet" href="{{ asset('back/assets/vendors/font-awesome/css/font-awesome.min.css') }}" />
-        <link rel="stylesheet" href="{{ asset('back/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
-        <!-- End plugin css for this page -->
-        <!-- inject:css -->
-        <!-- endinject -->
-        <!-- Layout styles -->
-        <link rel="stylesheet" href="{{ asset('back/assets/css/style.css') }}">
-        <!-- End layout styles -->
-        <link rel="shortcut icon" href="{{ asset('back/assets/images/reloua_logo_2-01.svg') }}" />
+
     {% endblock %}
 </head>
 
@@ -88,7 +75,6 @@
                         <li class="has-submenu"><a href="{{ path('produit_affichage_front') }}">Produit</a>
 
                         </li>
-                        <li class="has-submenu"><a href="{{ path('publication_newPublication') }}">Publication</a>
                         <li class="has-submenu"><a href="{{ path('user_index') }}">Forum</a>
 
                         </li>
@@ -140,7 +126,9 @@
                                             <span>Profile</span>
                                             <i class="mdi mdi-home-account ml-1"></i>
                                         </a>
-
+                                        <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="{{ path('publication_newPublication') }}"><span>Publication</span>
+                                        <i class="mdi mdi-publish ml-1"></i>
+                                        </a>
                                         <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="{{ path('app_logout') }}">
                                             <span>Log Out</span>
                                             <i class="mdi mdi-logout ml-1"></i>

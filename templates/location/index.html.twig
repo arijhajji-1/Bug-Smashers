@@ -22,7 +22,9 @@
                 <td>{{ location.id }}</td>
                 <td>{{ location.dateDEB ? location.dateDEB|date('Y-m-d') : '' }}</td>
                 <td>{{ location.dateFin ? location.dateFin|date('Y-m-d') : '' }}</td>
-                <td>{% for Produit in location.Produit %}{{ Produit.nom }} {% endfor %}</td>
+                <td>{% for Produit in location.Produit %}
+                        {{ Produit.nom }}
+                    {% endfor %}</td>
                 <td>{{ location.TotalL }}</td>
                 <td>
                     <a href="{{ path('location_show', {'id': location.id}) }}">VOS PRODUITS</a>

@@ -77,7 +77,7 @@
                                 <span>Log Out</span>
                                 <i class="mdi mdi-logout ml-1"></i>
                             </a>
-                        <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="{{ path('home') }}">
+                        <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="{{ path('index') }}">
                             <span>Home</span>
                             <i class="mdi mdi-home ml-1"></i>
                         </a>
@@ -114,6 +114,9 @@
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link" href="{{ path("admin_index") }}">Liste des utilisateurs</a></li>
 
+                                    <li class="nav-item"> <a class="nav-link" href="{{ path('publication_index') }}">list des publications</a></li>
+                                    <li class="nav-item"> <a class="nav-link" href="{{ path('publication_new') }}">Add publication</a></li>
+
                         </ul>
                     </div>
                 </li>
@@ -137,6 +140,7 @@
                     <a class="nav-link" href="{{ path("category") }}">
                         <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
                         <span class="menu-title">Categorie</span>
+
                     </a>
                 </li>
                 <li class="nav-item">
@@ -146,7 +150,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#reparation" aria-expanded="false" aria-controls="auth">
+                    <a class="nav-link" data-toggle="collapse" href="#reparation" aria-expanded="false" aria-controls="reparation">
                         <span class="icon-bg"><i class="mdi mdi-cart"></i></span>
                         <span class="menu-title">Réparation</span>
                         <i class="menu-arrow"></i>
@@ -155,7 +159,8 @@
                         <ul class="nav flex-column sub-menu"  >
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('reparation1') }}">Réparation</a>
-
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ path('AvisReparation_show') }}">Avis</a>
                             </li>
                         </ul>

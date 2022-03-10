@@ -23,9 +23,9 @@
             <span style="color:red">{{ form_errors(form.image) }}</span>
         </div>
         <input type="hidden" name="usr" value="{{ app.user? app.user.id : null  }}"/>
-        <button class="btn btn-info">{{ button_label|default('ajouter publication') }}</button>
+        <button class="btn btn-inverse-light" style="color: black;">{{ button_label|default('ajouter publication') }} <i class="mdi mdi-creation"> </i></button>
         {{ form_end(form) }}
         <br/>
-    <a href="{{ path('publication_index') }}" class="btn btn-info ">back to list</a>
+    <a href="{{ path('publication_index') }}" >back to list  <i class="mdi mdi-creation"></i></a>
     </div>
 {% endblock %}

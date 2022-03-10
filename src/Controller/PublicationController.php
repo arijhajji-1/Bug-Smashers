@@ -7,27 +7,37 @@ use App\Form\PublicationType;
 use App\Repository\PublicationRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 /**
  * @Route("/publication")
  */
 class PublicationController extends AbstractController
 {
+
     /**
      * @Route("/", name="publication_index", methods={"GET"})
      */
-    public function index(PublicationRepository $publicationRepository): Response
+    public function index(PublicationRepository $publicationRepository,Request $request, PaginatorInterface $paginator): Response
     {
-        return $this->render('publication/index.html.twig', [
-            'publications' => $publicationRepository->findAll(),
-        ]);
-    }
 
+        $donnees=$publicationRepository->findAll();
+
+        $publication= $paginator->paginate(
+            $donnees, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            1 // Nombre de résultats par page
+
+        );
+
+        return $this->render('publication/index.html.twig',['publications'=>$publication]);
+    }
     /**
      * @Route("/new", name="publication_new", methods={"GET", "POST"})
      */
@@ -46,7 +56,8 @@ class PublicationController extends AbstractController
             if ($brochureFile) {
                 $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
-                $newFilename = md5(uniqid()).'.'.$brochureFile->guessExtension();
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {
@@ -92,7 +103,8 @@ class PublicationController extends AbstractController
             if ($brochureFile) {
                 $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
-                $newFilename = md5(uniqid()).'.'.$brochureFile->guessExtension();
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {

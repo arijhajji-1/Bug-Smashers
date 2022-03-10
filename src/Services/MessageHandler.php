@@ -27,7 +27,7 @@ class MessageHandler implements MessageHandlerInterface
 
         $this->twilio->messages->create($toNumber, [
             'from' => $this->fromNumber,
-            'body' => "Bonjour $toName! Vous pouvez recuperer votre appreil"
+            'body' => "cher client $toName! Vous pouvez récupèrer votre appareil"
         ]);
 
         //sleep(random_int(10, 15));

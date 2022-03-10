@@ -110,6 +110,18 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
+    "illuminate/collections": {
+        "version": "v8.83.4"
+    },
+    "illuminate/contracts": {
+        "version": "v8.83.4"
+    },
+    "illuminate/macroable": {
+        "version": "v8.83.4"
+    },
+    "illuminate/support": {
+        "version": "v8.83.4"
+    },
     "knplabs/knp-components": {
         "version": "v3.4.0"
     },
@@ -119,6 +131,9 @@
     "laminas/laminas-code": {
         "version": "4.5.1"
     },
+    "mercuryseries/flashy": {
+        "version": "1.0.4"
+    },
     "mercuryseries/flashy-bundle": {
         "version": "v3.0.0"
     },
@@ -127,6 +142,9 @@
     },
     "myclabs/deep-copy": {
         "version": "1.10.2"
+    },
+    "nesbot/carbon": {
+        "version": "2.57.0"
     },
     "nikic/php-parser": {
         "version": "v4.13.2"
@@ -195,6 +213,9 @@
     },
     "psr/log": {
         "version": "1.1.4"
+    },
+    "psr/simple-cache": {
+        "version": "1.0.1"
     },
     "sabberworm/php-css-parser": {
         "version": "8.4.0"
@@ -677,6 +698,9 @@
     },
     "twilio/sdk": {
         "version": "6.35.0"
+    },
+    "voku/portable-ascii": {
+        "version": "1.6.1"
     },
     "webmozart/assert": {
         "version": "1.10.0"

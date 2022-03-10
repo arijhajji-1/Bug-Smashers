@@ -48,4 +48,3 @@ security:
         - { path: '^/produit/affback/avis', roles: ROLE_ADMIN}
         - { path: '^/categoryaffback', roles: ROLE_ADMIN}
         - { path: '^/admin', roles: 'is_granted("IS_AUTHENTICATED_FULLY") and is_granted("ROLE_ADMIN")' }
-        - { path: '^/user/', roles: ROLE_USER }

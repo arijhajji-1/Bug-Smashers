@@ -14,7 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
+use Knp\Component\Pager\PaginatorInterface;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 /**
  * @Route("/admin")
  * @IsGranted("ROLE_ADMIN")
@@ -59,7 +61,8 @@ class AdminController extends AbstractController
             if ($brochureFile) {
                 $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
-                $newFilename = md5(uniqid()).'.'.$brochureFile->guessExtension();
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {
@@ -77,6 +80,8 @@ class AdminController extends AbstractController
             }
             $user->setPassword(password_hash($user->getPassword(), PASSWORD_DEFAULT));
             $entityManager->flush();
+            $this->addFlash('success', 'VOTRE CHAMP EST MODIFIER AVEC SUCCESS');
+
 
             return $this->redirectToRoute('admin_index', [], \Symfony\Component\HttpFoundation\Response::HTTP_SEE_OTHER);
         }
@@ -98,4 +103,63 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('admin_index', [], Response::HTTP_SEE_OTHER);
     }
+    /**
+     * @Route("/user/trieee", name="trieee")
+     */
+    public function T()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->createQuery(
+            'SELECT u FROM App\Entity\User u
+            ORDER BY u.lastName'
+        );
+
+
+        $rep = $query->getResult();
+
+        return $this->render('user/indexAdmin.html.twig',
+            array('users' => $rep));
+    }
+    /**
+     * @Route("/user/usersPDF", name="usersPDF")
+     */
+    public function UsersPDF()
+    {
+        $options = new Options();
+        $options->set('defaultFont', 'Roboto');
+
+
+        $dompdf = new Dompdf($options);
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+        // return $this->render('Back-office/UsersPDF.html.twig', array("users" => $users));
+        $data = array(
+            'headline' => 'my headline'
+        );
+        $html = $this->renderView('/usersPDF.html.twig', array("users" => $users));
+
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $dompdf->stream("testpdf.pdf", [
+            "Attachment" => true
+        ]);
+
+    }
+    /**
+     * @Route("/recherche", name="Recherche")
+     */
+
+    public function Recherche(UserRepository $repository,Request $request)
+    {
+        $data=$request->get('search');
+        $Reponse=$repository->findBy(['firstName'=>$data]);
+        return $this->render('user/indexAdmin.html.twig', [
+            'users' => $Reponse,
+        ]);
+
+    }
+
 }

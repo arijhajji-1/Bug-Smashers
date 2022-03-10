@@ -67,11 +67,8 @@
 
                                         <div class="product-action">
                                             <div class="action-top d-sm-flex">
-                                                <div class="pro-qty mr-3 mb-4 mb-sm-0">
-                                                    <label for="quantity" class="sr-only">Quantity</label>
-                                                    <input type="text" id="quantity" title="Quantity" value="1" />
-                                                </div>
-                                                <button class="btn btn-bordered">Add to Cart</button>
+
+                                                <a class="btn btn-bordered" href="{{path("cart_add",{'id':produit.id}) }}"> Add to Cart</a>
                                             </div>
                                         </div>
                                     </div>

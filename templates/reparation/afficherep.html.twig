@@ -30,14 +30,14 @@
                 <td >{{ reparation.description }}</td>
                 <td >{{ reparation.Reserver| date('d/m/Y H:i') }}</td>
                 <td>
-                <button class="btn btn-brand"><a href="{{ path('delete1', {'id': reparation.Id}) }}"style="color: white;">Supprimer</a></button>
+                <button class="btn btn-brand"><a href="{{ path('delete1', {'id': reparation.Id}) }}"style="color: black;">Supprimer</a></button>
                 </td>
                 <td>
-                <button class="btn btn-brand"><a href="{{ path('update1', {'id': reparation.Id}) }}"style="color: white;">Modifier</a></button>
+                <button class="btn btn-brand"><a href="{{ path('update1', {'id': reparation.Id}) }}"style="color: black;">Modifier</a></button>
 
                 </td>
                 <td>
-                <button class="btn btn-brand"><a href="{{ path('avis_reparation', {'id': reparation.Id}) }}" style="color: white;">Donner avis</a></button>
+                <button class="btn btn-brand"><a href="{{ path('avis_reparation', {'id': reparation.Id}) }}" style="color: black;">Donner avis</a></button>
 
                 </td>
             </tr>

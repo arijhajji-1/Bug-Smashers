@@ -53,8 +53,8 @@
                             <td>{{ montage.StockageSupp }}</td>
                             <td>{{ montage.Montant }}</td>
 
-                            <td><button  class="btn btn-brand"><a href="{{ path('delete', {'id': montage.Id}) }}"style="color: white;" onclick="return confirm('Etes vous sûr de supprimer ce montage?')"; >Supprimer</a></button></td>
-                             <td><button  class="btn btn-brand"><a href="{{ path('update', {'id': montage.Id}) }}"style="color: white;">Modifier</a></button></td>
+                            <td><button  class="btn btn-brand"><a href="{{ path('delete', {'id': montage.Id}) }}"style="color: black;" onclick="return confirm('Etes vous sûr de supprimer ce montage?')"; >Supprimer</a></button></td>
+                             <td><button  class="btn btn-brand"><a href="{{ path('updatemontage', {'id': montage.Id}) }}"style="color: black;">Modifier</a></button></td>
                         </tr>
                         </tbody>
                         {% endif %}

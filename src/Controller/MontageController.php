@@ -147,7 +147,7 @@ class MontageController extends AbstractController
 
     }
     /**
-     * @Route ("/update/{id}", name="update")
+     * @Route ("/update/{id}", name="updatemontage")
      */
     public function UpdateMontage(Request $request, Montage $montage)
     {
