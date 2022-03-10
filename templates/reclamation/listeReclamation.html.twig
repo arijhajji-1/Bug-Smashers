@@ -1,0 +1,45 @@
+{% extends 'base-back.html.twig' %}
+{% block title %}
+    <head>
+        <title> Liste des Reclamations </title>
+    </head>
+{% endblock %}
+
+{% block body %}
+    <div class="card-body">
+<h1>LISTE DES RECLAMATIONS</h1>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-warning">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <table class="table table-striped">
+    <thead>
+<tr>
+        <th> code</th>
+        <th> categorie</th>
+        <th> id commande</th>
+        <th> sujet</th>
+        <th> description</th>
+        <th> date</th>
+        <th> etat</th>
+        <th> </th>
+    </tr>
+    </thead>
+        <tbody>
+    <tr {% for item in reclamations %}>
+      <td>{{ item.code }} </td>
+        <td>{{ item.categorie }} </td>
+        <td>{{ item.idCommande }} </td>
+        <td>{{ item.sujet }} </td>
+        <td>{{ item.description }} </td>
+        <td>{{ item.date|date('d-m-Y') }} </td>
+        <td>{{ item.statut }} </td>
+        <td><a href="{{ path('update',{'id':item.code}) }}">   modifier</button>
+            </a></td>
+    </tr {% endfor %}>
+        </tbody>
+</table>
+    {{ knp_pagination_render(reclamations) }}
+{% endblock %}

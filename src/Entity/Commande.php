@@ -49,6 +49,8 @@ class Commande
      */
     private $adresse;
 
+
+
     /**
      * @ORM\OneToMany(targetEntity=LigneCommande::class, mappedBy="Commande")
      */
@@ -70,6 +72,17 @@ class Commande
      * @ORM\Column(type="integer")
      */
     private $iduser;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Livraison::class, cascade={"persist", "remove"})
+     *
+     */
+    private $livraison;
+
+    public function __toString()
+    {
+        return  $this -> getNom().' '.$this->getPrenom() ;
+    }
 
 
 
@@ -205,10 +218,10 @@ class Commande
         return $this;
     }
 
-    public function __toString(): string
+   /* public function __toString(): string
     {
         return $this->getNom();
-    }
+    }*/
 
     public function getIduser(): ?int
     {
@@ -218,6 +231,18 @@ class Commande
     public function setIduser(int $iduser): self
     {
         $this->iduser = $iduser;
+
+        return $this;
+    }
+
+    public function getLivraison(): ?Livraison
+    {
+        return $this->livraison;
+    }
+
+    public function setLivraison(Livraison $livraison): self
+    {
+        $this->livraison = $livraison;
 
         return $this;
     }

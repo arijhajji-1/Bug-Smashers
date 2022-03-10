@@ -1,0 +1,47 @@
+{% extends 'base-back.html.twig' %}
+{% block title %}
+    <head>
+        <title> Liste des livraisons </title>
+    </head>
+{% endblock %}
+
+{% block body %}
+    <div class="card-body">
+    <h1>LISTE DES Livraisons</h1>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-warning">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <button class="btn btn-primary"><a href="{{ path('stat_livraison') }}"> statistique</a></button>
+    <button class="border-left"><a href="{{ path('livraisonpdf') }}"> importer en pdf </a></button>
+    <table class="table table-striped">
+        <thead>
+    <tr>
+        <th> commande</th>
+<th> modpai </th>
+        <th> modlivr</th>
+        <th> region</th>
+        <th> description</th>
+        <th> date</th>
+        <th> actions </th>
+    </tr>
+        </thead>
+        <tbody>
+    <tr {% for item in livraisons %}>
+        <td > {{ item.commande}} </td>
+<td>{{ item.modpaie}} </td>
+        <td>{{ item.modlivr}} </td>
+        <td>{{ item.region }} </td>
+        <td>{{ item.description }} </td>
+        <td>{{ item.date|date('d-m-Y') }} </td>
+        <td>
+            <a href="{{ path('livraison_show', {'id': item.id}) }}">show</a>
+            <a href="{{ path('livraison_edit', {'id': item.id}) }}">edit</a>
+            <a href="{{ path('livraison_left', {'id': item.id}) }}">left days</a>
+        </td>
+    </tr {% endfor %}>
+        </tbody>
+</table>
+
+{% endblock %}

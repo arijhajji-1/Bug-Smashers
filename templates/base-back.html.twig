@@ -174,7 +174,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="{{ path('recherche_reclamation') }}">
                         <span class="icon-bg"><i class="mdi mdi-alert-circle-outline"></i></span>
                         <span class="menu-title">Réclamations</span>
                     </a>
@@ -194,6 +194,12 @@
                         </ul>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('livraison_index') }}">
+                        <span class="icon-bg"><i class="mdi mdi-alert-circle-outline"></i></span>
+                        <span class="menu-title">livraisons</span>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- partial -->
@@ -206,7 +212,7 @@
 </div>
 <!-- container-scroller -->
 <!-- plugins:js -->
-{% block js %}
+{% block javascripts %}
 
 <script src="{{ asset('back/assets/vendors/js/vendor.bundle.base.js') }}"></script>
 <!-- endinject -->

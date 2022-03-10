@@ -1,0 +1,41 @@
+{# ./templates/default/mypdf.html.twig #}
+
+{% block title %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Livraison en cours</title>
+    </head>
+{% endblock %}
+
+{% block body %}
+<h1 class=" text-info">livraison à effectuer</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th> commande</th>
+        <th> modpai </th>
+        <th> modlivr</th>
+        <th> region</th>
+        <th> description</th>
+        <th> date</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in livraisons %}
+    <tr>
+        <td > {{ item.commande}} </td>
+        <td>{{ item.modpaie}} </td>
+        <td>{{ item.modlivr}} </td>
+        <td>{{ item.region }} </td>
+        <td>{{ item.description }} </td>
+        <td>{{ item.date|date('d-m-Y') }} </td>
+
+    </tr>
+    </tbody>
+        </table>
+    {% endfor %}
+{% endblock %}
+
+
+

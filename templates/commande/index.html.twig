@@ -49,6 +49,9 @@
                     <a href="{{path("info_cart")}}" class="btn ">consulter votre commande
                         <i class="bi bi-cart-x"></i>
                     </a>
+                    <a href="{{path("livraison_new",{'id': commande.id})}}" class="btn ">livraison
+                        <i class="bi bi-cart-x"></i>
+                    </a>
                 </td>
             </tr>
             {% endif %}

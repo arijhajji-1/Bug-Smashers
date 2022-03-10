@@ -1,0 +1,9 @@
+{% extends 'base-front.html.twig' %}
+{% block body %}
+
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+    <h1>MODIFIER RECLAMATION</h1>
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-primary">modifier!</button>
+    {{ form_end(form) }}
+{% endblock %}

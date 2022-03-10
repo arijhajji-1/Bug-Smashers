@@ -1,0 +1,21 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}nombre de jours restants{% endblock %}
+
+{% block body %}
+    <h1 style="padding-right: 10px; text-align-all: center" >Livraison</h1>
+    <div class="col-md-9 col-lg-8 m-auto order-8">
+        <div class=blog-post-txt">
+    <h1> {{ livraison.commande }}</h1>
+<h2> {{ livraison.date|date("Y-m-d") }}</h2>
+<h3> vous avez encore J-{{ jours }} jours pour la livraison</h3>
+<p> {{ livraison.description }}</p>
+    </div>
+    </div>
+
+
+    <a href="{{ path('livraison_index') }}">back to list</a>
+
+
+
+{% endblock %}

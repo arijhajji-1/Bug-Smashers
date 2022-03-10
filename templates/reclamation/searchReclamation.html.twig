@@ -1,0 +1,55 @@
+{% extends 'base-back.html.twig' %}
+{% block title %}
+    <head>
+        <title> recherche Reclamations </title>
+    </head>
+{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-warning">
+        {{ message }}
+    </div>
+{% endfor %}
+<div class="row text-center ">
+
+</div>
+
+    <div class="card-body">
+        <form method="post">
+            <input type="text" name="categorie">
+            <input type="submit" class="btn btn-primary" value="recherche">
+        </form>
+        <button><a href="{{ path('stat_reclamation') }}"> statistique</a></button>
+    <h1>LISTE RECLAMATIONS</h1>
+    <table class="table table-striped">
+        <thead>
+    <tr>
+        <th> code</th>
+        <th> categorie</th>
+        <th> id commande</th>
+        <th> sujet</th>
+        <th> description</th>
+        <th> date</th>
+        <th> etat</th>
+
+    </tr>
+        </thead>
+        </thead>
+        <tbody>
+    <tr {% for item in reclamation %}>
+        <td>{{ item.code }} </td>
+        <td>{{ item.categorie }} </td>
+        <td>{{ item.idCommande }} </td>
+        <td>{{ item.sujet }} </td>
+        <td>{{ item.description }} </td>
+        <td>{{ item.date|date('d-m-Y') }} </td>
+        <td>{{ item.statut }} </td>
+        <td><button><a href="{{ path('update',{'id':item.code}) }}">   modifier</button>
+            </a></td>
+    </tr {% endfor %}>
+        </tbody>
+</table>
+    </div>
+{% endblock %}

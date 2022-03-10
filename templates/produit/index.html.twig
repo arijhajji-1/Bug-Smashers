@@ -112,8 +112,8 @@
                                     </div>
 
                                     <div class="product-item__action">
-                                        <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
-                                        <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                        <a href="{{ path("cart_add",{'id':produit.id}) }}" class="btn-add-to-cart">
+                                            <i class="ion-bag"></i></a>
                                         <a class="btn-add-to-cart"
                                                 href="{{ path("AjouterpAWish", {'id':produit.id })}}">
                                             <i class="ion-ios-heart-outline"></i></a>
@@ -192,9 +192,7 @@
                                         </div>
 
                                         <div class="product-item__action">
-                                            <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
-                                            <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
-                                            <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
+                                            <a class="btn-add-to-cart" href="{{path("location_new", {'id': produit.id})}}" class="btn-add-to-cart"><i class="ion-bag"></i></a>
                                             <a class="btn-add-to-cart"
                                                href="{{ path("single_produitL", {'id':produit.id })}}"><i
                                                         class="ion-eye"></i></a>
