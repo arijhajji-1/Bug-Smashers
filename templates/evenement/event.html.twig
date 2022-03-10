@@ -89,7 +89,7 @@
                                         </div>
                                     {% endfor %}
                                     {% endfor %}
-                                    {{form_start(form)}}
+                                    {{form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
 
 
 
@@ -102,6 +102,9 @@
                                         <div class="form-input-item mt-30 mb-40">
                                             {{ form_row(form.description,{'id' : 'your-review'}) }}
                                         </div>
+                                        <div class="my-custom-class-for-errors">
+                                            {{ form_errors(form.description) }}
+                                        </div>
                                     </div>
 
                                     <div class="row">
@@ -113,16 +116,6 @@
                                         </div>
                                     </div>
 
-                                    {% set formErrors = form.vars.errors.form.getErrors(true) %}
-                                    {% if formErrors|length %}
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            {% for error in formErrors %}
-                                                <li>{{ error.message }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    </div>
-                                    {% endif %}
 
 
                                     <div class="col-12 mt-22">

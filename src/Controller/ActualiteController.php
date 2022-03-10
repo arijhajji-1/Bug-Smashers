@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Evenement;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -69,10 +70,15 @@ class ActualiteController extends AbstractController
     /**
      * @Route("/actualite/affiche", name="actualite_affiche")
      */
-    public function affiche(ActualiteRepository $repo){
+    public function affiche(Request $request, EntityManagerInterface $em, PaginatorInterface $paginator){
 
-        $repo=$this->getDoctrine()->getRepository(Actualite::class);
-        $actualite=$repo->findAll();
+        $dql   = "SELECT p FROM App\Entity\Actualite p";
+        $query = $em->createQuery($dql);
+        $actualite = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            2 // Nombre de résultats par page
+        );
         return $this->render('/actualite/affiche.html.twig',[
             'actualites'=>$actualite
         ]);

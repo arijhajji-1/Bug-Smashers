@@ -38,24 +38,6 @@ class IndexController extends AbstractController
         return $this->render('/profile.html.twig');
     }
     /**
-     * @Route("/edit/{id}", name="editprofile")
-     */
-    public function editprofile(UserRepository $repo,$id,Request $request): Response
-    {
-        $user=$repo->find($id);
-        $form=$this->createForm(UserType::class,$user);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $em=$this->getDoctrine()->getManager();
-            $em->flush();
-            return $this->redirectToRoute('profile');
-        }
-        return $this->render('/editprofile.html.twig',[
-            'form'=>$form->createView()
-        ]);
-    }
-    /**
      * @Route("/", name="index")
      */
     public function HomePage(): Response
@@ -68,6 +50,25 @@ class IndexController extends AbstractController
     public function Home(): Response
     {
         return $this->redirectToRoute('indexing');
+    }
+    /**
+     * @Route("/edit/{id}", name="editprofile")
+     */
+    public function editprofile(UserRepository $repo,$id,Request $request): Response
+    {
+        $user=$repo->find($id);
+        $form=$this->createForm(UserType::class,$user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $em=$this->getDoctrine()->getManager();
+            $user->setPassword(password_hash($user->getPassword(), PASSWORD_DEFAULT));
+            $em->flush();
+            return $this->redirectToRoute('profile');
+        }
+        return $this->render('/editprofile.html.twig',[
+            'form'=>$form->createView()
+        ]);
     }
 
     /**

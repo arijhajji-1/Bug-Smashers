@@ -41,5 +41,11 @@ security:
     access_control:
         # require ROLE_ADMIN for /admin*
         - { path: '^/admin', roles: ROLE_ADMIN }
+        - { path: '^/b', roles: ROLE_ADMIN }
+        - { path: '^/indexback', roles: ROLE_ADMIN }
+        - { path: '^/produit/affback/acheter', roles: ROLE_ADMIN}
+        - { path: '^/produit/affback/louer', roles: ROLE_ADMIN}
+        - { path: '^/produit/affback/avis', roles: ROLE_ADMIN}
+        - { path: '^/categoryaffback', roles: ROLE_ADMIN}
         - { path: '^/admin', roles: 'is_granted("IS_AUTHENTICATED_FULLY") and is_granted("ROLE_ADMIN")' }
         - { path: '^/user/', roles: ROLE_USER }

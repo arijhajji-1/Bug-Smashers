@@ -143,10 +143,10 @@ class ProduitController extends AbstractController
     }
     /**
      * @Route("/produit/afffront", name="produit_affichage_front")
-     * @Security("is_granted('ROLE_USER') or is_granted('ROLE_ADMIN')")
      */
     public function index(ProduitLouerRepository $produitLouerRepository,ProduitAcheterRepository $produitAcheterRepository,
-                          CategoryRepository $categoryRepository,Request $request, PaginatorInterface $paginator): Response
+                          CategoryRepository $categoryRepository,Request $request, PaginatorInterface $paginator,
+                          EntityManagerInterface $em): Response
     {
         $data = new SearchData();
         $form = $this->createForm(SearchForm::class,$data, [

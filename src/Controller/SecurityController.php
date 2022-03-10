@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -36,7 +37,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/inscription", name="user_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, \Swift_Mailer $mailer): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -68,8 +69,18 @@ class SecurityController extends AbstractController
                 $user->setPhoto($newFilename);
             }
             $user->setPassword(password_hash($user->getPassword(), PASSWORD_DEFAULT));
+            $user->setStatus(0);
             $roles = ['ROLE_USER'];
             $user->setRoles($roles);
+            $message = (new \Swift_Message( 'INSCRIPTION'))
+                ->setFrom('Reloua.tunisie@gmail.com')
+
+                ->setTo($user->getEmail())
+                ->setBody(
+                    'VOTRE COMPTE A ETE CREE AVEC SUCCEE! CLIQUER SUR CE LIEN POUR VALIDER LE COMPTE: http://127.0.0.1:8000/confirm '
+                )
+            ;
+            $mailer->send($message);
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -87,5 +98,22 @@ class SecurityController extends AbstractController
     public function logout()
     {
        return $this->redirectToRoute('app_login');
+    }
+    /**
+     * @Route("/confirm", name="confirmation")
+     */
+    public function confirm(UserRepository $userRepository, Request $request): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        if($request->isMethod('POST')){
+            $email =  $request->get('email');
+            $user =  $userRepository->findOneBy(['email'=>$email]);
+            var_dump($user);
+            $user->setStatus(1);
+            $em->persist($user);
+            $em->flush();
+            echo $user->getStatus();
+        }
+        return $this->render('user/confirmation.html.twig');
     }
 }

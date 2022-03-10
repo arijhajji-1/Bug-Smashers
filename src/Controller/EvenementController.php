@@ -14,6 +14,7 @@ use App\Repository\AvisRepository;
 use App\Repository\EvenementRepository;
 use App\Service\FileUploaderE;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,10 +83,15 @@ class EvenementController extends AbstractController
     /**
      * @Route("/evenement/affiche", name="evenement_affiche")
      */
-    public function affiche(EvenementRepository $repo){
+    public function affiche(Request $request, EntityManagerInterface $em,PaginatorInterface$paginator){
 
-        $repo=$this->getDoctrine()->getRepository(Evenement::class);
-        $evenement=$repo->findAll();
+        $dql   = "SELECT p FROM App\Entity\Evenement p";
+        $query = $em->createQuery($dql);
+        $evenement = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            2 // Nombre de résultats par page
+        );
         return $this->render('/evenement/affiche.html.twig',[
             'evenements'=>$evenement
         ]);

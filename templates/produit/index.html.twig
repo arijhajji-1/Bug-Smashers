@@ -38,7 +38,7 @@
         <div class="container container-wide">
             <div class="action-bar-inner">
                 <div class="row align-items-center">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <div class="shop-layout-switcher mb-15 mb-sm-0">
                             <ul class="layout-switcher nav">
                                 <li data-layout="grid" class="active"><i class="fa fa-th"></i></li>
@@ -46,18 +46,7 @@
                             </ul>
                         </div>
                     </div>
-
-                    <div class="col-sm-6">
-                        <div class="sort-by-wrapper">
-                            <label for="sort" class="sr-only">Sort By</label>
-                            <select name="sort" id="sort">
-                                <option value="sbp">Sort By Popularity</option>
-                                <option value="sbn">Sort By Newest</option>
-                                <option value="sbt">Sort By Trending</option>
-                                <option value="sbr">Sort By Rating</option>
-                            </select>
-                        </div>
-                    </div>
+                    <br>
                 </div>
             </div>
         </div>
@@ -112,7 +101,6 @@
                                     <div class="product-item__info">
                                         <h4 class="title"><a href="{{ path("single_produitA", {'id':produit.id })}}">{{ produit.nom }}</a></h4>
                                         <span class="price"><strong>Price:</strong>
-
                                             {% if produit.getPromotion() %}
 
                                             <br><del>{{ produit.prix }} dt </del> <br>
@@ -124,7 +112,8 @@
                                     </div>
 
                                     <div class="product-item__action">
-                                        <a href="{{path("cart_add", {id: produit.id})}}" class="btn-add-to-cart"><i class="ion-bag"></i></a>                                        <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
+                                        <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                        <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
                                         <a class="btn-add-to-cart"
                                                 href="{{ path("AjouterpAWish", {'id':produit.id })}}">
                                             <i class="ion-ios-heart-outline"></i></a>
@@ -201,9 +190,10 @@
                                             <h4 class="title"><a href="{{ path("single_produitL", {'id':produit.id })}}">{{ produit.nom }}</a></h4>
                                             <span class="price"><strong>Price:</strong> <br>{{ produit.prix }} Dt/jour</span>
                                         </div>
+
                                         <div class="product-item__action">
-                                            <a href="{{path("location_new", {id: produit.id})}}" class="btn-add-to-cart"><i class="ion-bag"></i></a>
-                                            <a href="{{ path('location_index') }}" class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></a>
+                                            <button class="btn-add-to-cart"><i class="ion-bag"></i></button>
+                                            <button class="btn-add-to-cart"><i class="ion-ios-loop-strong"></i></button>
                                             <button class="btn-add-to-cart"><i class="ion-ios-heart-outline"></i></button>
                                             <a class="btn-add-to-cart"
                                                href="{{ path("single_produitL", {'id':produit.id })}}"><i

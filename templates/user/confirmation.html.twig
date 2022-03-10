@@ -1,0 +1,17 @@
+{% extends 'loginTemplate.html.twig' %}
+
+{% block title %}Confirmation!{% endblock %}
+
+{% block body %}
+    <form method="post">
+
+
+        <h1 class="h3 mb-3 font-weight-normal">Confirmation d'email</h1>
+        <label for="inputEmail">Email</label>
+        <input type="email" name="email" id="inputEmail" class="form-control" required autofocus>
+        <button class="btn btn-lg btn-primary" type="submit">
+            Confirmer compte
+        </button>
+    </form>
+
+{% endblock %}

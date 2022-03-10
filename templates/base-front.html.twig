@@ -88,6 +88,7 @@
                         <li class="has-submenu"><a href="{{ path('produit_affichage_front') }}">Produit</a>
 
                         </li>
+                        <li class="has-submenu"><a href="{{ path('publication_newPublication') }}">Publication</a>
                         <li class="has-submenu"><a href="{{ path('user_index') }}">Forum</a>
 
                         </li>
@@ -150,6 +151,11 @@
                             </ul>
 
                         </ul>
+                        <div class="mini-cart-wrap">
+                            <a href="{{ path("afficher_wishlist") }}" class="btn-mini-cart">
+                                <i class="ion-ios-heart-outline"></i>
+                            </a>
+                        </div>
 
                     {% else %}
                         <ul class="login-reg-nav nav">

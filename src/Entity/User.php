@@ -93,7 +93,10 @@ class User implements UserInterface
      * )
      */
     private $password;
-
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $status;
     /**
      * @ORM\OneToOne(targetEntity=Wishlist::class, mappedBy="users", cascade={"persist", "remove"})
      */
@@ -242,6 +245,7 @@ class User implements UserInterface
         return $this;
     }
 
+
     /**
      * @return mixed
      */
@@ -294,6 +298,22 @@ class User implements UserInterface
         $this->wishlist = $wishlist;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status): void
+    {
+        $this->status = $status;
     }
 
 

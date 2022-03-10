@@ -49,8 +49,6 @@ class Commande
      */
     private $adresse;
 
-
-
     /**
      * @ORM\OneToMany(targetEntity=LigneCommande::class, mappedBy="Commande")
      */
@@ -223,5 +221,6 @@ class Commande
 
         return $this;
     }
+
 
 }

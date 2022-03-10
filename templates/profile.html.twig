@@ -1,4 +1,5 @@
-
+{% extends 'base-front.html.twig' %}
+{% block body %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +40,7 @@
             <div class="panel">
 
                 <div class="panel-body bio-graph-info">
-                    <h1>Profile</h1>
+                    <h1>Bio Graph</h1>
                     <div class="row">
                         <div class="bio-row">
                             <p><span>First Name </span>{{app.user.lastName}}</p>
@@ -514,3 +515,4 @@
 </script>
 </body>
 </html>
+{% endblock %}
