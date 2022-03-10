@@ -43,8 +43,9 @@ class Reclamation
     private $categorie;
 
     /**
-     *   @Assert\NotBlank(message = "La date de début doit être saisie.")
+     * @Assert\NotBlank(message = "La date de début doit être saisie.")
      * @Assert\Date(message = "La date de début n'est pas valide.")
+     * @Assert\GreaterThan("today")
      * @ORM\Column(type="date")
      * @Groups("post:read")
      */

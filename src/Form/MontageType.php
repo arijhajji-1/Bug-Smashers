@@ -59,7 +59,7 @@ class MontageType extends AbstractType
             ->add('carte_mere', EntityType::class, ['class' => ProduitAcheter::class, 'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('u')
                     ->orderBy('u.id', 'ASC')
-                    ->where('u.category = 3');
+                    ->where('u.category = 7');
             },
                 'placeholder' => "choisir une option.",
                 'choice_label' => function (ProduitAcheter $ProduitAcheter) {
@@ -75,7 +75,7 @@ class MontageType extends AbstractType
             ->add('disque_systeme', EntityType::class, ['class' => ProduitAcheter::class, 'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('u')
                     ->orderBy('u.id', 'ASC')
-                    ->where('u.category = 4');
+                    ->where('u.category = 9');
             },
                 'placeholder' => "choisir une option.",
                 'choice_label' => function (ProduitAcheter $ProduitAcheter) {
@@ -91,7 +91,7 @@ class MontageType extends AbstractType
             ->add('boitier', EntityType::class, ['class' => ProduitAcheter::class, 'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('u')
                     ->orderBy('u.id', 'ASC')
-                    ->where('u.category = 5');
+                    ->where('u.category = 6');
             },
                 'placeholder' => "choisir une option.",
                 'choice_label' => function (ProduitAcheter $ProduitAcheter) {
@@ -107,7 +107,7 @@ class MontageType extends AbstractType
             ->add('stockage_supp', EntityType::class, ['class' => ProduitAcheter::class, 'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('u')
                     ->orderBy('u.id', 'ASC')
-                    ->where('u.category = 6');
+                    ->where('u.category = 9');
             },
                 'placeholder' => "choisir une option.",
                 'choice_label' => function (ProduitAcheter $ProduitAcheter) {
