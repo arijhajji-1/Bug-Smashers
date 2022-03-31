@@ -5,7 +5,7 @@ namespace App\Entity;
 use App\Repository\AvisProduitRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=AvisProduitRepository::class)
  */
@@ -31,6 +31,7 @@ class Avis_Produit
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Vous devez donner une description !")
+     * @Groups("avis")
      */
     private $description;
 
@@ -47,6 +48,7 @@ class Avis_Produit
     /**
      * @ORM\Column(type="smallint")
      * @Assert\NotBlank(message="Vous devez choisir au moin 1 star !")
+     * @Groups("avis")
      */
     private $rating;
 

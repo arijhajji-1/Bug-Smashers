@@ -8,8 +8,9 @@ use App\Form\SearchCommandeForm;
 use App\Form\CommandeType;
 use App\Repository\CommandeRepository;
 use App\Repository\ProduitAcheterRepository;
-use phpDocumentor\Reflection\DocBlock\Serializer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -123,8 +124,8 @@ class CommandeController extends AbstractController
     }
 
     /**
-     * @Route("/commande/add2", name="add_commande",methods={"GET", "POST"})
-     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
+     * @Route("/commande/add2", name="add_commande")
+     * @Method("GET")
      */
 
     public function addcommande(Request $request)
@@ -144,6 +145,7 @@ class CommandeController extends AbstractController
         $commande->setPaiment($paiment);
         $commande->setAdresse($adresse);
         $commande->setTelephone($telephone);
+        $commande->setIduser("1");
 
 
         $em->persist($commande);
@@ -153,6 +155,59 @@ class CommandeController extends AbstractController
         return new JsonResponse($formatted);
 
     }
+
+
+    /**
+     * @Route("/commande/updateCommande/{id}", name="update_Commande")
+     * @Method("PUT")
+     */
+    public function modifierCommandeAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $Commande = $this->getDoctrine()->getManager()
+            ->getRepository(Commande::class)
+            ->find($request->get("id"));
+        $Commande->setNom($request->get("nom"));
+        $Commande->setPrenom($request->get("prenom"));
+        $Commande->setPaiment($request->get("paiment"));
+        $Commande->setAdresse($request->get("adresse"));
+        $Commande->setTelephone($request->get("telephone"));
+
+        $em->persist($Commande);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($Commande);
+        return new JsonResponse("Commande a ete modifiee avec success.");
+
+    }
+
+    /**
+     * @Route("/commande/deleteCommande", name="delete_Commande")
+     * @Method("DELETE")
+     */
+
+    public function deleteCommandeAction(Request $request) {
+        $id = $request->get("id");
+
+        $em = $this->getDoctrine()->getManager();
+        $commande = $em->getRepository(Commande::class)->find($id);
+        if($commande!=null ) {
+            $em->remove($commande);
+            $em->flush();
+
+            $serialize = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serialize->normalize("Votre Commande a ete supprimee avec success.");
+            return new JsonResponse($formatted);
+
+        }
+        return new JsonResponse("id commande invalide.");
+
+
+    }
+
+
+
+
+
 
 
     /**
@@ -221,7 +276,7 @@ class CommandeController extends AbstractController
     }
 
     /**
-     * @Route("/commande/liste",name="liste_commande",methods={"GET"})
+     * @Route("/commande/liste",name="liste_commande")
      */
     public function getCommande(NormalizerInterface $normalizer,CommandeRepository $repo): Response
     {
@@ -234,11 +289,11 @@ class CommandeController extends AbstractController
 
     }
 
-      // /**
-     //* @param CommandeRepository $repo
-     //* @return Response \Symfony\Component\HttpFoundation\Response
-     //* @Route("/commande/show1", name="Affiche")
-     //*/
+    // /**
+    //* @param CommandeRepository $repo
+    //* @return Response \Symfony\Component\HttpFoundation\Response
+    //* @Route("/commande/show1", name="Affiche")
+    //*/
     /* public function show1(CommandeRepository $CommandeRepository,Request $request, PaginatorInterface $paginator): Response
     {
         return $this->render('commande/showB.html.twig', [

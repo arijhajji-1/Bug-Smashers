@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ProduitLouerRepository::class)
@@ -17,52 +18,61 @@ class ProduitLouer
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("produit")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank(message="le nom ne peut pas etre vide")
+     * @Groups("produit")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="L'article doit avoir une description")
+     * @Groups("produit")
      */
     private $description;
 
     /**
      * @ORM\Column(type="decimal", precision=12, scale=2)
      * @Assert\NotBlank(message="le prix ne peut pas etre vide")
+     * @Groups("produit")
      */
     private $prix;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank(message="l'etat du produit ne peut pas etre vide")
+     * @Groups("produit")
      */
     private $etat;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("produit")
      */
     private $imagePath;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank(message="L'article doit avoir une marque")
+     * @Groups("produit")
      */
     private $marque;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="produitsLouer")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     * @Groups("produit")
      */
     private $category;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups("produit")
      */
     private $dispo;
 
@@ -70,6 +80,11 @@ class ProduitLouer
      * @ORM\OneToMany(targetEntity=Avis_Produit::class, mappedBy="produitLouer",orphanRemoval=true)
      */
     private $avis;
+    /**
+     * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="produit")
+     * @Groups("produit")
+     */
+    private $location;
 
     public function __construct()
     {
@@ -92,7 +107,10 @@ class ProduitLouer
 
         return $this;
     }
-
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
     public function getDescription(): ?string
     {
         return $this->description;
@@ -169,7 +187,12 @@ class ProduitLouer
     {
         return $this->dispo;
     }
+    public function setLocation(?Location $location): self
+    {
+        $this->location = $location;
 
+        return $this;
+    }
     public function setDispo(bool $dispo): self
     {
         $this->dispo = $dispo;

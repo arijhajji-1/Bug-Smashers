@@ -33,6 +33,7 @@ class ProduitAcheter
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="L'article doit avoir une description")
+     * @Groups("produit")
      */
     private $description;
 
@@ -52,18 +53,21 @@ class ProduitAcheter
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("produit")
      */
     private $imagePath;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank(message="L'article doit avoir une marque")
+     * @Groups("produit")
      */
     private $marque;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="produitsAcheter")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     * @Groups("produit")
      */
     private $category;
 

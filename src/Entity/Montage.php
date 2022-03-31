@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
+use App\Entity\ProduitAcheter;
 /**
  * @ORM\Entity(repositoryClass=MontageRepository::class)
  */
@@ -69,10 +70,7 @@ class Montage
      */
     private $montant;
 
-    /**
-     * @ORM\OneToMany(targetEntity=ProduitAcheter::class, mappedBy="montage")
-     */
-    private $produits;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -178,35 +176,7 @@ class Montage
         return $this;
     }
 
-    /**
-     * @return Collection|ProduitAcheter[]
-     */
-    public function getProduitAcheters(): Collection
-    {
-        return $this->ProduitAcheters;
-    }
 
-    public function addProduitAcheter(ProduitAcheter $ProduitAcheter): self
-    {
-        if (!$this->ProduitAcheters->contains($ProduitAcheter)) {
-            $this->ProduitAcheters[] = $ProduitAcheter;
-            $ProduitAcheter->setMontage($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduitAcheter(ProduitAcheter $ProduitAcheter): self
-    {
-        if ($this->ProduitAcheters->removeElement($ProduitAcheter)) {
-            // set the owning side to null (unless already changed)
-            if ($ProduitAcheter->getMontage() === $this) {
-                $ProduitAcheter->setMontage(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getEmail(): ?string
     {

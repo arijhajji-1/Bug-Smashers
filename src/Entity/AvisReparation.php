@@ -6,6 +6,7 @@ use App\Repository\AvisReparationRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=AvisReparationRepository::class)
@@ -16,12 +17,14 @@ class AvisReparation
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups ("post:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *  * @Assert\NotBlank(message="This field must be filled")
+     *  @Assert\NotBlank(message="This field must be filled")
+     * @Groups ("post:read")
      */
     private $Description;
 
@@ -38,17 +41,20 @@ class AvisReparation
      *     checkMX = true
      * )
      * @Assert\NotBlank(message="This field must be filled")
+     * @Groups ("post:read")
      */
     private $email;
 
     /**
      * @ORM\OneToOne(targetEntity=Reparation::class, inversedBy="avisReparation", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
+     * @Groups ("post:read")
      */
     private $idrep;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups ("post:read")
      */
     private $iduser;
 

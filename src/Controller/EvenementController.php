@@ -3,25 +3,28 @@
 namespace App\Controller;
 
 
+
 use App\Entity\Evenement;
 
-use App\Entity\User;
-use App\Form\AvisEType;
 use App\Form\EvenementType;
 use App\Form\AvisType;
-use App\Repository\ActualiteRepository;
+
 use App\Repository\AvisRepository;
 use App\Repository\EvenementRepository;
-use App\Service\FileUploaderE;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Avis;
 use Swift_Mailer;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 
 class EvenementController extends AbstractController
@@ -40,7 +43,7 @@ class EvenementController extends AbstractController
      * @Route("/evenement/ajouter", name="evenement_ajout")
      */
     public function ajouter(Request $request, EntityManagerInterface $entityManager
-        , FileUploaderE $fileUploader,Swift_Mailer $mailer): Response
+        , FileUploader $fileUploader,Swift_Mailer $mailer): Response
     {
         $evenement = new Evenement();
         $form = $this->createForm(EvenementType::class, $evenement);
@@ -53,21 +56,7 @@ class EvenementController extends AbstractController
                 $evenement->setImageName($fileName);
             }
             $entityManager->persist($evenement);
-            $users=$entityManager->getRepository(User::class)->findAll();
-            foreach($users as $item) {
-                $email = $item->getEmail();
-                $message = (new \Swift_Message( 'Nouvel Evenement!!'))
-                    ->setFrom('Reloua.tunisie@gmail.com')
-                    ->setTo($email)
-                    ->setBody(
-                        $this->renderView(
-                            'emails/registration.html.twig'
-                        ),
-                        'text/html'
-                    )
-                ;
-                $mailer->send($message);
-            }
+            $this->mail($mailer);
             $entityManager->flush();
 
             return $this->redirectToRoute('evenement_ajout', [], Response::HTTP_SEE_OTHER);
@@ -83,15 +72,10 @@ class EvenementController extends AbstractController
     /**
      * @Route("/evenement/affiche", name="evenement_affiche")
      */
-    public function affiche(Request $request, EntityManagerInterface $em,PaginatorInterface$paginator){
+    public function affiche(EvenementRepository $repo){
 
-        $dql   = "SELECT p FROM App\Entity\Evenement p";
-        $query = $em->createQuery($dql);
-        $evenement = $paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1),
-            2 // Nombre de résultats par page
-        );
+        $repo=$this->getDoctrine()->getRepository(Evenement::class);
+        $evenement=$repo->findAll();
         return $this->render('/evenement/affiche.html.twig',[
             'evenements'=>$evenement
         ]);
@@ -105,6 +89,7 @@ class EvenementController extends AbstractController
         $evenement=$repo->find($id);
         $em=$this->getDoctrine()->getManager();
         $em->remove($evenement);
+        $this->mailSupp($mailer);
         $em->flush();
         return $this->redirectToRoute('evenement_affiche');
     }
@@ -137,13 +122,11 @@ class EvenementController extends AbstractController
         $evenement = $entityManager->getRepository(Evenement::class)->find($id);
         $avis = new Avis();
         $avis->setEvenement($evenement);
-        $form = $this->createForm(AvisEType::class, $avis);
+        $form = $this->createForm(AvisType::class, $avis);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $avis->setEvenement($evenement);
-            $avis->setEmail($this->getUser()->getEmail());
-            $avis->setNom($this->getUser()->getFirstName());
             $entityManager->persist($avis);
             $entityManager->flush();
             $this->addFlash('success','commentaire ajouté avec succès');
@@ -158,7 +141,7 @@ class EvenementController extends AbstractController
             "evenement" => $evenement,
             'form' => $form->createView(),
             'avis' => $evenement->getAvis(),
-             'jours' => $totalDaysDiff
+            'jours' => $totalDaysDiff
         ]);
     }
 
@@ -182,16 +165,15 @@ class EvenementController extends AbstractController
     public function SupprimerComment($id, AvisRepository $repo)
     {
         $avis=$repo->find($id);
-        $id=$avis->getEvenement()->getId();
         $em=$this->getDoctrine()->getManager();
         $em->remove($avis);
         $em->flush();
-        return $this->redirectToRoute('evenement_comment',['id'=>$id]);
+        return $this->redirectToRoute('evenement_comment');
     }
 
 
 
-/*
+
     public function mail( \Swift_Mailer $mailer)
     {
         $message = (new \Swift_Message('Vous Avez Ajouter un évenement!!  '))
@@ -224,7 +206,7 @@ class EvenementController extends AbstractController
     public function mailSupp( \Swift_Mailer $mailer)
     {
         $message = (new \Swift_Message('un évenement  est annulé!!  '))
-            ->setFrom('Reloua.tunisie@gmail.com')
+            ->setFrom('nourelhoudamakkari@gmail.com')
             ->setTo('nourelhoudamakkari@gmail.com')
             ->setBody(
                 $this->renderView(
@@ -249,6 +231,78 @@ class EvenementController extends AbstractController
 
         $mailer->send($message);
     }
-*/
+
+
+    /**
+     * @Route("/listeEvenement",name="listeEvenement")
+     */
+    public function listeEvenement(NormalizerInterface $normalizer)
+    {
+        $repo= $this->getDoctrine()->getRepository(evenement::class);
+        $evenement = $repo->findAll();
+        $jsonContent = $normalizer->normalize($evenement, 'json',['groups'=>'post:read']);
+
+
+        return new Response(json_encode($jsonContent));
+
+    }
+
+    /**
+     * @Route("/ajoutEvenement",name="ajoutEvenementJSON")
+     */
+    public function ajoutEvenementJSON(Request $request,NormalizerInterface $normalizer)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $evenement = new Evenement();
+        $evenement->setNom($request->get('nom'));
+        $evenement->setDate(new \DateTime());
+        $evenement->setHeure("13:00");
+        $evenement->setDescription($request->get('description'));
+        $evenement->setimageName($request->get('imageName'));
+        $em->persist($evenement);
+        $em->flush();
+        $jsonContent = $normalizer->normalize($evenement, 'json',['groups'=>'post:read']);
+
+        return new Response(json_encode($jsonContent));
+    }
+
+    /**
+     * @Route("/updateEvenement",name="updateEvenementJSON")
+     */
+    public function updateEvenementJSON(Request $request,NormalizerInterface $normalizer){
+        $em = $this->getDoctrine()->getManager();
+        $evenement = $this->getDoctrine()->getManager()->getRepository(Evenement::class)->find($request->get("id"));
+        $evenement->setNom($request->get('nom'));
+        $evenement->setDate(new \DateTime());
+        $evenement->setHeure("12");
+        $evenement->setDescription($request->get('description'));
+        $evenement->setimageName($request->get('imageName'));
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        return new Response("evenement updated successfully");
+
+    }
+
+
+    /**
+     * @Route("/deleteEvenement",name="deleteEvenementJSON")
+     * @Method ("DELETE")
+     */
+    public function deleteEvenement(Request $request,  EntityManagerInterface $em)
+    {
+        $id = $request->get("id");
+        $em = $this->getDoctrine()->getManager();
+        $Evenement = $em->getRepository(Evenement::class)->find($id);
+        if($Evenement != null) {
+            $em->remove($Evenement);
+            $em->flush();
+
+            return new JsonResponse("Evenement Deleted ");
+        }
+        return new JsonResponse("not found");
+    }
+
+
+
 
 }

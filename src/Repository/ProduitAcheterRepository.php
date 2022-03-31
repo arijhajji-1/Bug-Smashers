@@ -59,7 +59,25 @@ class ProduitAcheterRepository extends ServiceEntityRepository
         }
         return $query->getQuery()->getResult();
     }
+    /**
+     * @return Produit[]
+     */
 
+    public function findByExampleField($value)
+    {
+
+
+
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.id  like :val')
+            ->orWhere('a.nom like :val')
+            ->orWhere('a.description like :val')
+            ->setParameter('val', '%'.$value.'%')
+
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     /*
     public function findOneBySomeField($value): ?ProduitAcheter
     {

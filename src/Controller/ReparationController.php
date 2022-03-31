@@ -10,6 +10,7 @@ use App\Form\SearchFormReparation;
 use App\Message\GenerateReport;
 use App\Repository\ReparationRepository;
 use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -146,7 +147,23 @@ dump($jsonContent);
 die;
 
     }
+    /**
+     * @route("/recherchemobilerep",name="recherchemobilerep")
+     */
+    public function rechercher(NormalizerInterface $normalizer,ReparationRepository $repo , request $request): Response
+    { $repo=$this->getDoctrine()->getRepository(Reparation::class) ;
+        $data=$request->get('searchbar');
+      //  $reparation=$repo->findBy(['category'=>$data]);
+        $reparations = $this->getDoctrine()->getRepository(Reparation::class)->findByExampleField($data);
+        $jsonContent=$normalizer->normalize($reparations,'json',['groups'=>'post:read']);
 
+
+        return new Response(json_encode($jsonContent));
+
+        dump($jsonContent);
+        die;
+
+    }
     /**
      * @Route("/addreparation", name="add_reparation")
      * @Method("GET")
@@ -159,16 +176,18 @@ die;
         $Type = $request->query->get("Type");
         $Description = $request->query->get("Description");
 
-        $Reserver =  new \DateTime('now');
+        $Reserver =$request->query->get("Reserver");
         $Etat = $request->query->get("Etat");
         $em = $this->getDoctrine()->getManager();
 
         $reparation->setType($Type);
         $reparation->setCategory($Category);
         $reparation->setDescription($Description);
-        $reparation->setReserver($Reserver);
+        $reparation->setReserver(new \DateTime());
         $reparation->setEtat("En cours");
-
+        $reparation->setTelephone("+21690197079");
+        $reparation->setIduser("1");
+        $reparation->setEmail("arij.hajji@esprit.tn");
         $em->persist($reparation);
         $em->flush();
         $serializer = new Serializer([new ObjectNormalizer()]);
@@ -177,37 +196,32 @@ die;
 
     }
     /**
-     * @Route("/deletereparation", name="delete_reparation")
+     * @Route("/deletereparations", name="delete_reparation")
+     * @Method ("DELETE")
      */
-
-    public function deletereparationAction(Request $request) {
+    public function deletereparationA(Request $request,  EntityManagerInterface $em)
+    {
         $id = $request->get("id");
-
         $em = $this->getDoctrine()->getManager();
-        $reparation = $em->getRepository(reparation::class)->find($id);
-        if($reparation!=null ) {
-            $em->remove($reparation);
+        $Reparation  = $em->getRepository(Reparation::class)->find($id);
+        if($Reparation != null)
+        {
+            $em->remove($Reparation);
             $em->flush();
 
-            $serialize = new Serializer([new ObjectNormalizer()]);
-            $formatted = $serialize->normalize("reparation a ete supprimee avec success.");
-            return new JsonResponse($formatted);
-
+            return new JsonResponse("Reparation Deleted ");
         }
-        return new JsonResponse("id reparation invalide.");
-
-
+        return new JsonResponse("not found");
     }
 
     /******************Modifier reparation*****************************************/
     /**
      * @Route("/updatereparation", name="update_reparation")
+     * @Method("PUT")
      */
     public function modifierreparationAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
-        $reparation = $this->getDoctrine()->getManager()
-            ->getRepository(reparation::class)
-            ->find($request->get("id"));
+        $reparation = $this->getDoctrine()->getManager()->getRepository(Reparation::class)->find($request->get("id"));
         $reparation->setType($request->get("Type"));
         $reparation->setCategory($request->get("Category"));
         $reparation->setDescription($request->get("Description"));

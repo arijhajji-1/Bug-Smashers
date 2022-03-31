@@ -2,17 +2,20 @@
 
 namespace App\Controller;
 
-use App\Entity\Commande;
 use App\Entity\Location;
 use App\Form\LocationType;
 use App\Entity\ProduitLouer;
-use App\Repository\CommandeRepository;
 use App\Repository\LocationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
  * @Route("/location")
@@ -65,7 +68,7 @@ class LocationController extends AbstractController
     /**
      * @param LocationRepository $repo
      * @return Response \Symfony\Component\HttpFoundation\Response
-     * @Route("/commande/showB", name="AfficheB")
+     * @Route("/location/showB", name="AfficheB")
      */
     public function showB(LocationRepository $locationRepository): Response
     {
@@ -138,5 +141,94 @@ class LocationController extends AbstractController
         }
 
         return $this->redirectToRoute('AfficheB', [], Response::HTTP_SEE_OTHER);
+    }
+    /**
+     * @Route("/location/add3", name="add_location")
+     * @Method("GET")
+     */
+
+    public function addlocation(Request $request)
+    {
+        $location = new Location();
+        $dateDEB = $request->query->get("dateDEB");
+        $dateFin = $request->query->get("dateFin");
+        $TotalL = $request->query->get("TotalL");
+        $produit=$request->query->get("produit");
+
+
+
+        $em = $this->getDoctrine()->getManager();
+
+        $location->setDateDEB(new \DateTime());
+        $location->setDateFin(new \DateTime());
+        $location->setTotalL($TotalL);
+
+
+
+        $location->setIduser("1");
+
+
+        $em->persist($location);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($location);
+        return new JsonResponse($formatted);
+
+    }
+
+
+    /**
+     * @Route("/location/updatelocation/{id}", name="update_location")
+     * @Method("PUT")
+     */
+    public function modifierlocationAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $location = $this->getDoctrine()->getManager()
+            ->getRepository(Location::class)
+            ->find($request->get("id"));
+        $dateDEB = $request->query->get("dateDEB");
+        $dateFin = $request->query->get("dateFin");
+        $TotalL = $request->query->get("TotalL");
+
+        $location->setDateDEB(new \DateTime());
+        $location->setDateFin(new \DateTime());
+        $location->setTotalL($TotalL);
+
+        $em->persist($location);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($location);
+        return new JsonResponse("location a ete modifiee avec success.");
+
+    }
+
+    /**
+     * @Route("/location/deletelocation", name="delete_location")
+     * @Method("DELETE")
+     */
+
+    public function deletelocationAction(Request $request) {
+        $id = $request->get("id");
+
+        $em = $this->getDoctrine()->getManager();
+        $location = $em->getRepository(Location::class)->find($id);
+        if($location!=null ) {
+            $em->remove($location);
+            $em->flush();
+            $serialize = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serialize->normalize("Votre location a ete supprimee avec success.");
+            return new JsonResponse($formatted);
+        }
+        return new JsonResponse("id location invalide.");
+    }
+    /**
+     * @Route("/location/liste2",name="liste_location")
+     */
+    public function getlocation(NormalizerInterface $normalizer,LocationRepository $repo): Response
+    {
+        $repo=$this->getDoctrine()->getRepository(Location::class) ;
+        $location=$repo->findAll();
+        $jsonContent=$normalizer->normalize($location,'json',['groups'=>'location']);
+        return new Response(json_encode($jsonContent));
     }
 }

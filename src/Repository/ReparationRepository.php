@@ -19,6 +19,25 @@ class ReparationRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Reparation::class);
     }
+    /**
+     * @return Reparation[] Returns an array of Article objects
+     */
+
+    public function findByExampleField($value)
+    {
+
+
+
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.id  like :val')
+            ->orWhere('a.category like :val')
+          ->orWhere('a.description like :val')
+            ->setParameter('val', '%'.$value.'%')
+
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
     // /**
     //  * @return Reparation[] Returns an array of Reparation objects
@@ -60,6 +79,25 @@ class ReparationRepository extends ServiceEntityRepository
         // returns an array of Product objects
         return $query->getResult();
 
+    }
+    /**
+     * recupere les annonces en lien avec recherche
+     * @return Reparation[]
+     */
+    public function findSearch2(SearchDataReparation $search):array
+    {
+        $query= $this
+            ->createQueryBuilder('x');
+
+
+        if (!empty($search->y))
+        {
+            $query=$query
+                ->andWhere('x.category LIKE :y  LIKE :y')
+                ->setParameter('y',"{$search->y}%");
+        }
+
+        return $query->getQuery()->getResult();
     }
     /**
      * recupere les annonces en lien avec recherche

@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -18,12 +19,14 @@ class Evenement
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("post:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="veuillez entrer le nom de l'événement")
+     * @Groups("post:read")
      */
     private $nom;
 
@@ -31,23 +34,27 @@ class Evenement
      * @ORM\Column(type="date")
      * @Assert\NotBlank(message="veuillez entrer la date de l'événement")
      * @Assert\GreaterThan("today UTC")
+     * @Groups("post:read")
      */
     private $date;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="veuillez entrer l'heure de l'événement")
+     * @Groups("post:read")
      */
     private $heure;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="veuillez entrer la description de l'événement")
+     * @Groups("post:read")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("post:read")
      */
     private $ImageName;
 

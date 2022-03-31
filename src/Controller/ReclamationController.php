@@ -2,9 +2,14 @@
 
 namespace App\Controller;
 use App\Form\SearchReclamationType;
+use CalendarBundle\Serializer\SerializerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Form\ReclamationType;
 //use http\Env\Request;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use MercurySeries\FlashyBundle\FlashyNotifier;
@@ -25,6 +30,8 @@ use Symfony\Component\Serializer\Normalizer\NormalizableInterface;
 use Ob\HighchartsBundle\Highcharts\Highchart;
 use Symfony\Component\Serializer\Encoder\JsonEncode;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class ReclamationController extends AbstractController
 {
@@ -32,12 +39,12 @@ class ReclamationController extends AbstractController
      * @Route("/reclamation/home", name="acceuil_reclamation")
      */
 
-public function home(){
+    public function home(){
 
-    return $this->render('reclamation/home.html.twig',
-    ['controller_name'=>'ReclamationController']);
+        return $this->render('reclamation/home.html.twig',
+            ['controller_name'=>'ReclamationController']);
 
-}
+    }
 
 
 
@@ -57,7 +64,6 @@ public function home(){
         //recuperer le formulaire
         $formBuilder = $this->createFormBuilder($reclaim);
         $formBuilder
-            ->add('code',IntegerType::class)
             ->add('idCommande',IntegerType::class)
             ->add('categorie',ChoiceType::class,
                 ['choices'  => [
@@ -82,12 +88,12 @@ public function home(){
         //controle de saisie
         if($form->isSubmitted()&& $form->isValid())
         {
-        $em=$this->getDoctrine()->getManager();
-        $em->persist($reclaim);
-        $em->flush();
-           // $flashy->success('relamation enregistrée !');
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($reclaim);
+            $em->flush();
+            // $flashy->success('relamation enregistrée !');
             $this->addFlash('success', 'relamation enregistrée !');
-        return $this->redirectToRoute('ajout_reclamation');
+            return $this->redirectToRoute('ajout_reclamation');
         }
         //rendre la vue et generer le html du formulaire
         return $this->render('reclamation/reclamation.html.twig',[
@@ -100,12 +106,12 @@ public function home(){
 
 
 
-     /**
-      * @return \Symfony\Component\HttpFoundation\Response
-      * @Route("/reclamation/list", name="list_reclamation")
-      */
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/reclamation/list", name="list_reclamation")
+     */
 
-     //fonction de l'admnistrateur pour afficher la liste des réclamations
+    //fonction de l'admnistrateur pour afficher la liste des réclamations
     public function reclaimlist( Request $request, PaginatorInterface $paginator, ReclamationRepository $repo)
     {
 //NormalizableInterface $normalizer,
@@ -116,15 +122,14 @@ public function home(){
             6);
 
 
-            // $jsoncontent= $normalizer->normalize($reclamations,'json',['groups'=>'post:read']);
-            return $this->render('reclamation/searchReclamation.html.twig', [
-                //'data'=>$jsoncontent
-                'reclamation' => $reclamations,
-            ]);
+        // $jsoncontent= $normalizer->normalize($reclamations,'json',['groups'=>'post:read']);
+        return $this->render('reclamation/listeReclamation.html.twig', [
+            //'data'=>$jsoncontent
+            'reclamations' => $reclamations,
+        ]);
 
 
     }
-
 
 
 
@@ -138,11 +143,10 @@ public function home(){
     //fonction de l'utilisateur pour modifier sa réclamation
     public function UpdateReclamation(ReclamationRepository $repo,$id,Request $request)
     {
-        $reclamation = $repo->findOneByCode($id);
+        $reclamation = $repo->find($id);
         // Et on construit le formBuilder avec cette instance de reclamation
         $formBuilder = $this->createFormBuilder($reclamation);
         $formBuilder
-            ->add('code',IntegerType::class)
             ->add('idCommande',IntegerType::class)
             ->add('categorie',ChoiceType::class,
                 ['choices'  => [
@@ -153,8 +157,8 @@ public function home(){
             ->add('sujet',TextType::class)
             ->add('description',TextareaType::class)
             ->add('date',DateType::class);
-       // $form = $this->createForm(ReclamationType::class, $reclamation);
-       // $form->add('update', SubmitType::class);
+        // $form = $this->createForm(ReclamationType::class, $reclamation);
+        // $form->add('update', SubmitType::class);
         $form= $formBuilder->getForm();
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -178,110 +182,220 @@ public function home(){
      */
 
     //fonction de l'administrateur pour supprimer une réclamation
- public function delete ( $id,ReclamationRepository $repository)
- {
-     $reclamation = $this->getDoctrine()->getRepository(Reclamation::class)->findOneByCode($id);
-   /* dump($reclamation);
-    die();*/
-     $em=$this->getDoctrine()->getManager();
+    public function delete ( $id,ReclamationRepository $repository)
+    {
+        $reclamation = $this->getDoctrine()->getRepository(Reclamation::class)->find($id);
+        /* dump($reclamation);
+         die();*/
+        $em=$this->getDoctrine()->getManager();
 
-     $em->remove($reclamation);
-     $em->flush();
-     $this->addFlash('success', 'relamation modifiée!');
-     return $this->redirectToRoute('list_reclamation');
+        $em->remove($reclamation);
+        $em->flush();
+        $this->addFlash('success', 'relamation modifiée!');
+        return $this->redirectToRoute('list_reclamation');
 
- }
+    }
 
     /**
      * @return Response
      * @route ("/search/reclamation", name="recherche_reclamation")
      */
 
-public function recherchebycategorie(Request $request)
-{
-    $em=$this->getDoctrine()->getManager();
-    $reclamation=$em->getRepository(Reclamation::class)->findAll();
-    if($request->isMethod("POST"))
+    public function recherchebycategorie(Request $request)
     {
-        $categorie=$request->get('categorie');
-        $reclamation=$em->getRepository(Reclamation::class)->findBy(['categorie'=>$categorie]);
-    }
-    return $this->render('reclamation/searchReclamation.html.twig', [
-        'reclamation' => $reclamation,
-    ]);
-
-}
-
-
-/**
- * @route("/stat/reclamation", name="stat_reclamation")
- *
- */
-
-public function statReclamation(ReclamationRepository $repo)
-{
-
-$reclamations=$repo->countday();
-  $dates=[];
-  $reclcount=[];
-    foreach ($reclamations as $reclamation)
-    {
-        $dates[]= $reclamation['date'];
-        $reclcount[]=$reclamation['count'];
-
-    }
-
-    return $this->render('reclamation/statistiqueReclamation.html.twig',
-        [
-            'dates'=>json_encode($dates),
-    'reclcount'=>json_encode($reclcount),
+        $em=$this->getDoctrine()->getManager();
+        $reclamation=$em->getRepository(Reclamation::class)->findAll();
+        if($request->isMethod("POST"))
+        {
+            $categorie=$request->get('categorie');
+            $reclamation=$em->getRepository(Reclamation::class)->findBy(['categorie'=>$categorie]);
+        }
+        return $this->render('reclamation/searchReclamation.html.twig', [
+            'reclamation' => $reclamation,
         ]);
 
-}
+    }
+
+
+    /**
+     * @route("/stat/reclamation", name="stat_reclamation")
+     *
+     */
+
+    public function statReclamation(ReclamationRepository $repo)
+    {
+//chercher toutes les reclamations
+        $recls= $repo->findAll();
+        $categNom=[];
+        $categCount=[];
+        foreach ($recls as $recl)
+        {
+            $categNom[]=$recl->getCategorie();
+            $categCount[]=is_countable($recl->getId());
+
+        }
+        $reclamations=$repo->countday();
+        $dates=[];
+        $reclcount=[];
+        foreach ($reclamations as $reclamation)
+        {
+            $dates[]= $reclamation['date'];
+            $reclcount[]=$reclamation['count'];
+
+        }
+
+        return $this->render('reclamation/statistiqueReclamation.html.twig',
+            ['categNom'=>json_encode($categNom),
+                'categCount'=>json_encode($categCount),
+                'dates'=>json_encode($dates),
+                'reclcount'=>json_encode($reclcount),
+            ]);
+
+    }
+
+
+//*********************************supprimer avec json****************************//
+
+    /**
+     * @Route("/suppReclamation", name="supp_reclamation")
+     * @Method("DELETE")
+     */
+
+    public function deleteReclamationAction(Request $request)
+    {
+        $id = $request->get("id");
+
+        $em = $this->getDoctrine()->getManager();
+        $reclamation = $em->getRepository(Reclamation::class)->find($id);
+        if ($reclamation != null) {
+            $em->remove($reclamation);
+            $em->flush();
+
+            $serialize = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serialize->normalize("Reclamation a ete supprimee avec success.");
+            return new JsonResponse($formatted);
+
+        }
+        return new JsonResponse("id reclamation invalide.");
+
+    }
 
 
 
+    //*******************modifier avec json*****************//
+    /**
+     * @Route("/modReclamation", name="mod_reclamation")
+     * @Method("PUT")
+     */
+    public function modifierReclamationAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $reclamation = $em->getRepository(Reclamation::class)
+            ->find(
+                $request->get("id")
+            );
+        // $reclamation->setIdCommande($request->get("idCommande"));
+        $reclamation->setCategorie($request->get("categorie"));
+        $reclamation->setSujet($request->get("sujet"));
+        $reclamation->setDescription($request->get("description"));
+        $reclamation->setDate(new \DateTime());
+
+        $em->persist($reclamation);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($reclamation);
+        return new JsonResponse("Reclamation a ete modifiee avec success.");
+
+    }
 
 
+    //*************************ajouter avec json*****************************//
 
 
+    /**
+     * @Route("/ajoutReclamation", name="ajout_reclamation")
+     * @Method("POST")
+     */
+    public function ajouterReclamationAction(Request $request) {
 
 
+        $em = $this->getDoctrine()->getManager();
+        $reclamation= new Reclamation();
+        /*$reclamation = $em
+            ->getRepository(Reclamation::class)
+            ->find($request->get("id"));*/
 
 
+        $reclamation->setIdCommande("0");
+        $reclamation->setCategorie($request->get("categorie"));
+        $reclamation->setSujet($request->get("sujet"));
+        $reclamation->setDescription($request->get("description"));
+        $reclamation->setDate(new \DateTime());
+        $em->persist($reclamation);
+        $em->flush();
+        /*$jsoncontent= $normalizer->normalize($reclamation,'json',['group'=>'post:read']);
+        return new Response(json_encode($jsoncontent));*/
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($reclamation);
+        return new JsonResponse("Reclamation a ete ajoutee avec success.");
+
+    }
+
+//***************afficher les reclamations avec json*************//
+
+    /*
+     * @Route("/affReclamation", name="afficher_reclamation")
 
 
+public function allrecl(){
+
+        $reclamation=$this->getDoctrine()->getManager()->getRepository(Reclamation::class)->findAll();
+        $serializer= new Serializer([new ObjectNormalizer()]);
+        $formatted= $serializer->normalize($reclamation);
+
+        return new JsonResponse($formatted);
+
+}*/
+    /**
+     * @Route("/affReclamation", name="afficher_reclamation")
+     */
+    public function allrecl(NormalizerInterface $normalizer,ReclamationRepository $repo): Response
+    {
+        $repo=$this->getDoctrine()->getRepository(Reclamation::class) ;
+        $reclamation=$repo->findAll();
+        $jsonContent=$normalizer->normalize($reclamation,'json',['groups'=>'post:read']);
 
 
+        return new Response(json_encode($jsonContent));
+
+        dump($jsonContent);
+        die;
+
+    }
+
+//**************detail reclamation**********************//
+
+    /**
+     * @Route("/detReclamation", name="detail_reclamation")
+     * @Method("GET")
+     */
+
+    public function detailReclamation(Request $request)
+    {
+        $id=$request->get("id");
+        $em=$this->getDoctrine()->getManager();
+        $reclamation=$em->getRepository(Reclamation::class)->find($id);
+        $encoder= new JsonEncoder();
+        $normalizer=new ObjectNormalizer();
+        $normalizer->setCircularReferenceHandler(function ($object){
+            return $object->getDescription;
+        });
+        $serializer= new Serializer([new ObjectNormalizer()]);
+        $formatted= $serializer->normalize($reclamation);
+
+        return new JsonResponse($formatted);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 
 

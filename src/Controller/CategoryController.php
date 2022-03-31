@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\CategoryRepository;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class CategoryController extends AbstractController
 {
@@ -27,7 +28,14 @@ class CategoryController extends AbstractController
         ]);
     }
 
-
+    /**
+     * @Route("/listeC",name="listeC")
+     */
+    public function getCategories(CategoryRepository $repo,NormalizerInterface $ni){
+        $category = $repo->findAll();
+        $json = $ni->normalize($category,'json',['groups' => 'category']);
+        return new Response(json_encode($json));
+    }
     /**
      * @Route("/category/ajouter", name="category_ajouter")
      */

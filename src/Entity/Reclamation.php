@@ -20,14 +20,10 @@ class Reclamation
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("post:read")
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     * @Groups("post:read")
-     */
-    private $code;
 
     /**
      * @ORM\Column(type="string", length=500)
@@ -43,10 +39,10 @@ class Reclamation
     private $categorie;
 
     /**
-     * @Assert\NotBlank(message = "La date de début doit être saisie.")
+     *   @Assert\NotBlank(message = "La date de début doit être saisie.")
      * @Assert\Date(message = "La date de début n'est pas valide.")
-     * @Assert\GreaterThan("today")
      * @ORM\Column(type="date")
+     * @Assert\GreaterThan("today")
      * @Groups("post:read")
      */
     private $date;
@@ -54,7 +50,7 @@ class Reclamation
     /**
 
      * @ORM\Column(type="boolean",nullable="yes")
-     *@Groups("post:read")
+
      */
     private $statut;
 
@@ -82,17 +78,6 @@ class Reclamation
         return $this->id;
     }
 
-    public function getCode(): ?int
-    {
-        return $this->code;
-    }
-
-    public function setCode(int $code): self
-    {
-        $this->code = $code;
-
-        return $this;
-    }
 
     public function getDescription(): ?string
     {
@@ -179,10 +164,10 @@ class Reclamation
     {
         return  $this -> getCategorie() ;
     }
-   /* public function __construct()
-    {
-        $this->date = new \Datetime;
+    /* public function __construct()
+     {
+         $this->date = new \Datetime;
 
-    }*/
+     }*/
 
 }

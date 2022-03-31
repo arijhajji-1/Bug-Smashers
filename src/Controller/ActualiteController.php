@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Evenement;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Actualite;
@@ -12,20 +12,21 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\ActualiteType;
 use App\Repository\ActualiteRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Service\FileUploaderE;
+use App\Service\FileUploader;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Form\ActualiteFormType;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 use Symfony\Bundle\FrameworkBundle\Controller;
-
-
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 
 class ActualiteController extends AbstractController
 {
     /**
-     * @Route("/index", name="indexing")
+     * @Route("/index", name="index")
      */
     public function index(ActualiteRepository $actualiteRepository): Response
     {
@@ -41,7 +42,7 @@ class ActualiteController extends AbstractController
      * @Route("/actualite/ajouter", name="actualite_ajout")
      */
     public function ajouter(Request $request, EntityManagerInterface $entityManager
-        , FileUploaderE $fileUploader): Response
+        , FileUploader $fileUploader): Response
     {
         $actualite = new Actualite();
         $form = $this->createForm(ActualiteType::class, $actualite);
@@ -70,15 +71,10 @@ class ActualiteController extends AbstractController
     /**
      * @Route("/actualite/affiche", name="actualite_affiche")
      */
-    public function affiche(Request $request, EntityManagerInterface $em, PaginatorInterface $paginator){
+    public function affiche(ActualiteRepository $repo){
 
-        $dql   = "SELECT p FROM App\Entity\Actualite p";
-        $query = $em->createQuery($dql);
-        $actualite = $paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1),
-            2 // Nombre de résultats par page
-        );
+        $repo=$this->getDoctrine()->getRepository(Actualite::class);
+        $actualite=$repo->findAll();
         return $this->render('/actualite/affiche.html.twig',[
             'actualites'=>$actualite
         ]);
@@ -129,13 +125,73 @@ class ActualiteController extends AbstractController
 
 
     /**
-     * @Route("/testingg",name="testingg")
+     * @Route("/listeActualite",name="listeActualite")
      */
-    public function getProduits(ActualiteRepository $repo,NormalizerInterface $ni){
-        $actualites=$repo->findAll();
-        $json = $ni->normalize($actualites,'json',['groups' => 'actualite']);
-        return new Response(json_encode($json));
+    public function listeActualite(NormalizerInterface $normalizer)
+    {
+        $repo= $this->getDoctrine()->getRepository(Actualite::class);
+        $actualite = $repo->findAll();
+        $jsonContent = $normalizer->normalize($actualite, 'json',['groups'=>'post:read']);
+
+
+        return new Response(json_encode($jsonContent));
+
+    }
+
+    /**
+     * @Route("/ajoutActualite",name="ajoutActualiteJSON")
+     */
+    public function ajoutActualiteJSON(Request $request,NormalizerInterface $normalizer)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $actualite = new Actualite();
+        $actualite->setTitre($request->get('titre'));
+
+        $actualite->setDate(new \DateTime());
+        $actualite->setDescription($request->get('description'));
+        $actualite->setimageName($request->get('imageName'));
+        $em->persist($actualite);
+        $em->flush();
+        $jsonContent = $normalizer->normalize($actualite, 'json',['groups'=>'post:read']);
+
+        return new Response(json_encode($jsonContent));
+    }
+
+    /**
+     * @Route("/updateAcualite",name="updateActualiteJSON")
+     * @Method ("PUT")
+     */
+    public function updateAcualiteJSON(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $actualite = $this->getDoctrine()->getManager()->getRepository(Actualite::class)->find($request->get("id"));
+        $actualite->setTitre($request->get('titre'));
+        $actualite->setDate(new \DateTime());
+        $actualite->setDescription($request->get('description'));
+        $actualite->setimageName($request->get('imageName'));
+        $em->persist($actualite);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        return new Response("actualite updated successfully");
+
     }
 
 
+    /**
+     * @Route("/deleteActualite",name="deleteActualiteJSON")
+     * @Method ("DELETE")
+     */
+    public function deleteActualite(Request $request,  EntityManagerInterface $em)
+    {
+        $id = $request->get("id");
+        $em = $this->getDoctrine()->getManager();
+        $Actualite  = $em->getRepository(Actualite::class)->find($id);
+        if($Actualite != null)
+        {
+            $em->remove($Actualite);
+            $em->flush();
+
+            return new JsonResponse("Actualite Deleted ");
+        }
+        return new JsonResponse("not found");
+    }
 }

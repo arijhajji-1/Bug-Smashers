@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=LocationRepository::class)
  */
@@ -17,29 +17,34 @@ class Location
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups ("location")
      */
     private $id;
 
     /**
      * @ORM\Column(type="date")
      * @Assert\GreaterThan("today UTC")
+     * @Groups ("location")
      */
     private $dateDEB;
 
     /**
      * @ORM\Column(type="date")
      * @Assert\GreaterThan(propertyPath="dateDEB")
+     * @Groups ("location")
      */
     private $dateFin;
 
     /**
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="empty field")
+     * @Groups ("location")
      */
     private $TotalL;
 
     /**
      * @ORM\OneToMany(targetEntity=ProduitLouer::class, mappedBy="location")
+     * @Groups ("location")
      */
     private $produit;
 

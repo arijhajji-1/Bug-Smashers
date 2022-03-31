@@ -51,10 +51,7 @@ class Commande
 
 
 
-    /**
-     * @ORM\OneToMany(targetEntity=LigneCommande::class, mappedBy="Commande")
-     */
-    private $LigneCommande;
+
 
     /**
      * @ORM\Column(type="integer")
@@ -73,23 +70,12 @@ class Commande
      */
     private $iduser;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Livraison::class, cascade={"persist", "remove"})
-     *
-     */
-    private $livraison;
-
-    public function __toString()
-    {
-        return  $this -> getNom().' '.$this->getPrenom() ;
-    }
-
 
 
     public function __construct()
     {
 
-        $this->LigneCommande = new ArrayCollection();
+
         $this->Facture = new ArrayCollection();
     }
 
@@ -146,35 +132,7 @@ class Commande
         return $this;
     }
 
-    /**
-     * @return Collection|LigneCommande[]
-     */
-    public function getLigneCommandes(): Collection
-    {
-        return $this->LigneCommandes;
-    }
 
-    public function addLigneCommande(LigneCommande $LigneCommande): self
-    {
-        if (!$this->LigneCommandes->contains($LigneCommande)) {
-            $this->LigneCommandes[] = $LigneCommande;
-            $LigneCommande->setCommande($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLigneCommande(LigneCommande $LigneCommande): self
-    {
-        if ($this->LigneCommandes->removeElement($LigneCommande)) {
-            // set the owning side to null (unless already changed)
-            if ($LigneCommande->getCommande() === $this) {
-                $LigneCommande->setCommande(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getTelephone(): ?int
     {
@@ -218,10 +176,10 @@ class Commande
         return $this;
     }
 
-   /* public function __toString(): string
+    public function __toString(): string
     {
         return $this->getNom();
-    }*/
+    }
 
     public function getIduser(): ?int
     {
@@ -234,18 +192,5 @@ class Commande
 
         return $this;
     }
-
-    public function getLivraison(): ?Livraison
-    {
-        return $this->livraison;
-    }
-
-    public function setLivraison(Livraison $livraison): self
-    {
-        $this->livraison = $livraison;
-
-        return $this;
-    }
-
 
 }
