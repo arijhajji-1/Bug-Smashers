@@ -88,10 +88,20 @@ class ProduitJsonController extends AbstractController
         $data=$request->get('searchbar');
         //  $reparation=$repo->findBy(['category'=>$data]);
         $produit = $this->getDoctrine()->getRepository(ProduitAcheter::class)->findByExampleField($data);
-        $jsonContent=$normalizer->normalize($produit,'json',['groups'=>'produit']);
+        $datas=array();
+        foreach($produit as $key=>$blog) {
+            $datas[$key]['id']=$blog->getId();
+            $datas[$key]['nom']=$blog->getNom();
+            $datas[$key]['description']=$blog->getDescription();
+            $datas[$key]['qte']=$blog->getQte();
+            $datas[$key]['marque']=$blog->getMarque();
+            $datas[$key]['prix']=$blog->getPrix();
+            $datas[$key]['imagePath']=$blog->getImagePath();
+            $datas[$key]['category']=$blog->getCategory()->getId();
+        }
 
 
-        return new Response(json_encode($jsonContent));
+        return new JsonResponse($datas);
 
         dump($jsonContent);
         die;

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -110,6 +111,8 @@ class UserJsonController extends AbstractController
         $user
 
             ->setRoles(["ROLE_User"])
+            ->setPhoto('dfds')
+
             ->setEmail($request->get('email'))
 
             ->setPassword($passwordEncoder->encodePassword(
@@ -117,20 +120,16 @@ class UserJsonController extends AbstractController
                 $request->get('password')
             ));
 
-        $dateNaissance =
-            DateTime::createFromFormat('d/m/Y',
-                $request->get('day') . "/" .
-                $request->get('month') . "/" .
-                $request->get('year')
-            );
+
 
 
            $user
-            ->setNom($request->get('nom'))
-            ->setPrenom($request->get('prenom'))
-            ->setTel($request->get('tel'))
-            ->setSexe($request->get('sexe'))
-            ->setDateNaissance($dateNaissance);
+            ->setFirstName($request->get('nom'))
+            ->setLastName($request->get('prenom'))
+            ->setTelephone($request->get('tel'))
+            ->setCin($request->get('sexe'));
+
+            //->setDateNaissance($dateNaissance);
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);

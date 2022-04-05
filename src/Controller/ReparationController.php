@@ -178,6 +178,10 @@ die;
 
         $Reserver =$request->query->get("Reserver");
         $Etat = $request->query->get("Etat");
+        $tel =$request->query->get("tel");
+        $iduser = $request->query->get("iduser");
+        $email =$request->query->get("email");
+
         $em = $this->getDoctrine()->getManager();
 
         $reparation->setType($Type);
@@ -185,9 +189,9 @@ die;
         $reparation->setDescription($Description);
         $reparation->setReserver(new \DateTime());
         $reparation->setEtat("En cours");
-        $reparation->setTelephone("+21690197079");
-        $reparation->setIduser("1");
-        $reparation->setEmail("arij.hajji@esprit.tn");
+        $reparation->setTelephone($tel);
+        $reparation->setIduser($iduser);
+        $reparation->setEmail($email);
         $em->persist($reparation);
         $em->flush();
         $serializer = new Serializer([new ObjectNormalizer()]);

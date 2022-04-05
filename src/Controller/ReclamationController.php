@@ -325,7 +325,7 @@ class ReclamationController extends AbstractController
             ->find($request->get("id"));*/
 
 
-        $reclamation->setIdCommande("0");
+        $reclamation->setIdCommande($request->get("idCommande"));
         $reclamation->setCategorie($request->get("categorie"));
         $reclamation->setSujet($request->get("sujet"));
         $reclamation->setDescription($request->get("description"));

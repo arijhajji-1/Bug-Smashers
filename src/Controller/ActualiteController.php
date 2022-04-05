@@ -167,7 +167,6 @@ class ActualiteController extends AbstractController
         $actualite->setTitre($request->get('titre'));
         $actualite->setDate(new \DateTime());
         $actualite->setDescription($request->get('description'));
-        $actualite->setimageName($request->get('imageName'));
         $em->persist($actualite);
         $em->flush();
         $serializer = new Serializer([new ObjectNormalizer()]);
