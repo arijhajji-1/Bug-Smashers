@@ -1,0 +1,62 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Reparation {% endblock %}
+
+{% block body %}
+
+    <h1 align="center">Liste réparation</h1>
+    <div class="container">
+
+        <table class="table-bordered">
+            <thead>
+            <tr>
+                <th style="padding-right: 20px;">Category</th>
+                <th style="padding-right: 20px;">Type</th>
+                <th style="padding-right: 20px;">Description</th>
+
+                <th style="padding-right: 20px;">date</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr >
+                {% for reparation in reparation %}
+                {% if app.user.id== reparation.iduser%}
+
+                <td>{{ reparation.category }}</td>
+
+                <td>{{ reparation.type }}</td>
+                <td >{{ reparation.description }}</td>
+                <td >{{ reparation.Reserver| date('d/m/Y H:i') }}</td>
+                <td>
+                <button class="btn btn-brand"><a href="{{ path('delete1', {'id': reparation.Id}) }}"style="color: black;">Supprimer</a></button>
+                </td>
+                <td>
+                <button class="btn btn-brand"><a href="{{ path('update1', {'id': reparation.Id}) }}"style="color: black;">Modifier</a></button>
+
+                </td>
+                <td>
+                <button class="btn btn-brand"><a href="{{ path('avis_reparation', {'id': reparation.Id}) }}" style="color: black;">Donner avis</a></button>
+
+                </td>
+            </tr>
+
+                {% endif %}
+            {% endfor %}
+            </tbody>
+
+
+        </table>
+
+    </div>
+    <br>
+    <br>
+<nav aria-label="Page navigation example">
+    <ul class="pagination pagination-template d-flex justify-content-center">
+
+    {{ knp_pagination_render(reparation) }}
+
+    </ul>
+</nav>
+{% endblock %}

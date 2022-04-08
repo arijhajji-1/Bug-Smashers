@@ -1,0 +1,114 @@
+/*=========================
+11. Newsletter Area Style
+===========================*/
+
+.newsletter-content {
+  color: #d8d8d8;
+  padding: 100px 15px;
+
+  @media #{$md-device} {
+    padding: 80px 15px;
+  }
+
+  @media #{$sm-device} {
+    padding: 60px 15px;
+  }
+
+  h2, h3, h4 {
+    color: $white;
+    margin-top: 0;
+  }
+
+  h4 {
+    font-size: 24px;
+    font-weight: 300;
+
+    @media #{$sm-device} {
+      font-size: 20px;
+    }
+
+    span {
+      color: $brandColor;
+    }
+  }
+
+  h2 {
+    font-size: 32px;
+    font-weight: 600;
+
+    @media #{$sm-device} {
+      font-size: 26px;
+    }
+  }
+}
+
+.newsletter-form-wrap {
+  margin: 44px auto 0;
+
+  @media #{$xl-device} {
+    max-width: 90%;
+  }
+
+  @media #{$sm-device} {
+    margin-top: 34px;
+  }
+
+  .form-content {
+    position: relative;
+
+    input {
+      background-color: transparent;
+      border: 1px solid #d8d8d8;
+      border-radius: 100px;
+      color: $white;
+      display: block;
+      padding: 12px 165px 12px 20px;
+      width: 100%;
+
+      @media #{$sm-device} {
+        padding: 15px;
+      }
+    }
+
+    .btn-newsletter {
+      background-color: $brandColor;
+      border-radius: 100px;
+      color: $white;
+      font-size: 18px;
+      font-weight: 600;
+      font-family: $font-heading;
+      text-transform: uppercase;
+      position: absolute;
+      height: 100%;
+      width: 150px;
+      top: 0;
+      right: 0;
+
+      @media #{$sm-device} {
+        position: static;
+        padding: 10px;
+        margin-top: 20px;
+      }
+
+      &:hover {
+        background-color: #d8d8d8;
+        color: $headingColor;
+      }
+    }
+  }
+}
+
+.newsletter-area-wrapper {
+  margin-top: -130px;
+  position: relative;
+  z-index: 1;
+
+  &.home--2 {
+    @media #{$md-device} {
+      padding-top: 80px;
+    }
+    @media #{$lg-device,$xl-device} {
+      padding-top: 100px;
+    }
+  }
+}

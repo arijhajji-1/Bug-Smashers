@@ -1,0 +1,99 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Promotion {% endblock %}
+
+{% block body %}
+
+
+    <script src="{{ asset('front/assets/js/node_modules/jquery/dist/jquery.js') }}"></script>
+    <div class="card-body">
+        <h4 class="card-title">Les Promotions</h4>
+        <p class="card-description"><code>Click to modify or delete</code>
+        </p>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th> {{ knp_pagination_sortable(promotions, 'id Promotion', 'p.id')}} </th>
+                <th> {{ knp_pagination_sortable(promotions, 'Label', 'p.label')}} </th>
+                <th> {{ knp_pagination_sortable(promotions, 'Pourcentage', 'p.pourcentage')}} </th>
+                <th colspan="2" class="text-center"> Les Actions </th>
+            </tr>
+            </thead>
+            <tbody id="ach">
+            {% for promotion in promotions %}
+                <tr>
+                    <td class="py-1">
+                        {{ promotion.id }}
+                    </td>
+                    <td> {{ promotion.label }} </td>
+                    <td> {{ promotion.pourcentage }}
+                    </td>
+                    <td><a href="{{ path("liste-produit-promo", {'id':promotion.id })}}">Afficher Les produits en Promo
+                        </a></td>
+                    <td><a href="{{ path("delete-produit-promo", {'id':promotion.id}) }}">Supprimer
+                            <i class="mdi mdi-delete-forever"></i></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <div style="margin: 0 auto; text-align: center">
+            <a href="{{ path('produit_promotion_ajout')  }}" class="btn btn-outline-dark btn-fw" style="margin-left: 40%;
+         margin-right: 40%; display:block;">Ajouter Une Promotion</a>
+            <a href="{{ path('produit_affichage_front')  }}" class="btn btn-outline-dark btn-fw" style="margin-left: 40%;
+         margin-right: 40%; display:block;">Liste Des Produits</a>
+
+        </div>
+        <br>
+        <div id="pag">
+            {{ knp_pagination_render(promotions) }}
+        </div>
+    </div>
+
+    <script>
+        function delay(fn, ms) {
+            let timer = 0
+            return function(...args) {
+                clearTimeout(timer)
+                timer = setTimeout(fn.bind(this, ...args), ms || 0)
+            }
+        }
+        $('#q').keyup(delay(function(e){
+            var serie=$('#q').val();
+            var DATA =  {'q' : serie};
+            console.log(DATA);
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "{{ path('acheter')}}",
+                data:DATA,
+                success: function (data) {
+                    $("#ach").replaceWith("<tbody id='ach'>")
+                    $("#pag").replaceWith("<div id='pag'>")
+                    console.log(data);
+                    $.each(data,function(k,el) {
+                        var test="{{path('supprimer_produitA', {'id':'ReplacewithcorrectValue' })}}'>"
+                        var supp = test.replace("ReplacewithcorrectValue", el.id)
+                        var test = "{{ path("modifier_produitA", {'id':'ReplacewithcorrectValue' })}}'>"
+                        var modif= test.replace("ReplacewithcorrectValue", el.id)
+                        $('#ach').append(
+                            "<tr>"+"<td class='py-1'>"+el.id+"</td>"+
+                            "<td>"+el.nom+"</td>"+"<td>"+el.category+"</td>"+
+                            "<td>"+el.marque+"</td>"+"<td>"+el.prix+"</td>"+
+                            "<td>"+el.qte+"</td>"+
+                            "<td>"+"<a href='"+modif+"Modifier"+"<i class='mdi mdi-pencil'>"+"</i>"+"</a>"+"</td>"
+                            +"<td>"+"<a href='"+supp+"Supprimer"+
+                            "<i class='mdi mdi-delete-forever'>"+"</i>"+"</a>"+"</td>"
+
+                        );
+                    });
+                },
+                error:function ()
+                {
+                    $("#ach").replaceWith("<tbody id='ach'>")
+                }
+            });
+        }, 500));
+    </script>
+
+{% endblock %}

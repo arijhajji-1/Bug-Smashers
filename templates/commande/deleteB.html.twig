@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('commande_deleteB', {'id': commande.id}) }}" onsubmit="return confirm('Are you sure you want to cancel your checkout?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ commande.id) }}">
+    <div>
+        <button class="btn">Annulation de commande</button>
+    </div>
+</form>

@@ -1,0 +1,36 @@
+{% block body %}
+    <body style="
+    background-size: 200px 200px;
+    background-color:#ffd700;">
+    <a>
+        <img src="{{ 'uploads/reloua logo-01.png' }}" alt="" width="150">
+    </a>
+    <h1 align="center">Facture Client</h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Remise</th>
+                <th>Total</th>
+                <th>NOMCLIENT</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for facture in factures %}
+            <tr>
+                <td>{{ facture.DateFact | date('d-m-Y') }}</td>
+                <td>{{ facture.Remise }}</td>
+                <td>{{ facture.Total }}</td>
+                <td>{{ facture.commande.nom }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="18">pas de facture</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

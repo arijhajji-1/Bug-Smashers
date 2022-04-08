@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendrier{% endblock %}
+{% block stylesheet %}
+    <style>
+        #calendrier{
+            width: 80%;
+            margin: auto;
+
+        }
+    </style>
+{% endblock %}
+{% block body %}
+
+    <div class="container">
+        <div id="calendrier">
+
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
+
+    <script>
+
+        window.onload = () => {
+            let calendarEl = document.querySelector("#calendrier");
+            let calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'fr',
+                timezone: 'Europe/paris',
+                headerToolbar: {
+                    start: 'prev,next today',
+                    center: 'title',
+                    end: 'dayGridMonth,timeGridWeek'
+                },
+                events : {{ data|raw }},
+                editable : true,
+                eventResizableFormStart : true
+            })
+
+            calendar.on('eventChange', (e) => {
+
+                let url = `{{path('app_api_edit',{'id':"Re"})}}`
+                url = url.replace("Re",e.event.id)
+
+                let donnees ={
+
+
+                    "title": e.event.title,
+                    "start": e.event.start,
+                    "end": e.event.start,
+
+
+
+
+
+                }
+                console.log(donnees);
+                let xhr = new XMLHttpRequest
+
+                xhr.open("PUT", url)
+                xhr.send(JSON.stringify(donnees))
+            })
+            calendar.render()
+        }
+
+    </script>
+{% endblock %}

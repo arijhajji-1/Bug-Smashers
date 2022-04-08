@@ -1,0 +1,24 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}MODIFIER LES INFORMATIONS D UNE COMMANDE{% endblock %}
+
+{% block body %}
+    <div class="card-body" >
+        <h1 align="center">MODIFIER LES INFORMATIONS D UNE COMMANDE</h1>
+
+        {% form_theme form 'bootstrap_4_layout.html.twig' %}
+        <div>
+            {{ include('commande/_form.html.twig', {'button_label': 'Modifier les informations'}) }}
+        </div>
+
+
+        <div>
+            {{ include('commande/deleteB.html.twig') }}
+        </div>
+        <div>
+            <a href="{{ path('commandeSearch') }}" class="btn ">back to list
+                <i class="bi bi-cart-x"></i>
+            </a>
+        </div>
+    </div>
+{% endblock %}

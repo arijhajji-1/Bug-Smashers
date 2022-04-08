@@ -1,0 +1,32 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}ETAT COMMANDE{% endblock %}
+
+{% block body %}
+    <h1>ETAT COMMANDE</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ligne_commande.id }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ ligne_commande.Status }}</td>
+            </tr>
+            <tr>
+                <th>Commande</th>
+                <td>{{ ligne_commande.Commande.id }}</td>
+            </tr>
+            <tr>
+                <th>CLIENT</th>
+                <td>{{ ligne_commande.Commande.prenom }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <a href="{{ path('ligne_commande_edit', {'id': ligne_commande.id}) }}">MODIFICATION DE L ETAT DE COMMANDE</a>
+    {{ include('ligne_commande/_delete_form.html.twig') }}
+    <a href="{{ path('ligne_commande_index') }}">RETOUR A LA LISTE</a>
+{% endblock %}

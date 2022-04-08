@@ -1,0 +1,73 @@
+{% extends 'base-back.html.twig' %}
+
+    {% block title %}Événement{% endblock %}
+
+    {% block body %}
+        <br>
+        <br>
+<div class="card-body">
+<h1 class="card-title">La liste des événements</h1>
+    <p class="card-description"><code>Supprimer ou modifier</code>
+    </p>
+<br>
+<br>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Nom
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Heure
+        </th>
+
+        <th colspan="2" class="text-center"> Les Actions </th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% for evenement in evenements %}
+
+        <tr>
+            <td class="py-1">
+                {{evenement.id}}
+            </td>
+            <td>
+
+                <a class="btn btn-white" href="{{  path('evenement_comment', {'id': evenement.id })  }}"> {{ evenement.nom }}</a>
+
+            </td>
+            <td>
+                {{ evenement.date|date("m/d/Y") }}
+            </td>
+            <td>
+                {{evenement.heure}}
+            </td>
+           
+
+
+            <td ><a href="{{ path('evenement_supprimer', {'id': evenement.Id}) }}">Supprimer<i class="mdi mdi-delete-forever"></i></a></td>
+            <td ><a href="{{ path('evenement_modifier', {'id': evenement.Id}) }}">Modifier<i class="mdi mdi-pencil"></i></a></td>
+        </tr>
+
+    {% endfor %}
+    </tbody>
+</table>
+        <br>
+    {{ knp_pagination_render(evenements) }}
+        <br>
+    <div style="margin: 0 auto; text-align: center">
+    <a href="{{ path('evenement_ajout')  }}" class="btn btn-outline-dark btn-fw" >Ajouter un nouveau événement</a>
+        <a href="{{ path('app_calendar')  }}" class="btn btn-outline-dark btn-fw" >Consulter la calendrier
+        </a>
+
+    </div>
+</div>
+    {% endblock %}

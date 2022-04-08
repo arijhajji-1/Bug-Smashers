@@ -1,0 +1,22 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Evenement{% endblock %}
+
+{% block body %}
+<div class="card">
+    <div class="card-body">
+           <h1>Modifier un événement</h1>
+
+        <br>
+        <br>
+    {{ form_start(form,{'class': 'forms-sample','attr': {'novalidate':'novalidate'}} ) }}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+        <br>
+    </div>
+</div>
+{% endblock %}

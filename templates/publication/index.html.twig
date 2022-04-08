@@ -1,0 +1,45 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Publication index{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <h1>Les Publications</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Desription</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for publication in publications %}
+            <tr>
+                <td>{{ publication.id }}</td>
+                <td>{{ publication.titre }}</td>
+                <td>{{ publication.desription }}</td>
+                <td><img src="{{ asset('uploads/' ~ publication.image) }}" /></td>
+                <td>
+                    <a href="{{ path('publication_show', {'id': publication.id}) }}" >show</a>
+                    <a href="{{ path('publication_edit', {'id': publication.id}) }}" >edit<i class="mdi mdi-pencil"></i></a>
+                    <a href="{{ path('publication_delete', {'id': publication.id}) }}" >delete <i class="mdi mdi-delete-forever"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('publication_new') }}" >Create new publication  <i class="mdi mdi-creation"></i></a>
+
+        {{ knp_pagination_render(publications) }}
+
+    </div>
+{% endblock %}

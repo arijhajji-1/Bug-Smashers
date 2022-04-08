@@ -1,0 +1,18 @@
+{% extends 'base-back.html.twig' %}
+{% block body %}
+    <div class="card-body">
+    <div class="container">
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+    <h1 align="center">MODIFIER RECLAMATION</h1>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-warning">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-primary">modifier!</button>
+    {{ form_end(form) }}
+    </div>
+    </div>
+{% endblock %}

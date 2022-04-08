@@ -1,0 +1,36 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Hello ActualiteController!{% endblock %}
+
+{% block body %}
+    <div class="page-content-wrapper sp-y">
+        <div class="blog-details-page-wrapper">
+            <div class="container container-wide">
+                <div class="row">
+                    <div class="col-12">
+                        <article class="blog-post-details">
+                            <figure class="blog-post-thumb">
+                                <img src="{{ asset('front/assets/img/actualite/'~actualite.imageName) }}" alt="Blog" />
+                            </figure>
+
+                            <div class="blog-post-txt-wrap">
+                                <div class="row">
+                                    <div class="col-md-3 col-lg-2 order-1 order-md-0"></div>
+
+                                    <div class="col-md-9 col-lg-8 m-auto order-0">
+                                        <div class="blog-post-txt">
+                                            <h3>{{actualite.titre}}</h3>
+                                            <h2>{{ actualite.date|date("m/d/Y") }}</h2>
+                                            <p>{{actualite.description}}</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

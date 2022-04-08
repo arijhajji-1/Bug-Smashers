@@ -1,0 +1,46 @@
+<body
+        style="background-image: url("{{ asset('Front/img/logo.png') }}");"
+>
+<div style="background-color:#DA90F9; height:10 %">
+    <h1 style="text-align: center">list Users</h1>
+    {# <img src="{{ asset('Front/img/logo.png') }}" alt="Photo de montagne" style="width:10%;opacity: 0.5;" /> #}
+</div>
+<hr>
+<table  style="text-align: center;
+    margin: auto;
+    width : 100%;
+    border-collapse: collapse;
+    border: 1px solid;
+    ">
+    <thead>
+    <tr>
+        <th
+                style="background-image: url("Front/img/logo.png") alt="Photo de montagne";"
+
+        <th>Email</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Adresse</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.email }}</td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.adresse }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+    <tr>
+        <th>Email</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Adresse</th>
+
+    </tr>
+    </tfoot>
+</table>
+</body>

@@ -1,0 +1,150 @@
+
+{% extends 'base-front.html.twig' %}
+
+    {% block title %}Home{% endblock %}
+
+    {% block body %}
+        <div class="page-content-wrapper sp-y">
+            <div class="blog-details-page-wrapper">
+                <div class="container container-wide">
+                    <div class="row">
+                        <div class="col-12">
+                            <article class="blog-post-details">
+                                <figure class="blog-post-thumb">
+                                    <img src="{{ asset('front/assets/img/actualite/'~evenement.imageName) }}" alt="Blog" />
+                                </figure>
+
+                                <div class="blog-post-txt-wrap">
+                                    <div class="row">
+                                        <div class="col-md-3 col-lg-2 order-1 order-md-0"></div>
+
+                                        <div class="col-md-9 col-lg-8 m-auto order-0">
+                                            <div class="blog-post-txt">
+                                                <h1>{{evenement.nom}}</h1>
+                                                <h2>{{ evenement.date|date("d/m/Y") }}</h2>
+                                                <h2>{{evenement.heure}}</h2>
+                                                <h3>J- {{ jours }}</h3>
+                                                <p>{{evenement.description}}</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="product-description-review">
+                                        <!-- Product Description Tab Menu -->
+                                        <ul class="nav nav-tabs desc-review-tab-menu" id="desc-review-tab" role="tablist">
+                                            <li>
+                                                <a class="active" id="desc-tab" data-toggle="tab" href="#descriptionContent" role="tab">Commentaire</a>
+                                            </li>
+                                        </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="descriptionContent">
+                                    <div class="description-content">
+
+                                    </div>
+                                </div>
+<div class="product-rating-wrap">
+                            <div class="display-ratings">
+                                {% for message in app.flashes('success') %}
+                                    <div class="alert alert-success">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                                {% for av in avis %}
+                                    <h6>Le Commentaire :</h6>
+
+                                <div class="rating-item">
+                                    <div class="rating-author-txt">
+                                        <div class="rating-author-pic">
+                                        </div>
+                                        <div class="rating-meta">
+                                            <h3>{{ av.nom }}</h3>
+                                            <span class="time">-  {{ av.email }}</span>
+                                        </div>
+
+                                        <p>{{av.description}}</p>
+                                        <h3 align="right"> <a href="{{ path("reply",{'id':av.id}) }}"><i class="ion-ios-undo"></i></a></h3>
+                                    </div>
+
+                                </div>
+                                    {% if av.getReplies()|length() %}
+                                    <h6>Les réponses :</h6>
+                                    {% endif %}
+                                    {% for r in av.getReplies() %}
+                                        <div class="rating-item">
+                                            <div class="rating-author-txt">
+                                                <div class="rating-author-pic">
+                                                </div>
+                                                <div class="rating-meta">
+                                                    <h3>{{ r.nom }}</h3>
+                                                    <span class="time">-  {{ r.email }}</span>
+                                                </div>
+
+                                                <p>{{r.description}}</p>
+
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    {% endfor %}
+                                    {{form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
+
+
+
+                                    <div class="rating-form-wrapper">
+                            <h3>Ajouter un commentaire</h3>
+                            <form action="{{ path("evenement_event", {'id':evenement.id })}}"  method="POST">
+                                <div class="rating-form row">
+
+                                    <div class="col-12">
+                                        <div class="form-input-item mt-30 mb-40">
+                                            {{ form_row(form.description,{'id' : 'your-review'}) }}
+                                        </div>
+                                        <div class="my-custom-class-for-errors">
+                                            {{ form_errors(form.description) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4 offset-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleFormControlInput1">Are you a robot ?</label>
+                                                {{ form_widget(form.captchaCode , {'attr' : { 'class' :'form-control' }}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-12 mt-22">
+                                        <button class="btn btn-white">Ajouter</button>
+                                    </div>
+                                    {{form_widget(form)}}
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        </div>
+        <!--== End Slider Area Wrapper ==-->
+    {% endblock %}
+
+

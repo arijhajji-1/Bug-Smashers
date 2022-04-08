@@ -1,0 +1,59 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Wishlist !{% endblock %}
+
+{% block body %}
+    <div class="page-content-wrapper sp-y">
+        <div class="wishlist-page-content-wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="shopping-cart-list-area">
+                            <div class="shopping-cart-table table-responsive">
+                                <table class="table table-bordered text-center mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th>Products</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for produit in produitsAcheter %}
+                                    <tr>
+                                        <td class="product-list">
+                                            <div class="cart-product-item d-flex align-items-center">
+                                                <div class="remove-icon">
+                                                    <a href="{{ path("supprimer_produit_wishlist", {'id':produit.id })}}"><i class="fa fa-trash-o"></i></a>
+                                                </div>
+                                                <a href="{{ path("single_produitA", {'id':produit.id })}}"
+                                                   class="product-thumb">
+                                                    <img src="{{ asset('front/assets/img/product/'~produit.imagePath)}}"
+                                                         alt="{{ produit.nom }}">
+                                                </a>
+                                                <a href="{{ path("single_produitA", {'id':produit.id })}}"
+                                                   class="product-name">{{ produit.nom }}</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="price">{{ produit.prix }} DT</span>
+                                        </td>
+                                        <td>
+                                            <div class="stock-status">
+                                                <p>In Stock</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

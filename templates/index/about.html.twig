@@ -1,0 +1,88 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}About{% endblock %}
+
+{% block body %}
+    <hr>
+    <div class="page-content-wrapper sm-top">
+        <div class="about-page-content">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 order-1 order-md-0">
+                        <div class="about-content">
+                            <h2 class="h3 mb-sm-20">A propos Bug Smashers</h2>
+                            <p>This is a list of automotive parts mostly for vehicles using internal combustion engines
+                                which are manufactured components of automobiles.</p>
+                            <p>This category is for components and parts that make up automobile (car) bodies including
+                                accessories.</p>
+                            <p>On motorbikes their main function is to shield the rider from wind, though not as completely
+                                as in a car, whereas on sports and racing motorcycles the main function is reducing drag
+                                when the rider</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 order-0">
+                        <div class="about-thumb mb-sm-30">
+                            <a href="{{ path('index') }}"><img src="{{ asset('front/assets/img/logo-01.png') }}" alt="Logo" /></a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="responsive-menu d-lg-none">
+        <button class="btn-menu">
+            <i class="fa fa-bars"></i>
+        </button>
+    </div>
+
+<div class="page-content-wrapper sm-top">
+    <div class="contact-page-content">
+        <div class="contact-info-wrapper">
+            <div class="container">
+                <div class="row mtn-30">
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="contact-info-item">
+                            <div class="con-info-icon">
+                                <i class="ion-ios-location-outline"></i>
+                            </div>
+                            <div class="con-info-txt">
+                                <h4>Our Location</h4>
+                                <p>(800) 123 456 789 / (800) 123 456 789
+                                    info@example.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="contact-info-item">
+                            <div class="con-info-icon">
+                                <i class="ion-iphone"></i>
+                            </div>
+                            <div class="con-info-txt">
+                                <h4>Contact us Anytime</h4>
+                                <p>Mobile: 012 345 678 <br>
+                                    Fax: 123 456 789</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="contact-info-item">
+                            <div class="con-info-icon">
+                                <i class="ion-ios-email-outline"></i>
+                            </div>
+                            <div class="con-info-txt">
+                                <h4>Write Some Words</h4>
+                                <p>Support24/7@example.com
+                                    info@example.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        {% endblock %}

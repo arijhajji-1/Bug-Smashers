@@ -1,0 +1,130 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <div class="page-content-wrapper sp-y">
+        <div class="blog-details-page-wrapper">
+                <div class="row">
+                    <div class="col-12">
+                        <article class="blog-post-details">
+                            <figure class="blog-post-thumb">
+                                <img src="{{ asset("front/assets/blogging.jpg") }}" alt="Blog" style="height: 500px;" />
+                            </figure>
+
+                            <div class="blog-post-txt-wrap">
+                                <div class="row">
+                                    <div class="col-md-3 col-lg-2 order-1 order-md-0">
+                                     {% if(app.user) %}
+                                        <div class="author-info mt-sm-40">
+                                            <div class="author-thumb">
+                                                {% if(app.user) %}
+                                                    <img src="{{ asset('uploads/' ~ app.user.photo) }}" alt="Author" />
+                                                {% endif %}
+
+                                            </div>
+                                            <div class="author-txt">
+                                                <h5>{{ app.user.firstName }} {{ app.user.lastName }}<span class="designation">{{ app.user.email }}</span></h5>
+
+                                                <div class="member-social-icons">
+                                                    <a href="#"><i class="ion-social-facebook"></i></a>
+                                                    <a href="#"><i class="ion-social-linkedin"></i></a>
+                                                    <a href="#"><i class="ion-social-twitter"></i></a>
+                                                    <a href="#"><i class="ion-social-pinterest"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                   {% endif %}
+                                    </div>
+
+                                    <div class="col-md-9 col-lg-8 m-auto order-0">
+                                        <div class="blog-post-txt">
+                                            <h2>Welcome to our blog</h2>
+
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aperiam
+                                                assumenda culpa cumque debitis dignissimos, dolor dolores doloribus ducimus
+                                                fuga
+                                                iusto magni maiores minus nam numquam officiis provident quasi quibusdam
+                                                quos
+                                                ratione rem saepe sequi sit unde ut velit vitae. Amet ea error expedita,
+                                                laboriosam maxime officiis porro ut velit.</p>
+
+
+{% for p in publications %}
+    <h3>{{ p.titre }}</h3>
+                                            <figure class="blog-post-img">
+                                                <img src="{{ asset('uploads/' ~ p.image) }}" alt="Blog" style="height: 200px;width: 200px;"/>
+                                            </figure>
+
+                                            <p>{{ p.desription }}</p>
+    <div class="share-article text-center">
+        <h6>Share this article</h6>
+        <div class="share-icons nav justify-content-center">
+            <a class="facebook" href="#"><i class="ion-social-facebook"></i></a>
+            <a class="twitter" href="#"><i class="ion-social-twitter"></i></a>
+            <a class="reddit" href="#"><i class="ion-social-reddit"></i></a>
+            <a class="pinterest" href="#"><i class="ion-social-pinterest"></i></a>
+        </div>
+    </div>
+    <div class="comment-area-wrapper">
+        <div class="comments-view-area">
+            <h3>Comments {{ nbrecomm[loop.index-1] }}</h3>
+            {% for c in commentaires %}
+                {% if(c.publications.id == p.id) %}
+                <div class="single-comment-wrap d-flex">
+                    <figure class="author-thumb">
+                        {% if(app.user) %}
+                            <a href="#"><img src="{{ asset('uploads/' ~ app.user.photo) }}" alt="Author"></a>
+                            {% endif %}
+                    </figure>
+                    <div class="comments-info">
+                        <p class="m-0">{{ c.text }}</p>
+                        <div class="comment-footer mt-8 d-flex justify-content-between">
+                            <a href="#" class="author"><strong>{{ c.users.firstName }}</strong> - {{ c.datecommentaire|date('F d, Y') }}</a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="comment-box-form mt-50 mt-sm-35">
+            <h3>Leave your thought</h3>
+            <form action="{{ path('commentaire_new') }}" novalidate method="POST">
+                <div class="row mtn-30">
+                    <div class="col-12">
+                        <div class="input-item">
+                            <label for="comments" class="sr-only">comments</label>
+                            <textarea name="comments" id="comments" cols="30" rows="5" placeholder="Write your Comment*" required></textarea>
+
+                            <input type="hidden" name="pubid" value="{{ p.id }}"/>
+                            <input type="hidden" name="userid" value="{{ app.user? app.user.id : null  }}">
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-40">
+                        {% if(app.user) %}
+                            <button class="btn btn-brand w-100">comment</button>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<br/>
+{% endfor %}
+                                        </div>
+
+
+
+                                        <!-- Start Comment Area Wrapper -->
+                                      </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

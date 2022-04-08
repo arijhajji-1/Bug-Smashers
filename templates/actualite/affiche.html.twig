@@ -1,0 +1,63 @@
+{% extends 'base-back.html.twig' %}
+
+    {% block title %}Home{% endblock %}
+
+    {% block body %}
+        <br>
+        <br>
+<div class="card-body">
+        <h1 class="card-title">La liste des actualités</h1>
+    <p class="card-description"><code>Supprimer ou modifier</code>
+        <br>
+        <br>
+
+<table class="table table-striped">
+        <thead>
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Titre
+        </th>
+        <th>
+            Date
+        </th>
+        <th colspan="2" class="text-center"> les actions </th>
+    </tr>
+        </thead>
+        <tbody>
+
+        {% for actualite in actualites %}
+
+        <tr>
+            <td class="py-1">
+                {{actualite.id}}
+            </td>
+            <td>
+                {{actualite.titre}}
+            </td>
+            <td>
+                {{ actualite.date|date("m/d/Y") }}
+            </td>
+
+
+            <td ><a href="{{ path('supprimer', {'id': actualite.Id}) }}">Supprimer<i class="mdi mdi-delete-forever"></i></a></td>
+            <td ><a href="{{ path('modifier', {'id': actualite.Id}) }}">Modifier<i class="mdi mdi-pencil"></i></a></td>
+        </tr>
+    {% endfor %}
+        </tbody>
+</table>
+
+
+<br>
+    {{ knp_pagination_render(actualites) }}
+        <br>
+    <div style="margin: 0 auto; text-align: center">
+        <a href="{{ path('actualite_ajout')  }}" class="btn btn-outline-dark btn-fw" >Ajouter une nouvelle actualité</a>
+    </div>
+</div>
+
+    {% endblock %}
+
+

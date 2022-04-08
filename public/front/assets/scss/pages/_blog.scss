@@ -1,0 +1,87 @@
+/*=============================
+21. Blog Layout Style Css
+==============================*/
+
+.blog-item {
+  position: relative;
+  margin-top: 25px;
+
+  &__info {
+    position: relative;
+    padding-left: 70px;
+    padding-top: 25px;
+
+    .post {
+      &-date {
+        border-radius: 5px;
+        border: 1px solid $borderColor;
+        text-align: center;
+        padding: 10px;
+        margin-right: 20px;
+        width: 50px;
+        position: absolute;
+        left: 0;
+        top: 25px;
+
+
+        span {
+          display: block;
+          margin: 0;
+          font-weight: 600;
+          font-size: 20px;
+          line-height: 1;
+          color: $headingColor;
+          font-family: $font-heading;
+
+          &:first-child {
+            padding-bottom: 5px;
+          }
+        }
+      }
+
+      &-meta {
+        margin-bottom: 10px;
+        margin-top: -4px;
+
+        a, span {
+          color: $headingColor;
+          font-family: $font-heading;
+
+          a {
+            &:hover {
+              color: $brandColor;
+            }
+          }
+        }
+
+        span {
+          &:after {
+            content: '|';
+            padding-left: 3px;
+          }
+
+          &:last-child {
+            &:after {
+              display: none;
+            }
+          }
+        }
+      }
+
+      &-title {
+        font-size: 20px;
+        font-weight: 500;
+        margin-top: -5px;
+        margin-bottom: 10px;
+
+        a {
+          color: $headingColor;
+
+          &:hover {
+            color: $brandColor;
+          }
+        }
+      }
+    }
+  }
+}

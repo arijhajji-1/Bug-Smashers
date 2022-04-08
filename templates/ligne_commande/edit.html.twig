@@ -1,0 +1,11 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}MODIFIER L ETAT DE COMMANDE{% endblock %}
+
+{% block body %}
+    <h1>MODIFIER L ETAT DE LA COMMANDE</h1>
+
+    {{ include('ligne_commande/_form.html.twig', {'button_label': 'MODIFIER L ETAT DE LA COMMANDE'}) }}
+    {{ include('ligne_commande/_delete_form.html.twig') }}
+    <a href="{{ path('ligne_commande_index') }}">RETOUR A LA LISTE</a>
+{% endblock %}

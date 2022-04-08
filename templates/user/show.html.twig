@@ -1,0 +1,61 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <div class="p-5">
+    <h1>User</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>FirstName</th>
+                <td>{{ user.firstName }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ user.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ user.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td>{{ user.photo }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ user.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Cin</th>
+                <td>{{ user.cin }}</td>
+            </tr>
+            <tr>
+                <th>Date_naissance</th>
+                <td>{{ user.dateNaissance ? user.dateNaissance|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_index') }}" class="btn btn-danger">back to list</a>
+
+    </div>
+{% endblock %}

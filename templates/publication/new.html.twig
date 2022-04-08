@@ -1,0 +1,31 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}New Publication{% endblock %}
+
+{% block body %}
+    <div class="container p-5">
+    <h1>Create new Publication</h1>
+
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="form-group row">
+            {{ form_label(form.titre) }}
+            {{ form_widget(form.titre, {'attr': {'class':'form-control'}}) }}
+            <span style="color:red">{{ form_errors(form.titre) }}</span>
+        </div>
+        <div class="form-group row">
+            {{ form_label(form.desription) }}
+            {{ form_widget(form.desription, {'attr': {'class':'form-control'}}) }}
+            <span style="color:red">{{ form_errors(form.desription) }}</span>
+        </div>
+        <div class="form-group row">
+            {{ form_label(form.image) }}
+            {{ form_widget(form.image, {'attr': {'class':'form-control'}}) }}
+            <span style="color:red">{{ form_errors(form.image) }}</span>
+        </div>
+        <input type="hidden" name="usr" value="{{ app.user? app.user.id : null  }}"/>
+        <button class="btn btn-inverse-light" style="color: black;">{{ button_label|default('ajouter publication') }} <i class="mdi mdi-creation"> </i></button>
+        {{ form_end(form) }}
+        <br/>
+    <a href="{{ path('publication_index') }}" >back to list  <i class="mdi mdi-creation"></i></a>
+    </div>
+{% endblock %}

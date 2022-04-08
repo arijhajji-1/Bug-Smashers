@@ -1,0 +1,52 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Facture{% endblock %}
+
+{% block body %}
+    <h1 align="center">Facture</h1>
+
+<div class="col-lg-12 stretch-card">
+
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ commande.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ commande.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ commande.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Paiment</th>
+                <td>{{ commande.paiment }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ commande.Adresse }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ commande.Telephone }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+
+    <a href="{{ path('listec') }}"class="btn ">IMPRESSION
+        <i class="bi bi-cart-x"></i>
+    </a>
+
+
+    <a href="{{ path('commande_index') }}"class="btn ">BACK TO LIST
+        <i class="bi bi-cart-x"></i>
+    </a>
+{% endblock %}

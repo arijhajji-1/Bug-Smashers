@@ -1,0 +1,241 @@
+{% include ('cursor.html.twig') %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Reloua-admin{% endblock %}</title>
+    <!-- plugins:css -->
+    {% block css %}
+    <link rel="stylesheet" href="{{ asset('back/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('back/assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('back/assets/vendors/css/vendor.bundle.base.css') }}">
+    <!-- endinject -->
+
+        <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="{{ asset('back/assets/vendors/font-awesome/css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('back/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="{{ asset('back/assets/css/style.css') }}">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="{{ asset('back/assets/images/reloua_logo_2-01.svg') }}" />
+    {% endblock %}
+</head>
+<body>
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+            <a class="navbar-brand brand-logo" href="{{ path('indexback') }}"><img src="{{ asset('back/assets/images/reloua logo-01.png') }}" alt="logo" /></a>
+            <a class="navbar-brand brand-logo-mini" href="{{ path('indexback') }}"><img src="{{ asset('back/assets/images/reloua_logo_2-01.svg') }}" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                <span class="mdi mdi-menu"></span>
+            </button>
+            <div class="search-field d-none d-xl-block">
+                {% block form %}
+                <form class="d-flex align-items-center h-100">
+                    {% endblock %}
+                    <div class="input-group">
+                        <div class="input-group-prepend bg-transparent">
+                            <i class="input-group-text border-0 mdi mdi-magnify"></i>
+                        </div>
+                        {% block chercher %}
+                        <input type="text" id="chercher" class="form-control bg-transparent border-0" >
+                        {% endblock %}
+                    </div>
+
+                </form>
+
+            </div>
+            <ul class="navbar-nav navbar-nav-right">
+                <li class="nav-item nav-profile dropdown">
+                    <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                        <div class="nav-profile-img">
+                            <img src="{{ asset('uploads/' ~ app.user.photo) }}" alt="image">
+                        </div>
+                        <div class="nav-profile-text">
+                            <p class="mb-1 text-black">{{ app.user.lastName }}</p>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="profileDropdown" data-x-placement="bottom-end">
+                        <div class="p-3 text-center bg-primary">
+                            <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{ asset('uploads/' ~ app.user.photo) }}" alt="">
+                        </div>
+
+
+                            <div role="separator" class="dropdown-divider"></div>
+                            <h5 class="dropdown-header text-uppercase  pl-2 text-dark mt-2">Actions</h5>
+
+                            <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="{{ path('app_logout') }}">
+                                <span>Log Out</span>
+                                <i class="mdi mdi-logout ml-1"></i>
+                            </a>
+                        <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="{{ path('index') }}">
+                            <span>Home</span>
+                            <i class="mdi mdi-home ml-1"></i>
+                        </a>
+
+                    </div>
+                </li>
+
+
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                <span class="mdi mdi-menu"></span>
+            </button>
+        </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item nav-category">Main</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('indexback') }}">
+                        <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
+                        <span class="menu-title">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#User" aria-expanded="false" aria-controls="ui-basic">
+                        <span class="icon-bg"><i class="mdi mdi-account-multiple"></i></span>
+                        <span class="menu-title">Utilisateurs</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="User">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{ path("admin_index") }}">Liste des utilisateurs</a></li>
+
+                                    <li class="nav-item"> <a class="nav-link" href="{{ path('publication_index') }}">list des publications</a></li>
+                                    <li class="nav-item"> <a class="nav-link" href="{{ path('publication_new') }}">Add publication</a></li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#Produit" aria-expanded="false" aria-controls="Produit">
+                        <span class="icon-bg"><i class="mdi mdi-cart"></i></span>
+                        <span class="menu-title">Produits</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="Produit">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{ path("produit_acheter_affichage_back") }}">Liste Produits Acheter</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path("produit_Louer_affichage_back") }}">Liste Produits Louer</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('avis_back') }}">Les Avis sur les produits</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('stats') }}">Statisque sur les produits</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path("category") }}">
+                        <span class="icon-bg"><i class="mdi mdi-format-list-bulleted menu-icon"></i></span>
+                        <span class="menu-title">Categorie</span>
+
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('montage1') }}">
+                        <span class="icon-bg"><i class="mdi mdi-desktop-mac"></i></span>
+                        <span class="menu-title">Montage</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#reparation" aria-expanded="false" aria-controls="reparation">
+                        <span class="icon-bg"><i class="mdi mdi-cart"></i></span>
+                        <span class="menu-title">Réparation</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="reparation" >
+                        <ul class="nav flex-column sub-menu"  >
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('reparation1') }}">Réparation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('AvisReparation_show') }}">Avis</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('evenement_affiche') }}">
+                        <span class="icon-bg"><i class="mdi mdi-calendar"></i></span>
+                        <span class="menu-title">Événements</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('actualite_affiche') }}">
+                        <span class="icon-bg"><i class="mdi mdi-book-open-page-variant"></i></span>
+                        <span class="menu-title">Actualité</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('recherche_reclamation') }}">
+                        <span class="icon-bg"><i class="mdi mdi-alert-circle-outline"></i></span>
+                        <span class="menu-title">Réclamations</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                        <span class="icon-bg"><i class="mdi mdi-animation"></i></span>
+                        <span class="menu-title">Commandes</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="auth">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{path('commandeSearch')}}"> Liste Commandes </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('facture_index') }}"> Liste des factures </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('ligne_commande_index') }}"> Confirmation des Commandes </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ path('AfficheB') }}"> LISTES DES DEMANDES DE LOCATIONS </a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('livraison_index') }}">
+                        <span class="icon-bg"><i class="mdi mdi-alert-circle-outline"></i></span>
+                        <span class="menu-title">livraisons</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- partial -->
+        {% block body %}
+
+    </div>
+
+    <!-- page-body-wrapper ends -->
+    {% endblock %}
+</div>
+<!-- container-scroller -->
+<!-- plugins:js -->
+{% block javascripts %}
+
+<script src="{{ asset('back/assets/vendors/js/vendor.bundle.base.js') }}"></script>
+<!-- endinject -->
+    <script src="{{ asset('front/assets/js/active.js') }}"></script>
+
+    <!-- Plugin js for this page -->
+<script src="{{ asset('back/assets/vendors/chart.js/Chart.min.js') }}"></script>
+<script src="{{ asset('back/assets/vendors/jquery-circle-progress/js/circle-progress.min.js') }}"></script>
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+
+    <script src="{{ asset('back/assets/js/off-canvas.js') }}"></script>
+<script src="{{ asset('back/assets/js/hoverable-collapse.js') }}"></script>
+<script src="{{ asset('back/assets/js/misc.js') }}"></script>
+<!-- endinject -->
+<!-- Custom js for this page -->
+<script src="{{ asset('back/assets/js/dashboard.js') }}"></script>
+<!-- End custom js for this page -->
+{% endblock %}
+</body>
+</html>

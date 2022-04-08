@@ -1,0 +1,60 @@
+/*========================
+10. Flash Deals Style
+=========================*/
+.flash-deals-content {
+  @media #{$sm-device} {
+    margin-top: 28px;
+  }
+
+  h2 {
+    font-size: 40px;
+    margin-bottom: 25px;
+  }
+
+  h3 {
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  .btn {
+    margin-top: 25px;
+  }
+
+  .deals-countdown-area {
+    margin-top: 50px;
+  }
+}
+
+.flash-deals-area {
+  padding: 230px 0;
+  margin-top: -130px;
+  position: relative;
+
+  @media #{$md-device} {
+    padding: 210px 0;
+  }
+
+  @media #{$sm-device} {
+    padding: 192px 0;
+  }
+
+  &.home-2{
+    margin-top: 70px;
+    @extend .sp-y;
+
+    @media #{$md-device} {
+      margin-top: 50px;
+    }
+
+    @media #{$sm-device} {
+      margin-top: 30px;
+    }
+  }
+}
+
+.flash-deals-thumb{
+  @media #{$sm-device} {
+    max-width: 80%;
+    margin: auto;
+  }
+}

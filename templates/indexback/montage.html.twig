@@ -1,0 +1,57 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %} Montage{% endblock %}
+
+{% block body %}
+
+
+
+
+<div class="card-body">
+    <h1>Liste demandes des montages</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+                                    <th >id</th>
+                                   <th >Processeur </th>
+                                   <th >Carte graphique </th>
+                                    <th >Carte mere </th>
+                                     <th>Disque Systeme</th>
+                                         <th>boitier</th>
+                                      <th>Stockage Supp</th>
+                                            <th>Montant</th>
+                                              <th>Email</th>
+
+
+
+    </tr>
+
+                                </thead>
+                                <tbody>
+<tr >
+    {% for montage in montage %}
+    <td >{{ montage.Id }}</td>
+    <td >{{ montage.Processeur }}</td>
+    <td >{{ montage.CarteGraphique }}</td>
+    <td >{{ montage.CarteMere }}</td>
+    <td>{{ montage.DisqueSysteme }}</td>
+    <td>{{ montage.boitier }}</td>
+    <td>{{ montage.StockageSupp }}</td>
+    <td>{{ montage.montant }}</td>
+    <td>{{ montage.email }}</td>
+
+</tr>
+                                </tbody>
+
+                                {% endfor %}
+
+                            </table>
+
+
+
+
+</div>
+
+
+
+{% endblock %}
