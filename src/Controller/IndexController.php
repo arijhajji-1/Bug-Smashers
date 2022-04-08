@@ -22,7 +22,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class IndexController extends AbstractController
 {
     /**
-     * @Route("/index", name="index")
+     * @Route("/index", name="ind")
      */
     public function index(): Response
     {
@@ -38,18 +38,18 @@ class IndexController extends AbstractController
         return $this->render('/profile.html.twig');
     }
     /**
-     * @Route("/", name="index")
+     * @Route("/", name="inde")
      */
     public function HomePage(): Response
     {
         return $this->render('/animation.html.twig');
     }
     /**
-     * @Route("/index", name="home")
+     * @Route("/indexx", name="home")
      */
     public function Home(): Response
     {
-        return $this->redirectToRoute('indexing');
+        return $this->redirectToRoute('index');
     }
     /**
      * @Route("/edit/{id}", name="editprofile")
