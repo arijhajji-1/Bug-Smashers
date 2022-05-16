@@ -32,11 +32,7 @@ class Reclamation
      */
     private $description;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     * @Groups("post:read")
-     */
-    private $categorie;
+
 
     /**
      *   @Assert\NotBlank(message = "La date de début doit être saisie.")
@@ -54,12 +50,17 @@ class Reclamation
      */
     private $statut;
 
+
+
+
+
+
+
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Commande", cascade={"persist"})
      * @ORM\Column(type="string", length=50)
      * @Groups("post:read")
      */
-    private $idCommande;
+    private $categorie;
 
     /**
      * @ORM\Column(type="string", length=150)
@@ -67,6 +68,15 @@ class Reclamation
      * @Groups("post:read")
      */
     private $sujet;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Commande::class, inversedBy="reclamation", cascade={"persist", "remove"})
+     */
+    private $idCommande;
+
+
+
+
 
     public function __construct()
     {
@@ -91,10 +101,7 @@ class Reclamation
         return $this;
     }
 
-    public function getCategorie(): ?string
-    {
-        return $this->categorie;
-    }
+
     public function registerBundles()
     {
         return array(
@@ -106,12 +113,7 @@ class Reclamation
     }
 
 
-    public function setCategorie(string $categorie): self
-    {
-        $this->categorie = $categorie;
 
-        return $this;
-    }
 
     public function getDate(): ?\DateTimeInterface
     {
@@ -137,16 +139,32 @@ class Reclamation
         return $this;
     }
 
-    public function getIdCommande(): ?int
+
+
+
+
+    /* public function __construct()
+     {
+         $this->date = new \Datetime;
+
+     }*/
+
+
+
+    public function getCategorie(): ?string
     {
-        return $this->idCommande;
+        return $this->categorie;
     }
 
-    public function setIdCommande(int $idCommande): self
+    public function setCategorie(string $categorie): self
     {
-        $this->idCommande = $idCommande;
+        $this->categorie = $categorie;
 
         return $this;
+    }
+    public function __toString(): string
+    {
+        return $this->getCategorie();
     }
 
     public function getSujet(): ?string
@@ -160,14 +178,21 @@ class Reclamation
 
         return $this;
     }
-    public function __toString()
-    {
-        return  $this -> getCategorie() ;
-    }
-    /* public function __construct()
-     {
-         $this->date = new \Datetime;
 
-     }*/
+    public function getIdCommande(): ?Commande
+    {
+        return $this->idCommande;
+    }
+
+    public function setIdCommande(?Commande $idCommande): self
+    {
+        $this->idCommande = $idCommande;
+
+        return $this;
+    }
+
+
+
+
 
 }

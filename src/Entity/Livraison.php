@@ -24,11 +24,7 @@ class Livraison
      */
     private $id;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Commande::class, mappedBy="livraison", cascade={"persist", "remove"})
-     *
-     */
-    private $commande;
+
 
 
     /**
@@ -60,13 +56,22 @@ class Livraison
      */
     private $date;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Commande::class, inversedBy="livraison", cascade={"persist", "remove"})
+     */
+    private $commande;
 
-  /*  public function __construct()
-    {
-        $this->livraison = new ArrayCollection();
-        $this->livreur = new ArrayCollection();
-    }
-*/
+
+
+
+
+
+    /*  public function __construct()
+      {
+          $this->livraison = new ArrayCollection();
+          $this->livreur = new ArrayCollection();
+      }
+  */
 
     public function registerBundles()
     {
@@ -87,22 +92,7 @@ class Livraison
 
 
 
-    public function getCommande(): ?Commande
-    {
-        return $this->commande;
-    }
 
-    public function setCommande(Commande $commande): self
-    {
-        // set the owning side of the relation if necessary
-        if ($commande->getLivraison() !== $this) {
-            $commande->setLivraison($this);
-        }
-
-        $this->commande = $commande;
-
-        return $this;
-    }
 
 
     public function getModpaie(): ?string
@@ -165,10 +155,20 @@ class Livraison
         return $this;
     }
 
-    public function __toString()
+    public function getCommande(): ?Commande
     {
         return $this->commande;
     }
+
+    public function setCommande(?Commande $commande): self
+    {
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+
+
 
 
 }

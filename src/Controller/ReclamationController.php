@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Controller;
+use App\Entity\Commande;
 use App\Form\SearchReclamationType;
 use CalendarBundle\Serializer\SerializerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Form\ReclamationType;
 //use http\Env\Request;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -64,7 +66,25 @@ class ReclamationController extends AbstractController
         //recuperer le formulaire
         $formBuilder = $this->createFormBuilder($reclaim);
         $formBuilder
-            ->add('idCommande',IntegerType::class)
+            ->add(
+                'idCommande'
+                ,EntityType::
+            class
+                ,[
+                'class'
+                =>
+                    Commande::
+                    class
+                ,
+                'choice_label'
+                =>
+                    'nom'
+                ,
+                'label'
+                =>
+                    'Commande'
+
+            ])
             ->add('categorie',ChoiceType::class,
                 ['choices'  => [
                     'Location' => "Location",
@@ -312,7 +332,7 @@ class ReclamationController extends AbstractController
 
 
     /**
-     * @Route("/ajoutReclamation", name="ajout_reclamation")
+     * @Route("/ajoutReclamation", name="ajout_reclamation1")
      * @Method("POST")
      */
     public function ajouterReclamationAction(Request $request) {

@@ -71,8 +71,8 @@
                             <div class="product-item">
                                 <div class="product-item__thumb">
                                     <a href="{{ path("single_produitA", {'id':produit.id })}}">
-                                        <img class="thumb-primary" src="{{ asset('front/assets/img/product/'~produit.imagePath)}}" alt="{{ produit.nom }}" />
-                                        <img class="thumb-secondary" src="{{ asset('front/assets/img/product/'~produit.imagePath)}}" alt="{{ produit.nom }}" />
+                                        <img class="thumb-primary" src="http://localhost:8080/assets/{{produit.imagePath}}" alt="{{ produit.nom }}" />
+                                        <img class="thumb-secondary" src="http://localhost:8080/assets/{{produit.imagePath}}" alt="{{ produit.nom }}" />
                                         <br>
                                     </a>
 
@@ -158,8 +158,8 @@
                                 <div class="product-item">
                                     <div class="product-item__thumb">
                                         <a href="{{ path("single_produitL", {'id':produit.id })}}">
-                                            <img class="thumb-primary" src="{{ asset('front/assets/img/product/'~produit.imagePath)}}" alt="{{ produit.nom }}" />
-                                            <img class="thumb-secondary" src="{{ asset('front/assets/img/product/'~produit.imagePath)}}" alt="{{ produit.nom }}" />
+                                            <img class="thumb-primary" src="http://localhost:8080/assets/{{produit.imagePath}}" alt="{{ produit.nom }}" />
+                                            <img class="thumb-secondary" src="http://localhost:8080/assets/{{produit.imagePath}}" alt="{{ produit.nom }}" />
                                         </a>
 
                                         <div class="ratting">

@@ -23,15 +23,7 @@ class EvenementType extends AbstractType
                 'label' => 'Image De Evenement (.png file)',
                 'mapped' => false,
                 'required' => false,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'image/png'
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid .png image',
-                    ])
-                ],
+
             ])
 
         ;

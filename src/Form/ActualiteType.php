@@ -22,14 +22,7 @@ class ActualiteType extends AbstractType
                 'label' => 'Image De Actualite (.png file)',
                 'mapped' => false,
                 'required' => false,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'image/png'
-                        ],
-                    ])
-                ],
+             
             ])
         ;
     }

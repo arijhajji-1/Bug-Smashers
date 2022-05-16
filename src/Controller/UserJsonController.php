@@ -17,8 +17,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 /**
-* @Route("/json/")
-*/
+ * @Route("/json/")
+ */
 class UserJsonController extends AbstractController
 {
     private $passwordEncoder;
@@ -58,7 +58,6 @@ class UserJsonController extends AbstractController
     public function recupererUser(Request $request): Response
     {
         $email = $request->get("email");
-
         $user = $this->getDoctrine()->getRepository(User::class)->findOneBy([
             'email' => $email
         ]);
@@ -83,7 +82,6 @@ class UserJsonController extends AbstractController
     {
         $email = $request->get('email');
         $password = $request->get('password');
-
         $user = $this->getDoctrine()->getRepository(User::class)->findOneBy([
             'email' => $email
         ]);
@@ -103,33 +101,36 @@ class UserJsonController extends AbstractController
      * @Route("inscription_User")
      * @throws Exception
      */
-    public function inscriptionCandidat(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function inscriptionCandidat(Request $request,\Swift_Mailer $mailer, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
 
         // encode the plain password
         $user
 
-            ->setRoles(["ROLE_User"])
+            ->setRoles(["ROLE_USER"])
             ->setPhoto('dfds')
 
             ->setEmail($request->get('email'))
+            ->setPassword(password_hash($request->get('password'), PASSWORD_DEFAULT));
+        $message = (new \Swift_Message( 'INSCRIPTION'))
+            ->setFrom('Reloua.tunisie@gmail.com')
 
-            ->setPassword($passwordEncoder->encodePassword(
-                $user,
-                $request->get('password')
-            ));
+            ->setTo($user->getEmail())
+            ->setBody(
+                'VOTRE COMPTE A ETE CREE AVEC SUCCEE! Merci <3 '
+            )
+        ;
+        $mailer->send($message);
 
 
-
-
-           $user
+        $user
             ->setFirstName($request->get('nom'))
             ->setLastName($request->get('prenom'))
             ->setTelephone($request->get('tel'))
             ->setCin($request->get('sexe'));
 
-            //->setDateNaissance($dateNaissance);
+        //->setDateNaissance($dateNaissance);
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);

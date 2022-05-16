@@ -5,9 +5,9 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 
 parameters:
-    products_directory: '%kernel.project_dir%/public/front/assets/img/product'
+    products_directory: 'C:/wamp/www/assets/'
     brochures_directory: '%kernel.project_dir%/public/uploads'
-    events_directory: '%kernel.project_dir%/public/front/assets/img/actualite'
+    events_directory: 'C:/wamp/www/assets/'
 services:
     # default configuration for services in *this* file
     _defaults:

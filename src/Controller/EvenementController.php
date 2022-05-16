@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Evenement;
 
+use App\Form\AvisEType;
 use App\Form\EvenementType;
 use App\Form\AvisType;
 
@@ -122,11 +123,13 @@ class EvenementController extends AbstractController
         $evenement = $entityManager->getRepository(Evenement::class)->find($id);
         $avis = new Avis();
         $avis->setEvenement($evenement);
-        $form = $this->createForm(AvisType::class, $avis);
+        $form = $this->createForm(AvisEType::class, $avis);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $avis->setEvenement($evenement);
+            $avis->setEmail($this->getUser()->getEmail());
+            $avis->setNom($this->getUser()->getFirstName());
             $entityManager->persist($avis);
             $entityManager->flush();
             $this->addFlash('success','commentaire ajouté avec succès');

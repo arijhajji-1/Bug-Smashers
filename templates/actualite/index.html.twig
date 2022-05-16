@@ -14,7 +14,7 @@
             <div class="slider-area-wrapper">
                 <div class="slider-content-active">
                     {% for actualite in actualites %}
-                        <div class="slider-slide-item bg-img" data-bg="{{ asset('front/assets/img/actualite/'~actualite.imageName) }}">
+                        <div class="slider-slide-item bg-img" data-bg="http://localhost:8080/assets/{{actualite.imageName}}">
                             <div class="container container-wide h-100">
                                 <div class="row align-items-center h-100">
                                     <div class="col-lg-6">
@@ -68,7 +68,7 @@
                     {% for evenement in evenements %}
                         <div class="item">
                             <div class="blog-entry">
-                                <a href="#" class="block-20 d-flex align-items-start" style="background-image: url('/front/assets/img/actualite/{{ evenement.imageName }}') ;">
+                                <a href="#" class="block-20 d-flex align-items-start" style="background-image: url('http://localhost:8080/assets/{{evenement.imageName}}') ;">
                                     <div class="meta-date text-center p-2">
                                         <span class="day">{{ evenement.date|date("d") }}</span>
                                         <span class="mos">{{ evenement.date|date("m") }}</span>

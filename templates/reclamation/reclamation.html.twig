@@ -20,17 +20,14 @@
             {{ message }}
         </div>
     {% endfor %}
-<div  class="container-fluid">
+    <div  class="container-fluid">
         <form method="post"  class="form-group has-success has-feedback">
             {% form_theme form 'bootstrap_4_layout.html.twig' %}
             {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
             <h1 style="padding-right: 10px;" >Ajouter une Réclamation</h1>
-            <div class="col-sm-10"  class="form-group">
-                {{ form_label(form.code, "Code:") }}
-                {{ form_widget(form.code) }}
-            </div>
+
             <div class="col-sm-10" class="form-group">
-                {{ form_label(form.idCommande, "idCommande:") }}
+                {{ form_label(form.idCommande, "Commande:") }}
                 {{ form_widget(form.idCommande) }}
             </div>
             <div class="col-sm-10" class="form-group" class="dropdown">
@@ -50,7 +47,7 @@
                 {{ form_widget(form.date) }}
             </div>
             <div class="col-sm-10" class="form-group">
-            <button type="submit" class="btn btn-primary">envoyer!</button>
+                <button type="submit" class="btn btn-primary">envoyer!</button>
             </div>
             {{ form_end(form) }}
 

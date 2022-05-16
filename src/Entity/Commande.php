@@ -70,6 +70,18 @@ class Commande
      */
     private $iduser;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Livraison::class, mappedBy="commande", cascade={"persist", "remove"})
+     */
+    private $livraison;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Reclamation::class, mappedBy="idCommande", cascade={"persist", "remove"})
+     */
+    private $reclamation;
+
+
+
 
 
     public function __construct()
@@ -192,5 +204,53 @@ class Commande
 
         return $this;
     }
+
+    public function getLivraison(): ?Livraison
+    {
+        return $this->livraison;
+    }
+
+    public function setLivraison(?Livraison $livraison): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($livraison === null && $this->livraison !== null) {
+            $this->livraison->setCommande(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($livraison !== null && $livraison->getCommande() !== $this) {
+            $livraison->setCommande($this);
+        }
+
+        $this->livraison = $livraison;
+
+        return $this;
+    }
+
+    public function getReclamation(): ?Reclamation
+    {
+        return $this->reclamation;
+    }
+
+    public function setReclamation(?Reclamation $reclamation): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($reclamation === null && $this->reclamation !== null) {
+            $this->reclamation->setIdCommande(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($reclamation !== null && $reclamation->getIdCommande() !== $this) {
+            $reclamation->setIdCommande($this);
+        }
+
+        $this->reclamation = $reclamation;
+
+        return $this;
+    }
+
+
+
+
 
 }
